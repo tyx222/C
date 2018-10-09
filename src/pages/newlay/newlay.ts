@@ -61,7 +61,9 @@ export class NewlayPage {
       } else {
         this.fromdata.is_sterilisation = "2";
       }
+
       this.fromdata["petcardid"] = this.navParams.get("data").id;
+      console.log(this.fromdata);
       this.fromdata.kind = this.navParams.get("data").kind;
       this.fromdata.sex = this.navParams.get("data").is_sterilisation;
       this.fromdata.headimgpath = this.navParams.get("data").headimgpath;
@@ -121,10 +123,14 @@ export class NewlayPage {
         return false;
       }
     }
-    let res = await this.http.addpetcard(this.fromdata);
-    this.http.http.showToast(res.message);
-    if(this.navParams.get('data')!==undefined){
-      this.navCtrl.pop()
+
+    if (this.navParams.get("data") !== undefined) {
+      let res = await this.http.updatepetcard(this.fromdata);
+      this.http.http.showToast(res.message);
+      this.navCtrl.pop();
+    } else {
+      let res = await this.http.addpetcard(this.fromdata);
+      this.http.http.showToast(res.message);
     }
     this.fromdata = {
       pet_name: "",

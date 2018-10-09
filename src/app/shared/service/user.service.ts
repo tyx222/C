@@ -17,7 +17,8 @@ export class UserService {
     querypetcardnum: "chongwu/chongwu/querypetcardnum",
     querypetcardlist: "chongwu/chongwu/querypetcardlist",
     addpetcard:"chongwu/chongwu/addpetcard",
-    deletePetcard:"chongwu/chongwu/deletePetcard"
+    deletePetcard:"chongwu/chongwu/deletePetcard",
+    updatepetcard:"chongwu/chongwu/updatepetcard"
   };
   constructor(public http: MyHttpService,public toastCtrl: ToastController) {}
   
@@ -146,4 +147,7 @@ export class UserService {
   deletePetcard(data){
     return this.http.Post(this.api.deletePetcard,data)
   }
+ updatepetcard(data){
+return this.http.Post(this.api.updatepetcard,data)
+ }
 }
