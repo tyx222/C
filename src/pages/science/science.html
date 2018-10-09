@@ -1,0 +1,71 @@
+<!--
+  Generated template for the SciencePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>科普</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)='doRefresh($event)'>
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新"  refreshingSpinner="circles" refreshingText="正在拼命加载">
+        </ion-refresher-content>
+    </ion-refresher>
+    <div class="box">
+        <div class="imgbox">
+
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let item of imgUrl"><img src="{{item}}" alt="" srcset=""></div>
+
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+
+                <!-- 如果需要导航按钮 -->
+
+            </div>
+        </div>
+        <p>
+            <button>
+        <img src="assets/imgs/images/kepu1.png" alt="" srcset="">宠圈</button>
+            <button>
+        <img src="assets/imgs/images/kepu2.png" alt="" srcset="">知识</button>
+        </p>
+    </div>
+
+    <p class="tabs">
+        <button [ngClass]="{'cd': lulartype==1}" (click)="expression(lulartype=1)">图文</button>
+        <button [ngClass]="{'cd': lulartype==2}" (click)="expression(lulartype=2)">视频</button>
+    </p>
+    <div class="list">
+
+        <ul>
+            <li *ngFor="let item of finddata,let i=index" (click)="goknowledg(i)">
+                <div>
+                    <img src="{{imgpaths}}{{item.previewimg}}" alt="" srcset="">
+                </div>
+                <div>
+                    <p *ngIf="item.science_title!==undefined">{{item.science_title}}</p>
+                    <p class="pagetext" *ngIf="item.textmgs!==undefined">{{item.textmgs}}</p>
+                    <p class="tags">
+                        <img src="assets/imgs/images/home_13.png" alt="" srcset="">宠物护理</p>
+                </div>
+            </li>
+
+        </ul>
+        <p style="text-align: center;margin-bottom: 2rem;color: #ffc43596;" *ngIf="loding">已经没有更多数据咯</p>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>

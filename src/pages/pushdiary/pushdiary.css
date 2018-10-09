@@ -1,0 +1,91 @@
+page-pushdiary .scroll-content {
+  padding: 0 !important;
+  background: #eee;
+}
+
+page-pushdiary .put_box {
+  background: #fff;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+}
+
+page-pushdiary .put_box input {
+  font-size: 1.5rem;
+  border: 0;
+}
+
+page-pushdiary .put_box img {
+  height: 4rem;
+}
+
+page-pushdiary .area {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+page-pushdiary textarea {
+  width: 90vw;
+  max-width: 90vw;
+  height: 40vh;
+  max-height: 40vh;
+  overflow-y: auto;
+  border: 0;
+  padding: 1rem;
+}
+
+page-pushdiary .Fileimg {
+  background: #fff;
+  width: 90vw;
+  padding: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+page-pushdiary .Fileimg .itembox {
+  width: 24%;
+  margin: 4.5%;
+  position: relative;
+}
+
+page-pushdiary .Fileimg .itembox .remimg {
+  width: 1.5rem;
+  display: inline-flex;
+  position: absolute;
+  height: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 1.5rem;
+  right: -0.5rem;
+  top: -0.5rem;
+  background: red;
+  color: #fff;
+}
+
+page-pushdiary .Fileimg img {
+  width: 100%;
+}
+
+page-pushdiary .pushimg {
+  width: 80vw;
+  background: #FA8424;
+  color: #fff;
+  margin: 10vw;
+  height: 4rem;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+}
+
+page-pushdiary .header-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-size: cover;
+}

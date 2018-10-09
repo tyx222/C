@@ -1,0 +1,260 @@
+page-productadmin {
+    .scroll-content {
+        padding: 0 !important;
+        background: #eee
+    }
+    .tabs {
+        ul {
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            li {
+                width: 24%;
+                text-align: center;
+                padding: 1.5rem 0
+            }
+            .eft {
+                background: rgb(252, 201, 60);
+                color: #fff
+            }
+        }
+    }
+    .titaa {
+        margin-bottom: 1rem;
+        background: #fff;
+        overflow: hidden;
+        width: 100%;
+        display: -webkit-inline-box;
+        .userimg {
+            width: 6rem;
+        }
+    }
+    .left {
+        margin-left: -12rem
+    }
+    .distribution {
+        background: #fff;
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem;
+    }
+    .ble {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        background: #fff;
+        width: 100vw;
+        .shopingimg {
+            width: 10rem;
+            ;
+        }
+    }
+    .orderbutton {
+        display: flex;
+        button {
+            width: 6rem;
+            font-size: 1.5rem;
+            color: #fff
+        }
+        button:nth-of-type(1) {
+            background: rgb(255, 173, 65)
+        }
+        button:nth-of-type(2) {
+            background: #FF7041
+        }
+    }
+    display: flex;
+    flex-wrap: nowrap;
+    >div:nth-of-type(1) {
+        width: 20%;
+    }
+    .ble2 {
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+        height: 100%;
+        margin: 0 1rem;
+        p {
+            font-size: 1.8rem
+        }
+        .name {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 80%;
+            p {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                span:nth-of-type(1) {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 70%;
+                }
+                span:nth-of-type(2) {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 28%;
+                }
+            }
+            p:nth-of-type(2) {
+                span {
+                    color: #999
+                }
+            }
+        }
+        .pardack {
+            color: #999
+        }
+        .maxprice {
+            color: #FF7041
+        }
+        .total {
+            display: flex;
+            justify-content: space-between
+        }
+        .title {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            height: 7rem;
+            >p {
+                font-size: 1.5rem;
+            }
+            >p:nth-of-type(1) {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+        }
+        span {
+            margin-top: 0.5rem;
+            img {
+                width: 1rem;
+            }
+        }
+    }
+    .djd {
+        width: 5rem;
+        height: 2rem;
+        color: #fff;
+        background: #EF8936;
+        border-radius: 2rem
+    }
+    .texx {
+        padding: 1rem;
+        background: #fff;
+    }
+    .imglist {
+        display: flex;
+        flex-wrap: wrap;
+        background: #fff;
+        padding-bottom: 1rem;
+        img {
+            width: 25vw;
+            height: 25vw;
+            margin-left: 6vw;
+            margin-bottom: 1rem
+        }
+    }
+    .top {
+        margin-top: 2rem
+    }
+    .black {
+        color: #999
+    }
+    .martop {
+        margin-top: -1.5rem
+    }
+    .tarea {
+        margin-top: 1rem;
+        background: #fff;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            width: 10rem;
+        }
+    }
+    .left {
+        margin-left: -13rem
+    }
+    .listbox {
+        li {
+            display: flex;
+            flex-wrap: nowrap;
+            margin-top: 1rem;
+            overflow: hidden;
+            width: 150%;
+            .list {
+                background: #fff;
+                padding: 1.5rem 1rem;
+                display: flex;
+                flex-wrap: nowrap;
+                width: 100vw;
+            }
+            .list2 {
+                background: #fff;
+                padding: 1.5rem 1rem;
+                display: flex;
+                flex-wrap: nowrap;
+                width: 100vw;
+                margin-left: -12rem
+            }
+            .listbutton {
+                display: flex;
+                margin-left: 2rem;
+                button {
+                    width: 6rem;
+                    ;
+                    color: #fff;
+                    height: 10rem;
+                    font-weight: 900;
+                    font-size: 1.5rem
+                }
+                .editor {
+                    background: #f0d228
+                }
+                .rem {
+                    background: #f0285a
+                }
+            }
+            .date {
+                width: 17rem;
+                margin-top: 1rem;
+            }
+            .ttt {
+                display: flex;
+                height: 5.5rem;
+                img {
+                    width: 18rem;
+                    height: 95%;
+                }
+                .ddd {
+                    margin-left: 0.5rem;
+                    span:nth-of-type(2) {
+                        color: #999
+                    }
+                }
+                span {
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 3;
+                    overflow: hidden;
+                }
+            }
+        }
+        p {
+            color: #999
+        }
+    }
+}

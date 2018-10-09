@@ -1,0 +1,55 @@
+<!--
+  Generated template for the PushcouponPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>pushcoupon</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="fromdata">
+    <ul>
+
+      <li>
+        <span>优惠券名称</span>
+        <input type="text" placeholder="请输入优惠券名称">
+      </li>
+      <li>
+        <span>面值</span>
+        <input type="text" placeholder="请输入优惠券面值">
+      </li>
+      <li>
+        <span>优惠券金额</span>
+        <span>
+          <input type="radio" name="money" id="">不限制</span>
+        <span>
+          <input type="radio" name="money1" id="">满
+          <input type="number" class="monet">元可使用
+        </span>
+      </li>
+      <li>
+        <span>发放总量</span>
+        <input type="text" placeholder="请输入发放总量">
+      </li>
+      <li>
+        <span>生效时间</span>
+        <ion-datetime  displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="timeStarts"></ion-datetime>
+      </li>
+      <li>
+        <span>过期时间</span>
+        <ion-datetime  displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="timeStarts2"></ion-datetime>
+      </li>
+   
+    </ul>
+    <p>
+      <input type="checkbox" name="" id="">我已同意XXX用户协议</p>
+    <button class="tijiao">确认注册</button>
+  </div>
+</ion-content>

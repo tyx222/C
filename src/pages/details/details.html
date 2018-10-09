@@ -1,0 +1,168 @@
+<!--
+  Generated template for the DetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>details</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div>
+        <div>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let item of callname;let i=index">
+                        <div class="addshow">
+                            <div>
+                                <h1> {{item.pet_name}}</h1>
+                                <p> <button (click)="postlo()">
+                    <ion-icon ios="ios-male" md="md-male"></ion-icon>请求配种
+                  </button><span>0.7岁</span><span>射手座</span></p>
+
+                                <div class="msg2" style="margin-left:1rem;margin-top:1rem">
+                                    <div>
+                                        <img src="assets/imgs/images/maozhua.png" alt="">
+                                        <span>体重{{item.pet_wheight}}kg</span>
+                                    </div>
+
+                                    <div>
+                                        <img src="assets/imgs/images/xiangjiao.png" alt="">
+                                        <span style="overflow: hidden;width: 100%;height: 1.3rem;text-align: left;">{{item.comment}}</span>
+                                    </div>
+
+                                    <div>
+                                        <img src="assets/imgs/images/jiantou.png" alt="">
+                                        <span>总能量值 10.23kg</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="addimg" (click)="godate(index)">
+                                <span><img src="{{item.headimgpath}}" alt="" srcset=""></span>
+                                <span style="width: 10rem;">猫卡号:{{item.pet_num}}</span></div>
+                        </div>
+
+                    </div>
+                    <!-- <div class="swiper-slide">
+                        <div class="addshow">
+                            <div>
+                                <h1>locasd3</h1>
+                                <p> <button (click)="postlo()"><ion-icon ios="ios-male" md="md-male"></ion-icon>请求配种</button><span>0.7岁</span><span>射手座</span></p>
+
+                                <div class="msg2" style="margin-left:1rem;margin-top:1rem">
+                                    <div>
+                                        <img src="assets/imgs/images/maozhua.png" alt="">
+                                        <span>体重2.4kg</span>
+                                    </div>
+
+                                    <div>
+                                        <img src="assets/imgs/images/xiangjiao.png" alt="">
+                                        <span>喵~</span>
+                                    </div>
+
+                                    <div>
+                                        <img src="assets/imgs/images/jiantou.png" alt="">
+                                        <span>总能量值 10.23kg</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="addimg" (click)="godate()"><img src="assets/imgs/images/petImg.png" alt="" srcset=""><span>猫卡号:9999</span></div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="details_box">
+
+        <div class="state_box">
+            <div class="bq_box">
+                <div class="bq">
+                    <img src="assets/imgs/bq.png" alt="" srcset="">x10
+                </div>
+                <div class="size">
+                    <p>
+                        <span>xxx的零食能量</span>
+                        <span>223g</span>
+                    </p>
+                    <!-- <p class="progress">
+                        <span></span>
+                    </p> -->
+                </div>
+
+                <div class="feed">
+                    <p>
+                        <img src="assets/imgs/dj.png" alt="">
+                    </p>
+                    <p>投食</p>
+                </div>
+            </div>
+
+            <div class="pk_box">
+                <div class="pk">
+                    <p>投食榜</p>
+                    <p class="kg">233kG</p>
+                </div>
+                <div class="imgsT">
+                    <img src="assets/imgs/images/home1_15.png" alt="">
+                    <img src="assets/imgs/images/home1_15.png" alt="">
+                    <img src="assets/imgs/images/home1_15.png" alt="">
+                    <img src="assets/imgs/images/home1_15.png" alt="">
+                    <img src="assets/imgs/images/home1_15.png" alt="">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="consult">
+            <p (click)="goguanai()">
+                <span>医生咨询</span>
+                <span>
+          <img src="assets/imgs/images/right.png" alt="">
+        </span>
+            </p>
+        </div>
+        <div class="consult2">
+            <p>
+                <span>
+          <img src="assets/imgs/images/home1_15.png" alt="">
+          <span>
+            <span class="D">相遇180天</span>
+                <br>
+                <span>有2篇传记</span>
+                </span>
+                </span>
+                <span>
+          <img src="assets/imgs/images/right.png" alt="">
+        </span>
+            </p>
+        </div>
+    </div>
+    <div style="height:8rem"></div>
+    <ion-footer>
+        <div class="terbox">
+            <div> <img src="assets/imgs/images/home1_15.png" alt=""></div>
+            <div>
+                <div>
+                    <h3>qian</h3>
+                    <p>有 3 张猫卡</p>
+                </div>
+                <div>
+                    <p (click)='gohome()'><span><img src="assets/imgs/images/homeppp.png" alt=""></span><span>首页</span></p>
+                    <p (click)='Personalcenter()'><span><img src="assets/imgs/images/cartmu.png" alt=""></span><span>我的</span></p>
+                </div>
+            </div>
+            <div><button ion-button>取消后宫</button></div>
+        </div>
+    </ion-footer>
+</ion-content>

@@ -1,0 +1,7 @@
+<ion-tabs *ngIf="show" #myTabs class="page-tabs" (ionChange)="changeTabs(selectedIndex)" [selectedIndex]="mySelectedIndex">
+    <ion-tab *ngFor="let item of tabs" [root]="item.tab1Root" class="tab" [tabTitle]="item.tabTitle" [tabIcon]="item.tabIcon"></ion-tab>
+</ion-tabs>
+
+<ion-tabs #myTabs *ngIf="!show" class="page-tabs" (ionChange)="changeTabs(selectedIndex)" [selectedIndex]="mySelectedIndex">
+    <ion-tab *ngFor="let item of tabs2" [root]="item.tab1Root" class="tab" [tabTitle]="item.tabTitle" [tabIcon]="item.tabIcon"></ion-tab>
+</ion-tabs>

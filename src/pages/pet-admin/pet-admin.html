@@ -1,0 +1,81 @@
+<!--
+  Generated template for the PetAdminPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>宠物管理</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="content">
+    <div class="petBox" (click)="newlay()">
+        <div class="pet">
+            <img src="assets/imgs/images/pet.png" alt="">
+        </div>
+
+        <span class="add">添加一宠猫卡</span>
+    </div>
+
+    <div class="petBox top" *ngFor="let item of callname,let i=index">
+        <div class="petCrad">
+            <span class="msg" style="margin-left:1rem">{{item.pet_name}}</span>
+
+            <div class="msg1" style="margin-left:1rem;margin-top:1rem">
+                <div>
+                    <i *ngIf="item.is_sterilisation=='1'" class="iconfont icon-sexm"></i>
+                    <i *ngIf="item.is_sterilisation=='2'" class="iconfont icon-sexw"></i>
+                </div>
+
+                <span style="margin-left:1rem">{{item.petAge}}</span>
+                <span style="margin-left:1rem">天秤座</span>
+            </div>
+
+
+            <div class="msg2" style="margin-left:1rem;margin-top:1rem">
+                <div>
+                    <img src="assets/imgs/images/maozhua.png" alt="">
+                    <span>体重{{item.pet_wheight}}kg</span>
+                </div>
+
+                <div>
+                    <img src="assets/imgs/images/xiangjiao.png" alt="">
+                    <span>{{item.comment}}</span>
+                </div>
+
+                <div>
+                    <img src="assets/imgs/images/jiantou.png" alt="">
+                    <span>总能量值 10.23kg</span>
+                </div>
+
+                <div>
+                    <img src="assets/imgs/images/aixin.png" alt="">
+                    <span>粉丝数：0</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="imgCrad">
+            <div class="petImg">
+                <img src="{{item.headimgpath}}" alt="">
+                <span>宠卡号 : {{item.pet_num}}</span>
+            </div>
+            <div class="btn">
+                <button class="btn1" (click)="savepet(i)">修改</button>
+                <button class="btn2" (click)="rempet(i)">删除</button>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+</ion-content>

@@ -1,0 +1,166 @@
+@charset "UTF-8";
+* {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+
+.toast-md .toast-wrapper {
+  left: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  z-index: 10;
+  display: block;
+  width: 60%;
+  max-width: 700px;
+  background: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  border-radius: 0.5rem;
+}
+
+.date-picker[_ngcontent-c0] .top-banner[_ngcontent-c0] {
+  background-color: #F9D753 !important;
+  color: white;
+}
+
+.borbox {
+  text-align: center;
+  width: 60vw;
+  margin-left: 20vw;
+}
+
+.borbox .toast-md .toast-wrapper {
+  background: rgba(0, 0, 0, 0.7) !important;
+  border-radius: 0.5rem !important;
+}
+
+.back-button-icon-md {
+  font-size: 3rem !important;
+  color: #fff !important;
+}
+
+.toolbar-title-md {
+  color: #fff !important;
+  text-align: center;
+}
+
+ion-header {
+  overflow: hidden;
+}
+
+.data ion-label {
+  color: #333;
+}
+
+.data .list-header-md {
+  border-top: none !important;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.data .list-md .item-block .item-inner {
+  border: none;
+}
+
+.data .list-md {
+  margin: 0;
+}
+
+.toolbar-background-ios {
+  background: -webkit-linear-gradient(left, #F9D753, #EC6D36);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #F9D753, #EC6D36);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #F9D753, #EC6D36);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #F9D753, #EC6D36);
+  /* 标准的语法（必须放在最后） */
+  border: none;
+}
+
+.toolbar-background-md {
+  background: -webkit-linear-gradient(left, #F9D753, #EC6D36);
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #F9D753, #EC6D36);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #F9D753, #EC6D36);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #F9D753, #EC6D36);
+  /* 标准的语法（必须放在最后） */
+  border: none;
+}
+
+.header-ios .toolbar-background-ios,
+.footer-ios .toolbar-background-ios {
+  border: none !important;
+}
+
+.toolbar-title-ios {
+  color: #FFF !important;
+}
+
+.toolbar-title-md {
+  color: #fff !important;
+}
+
+.tabs-ios .tab-button[aria-selected=true] .tab-button-icon {
+  color: #FFC435 !important;
+}
+
+.tabs-ios .tab-button:hover:not(.disable-hover),
+.tabs-ios .tab-button[aria-selected=true] {
+  color: #FFC435 !important;
+}
+
+.picker-toolbar {
+  z-index: 1;
+  width: 100%;
+  contain: strict;
+  background: #f98004 !important;
+  display: flex;
+  justify-content: space-between !important;
+}
+
+.action-sheet-ios .action-sheet-group {
+  border-radius: 13px;
+  margin-bottom: 8px;
+}
+
+.action-sheet-ios .action-sheet-group .button-inner {
+  color: #666 !important;
+}
+
+.button-inner .back-button-icon-ios {
+  margin: -1px 0 0;
+  display: inherit;
+  min-width: 18px;
+  font-size: 3.4rem;
+  color: #fff;
+}
+
+.tabs-ios .tabbar {
+  background: #fff !important;
+  padding: 0.5rem 0;
+}
+
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #eee;
+}
+
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #eee;
+}
+
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #eee;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #eee;
+}

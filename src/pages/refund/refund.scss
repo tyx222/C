@@ -1,0 +1,269 @@
+page-refund {
+    .toolbar-background-ios {
+        // background: white;
+    }
+    .toolbar-title-ios {
+        font-weight: normal;
+    }
+    .first {
+        margin-top: 1rem !important;
+    } //商品信息
+    .item-ios ion-avatar ion-img,
+    .item-ios ion-avatar img {
+        width: 3rem;
+        height: 3rem;
+    }
+    .item-ios ion-avatar[item-left],
+    .item-ios ion-thumbnail[item-left],
+    .item-ios ion-avatar[item-start],
+    .item-ios ion-thumbnail[item-start] {
+        margin: 0.5rem 0.6rem 0.2rem 0;
+    }
+    .avatar-detail {
+        float: right;
+        color: #ff5d5d;
+        font-size: 1.3rem;
+        display: inline-block;
+        width: 7.5rem;
+        height: 2.6rem;
+        line-height: 2.6rem;
+        text-align: right;
+        margin-top: -0.4rem;
+    }
+    .button-outline-ios {
+        border-radius: 2rem;
+        border-color: #ff5d5d;
+        color: #ff5d5d;
+        height: 2.6rem;
+        margin-top: 1.5rem;
+    } // .grid{
+    //     background:#FBFBFB;
+    // }
+    .Fileimg {
+        background: #fff;
+        width: 90vw;
+        padding: 0 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        .itembox {
+            width: 24%;
+            margin: 4.5%;
+            position: relative;
+            .remimg {
+                width: 1.5rem;
+                display: inline-flex;
+                position: absolute;
+                height: 1.5rem;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #eee;
+                border-radius: 1.5rem;
+                right: -0.5rem;
+                top: -0.5rem;
+                background: red;
+                color: #fff
+            }
+        }
+        img {
+            width: 100%;
+            // margin: 100%;
+        }
+    }
+    .label-ios {
+        margin: 0.8rem 0 0 0;
+    }
+    .item-ios {
+        padding-left: 1rem !important
+    }
+    .goodPic {
+        width: 93%;
+        height: 100%;
+    }
+    .mydetail {
+        padding: 0
+    }
+    .mydetail h4 {
+        text-align: left;
+    }
+    .mydetail p {
+        text-align: left;
+    }
+    .mydetail p span {
+        text-align: left;
+        color: #ff5d5d;
+        padding-right: 2rem;
+    }
+    .gray {
+        color: #AAAAAA;
+    }
+    .button-outline-ios-danger {
+        border-radius: 1rem;
+        height: 3rem;
+    }
+    .card-ios {
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+        margin: 0 0;
+        width: 100%;
+        border-bottom: 1px solid #F1F1F1;
+    }
+    .shopName {
+        color: #999
+    }
+    .blank {
+        display: block;
+        background: #F2F2F2;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        padding-top: 4rem;
+    }
+    .blank img {
+        margin: 1rem auto;
+        width: 90%;
+        display: block;
+    }
+    .blank span {
+        color: #8B8B8D;
+        margin-left: -1rem;
+    }
+    .price p {
+        float: right;
+        width: 100%;
+    }
+    .service {
+        color: white;
+        background: #ff5d5d;
+        font-size: 1rem;
+        width: 2.7rem !important;
+        text-align: center;
+        margin-top: 0.7rem;
+    }
+    .serviceName {
+        font-size: 1.6rem;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // white-space: nowrap;
+        margin-top: 1.2rem !important;
+    }
+    .marketPrice {
+        margin-top: 0.5rem;
+        text-decoration: line-through;
+        letter-spacing: 0.05rem
+    }
+    .servicePrice {
+        color: #ff5d5d;
+        letter-spacing: 0.05rem;
+        margin-top: 0.3rem;
+    }
+    .orderCount {
+        font-size: 1.2rem;
+        letter-spacing: 0.1rem;
+        margin-top: 1.3rem;
+        margin: 0.7rem 0 0.9rem 0;
+    }
+    .deadlineTime {
+        color: #ff5d5d;
+        border: 1px solid #ff5d5d;
+        width: 43%;
+        font-size: 1rem;
+        border-radius: 0.2rem;
+        text-align: center !important;
+    }
+    .deadlineTime2 {
+        color: #AAAAAA;
+        border: 1px solid #AAAAAA;
+        width: 38%;
+        font-size: 1rem;
+        border-radius: 0.2rem;
+        text-align: center !important;
+    } //第一个的最后两个
+    #left {
+        text-align: left;
+    }
+    #text {
+        width: 100%;
+        word-break: break-all;
+        padding: 0.6rem 0.6rem 0 0.7rem;
+        border: none;
+    }
+    /*更改文本域的placeholder字体颜色*/
+    textarea::-webkit-input-placeholder {
+        color: #A4A4A4 !important;
+        /* WebKit browsers */
+    }
+    textarea:-moz-placeholder {
+        color: #A4A4A4 !important;
+        /* Mozilla Firefox 4 to 18 */
+    }
+    textarea::-moz-placeholder {
+        color: #A4A4A4 !important;
+        /* Mozilla Firefox 19+ */
+    }
+    textarea:-ms-input-placeholder {
+        color: #A4A4A4 !important;
+        /*Internet Explorer 10+ */
+    }
+    .down {
+        width: 100%;
+        height: 4.3rem;
+        line-height: 4.3rem;
+        text-align: center;
+        background: #ff5d5d;
+        color: white;
+        font-size: 1.6rem;
+    }
+    .same {
+        border-top: 1px solid #F1F1F1;
+        height: 3.8rem;
+        line-height: 3rem;
+        font-size: 1.4rem;
+    }
+    .way {
+        color: #ff5d5d;
+    }
+    .dot {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .refundReason {
+        // color: #999;
+        margin-left: 1rem;
+        font-size: 1.2rem;
+        margin-top: 1rem;
+    }
+    .reason {
+        font-size: 1.4rem;
+    }
+    .square {
+        display: inline-block;
+        width: 1.6rem;
+        height: 1.6rem;
+        position: relative;
+    }
+    .kuang {
+        width: 100%;
+        height: 100%;
+    }
+    .gou {
+        position: absolute;
+        top: 15%;
+        left: 15%;
+        width: 66%;
+        height: 67%;
+    }
+    .list {
+        width: 79%
+    }
+    .last {
+        margin-bottom: 2rem;
+    }
+    .filer {
+        margin-bottom: 4rem;
+        span {
+            width: 5rem;
+            display: inline-block;
+            margin-right: 1rem
+        }
+    }
+}

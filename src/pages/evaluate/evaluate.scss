@@ -1,0 +1,108 @@
+page-evaluate {
+    .scroll-content {
+        padding: 0 !important;
+        background: #eee
+    }
+    .title2 {
+        background: #fff;
+        padding: 1rem;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        border-bottom: 1px solid #eee;
+        span {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap
+        }
+        // >span:nth-of-type(2) {
+        //     // width: 55%;
+        //     img {
+        //         width: 3rem;
+        //     }
+        // }
+    }
+    .texfiler {
+        background: #fff;
+        textarea {
+            width: 100%;
+            height: 10rem;
+            ;
+            padding: 1rem;
+            border: 0;
+            resize: none
+        }
+        p {
+            padding: 1rem;
+            ;
+        }
+        button {
+            margin-left: 1rem;
+            margin-bottom: 2rem;
+            width: 25%;
+            img {
+                width: 100%;
+            }
+        }
+    }
+    .title2 {
+        background: #fff;
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        p {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            width: 100%;
+            margin-top: 0.5rem
+        }
+        span {
+            img {
+                width: 3rem;
+            }
+        }
+        button {
+            width: 100%;
+            height: 4rem;
+            text-align: center;
+            color: #fff;
+            background: rgb(250, 109, 53);
+            font-size: 1.8rem;
+            margin-top: 9rem;
+            margin-bottom: 5rem;
+            border-radius: 0.5rem
+        }
+    }
+    .Fileimg {
+        background: #fff;
+        width: 90vw;
+        padding: 0 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        .itembox {
+            width: 24%;
+            margin: 4.5%;
+            position: relative;
+            .remimg {
+                width: 1.5rem;
+                display: inline-flex;
+                position: absolute;
+                height: 1.5rem;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #eee;
+                border-radius: 1.5rem;
+                right: -0.5rem;
+                top: -0.5rem;
+                background: red;
+                color: #fff
+            }
+        }
+        img {
+            width: 100%;
+            // margin: 100%;
+        }
+    }
+}

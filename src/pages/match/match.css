@@ -1,0 +1,31 @@
+page-match .scroll-content {
+  padding: 0 !important;
+}
+
+page-match .fler {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+page-match .fler p {
+  margin-top: 1rem;
+}
+
+page-match .fler img {
+  width: 8rem;
+  height: 8rem;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+page-match .datas {
+  border-bottom: 1px solid #eee;
+  padding: 1rem;
+}
+
+page-match .data {
+  padding-left: 1rem;
+  margin-top: 1rem;
+}

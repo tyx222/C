@@ -1,0 +1,94 @@
+page-diary {
+    .scroll-content {
+        background: #eee;
+        padding: 0!important
+    }
+    .left {
+        margin-left: -13rem
+    }
+    .listbox {
+        li {
+            display: flex;
+            flex-wrap: nowrap;
+            margin-top: 1rem;
+            overflow: hidden;
+            width: 150%;
+            .list {
+                background: #fff;
+                border-radius: 1rem;
+                padding: 1.5rem 1rem;
+                display: flex;
+                flex-wrap: nowrap;
+                width: 90vw;
+                margin-left: 5vw
+            }
+            .list2 {
+                background: #fff;
+                border-radius: 1rem;
+                padding: 1.5rem 1rem;
+                display: flex;
+                flex-wrap: nowrap;
+                width: 90vw;
+                margin-left: -6rem
+            }
+            .listbutton {
+                display: flex;
+                margin-left: 2rem;
+                button {
+                    width: 6rem;
+                    ;
+                    color: #fff;
+                    height: 10rem;
+                    font-weight: 900;
+                    font-size: 1.5rem
+                }
+                .editor {
+                    background: #f0d228
+                }
+                .rem {
+                    background: #f0285a
+                }
+            }
+            .date {
+                width: 17rem;
+                margin-top: 1rem;
+            }
+            .ttt {
+                display: flex;
+                height: 5.5rem;
+                img {
+                    width: 18rem;
+                    height: 95%;
+                }
+                .ddd {
+                    margin-left: 0.5rem;
+                    span:nth-of-type(2) {
+                        color: #999
+                    }
+                }
+                span {
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 3;
+                    overflow: hidden;
+                }
+            }
+        }
+        p {
+            color: #999
+        }
+    }
+    .gopage {
+        background: rgba($color: #000000, $alpha: 0.6);
+        padding: 1rem;
+        border-radius: 50%;
+        width: 7rem;
+        height: 7rem;
+        position: fixed;
+        top: 70vh;
+        right: 3rem;
+        img {
+            width: 4rem;
+        }
+    }
+}

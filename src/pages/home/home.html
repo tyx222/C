@@ -1,0 +1,79 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title style="display: none">首页</ion-title>
+        <div class="titlebox"><button (click)='Pushdiary()'><img src="assets/imgs/images/home1_03.png" alt=""></button><input type='text' class='sousuo'><button (click)="checkIn()">签到</button></div>
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="homebox">
+        <div *ngIf="!usermgs" style="height: 10rem;line-height: 10rem;">
+            <span (click)="gologin()" *ngIf="data.mytoken==null">请登录查看宠卡</span>
+            <span (click)="gonewlay()" *ngIf="data.mytoken!==null&&callname.length==0">点击添加宠卡</span>
+        </div>
+        <div class="bgbox" *ngIf="usermgs">
+            <!-- <div class="userimg">
+                <img src="assets/imgs/logo.png" alt="">
+            </div> -->
+            <div class="userimg">
+                <!-- <img src="assets/imgs/logo.png" alt=""> -->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide" *ngFor="let item of callname" (click)="godetails()">
+                            <img src="{{item.headimgpath}}" alt="">
+                            <p> {{item.pet_name}}</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="swiper-button-prev">
+                        <ion-icon ios="ios-arrow-back" md="ios-arrow-back"></ion-icon>
+                    </div>
+                    <div class="swiper-button-next">
+                        <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+                    </div> -->
+                </div>
+            </div>
+            <div class="day">
+                <ul>
+                    <li><span>1天</span><span>5月9日</span></li>
+                    <li><span>2天</span><span>5月9日</span></li>
+                    <li><span>3天</span><span>5月9日</span></li>
+                </ul>
+            </div>
+            <p class="Radio">天要洗澡要洗澡今天要洗澡要洗澡今天要洗澡要洗澡！</p>
+        </div>
+
+        <!-- <div class="day2">
+            <ul>
+                <li><span><img src="assets/imgs/images/home_03.png" alt="" srcset=""></span><span>重量：24kg</span></li>
+                <li><span><img src="assets/imgs/images/home_05.png" alt="" srcset=""></span><span>状态：健康,幼儿期</span></li>
+                <li><span><img src="assets/imgs/images/home_07.png" alt="" srcset=""></span><span>代金券</span></li>
+            </ul>
+        </div> -->
+
+        <p class="gotobat" (click)="godaylist()"><span>今日宠榜</span><span><ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></span></p>
+
+        <div class="notice">
+            <span>小妙招</span><span>小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招</span>
+        </div>
+
+        <div class="card">
+            <div><img src="assets/imgs/logo.png" alt="" srcset=""></div>
+            <div>
+                <h5>宠卡</h5>
+                <p><img src="assets/imgs/bq.png" alt="" srcset="">可爱调皮捣蛋</p>
+                <div><img src="assets/imgs/logo.png" alt="" srcset="">
+                    <p>小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招</p>
+                </div>
+                <div class="Interaction"><span><img src="assets/imgs/zan.png" alt="" srcset=""></span><span><img src="assets/imgs/pl.png" alt="" srcset=""></span></div>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+    <guidance *ngIf="goguidance" (changehomes)="gohomes($event)"></guidance>
+
+</ion-content>

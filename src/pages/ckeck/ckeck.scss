@@ -1,0 +1,75 @@
+page-ckeck {
+
+    .scroll-content {
+        padding: 0 !important;
+        background: #eee
+    }
+    .titaa {
+        margin-bottom: 1rem;
+        .userimg {
+            width: 5rem;
+            margin-top: 1rem
+        }
+    }
+    .ble {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        background: #fff;
+    }
+    .ble2 {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 1rem;
+        p {
+            font-size: 2rem
+        }
+        span {
+            margin-top: 0.5rem;
+            img {
+                width: 1rem;
+            }
+        }
+    }
+    .name {
+        display: flex;
+        flex-direction: column
+    }
+    .djd {
+        width: 5rem;
+        height: 2rem;
+        color: #fff;
+        background: #EF8936;
+        border-radius: 2rem
+    }
+    .texx {
+        padding: 1rem;
+        background: #fff;
+    }
+    .imglist {
+        display: flex;
+        flex-wrap: wrap;
+        background: #fff;
+        padding-bottom: 1rem;
+        img {
+            width: 25vw;
+            height: 25vw;
+            margin-left: 6vw;
+            margin-bottom: 1rem
+        }
+    }
+    .titaa {
+        background: #fff
+    }
+    .top {
+        margin-top: 2rem
+    }
+    .black {
+        color: #999
+    }
+    .martop {
+        margin-top: -1.5rem
+    }
+}

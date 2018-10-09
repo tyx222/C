@@ -1,0 +1,77 @@
+page-chatroom {
+    .scroll-content {
+        padding: 0 !important;
+   
+    }
+.myusertext{
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 1.5rem;
+
+    img{
+        width: 4rem;
+        height: 4rem;
+    }
+    p{
+        margin-left: 1.2rem;
+        padding: 0.5rem;
+        border: 1px solid rgb(226, 226, 226);
+        border-radius: 0.5rem;
+        color: #999;
+        font-size: 1.3rem;
+        font-weight: 500
+    }
+}
+.youusertext{
+
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 1.5rem;
+    flex-direction: row-reverse;
+    img{
+        width: 4rem;
+        height: 4rem;
+    }
+    p{
+        margin-right: 1.2rem;
+        padding: 0.5rem;
+        border: 1px solid rgb(226, 226, 226);
+        border-radius: 0.5rem;
+        color: #999;
+        font-size: 1.3rem;
+        font-weight: 500
+    }
+}
+
+.pushnews{
+    border-top: 1px solid rgb(226, 226, 226);
+    padding:0.5rem;
+    position: fixed;
+    bottom: 0;width: 100%;
+    background: #fff;
+    p{
+          display: flex;
+ 
+    align-items: center;
+    }
+  
+    .btnimg{
+        justify-content: space-evenly;
+        button{
+            width: 5rem;
+        }
+    }
+    button{
+        width: 3rem;   background: #fff;
+    }
+    input{
+        height: 2rem;
+        width: 100%;
+        border-radius: 2rem;
+        border:1px solid rgb(226, 226, 226)
+    }
+    img{
+        width: 100%;
+    }
+}
+}

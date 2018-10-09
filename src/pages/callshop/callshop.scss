@@ -1,0 +1,129 @@
+page-callshop {
+    .scroll-content {
+        padding: 0 !important;
+        background: #eee
+    }
+    .titaa {
+        margin-bottom: 1rem;
+        .userimg {
+            width: 5rem;
+            margin-top: 1rem
+        }
+    }
+    .ble {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        background: #fff;
+    }
+    .ble2 {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 1rem;
+        p {
+            font-size: 2rem
+        }
+        span {
+            margin-top: 0.5rem;
+            img {
+                width: 1rem;
+            }
+        }
+    }
+    .name {
+        display: flex;
+        flex-direction: column
+    }
+    .djd {
+        width: 6rem;
+        height: 2rem;
+        color: #fff;
+        background: #EF8936;
+        border-radius: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center
+    }
+    .gogogo {
+        background: #FFC435;
+        color: #fff;
+        padding: 0.1rem 0.6rem;
+        border-radius: 5rem
+    }
+    .gogogo2 {
+        background: #999;
+        color: #fff;
+        padding: 0.1rem 0.6rem;
+        border-radius: 5rem
+    }
+    .shopmoss {
+        width: 90%;
+        margin: auto;
+        margin-top: 1rem;
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            /* margin: auto; */
+            justify-content: space-between;
+            li {
+                width: 47%;
+                background: #fff;
+                margin-top: 1rem;
+                >img {
+                    width: 100%;
+                    height: 12rem;
+                    ;
+                }
+            }
+        }
+    }
+    .sizet {
+        font-size: 2rem
+    }
+    .goshop {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        img {
+            width: 0.8rem
+        }
+    }
+    .texx {
+        padding: 1rem;
+        background: #fff;
+    }
+    .imglist {
+        display: flex;
+        flex-wrap: wrap;
+        background: #fff;
+        padding-bottom: 1rem;
+        img {
+            width: 25vw;
+            height: 25vw;
+            margin-left: 6vw;
+            margin-bottom: 1rem
+        }
+    }
+    h5 {
+        padding: 1rem 2rem;
+        background: #fff;
+        color: #EF8936;
+        font-size: 1.5rem
+    }
+    .titaa {
+        background: #fff;
+        width: 90%;
+        margin: auto;
+    }
+    .top {
+        margin-top: 2rem
+    }
+    .black {
+        color: #999
+    }
+    .martop {
+        margin-top: -1.5rem
+    }
+}

@@ -1,0 +1,106 @@
+page-diary .scroll-content {
+  background: #eee;
+  padding: 0 !important;
+}
+
+page-diary .left {
+  margin-left: -13rem;
+}
+
+page-diary .listbox li {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 1rem;
+  overflow: hidden;
+  width: 150%;
+}
+
+page-diary .listbox li .list {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 90vw;
+  margin-left: 5vw;
+}
+
+page-diary .listbox li .list2 {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 90vw;
+  margin-left: -6rem;
+}
+
+page-diary .listbox li .listbutton {
+  display: flex;
+  margin-left: 2rem;
+}
+
+page-diary .listbox li .listbutton button {
+  width: 6rem;
+  color: #fff;
+  height: 10rem;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+page-diary .listbox li .listbutton .editor {
+  background: #f0d228;
+}
+
+page-diary .listbox li .listbutton .rem {
+  background: #f0285a;
+}
+
+page-diary .listbox li .date {
+  width: 17rem;
+  margin-top: 1rem;
+}
+
+page-diary .listbox li .ttt {
+  display: flex;
+  height: 5.5rem;
+}
+
+page-diary .listbox li .ttt img {
+  width: 18rem;
+  height: 95%;
+}
+
+page-diary .listbox li .ttt .ddd {
+  margin-left: 0.5rem;
+}
+
+page-diary .listbox li .ttt .ddd span:nth-of-type(2) {
+  color: #999;
+}
+
+page-diary .listbox li .ttt span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+page-diary .listbox p {
+  color: #999;
+}
+
+page-diary .gopage {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1rem;
+  border-radius: 50%;
+  width: 7rem;
+  height: 7rem;
+  position: fixed;
+  top: 70vh;
+  right: 3rem;
+}
+
+page-diary .gopage img {
+  width: 4rem;
+}

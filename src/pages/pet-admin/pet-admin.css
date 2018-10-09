@@ -1,0 +1,135 @@
+page-pet-admin .content {
+  background: #f1f1f1;
+}
+
+page-pet-admin .list-header-md {
+  border: none !important;
+}
+
+page-pet-admin .petBox {
+  position: relative;
+  width: 100%;
+  height: 7rem;
+  border-radius: 5px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+}
+
+page-pet-admin .petBox .pet img {
+  width: 5rem;
+  margin-left: 3rem;
+}
+
+page-pet-admin .petBox .add {
+  font-size: 1.5rem;
+  margin-left: 3rem;
+}
+
+page-pet-admin .top {
+  margin-top: 3rem;
+  height: 18rem;
+}
+
+page-pet-admin .petCrad {
+  border: 1px solid transparent;
+  width: 65%;
+}
+
+page-pet-admin .petCrad .msg {
+  font-size: 2rem;
+}
+
+page-pet-admin .petCrad .msg1 {
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent 0;
+}
+
+page-pet-admin .petCrad .msg1 div {
+  width: auto;
+  padding: 0.5rem 1rem;
+  background: #d855f9;
+  border-radius: 50px;
+  color: #fff;
+}
+
+page-pet-admin .petCrad .msg1 div span {
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+page-pet-admin .petCrad .msg1 .icon-sexm,
+page-pet-admin .petCrad .msg1 .icon-sexw {
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+page-pet-admin .petCrad .msg2 div {
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  margin-bottom: 1rem;
+}
+
+page-pet-admin .petCrad .msg2 div span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+page-pet-admin .petCrad .msg2 img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+page-pet-admin .imgCrad {
+  width: 35%;
+  height: 16rem;
+  border: 1px solid transparent;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+page-pet-admin .imgCrad .petImg {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+page-pet-admin .imgCrad .petImg span {
+  margin-top: 2rem;
+  padding-right: 0.5rem;
+}
+
+page-pet-admin .imgCrad img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  margin-top: 2rem;
+}
+
+page-pet-admin .imgCrad .btn {
+  display: flex;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+page-pet-admin .imgCrad .btn1 {
+  background: #ffb400;
+  color: #fff;
+  width: 5rem;
+  height: 2rem;
+  border-radius: 5px;
+  margin-right: 2rem;
+}
+
+page-pet-admin .imgCrad .btn2 {
+  background: #ff4200;
+  color: #fff;
+  width: 5rem;
+  height: 2rem;
+  border-radius: 5px;
+}

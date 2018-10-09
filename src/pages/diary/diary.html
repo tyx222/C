@@ -1,0 +1,49 @@
+<!--
+  Generated template for the DiaryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>diary</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="listbox">
+        <ul>
+            <li *ngFor="let item of data let i=index" (swipe)="swipeEvent($event,i)">
+                <div [ngClass]="{'list':letfbor!==i,'list2':letfbor==i}" (click)='letfbor=-1'>
+                    <div class="date">
+                        <h4>今天</h4>
+                        <p>星期五</p>
+                    </div>
+                    <div class="ttt">
+                        <span>
+              <img [src]="item.imgurl" alt="">
+            </span>
+                        <span class="ddd">
+              <span class="hh">{{item.title}}</span>
+                        <span>
+                啊啊啊阿三大啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊阿三大啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊阿三大啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+              </span>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="listbutton">
+                    <!-- <button class="editor">编辑</button> -->
+                    <button class="rem" (click)="remlist(i)">删除</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <button class="gopage" (click)='gopushdiary()'>
+    <img src="assets/imgs/images/imhpush.png" alt="">
+  </button>
+</ion-content>

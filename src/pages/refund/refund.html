@@ -1,0 +1,70 @@
+<!--
+  Generated template for the RefundPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>refund</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card class="first">
+
+        <ion-grid>
+            <ion-row class="goods">
+                <ion-col col-4>
+                    <img src="assets/imgs/images/goudai.png" class="goodPic">
+                </ion-col>
+                <ion-col col-8 class="mydetail">
+                    <h4 class="serviceName">asdasdasd啊是大神大所大所大阿萨德阿萨德</h4>
+
+
+                </ion-col>
+
+            </ion-row>
+
+
+        </ion-grid>
+    </ion-card>
+    <button ion-item>
+    货物状态
+  </button>
+    <p class="refundReason">申请原因（可填可不填）</p>
+    <ion-card class="last">
+        <textarea id="text" rows="6" placeholder="请在此输入，不超过200字" maxlength="200"></textarea>
+    </ion-card>
+
+    <ion-row class="same">
+        <ion-col col-3 id="left">
+            退款金额
+        </ion-col>
+        <ion-col col-9 class="way">
+            ￥9999
+        </ion-col>
+    </ion-row>
+    <ion-row class="same">
+        <ion-col col-9 id="left">
+            最多可退:￥9999,包含邮费(0.00)
+        </ion-col>
+
+    </ion-row>
+    <h4>上传凭证</h4>
+
+    <div class="Fileimg">
+        <div class="itembox" *ngFor="let item of avatar let i =index">
+            <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
+            <img src="{{item}}" alt="" (click)="presentActionSheet(i)">
+        </div>
+    </div>
+
+    <!--底部按钮-->
+    <button class="down">
+    提交
+  </button>
+</ion-content>

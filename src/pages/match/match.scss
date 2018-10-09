@@ -1,0 +1,29 @@
+page-match {
+    .scroll-content {
+        padding: 0 !important;
+    }
+    .fler {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        p {
+            margin-top: 1rem;
+        }
+        img {
+            width: 8rem;
+            height: 8rem;
+            margin-bottom: 3rem;
+            margin-top: 3rem
+        }
+    }
+    .datas {
+        border-bottom: 1px solid #eee;
+        padding: 1rem;
+    
+    }
+    .data{
+padding-left:1rem ;
+margin-top: 1rem
+    }
+}

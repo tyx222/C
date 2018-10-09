@@ -1,0 +1,58 @@
+<!--
+  Generated template for the IpamPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>ipam</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <div class="titaa" (click)="goder()" *ngIf="ipml<3">
+        <div class="ble">
+            <div>
+                <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
+            </div>
+            <div class="ble2">
+                <div class="name">
+                    <p>添加收货地址</p>
+                </div>
+                <div>
+                    <img src="assets/imgs/images/right.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="titaa" *ngFor="let item of myipam let i=index" (swipe)="swipeEvent($event,i)">
+
+        <div [ngClass]="{'ble':letfbor!==i,'ble3':letfbor==i}" (click)='setindex(i)'>
+            <p style="color: #ffc435;width: 2rem;" *ngIf="mpindex==i">默认地址</p>
+            <div>
+                <img src="assets/imgs/images/xdgps.png" alt="" class="userimg">
+            </div>
+            <div class="ble2" (click)='letfbor=-1'>
+                <div class="name">
+                    <p><span>收货人:{{item.myname}} </span><span style="float: right;">{{item.ipone}}</span></p>
+                    <p><span>{{item.myipam}}{{item.ipam}}</span></p>
+
+                </div>
+                <div>
+                    <img src="assets/imgs/images/right.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="orderbutton">
+            <button>编辑</button>
+            <button (click)="rmoder(i)">删除</button>
+        </div>
+    </div>
+</ion-content>

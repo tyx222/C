@@ -1,0 +1,101 @@
+<!--
+  Generated template for the OrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>order</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="titaa" (click)='pushipam()' *ngIf="show==false">
+        <div class="ble">
+            <div>
+                <img src="assets/imgs/images/xdgps.png" alt="" class="userimg">
+            </div>
+            <div class="ble2">
+                <div class="name">
+                    <p><span>收货人:{{ipamord.myname}} </span><span style="float: right;">{{ipamord.ipone}}</span></p>
+                    <p><span>{{ipamord.order}}</span></p>
+
+                </div>
+                <div>
+                    <img src="assets/imgs/images/right.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="titaa" (click)='pushipam()' *ngIf="show">
+        <div class="ble">
+            <div>
+                <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
+            </div>
+            <div class="ble2">
+                <div class="name">
+                    <p>添加收货地址</p>
+                </div>
+                <div>
+                    <img src="assets/imgs/images/right.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="titaa">
+        <div class="ble">
+            <div>
+                <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
+            </div>
+            <div class="ble2">
+                <div class="name">
+                    <p>店铺名称</p>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="titaa" style="margin-top:-1rem">
+        <div class="ble" style="height: 10rem;">
+            <div class="shopingimg">
+                <img src="assets/imgs/images/goudai.png" alt="">
+            </div>
+            <div class="ble2">
+                <div class="title">
+                    <p>店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称</p>
+                    <p class="pardack">商品明细</p>
+                    <p class="total"><span class="maxprice">￥1900</span><span>X1</span></p>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="distribution"><span>配送方式：</span><span>快递 免邮</span></p>
+    <div class="tarea">
+        <p>买家留言：</p>
+        <textarea style="resize: none;width: 90%;height: 10rem;padding: 0.5rem;border: 1px solid #e2d1d1;border-radius: 5px" placeholder="选填 填写内容和卖家协商"></textarea>
+    </div>
+
+    <div style="height: 7rem;"></div>
+
+    <div class="shoppingcall">
+        <div>
+
+            合计金额：<span class="maxprice">￥1900</span>
+
+        </div>
+        <div>
+            <button class="shop">立即购买</button>
+        </div>
+    </div>
+</ion-content>

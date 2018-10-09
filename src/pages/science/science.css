@@ -1,0 +1,125 @@
+page-science .scroll-content {
+  padding: 0 !important;
+}
+
+page-science .swiper-container {
+  width: 100vw;
+  height: 10rem;
+}
+
+page-science .swiper-container img {
+  width: 100%;
+}
+
+page-science .swiper-pagination-bullet-active {
+  background: #EC6D36;
+  opacity: 1;
+}
+
+page-science .box {
+  display: flex;
+  flex-direction: column;
+}
+
+page-science .box .imgbox {
+  position: relative;
+}
+
+page-science .box .imgbox .slice {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  margin-top: -3rem;
+  height: 3rem;
+  z-index: 999;
+}
+
+page-science .box .imgbox .slice span {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #fff;
+  border-radius: 2rem;
+  margin: 0.5rem;
+}
+
+page-science .box .imgbox .slice .bg {
+  background: #fff;
+}
+
+page-science .box p {
+  display: flex;
+  flex-wrap: nowrap;
+  border-bottom: 1px solid #eee;
+}
+
+page-science .box p button {
+  width: 50%;
+  border-left: 1px solid #eee;
+  background: #fff;
+  height: 3rem;
+  line-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+page-science .box p button img {
+  width: 2rem;
+}
+
+page-science .tabs {
+  margin-top: 1rem;
+}
+
+page-science .tabs .cd {
+  color: #f57f31;
+}
+
+page-science .tabs button {
+  border: none;
+  color: #666;
+  padding: 1rem;
+  background: #fff;
+  font-weight: 900;
+  font-size: 1.4rem;
+}
+
+page-science .list ul {
+  padding: 1rem;
+}
+
+page-science .list ul li {
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-bottom: 1rem;
+}
+
+page-science .list ul li div:nth-of-type(1) img {
+  width: 5rem;
+}
+
+page-science .list ul li div:nth-of-type(2) {
+  margin-left: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 80%;
+}
+
+page-science .list ul li div:nth-of-type(2) .pagetext {
+  color: #999;
+}
+
+page-science .list ul li div:nth-of-type(2) .tags {
+  display: flex;
+  align-items: center;
+  color: #ad39fa;
+}
+
+page-science .list ul li div:nth-of-type(2) .tags img {
+  width: 1.5rem;
+}

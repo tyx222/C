@@ -1,0 +1,51 @@
+page-daylist {
+    .scroll-content {
+        padding: 0 !important;
+        background: #fff
+    }
+    .title {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px;
+        span {
+            font-size: 1.5rem
+        }
+        span:nth-of-type(2) {
+            color: #999
+        }
+    }
+    .boxs {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        padding-left: 16px;
+        margin-bottom: 1.5rem;
+        .listlv {
+            width: 3rem;
+            img {
+                width: 2rem;
+                ;
+            }
+        }
+        .lvuser {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border-bottom: 1px solid #eee;
+            span {
+                display: flex;
+                align-items: center;
+                padding-right: 16px;
+                padding-bottom: 0.5rem
+            }
+            span:nth-of-type(2) {
+                color: #999
+            }
+            img {
+                width: 3rem;
+                border-radius: 50%;
+            }
+        }
+    }
+}

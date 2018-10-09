@@ -1,0 +1,23 @@
+calendar-page ion-calendar-month .danger .days .on-selected,
+calendar-page ion-calendar-month .danger .startSelection button.days-btn,
+calendar-page ion-calendar-month .danger .endSelection button.days-btn {
+  background-color: #f9d753;
+  color: #fff;
+}
+
+calendar-page ion-calendar-month .danger button.days-btn small,
+calendar-page ion-calendar-month .danger .days .marked p,
+calendar-page ion-calendar-month .danger .days .today p {
+  color: #f9d753;
+}
+
+calendar-page .pudate {
+  width: 90%;
+  padding: 1rem;
+  color: #fff;
+  background: #f9d753;
+  margin-left: 5%;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}

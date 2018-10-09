@@ -1,0 +1,155 @@
+page-appraise {
+
+        .list-ios {
+          margin: 0px;
+        }
+        ion-item {
+          border: 0px;
+        }
+        .toolbar-background-ios{
+          background:#fff;
+        }
+        .button-ios {
+          z-index: 999;
+          margin-left: 15px;
+          margin-top: 15px;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background-color: rgba(255, 0, 0, 0.4);
+          position: fixed;
+          ion-icon {
+            padding: 0px;
+          }
+        }
+        .slide1 {
+          width: 100%;
+          height: 300px;
+          background: #fff;
+        }
+        .cont4 {
+          background: #fff;
+          margin-top: 1px;
+          color: rgb(102, 102, 102);
+          .list-ios .item-block .item-inner {
+            border: 0px;
+          }
+          .text1 {
+            height: 40px;
+            border-bottom: 1px solid #eee;
+            line-height: 40px;
+            font-size: 16px;
+          }
+          .text2 {
+            color: #aaa;
+            line-height: 22px;
+            padding-top: 8px;
+            border-bottom: 1px solid #eee;
+          }
+          .ion-user-avator{
+            margin:0 10px 10px 10px !important;
+            .userAvator{
+              width:50px;
+              height:50px;
+              border-radius: 50%;
+            }
+          }
+          h2{
+            margin-bottom:5px;
+          }
+          p {
+            margin: 0px;
+            font-size:1.1rem;
+            color:#aaa;
+          }
+          span {
+            color: rgb(51, 51, 51);
+            margin-left: 15px
+          }
+          /*设置评论的图片的大小*/
+          .imgContent{
+            width:100%;
+            height:auto;
+            padding-top:10px;
+            padding-bottom:10px;
+            img{
+                width: 29vw;
+                height: 29vw;
+            }
+          }
+        }
+ 
+        .shoppingcall{
+            background: #fff;
+            position: fixed;
+            bottom: 0px;
+            display: flex;
+            width: 100%;
+            
+           > div:nth-of-type(1){
+                display: flex;
+                width: 40%;
+                padding: 0.5rem;
+                p{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 50%;
+                    img{
+                        width: 3rem;
+                        height: 2.6rem;
+                    }
+                    span{
+                        color: #999
+                    }
+    
+                }
+            }
+            >div{
+                width: 60%;
+                button{
+                    width: 50%;
+                    height: 100%;
+                    color: #fff;
+                }
+                .join{
+                    background:rgb(252, 201, 60)
+                }
+                .shop{
+                    background: rgb(243, 66, 43)
+                }
+            }
+        }
+        ion-content {
+          .scroll-content {
+            margin: 0px !important;
+          }
+        }
+        .item-ios h2{
+            margin-top: 0px !important;
+        }
+      
+        /*设置 选择样式的 模块的样式*/
+        .selectStyle{
+          width:100%;
+          height:auto;
+          background:#fff;
+          padding: 10px 20px 20px 20px;
+          .options{
+            font-size: 1.3rem;
+            display: inline-block;
+            border-radius: 10px;
+            line-height: 20px;
+            padding: 4px 11px;
+            margin-right: 10px;
+            margin-top: 10px;
+            background: #ffeded;     
+          }
+          .checked{
+            background:#ff5d5d;
+            color:white;
+          }
+        }
+      
+      
+}

@@ -1,0 +1,47 @@
+page-playcode .playcode {
+  position: relative;
+  margin-top: 3rem;
+}
+
+page-playcode .playcode img {
+  position: absolute;
+  width: 2rem;
+  left: 0.5rem;
+}
+
+page-playcode .playcode input {
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 0.5rem 3rem;
+  border: 1px solid #dadada;
+  height: 3rem;
+}
+
+page-playcode .playcode input::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #e4e4e4;
+}
+
+page-playcode .playcode input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #e4e4e4;
+}
+
+page-playcode .playcode input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #e4e4e4;
+}
+
+page-playcode .playcode input:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #e4e4e4;
+}
+
+page-playcode .isok {
+  width: 100%;
+  background: #f5a952;
+  color: #fff;
+  height: 3rem;
+  margin-top: 3rem;
+  border-radius: 0.5rem;
+}

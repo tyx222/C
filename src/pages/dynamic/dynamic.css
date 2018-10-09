@@ -1,0 +1,84 @@
+page-dynamic .scroll-content {
+  padding: 0 !important;
+  background: #eee;
+}
+
+page-dynamic .titaa .userimg {
+  width: 5rem;
+  margin-top: 1rem;
+}
+
+page-dynamic .ble {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+}
+
+page-dynamic .ble2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+page-dynamic .ble2 p {
+  font-size: 2rem;
+}
+
+page-dynamic .ble2 span {
+  margin-top: 0.5rem;
+}
+
+page-dynamic .ble2 span img {
+  width: 1rem;
+}
+
+page-dynamic .name {
+  display: flex;
+  flex-direction: column;
+}
+
+page-dynamic .djd {
+  width: 5rem;
+  height: 2rem;
+  color: #fff;
+  background: #EF8936;
+  border-radius: 2rem;
+}
+
+page-dynamic .texx {
+  padding: 1rem;
+  background: #fff;
+}
+
+page-dynamic .imglist {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  padding-bottom: 1rem;
+}
+
+page-dynamic .imglist img {
+  width: 25vw;
+  height: 25vw;
+  margin-left: 6vw;
+  margin-bottom: 1rem;
+}
+
+page-dynamic .titaa {
+  background: #fff;
+}
+
+page-dynamic .top {
+  margin-top: 2rem;
+}
+
+page-dynamic .black {
+  color: #999;
+}
+
+page-dynamic .martop {
+  margin-top: -1.5rem;
+}

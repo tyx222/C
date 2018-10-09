@@ -1,0 +1,56 @@
+<!--
+  Generated template for the GoodseditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <!-- <ion-buttons start>
+        <button ion-button (click)="dismissCLI()">
+          <img src="assets/img/back.png" width='15' height='20'>
+        </button>
+      </ion-buttons>
+      <ion-title>{{description.title}}</ion-title>
+      <ion-buttons end style="text-align: right;">
+        <button ion-button (click)="addeditAddressAPI()">完成</button>
+      </ion-buttons> -->
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label fixed>收货人</ion-label>
+            <ion-input type="text" [(ngModel)]="mydata.myname" placeholder="收货人姓名"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>联系电话</ion-label>
+            <ion-input type="tel" [(ngModel)]="mydata.ipone" placeholder="收货人电话"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>地区</ion-label>
+            <ion-multi-picker item-content [(ngModel)]="mydata.myipam" [multiPickerColumns]="listData" #myipam></ion-multi-picker>
+        </ion-item>
+        <ion-item>
+            <ion-label>详细地址</ion-label>
+            <ion-input type="text" maxlength="20" [(ngModel)]="mydata.ipam" placeholder="输入您的详细地址"></ion-input>
+        </ion-item>
+
+        <!-- <button ion-item>
+        <label class="diyItem">所在地区</label>
+        <label class="diyItemright"></label>
+      </button>
+  
+      <div class="goodseditarea">
+        <ion-textarea maxLength="250" placeholder="请填写详细地址，不少于5个字" [(ngModel)]="addressAPI.detail_address">{{addressAPI.detail_address}}</ion-textarea>
+      </div> -->
+        <button class="ok" (click)="save(myipam)">保存</button>
+    </ion-list>
+
+
+
+
+
+</ion-content>

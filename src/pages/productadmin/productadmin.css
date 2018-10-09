@@ -1,0 +1,306 @@
+page-productadmin {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+page-productadmin .scroll-content {
+  padding: 0 !important;
+  background: #eee;
+}
+
+page-productadmin .tabs ul {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+}
+
+page-productadmin .tabs ul li {
+  width: 24%;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+page-productadmin .tabs ul .eft {
+  background: #fcc93c;
+  color: #fff;
+}
+
+page-productadmin .titaa {
+  margin-bottom: 1rem;
+  background: #fff;
+  overflow: hidden;
+  width: 100%;
+  display: -webkit-inline-box;
+}
+
+page-productadmin .titaa .userimg {
+  width: 6rem;
+}
+
+page-productadmin .left {
+  margin-left: -12rem;
+}
+
+page-productadmin .distribution {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+page-productadmin .ble {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  width: 100vw;
+}
+
+page-productadmin .ble .shopingimg {
+  width: 10rem;
+}
+
+page-productadmin .orderbutton {
+  display: flex;
+}
+
+page-productadmin .orderbutton button {
+  width: 6rem;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+page-productadmin .orderbutton button:nth-of-type(1) {
+  background: #ffad41;
+}
+
+page-productadmin .orderbutton button:nth-of-type(2) {
+  background: #FF7041;
+}
+
+page-productadmin > div:nth-of-type(1) {
+  width: 20%;
+}
+
+page-productadmin .ble2 {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: 100%;
+  margin: 0 1rem;
+}
+
+page-productadmin .ble2 p {
+  font-size: 1.8rem;
+}
+
+page-productadmin .ble2 .name {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 80%;
+}
+
+page-productadmin .ble2 .name p {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+page-productadmin .ble2 .name p span:nth-of-type(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 70%;
+}
+
+page-productadmin .ble2 .name p span:nth-of-type(2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 28%;
+}
+
+page-productadmin .ble2 .name p:nth-of-type(2) span {
+  color: #999;
+}
+
+page-productadmin .ble2 .pardack {
+  color: #999;
+}
+
+page-productadmin .ble2 .maxprice {
+  color: #FF7041;
+}
+
+page-productadmin .ble2 .total {
+  display: flex;
+  justify-content: space-between;
+}
+
+page-productadmin .ble2 .title {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 7rem;
+}
+
+page-productadmin .ble2 .title > p {
+  font-size: 1.5rem;
+}
+
+page-productadmin .ble2 .title > p:nth-of-type(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+page-productadmin .ble2 span {
+  margin-top: 0.5rem;
+}
+
+page-productadmin .ble2 span img {
+  width: 1rem;
+}
+
+page-productadmin .djd {
+  width: 5rem;
+  height: 2rem;
+  color: #fff;
+  background: #EF8936;
+  border-radius: 2rem;
+}
+
+page-productadmin .texx {
+  padding: 1rem;
+  background: #fff;
+}
+
+page-productadmin .imglist {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  padding-bottom: 1rem;
+}
+
+page-productadmin .imglist img {
+  width: 25vw;
+  height: 25vw;
+  margin-left: 6vw;
+  margin-bottom: 1rem;
+}
+
+page-productadmin .top {
+  margin-top: 2rem;
+}
+
+page-productadmin .black {
+  color: #999;
+}
+
+page-productadmin .martop {
+  margin-top: -1.5rem;
+}
+
+page-productadmin .tarea {
+  margin-top: 1rem;
+  background: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+page-productadmin .tarea p {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  width: 10rem;
+}
+
+page-productadmin .left {
+  margin-left: -13rem;
+}
+
+page-productadmin .listbox li {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 1rem;
+  overflow: hidden;
+  width: 150%;
+}
+
+page-productadmin .listbox li .list {
+  background: #fff;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100vw;
+}
+
+page-productadmin .listbox li .list2 {
+  background: #fff;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100vw;
+  margin-left: -12rem;
+}
+
+page-productadmin .listbox li .listbutton {
+  display: flex;
+  margin-left: 2rem;
+}
+
+page-productadmin .listbox li .listbutton button {
+  width: 6rem;
+  color: #fff;
+  height: 10rem;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+page-productadmin .listbox li .listbutton .editor {
+  background: #f0d228;
+}
+
+page-productadmin .listbox li .listbutton .rem {
+  background: #f0285a;
+}
+
+page-productadmin .listbox li .date {
+  width: 17rem;
+  margin-top: 1rem;
+}
+
+page-productadmin .listbox li .ttt {
+  display: flex;
+  height: 5.5rem;
+}
+
+page-productadmin .listbox li .ttt img {
+  width: 18rem;
+  height: 95%;
+}
+
+page-productadmin .listbox li .ttt .ddd {
+  margin-left: 0.5rem;
+}
+
+page-productadmin .listbox li .ttt .ddd span:nth-of-type(2) {
+  color: #999;
+}
+
+page-productadmin .listbox li .ttt span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+page-productadmin .listbox p {
+  color: #999;
+}

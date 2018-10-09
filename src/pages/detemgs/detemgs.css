@@ -1,0 +1,54 @@
+page-detemgs .qrscanner {
+  background: none;
+}
+
+page-detemgs .qrscanner-area {
+  width: 100%;
+  height: 86%;
+  background: url(../assets/imgs/images/scanner.svg) no-repeat center center;
+  background-size: contain;
+}
+
+page-detemgs .through-line {
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: red;
+  position: absolute;
+  animation: myfirst 2s linear infinite alternate;
+}
+
+@keyframes myfirst {
+  0% {
+    background: red;
+    top: 30%;
+  }
+  25% {
+    background: yellow;
+    top: 35%;
+  }
+  50% {
+    background: blue;
+    top: 40%;
+  }
+  75% {
+    background: green;
+    top: 45%;
+  }
+  100% {
+    background: red;
+    top: 50%;
+  }
+}
+
+page-detemgs .button-bottom {
+  width: 128px;
+  position: absolute;
+  left: 50%;
+  bottom: 80px;
+  margin-left: -64px;
+}
+
+page-detemgs .button-bottom .icon-camera {
+  float: left;
+}

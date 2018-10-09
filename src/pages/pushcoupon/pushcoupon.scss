@@ -1,0 +1,47 @@
+page-pushcoupon {
+    .scroll-content {
+        padding: 0 !important;
+    }
+    .fromdata {
+        ul {
+            display: flex;
+            flex-direction: column;
+            li {
+                display: flex;
+                justify-content: space-between;
+                padding: 1rem;
+                border-bottom: 1px solid #eee;
+                color: #666;
+                input {
+                    text-align: right;
+                    border: none
+                }
+                .monet {
+                    border-bottom: 1px solid #eee !important;
+                    width: 4rem;
+                    ;
+                }
+            }
+        }
+        p {
+            padding: 1rem;
+            margin-top: 2rem;
+            color: #999;
+            text-align: center
+        }
+        .tijiao {
+            width: 80vw;
+            height: 4rem;
+            color: #fff;
+            background: #f98004;
+            border-radius: 0.5rem;
+            margin-left: 10vw;
+            margin-top: 2rem
+        }
+        .item-cover {
+            position: inherit;
+            ;
+            width: 3rem;
+        }
+    }
+}

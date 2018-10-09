@@ -1,0 +1,93 @@
+<!--
+  Generated template for the NewlayPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>添加猫卡</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="fler">
+        <img src="{{petimage}}" alt="" (click)="userimg()">
+        <p>点击图片上传头像</p>
+    </div>
+    <p class="data">
+        <span>昵称:</span>
+        <span>
+      <input type="text" [(ngModel)]='fromdata.pet_name' placeholder="淼淼">
+    </span>
+    </p>
+    <p class="data">
+
+        <ion-list radio-group [(ngModel)]="fromdata.sex">
+            <ion-list-header>请选择性别</ion-list-header>
+            <ion-item>
+                <ion-label fixed>男生</ion-label>
+                <ion-radio value="1"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>女生</ion-label>
+                <ion-radio value="2"></ion-radio>
+            </ion-item>
+        </ion-list>
+
+
+    </p>
+    <p class="data" style="display: flex;">
+        <span>生日:</span>
+        <span>
+      <ion-datetime [cancelText]="'取消'" [doneText]="'完成'" displayFormat="YYYY-MM-DD" [(ngModel)]="fromdata.pet_birthday"></ion-datetime>
+    </span>
+    </p>
+    <p class="data">
+        <span>体重:</span>
+        <span>
+      <input type="number" [(ngModel)]='fromdata.pet_weight' placeholder="2.0Kg"><span>Kg</span>
+        </span>
+    </p>
+    <p class="data">
+        <span>一句话描述:</span>
+        <span>
+      <input type="text" [(ngModel)]='fromdata.comment' placeholder="一只爱吃鱼的猫">
+    </span>
+    </p>
+    <p class="data">
+        <ion-list radio-group [(ngModel)]="fromdata.is_sterilisation">
+            <ion-list-header>是否绝育</ion-list-header>
+            <ion-item>
+                <ion-label fixed>已绝育</ion-label>
+                <ion-radio value="1"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>未绝育</ion-label>
+                <ion-radio value="2"></ion-radio>
+            </ion-item>
+        </ion-list>
+    </p>
+    <p class="data">
+        <ion-list radio-group [(ngModel)]="fromdata.kind">
+            <ion-list-header>种类</ion-list-header>
+            <ion-item>
+                <ion-label fixed>喵星人</ion-label>
+                <ion-radio value="1"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>汪星人</ion-label>
+                <ion-radio value="2"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>其它</ion-label>
+                <ion-radio value="3"></ion-radio>
+            </ion-item>
+        </ion-list>
+    </p>
+    <button class="sub" (click)="subfrom()">提交</button>
+
+</ion-content>

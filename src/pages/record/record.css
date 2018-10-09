@@ -1,0 +1,47 @@
+page-record .scroll-content {
+  padding: 0 !important;
+  background: #eee;
+}
+
+page-record .userdata {
+  display: flex;
+  padding: 1rem;
+  background: #fff;
+  margin-top: 1rem;
+}
+
+page-record .userdata img {
+  width: 5rem;
+}
+
+page-record .userdata p {
+  color: #999;
+}
+
+page-record .userdata > div:nth-of-type(2) {
+  width: 50vw;
+}
+
+page-record .userdata > div:nth-of-type(2) > h3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+page-record .userdata > div:not(:first-child) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 4.5rem;
+  margin-left: 1rem;
+}
+
+page-record .userdata > div:not(:first-child) > h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+  margin-top: 1rem;
+}
+
+page-record .userdata p {
+  color: #999;
+}

@@ -1,0 +1,43 @@
+page-record {
+    .scroll-content {
+        padding: 0 !important;
+        background: #eee
+    }
+    .userdata {
+        display: flex;
+        padding: 1rem;
+        background: #fff;
+        margin-top: 1rem;
+        img {
+            width: 5rem;
+        }
+        p {
+            color: #999
+        }
+        >div:nth-of-type(2) {
+            width: 50vw;
+            >h3 {
+                
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap
+            }
+        }
+        >div:not(:first-child) {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 4.5rem;
+            margin-left: 1rem;
+
+            >h3 {
+                font-size: 1.3rem;
+                margin-bottom: 0.2rem;
+                margin-top: 1rem;
+            }
+        }
+        p {
+            color: #999
+        }
+    }
+}

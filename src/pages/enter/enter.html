@@ -1,0 +1,77 @@
+<!--
+  Generated template for the EnterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>enter</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="fromdata">
+        <ul>
+            <li>
+                <span>商家名称</span>
+                <input type="text" placeholder="请输入商家名称">
+            </li>
+            <li>
+                <span>主持人</span>
+                <input type="text" placeholder="请输入主持人名称">
+            </li>
+            <li>
+                <span>联系人姓名</span>
+                <input type="text" placeholder="请输入联系人名称">
+            </li>
+            <li>
+                <span>身份证号</span>
+                <input type="text" placeholder="请输入身份证号">
+            </li>
+            <li>
+                <span>手机号</span>
+                <input type="text" placeholder="请输入手机号">
+            </li>
+            <li>
+                <span>微信号</span>
+                <input type="text" placeholder="请输入微信号">
+            </li>
+
+            <ion-item>
+                <ion-label>地区</ion-label>
+                <ion-multi-picker item-content [cancelText]="'取消'" [doneText]="'完成'" [multiPickerColumns]="listData"></ion-multi-picker>
+            </ion-item>
+
+            <li>
+                <span>详细地址</span>
+                <input type="text" placeholder="请输入联系地址">
+            </li>
+            <li>
+                <span>CKU有效专业会员/犬舍会员编号</span>
+                <input type="text" placeholder="请输入会员编号">
+            </li>
+            <li>
+                <span>CAAC有效专业会员/猫舍会员编号</span>
+                <input type="text" placeholder="请输入会员编号">
+            </li>
+            <li>
+                <span>繁殖犬种</span>
+                <input type="text" placeholder="请输入繁殖犬种">
+            </li>
+            <!-- <ion-item>
+                <ion-label>日期</ion-label>
+                <ion-datetime [cancelText]="'取消'" [doneText]="'完成'" displayFormat="YYYY/DD/MM" [(ngModel)]="myDate"></ion-datetime>
+            </ion-item> -->
+
+
+
+
+        </ul>
+        <p><input type="checkbox" name="" id="">我已同意XXX用户协议</p>
+        <button class="subfrom">确认注册</button>
+    </div>
+</ion-content>

@@ -1,0 +1,27 @@
+calendar-page {
+    ion-calendar-month .danger .days .on-selected,
+    ion-calendar-month .danger .startSelection button.days-btn,
+    ion-calendar-month .danger .endSelection button.days-btn {
+        background-color: #f9d753;
+        color: #fff;
+    }
+    ion-calendar-month .danger button.days-btn small,
+    ion-calendar-month .danger .days .marked p,
+    ion-calendar-month .danger .days .today p {
+        color: #f9d753;
+    }
+    ion-calendar-month .danger .days .last-month-day p,
+    ion-calendar-month .danger .days .next-month-day p {
+        // color: #343434;
+    }
+    .pudate {
+        width: 90%;
+        padding: 1rem;
+        color: #fff;
+        background: #f9d753;
+        margin-left: 5%;
+        border-radius: 0.5rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+}

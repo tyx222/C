@@ -1,0 +1,108 @@
+page-newsword .scroll-content {
+  padding: 0 !important;
+  background: #eee;
+}
+
+page-newsword .top {
+  margin-top: 1rem;
+}
+
+page-newsword .top h5 {
+  padding-left: 1rem;
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+page-newsword .top h5 img {
+  width: 1.5rem;
+}
+
+page-newsword .listbox {
+  background: #fff;
+}
+
+page-newsword .listbox ul {
+  padding: 1.5rem 1rem;
+  width: 100%;
+}
+
+page-newsword .listbox li {
+  border-bottom: 1px solid #c3c3c3;
+  padding-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+page-newsword .listbox li .date {
+  width: 17rem;
+}
+
+page-newsword .listbox li .ttt {
+  display: flex;
+  height: 6rem;
+}
+
+page-newsword .listbox li .ttt img {
+  width: 18rem;
+  height: 95%;
+}
+
+page-newsword .listbox li .ttt .news {
+  position: absolute;
+  top: -0.5rem;
+  z-index: 99;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 1rem;
+  background: #f12a2a;
+  right: -0.5rem;
+  color: #fff;
+  text-align: center;
+  line-height: 1.5rem;
+}
+
+page-newsword .listbox li .ttt .ddd {
+  margin-left: 0.5rem;
+}
+
+page-newsword .listbox li .ttt .ddd span {
+  color: #666666;
+}
+
+page-newsword .listbox li .ttt .ddd .hh {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  color: #999;
+}
+
+page-newsword .listbox li .ttt .ddd .hh span {
+  font-size: 1.5rem !important;
+}
+
+page-newsword .listbox li .ttt span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+page-newsword .listbox p {
+  color: #999;
+}
+
+page-newsword .gopage {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1rem;
+  border-radius: 50%;
+  width: 7rem;
+  height: 7rem;
+  position: fixed;
+  top: 70vh;
+  right: 3rem;
+}
+
+page-newsword .gopage img {
+  width: 4rem;
+}

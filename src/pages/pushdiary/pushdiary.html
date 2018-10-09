@@ -1,0 +1,36 @@
+<!--
+  Generated template for the PushdiaryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>pushdiary</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="put_box">
+
+        <input type="text" name="" placeholder="点击输入标题" id="" class="">
+        <img src="assets/imgs/images/home1_11.png" alt="">
+    </div>
+    <div class="area">
+        <textarea placeholder="记录今天成长的趣事"></textarea>
+    </div>
+    <div class="area">
+        <div class="Fileimg">
+            <div class="itembox" *ngFor="let item of avatar let i =index">
+                <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
+                <img src="{{item}}" alt="" (click)="presentActionSheet(i)">
+            </div>
+        </div>
+    </div>
+    <!-- <div class="header-image" tappable [ngStyle]="{'background-image': 'url('+avatar+')'}" (click)="presentActionSheet()"></div> -->
+
+    <button class="pushimg">确认</button>
+</ion-content>

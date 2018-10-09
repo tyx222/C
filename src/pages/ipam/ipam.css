@@ -1,0 +1,182 @@
+page-ipam .scroll-content {
+  padding: 0 !important;
+  background: #eee;
+}
+
+page-ipam .titaa {
+  margin-bottom: 1rem;
+  background: #fff;
+  overflow: hidden;
+  width: 100%;
+  display: -webkit-inline-box;
+}
+
+page-ipam .titaa .userimg {
+  width: 6rem;
+}
+
+page-ipam .left {
+  margin-left: -12rem;
+}
+
+page-ipam .distribution {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+page-ipam .ble {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  width: 100vw;
+}
+
+page-ipam .ble .shopingimg {
+  width: 10rem;
+}
+
+page-ipam .ble3 {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  width: 100vw;
+  margin-left: -12rem;
+}
+
+page-ipam .ble3 .shopingimg {
+  width: 10rem;
+}
+
+page-ipam .orderbutton {
+  display: flex;
+}
+
+page-ipam .orderbutton button {
+  width: 6rem;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+page-ipam .orderbutton button:nth-of-type(1) {
+  background: #ffad41;
+}
+
+page-ipam .orderbutton button:nth-of-type(2) {
+  background: #FF7041;
+}
+
+page-ipam .ble2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  margin: 0 1rem;
+}
+
+page-ipam .ble2 p {
+  font-size: 1.8rem;
+}
+
+page-ipam .ble2 .pardack {
+  color: #999;
+}
+
+page-ipam .ble2 .maxprice {
+  color: #FF7041;
+}
+
+page-ipam .ble2 .total {
+  display: flex;
+  justify-content: space-between;
+}
+
+page-ipam .ble2 .title {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 7rem;
+}
+
+page-ipam .ble2 .title > p {
+  font-size: 1.5rem;
+}
+
+page-ipam .ble2 .title > p:nth-of-type(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+page-ipam .ble2 span {
+  margin-top: 0.5rem;
+}
+
+page-ipam .ble2 span img {
+  width: 1rem;
+}
+
+page-ipam .name {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+page-ipam .djd {
+  width: 5rem;
+  height: 2rem;
+  color: #fff;
+  background: #EF8936;
+  border-radius: 2rem;
+}
+
+page-ipam .texx {
+  padding: 1rem;
+  background: #fff;
+}
+
+page-ipam .imglist {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  padding-bottom: 1rem;
+}
+
+page-ipam .imglist img {
+  width: 25vw;
+  height: 25vw;
+  margin-left: 6vw;
+  margin-bottom: 1rem;
+}
+
+page-ipam .top {
+  margin-top: 2rem;
+}
+
+page-ipam .black {
+  color: #999;
+}
+
+page-ipam .martop {
+  margin-top: -1.5rem;
+}
+
+page-ipam .tarea {
+  margin-top: 1rem;
+  background: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+page-ipam .tarea p {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  width: 10rem;
+}

@@ -1,0 +1,74 @@
+<!--
+  Generated template for the CheckInPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>checkIn</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <p style="margin:2rem 0 4rem 0">请选择您今天要完成的任务</p>
+    <div class="box">
+        <div class="check">
+            <div class="radio checked">
+                <i class="iconfont icon-true"></i>
+            </div>
+            <span>洗澡</span>
+        </div>
+        <div class="check">
+            <div class="radio">
+                <i class="iconfont icon-true"></i>
+            </div>
+            <span>洗澡</span>
+        </div>
+        <div class="check">
+            <div class="radio">
+                <i class="iconfont icon-true"></i>
+            </div>
+            <span>洗澡</span>
+        </div>
+        <div class="check">
+            <div class="radio">
+                <i class="iconfont icon-true"></i>
+            </div>
+            <span>洗澡</span>
+        </div>
+        <div class="check">
+            <div class="radio">
+                <i class="iconfont icon-true"></i>
+            </div>
+            <span>洗澡</span>
+        </div>
+        <div class="check">
+            <div class="radio">
+                <i class="iconfont icon-true"></i>
+            </div>
+            <span>洗澡</span>
+        </div>
+    </div>
+    <div class="btnBox">
+        <button class="btn" (click)='ckeckin()'>确认</button>
+    </div>
+
+    <div class="model" *ngIf="checkInok">
+        <div class="box">
+            <img *ngIf="true" src="/assets/imgs/images/success.png" alt="">
+            <img *ngIf="false" src="/assets/imgs/images/fail.png" alt="">
+            <span class="success">签到成功</span>
+            <span class="signInShop">您已签到3天，请继续坚持哦</span>
+            <div class="select">
+                <span class="color" (click)='golink()'>确认</span>
+            </div>
+        </div>
+    </div>
+
+
+</ion-content>

@@ -1,0 +1,84 @@
+page-deposit .scroll-content {
+  padding: 0 !important;
+  background: #eee;
+}
+
+page-deposit .userdata {
+  display: flex;
+  padding: 1rem;
+  background: #fff;
+  margin-top: 1rem;
+}
+
+page-deposit .userdata img {
+  width: 5rem;
+}
+
+page-deposit .userdata p {
+  color: #999;
+}
+
+page-deposit .userdata > div:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 3.5rem;
+  margin-left: 1rem;
+}
+
+page-deposit .userdata > div:nth-of-type(2) h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+page-deposit .upmoney {
+  padding: 1rem;
+  background: #fff;
+  margin-top: 1rem;
+}
+
+page-deposit .upmoney p {
+  color: #999;
+}
+
+page-deposit .upmoney hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+page-deposit .upmoney h1 input {
+  border: none;
+  margin-left: 2rem;
+}
+
+page-deposit .upmoney h1 input::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #999;
+}
+
+page-deposit .upmoney h1 input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #999;
+}
+
+page-deposit .upmoney h1 input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #999;
+}
+
+page-deposit .upmoney h1 input:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #999;
+}
+
+page-deposit .upmoney button {
+  width: 80vw;
+  height: 3rem;
+  border-radius: 0.5rem;
+  margin: 3rem 0vw 6vw 7vw;
+  background: #FF8929;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+}

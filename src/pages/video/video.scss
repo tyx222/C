@@ -1,0 +1,83 @@
+page-video {
+    .scroll-content {
+        padding: 0 !important;
+        background: #eee
+    }
+    .put_box {
+        background: #fff;
+        height: 7rem;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-around;
+        input {
+            font-size: 1.5rem;
+            border: 0
+        }
+        img {
+            height: 4rem;
+        }
+    }
+    .area {
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem
+    }
+    textarea {
+        width: 90vw; //初始宽度 
+        max-width: 90vw; //最大宽度
+        height: 40vh; //初始高度 
+        max-height: 40vh; //最大高度
+        overflow-y: auto; //让滚动条自适应，保证兼容性
+        border: 0;
+        padding: 1rem
+    }
+    .Fileimg {
+        background: #fff;
+        width: 90vw;
+        padding: 0 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        .itembox {
+            width: 24%;
+            margin: 4.5%;
+            position: relative;
+            .remimg {
+                width: 1.5rem;
+                display: inline-flex;
+                position: absolute;
+                height: 1.5rem;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #eee;
+                border-radius: 1.5rem;
+                right: -0.5rem;
+                top: -0.5rem;
+                background: red;
+                color: #fff
+            }
+        }
+        img {
+            width: 100%;
+            // margin: 100%;
+        }
+    }
+    .pushimg {
+        width: 80vw;
+        background: #FA8424;
+        color: #fff;
+        margin: 10vw;
+        height: 4rem;
+        border-radius: 0.5rem;
+        font-size: 1.8rem
+    }
+    .header-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        background-size: cover;
+    }
+}

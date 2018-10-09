@@ -1,0 +1,195 @@
+page-order .scroll-content {
+  padding: 0 !important;
+  background: #eee;
+}
+
+page-order .titaa {
+  margin-bottom: 1rem;
+}
+
+page-order .titaa .userimg {
+  width: 6rem;
+}
+
+page-order .distribution {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+page-order .ble {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+}
+
+page-order .ble .shopingimg {
+  width: 10rem;
+}
+
+page-order .ble2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  margin: 0 1rem;
+}
+
+page-order .ble2 p {
+  font-size: 1.8rem;
+}
+
+page-order .ble2 .pardack {
+  color: #999;
+}
+
+page-order .ble2 .maxprice {
+  color: #FF7041;
+}
+
+page-order .ble2 .total {
+  display: flex;
+  justify-content: space-between;
+}
+
+page-order .ble2 .title {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 7rem;
+}
+
+page-order .ble2 .title > p {
+  font-size: 1.5rem;
+}
+
+page-order .ble2 .title > p:nth-of-type(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+page-order .ble2 span {
+  margin-top: 0.5rem;
+}
+
+page-order .ble2 span img {
+  width: 1rem;
+}
+
+page-order .name {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+page-order .djd {
+  width: 5rem;
+  height: 2rem;
+  color: #fff;
+  background: #EF8936;
+  border-radius: 2rem;
+}
+
+page-order .texx {
+  padding: 1rem;
+  background: #fff;
+}
+
+page-order .imglist {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  padding-bottom: 1rem;
+}
+
+page-order .imglist img {
+  width: 25vw;
+  height: 25vw;
+  margin-left: 6vw;
+  margin-bottom: 1rem;
+}
+
+page-order .titaa {
+  background: #fff;
+}
+
+page-order .top {
+  margin-top: 2rem;
+}
+
+page-order .black {
+  color: #999;
+}
+
+page-order .martop {
+  margin-top: -1.5rem;
+}
+
+page-order .tarea {
+  margin-top: 1rem;
+  background: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+page-order .tarea p {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  width: 10rem;
+}
+
+page-order .shoppingcall {
+  background: #fff;
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+page-order .shoppingcall > div:nth-of-type(1) {
+  display: flex;
+  width: 40%;
+  padding: 1rem;
+  align-items: center;
+}
+
+page-order .shoppingcall > div:nth-of-type(1) .maxprice {
+  font-size: 2rem;
+  color: #FF7041;
+}
+
+page-order .shoppingcall > div:nth-of-type(1) p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+page-order .shoppingcall > div:nth-of-type(1) p img {
+  width: 3rem;
+  height: 2.6rem;
+}
+
+page-order .shoppingcall > div:nth-of-type(1) p span {
+  color: #999;
+}
+
+page-order .shoppingcall > div button {
+  width: 50%;
+  height: 100%;
+  color: #fff;
+}
+
+page-order .shoppingcall > div .shop {
+  background: #f3422b;
+  width: 10rem;
+  height: 4rem;
+}

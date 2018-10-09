@@ -1,0 +1,28 @@
+page-guidance {
+    .bg {
+        width: 100%;
+        height: 70vh;
+    
+    }
+    .scroll-content {
+        padding: 0 !important
+    }
+    .btnbox {
+        button {
+            padding: 1rem 2rem;
+            border: 1px solid #dddddd;
+            color: #333;
+            background: #fff;
+            border-radius: 0.5rem;
+            width: 9rem;
+            height: 4rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem;
+            font-size: 2rem;
+        }
+        .yes {
+            border: 1px solid #d26948;
+            color: #d26948;
+        }
+    }
+}

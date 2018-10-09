@@ -1,0 +1,134 @@
+<!--
+  Generated template for the CarePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>
+            <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionCancel)="onCancel($event)">
+            </ion-searchbar>
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="titlebannar">
+        <div class="list">
+            <ul>
+                <li>
+                    <p>
+                        <img src="assets/imgs/images/xz.png" alt="">
+                    </p>
+                    <p>洗澡</p>
+                </li>
+                <li>
+                    <p>
+                        <img src="assets/imgs/images/xm.png" alt="">
+                    </p>
+                    <p>修毛</p>
+                </li>
+                <li>
+                    <p>
+                        <img src="assets/imgs/images/chwl.png" alt="">
+                    </p>
+                    <p>吃喝玩乐</p>
+                </li>
+                <li>
+                    <p>
+                        <img src="assets/imgs/images/yy.png" alt="">
+                    </p>
+                    <p>医院</p>
+                </li>
+                <li>
+                    <p>
+                        <img src="assets/imgs/images/qt.png" alt="">
+                    </p>
+                    <p>其它</p>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="tabs">
+            <div class="listbox">
+                <ul>
+                    <li *ngFor="let item of list let i=index" (click)='listshow(i)' [ngClass]="{'btm':shownumber==i}">{{item}}
+                        <ion-icon name="arrow-down" *ngIf="shownumber!==i"></ion-icon>
+                        <ion-icon name="arrow-up" *ngIf="shownumber==i"></ion-icon>
+                    </li>
+                </ul>
+                <div class="tabslistbox" *ngIf="shownumber==0">
+                    <div class="tabslist">
+                        <p *ngFor="let item of tabslist let i=index" [ngClass]="{'ftcolor':listget==i}" (click)='onlist(i)'><span>{{item}}</span> <span *ngIf="listget==i"><img src="assets/imgs/images/get.png" alt=""></span></p>
+                    </div>
+                    <!-- <div class="tabslistbg"></div> -->
+                </div>
+                <div class="tabslistbox" *ngIf="shownumber==1">
+                    <div class="tabslist">
+                        <p *ngFor="let item of tabslist1 let i=index" [ngClass]="{'ftcolor':listget1==i}" (click)='onlist1(i)'><span>{{item}}</span> <span *ngIf="listget1==i"><img src="assets/imgs/images/get.png" alt=""></span></p>
+                    </div>
+                </div>
+                <div class="tabslistbox" *ngIf="shownumber==2">
+                    <div class="tabslist">
+                        <p *ngFor="let item of tabslist2 let i=index" [ngClass]="{'ftcolor':listget2==i}" (click)='onlist2(i)'><span>{{item}}</span> <span *ngIf="listget2==i"><img src="assets/imgs/images/get.png" alt=""></span></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="tb">
+            <ul>
+                <li>
+                    <div>
+                        <img src="assets/imgs/images/goudai.png" alt="">
+                    </div>
+                    <div>
+                        <h1>距离您的距距离您的距距离您的距距离您的距</h1>
+                        <p>人气：999</p>
+                        <span>距离您的距离：99米</span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img src="assets/imgs/images/goudai.png" alt="">
+                    </div>
+                    <div>
+                        <h1>距离您的距距离您的距距离您的距距离您的距</h1>
+                        <p>人气：999</p>
+                        <span>
+              <span>店铺名称</span>
+                        <span>已成功交易 100单</span>
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img src="assets/imgs/images/goudai.png" alt="">
+                    </div>
+                    <div>
+                        <h1>距离您的距距离您的距距离您的距距离您的距</h1>
+                        <p>人气：999</p>
+                        <span>距离您的距离：99米</span>
+                    </div>
+                </li>
+                <li class="txt">
+                    <div>
+                        <span> 售价：
+              <span>￥999</span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="tst"> 离您的距距离您的距距离离您的距距离您的距距离离您的距距离您的距距离离您的距距离您的距距离 </span>
+                        <span class="dd"> 已售： 999单
+            </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</ion-content>

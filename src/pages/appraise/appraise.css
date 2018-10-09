@@ -1,0 +1,178 @@
+@charset "UTF-8";
+page-appraise {
+  /*设置 选择样式的 模块的样式*/
+}
+
+page-appraise .list-ios {
+  margin: 0px;
+}
+
+page-appraise ion-item {
+  border: 0px;
+}
+
+page-appraise .toolbar-background-ios {
+  background: #fff;
+}
+
+page-appraise .button-ios {
+  z-index: 999;
+  margin-left: 15px;
+  margin-top: 15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(255, 0, 0, 0.4);
+  position: fixed;
+}
+
+page-appraise .button-ios ion-icon {
+  padding: 0px;
+}
+
+page-appraise .slide1 {
+  width: 100%;
+  height: 300px;
+  background: #fff;
+}
+
+page-appraise .cont4 {
+  background: #fff;
+  margin-top: 1px;
+  color: #666666;
+  /*设置评论的图片的大小*/
+}
+
+page-appraise .cont4 .list-ios .item-block .item-inner {
+  border: 0px;
+}
+
+page-appraise .cont4 .text1 {
+  height: 40px;
+  border-bottom: 1px solid #eee;
+  line-height: 40px;
+  font-size: 16px;
+}
+
+page-appraise .cont4 .text2 {
+  color: #aaa;
+  line-height: 22px;
+  padding-top: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+page-appraise .cont4 .ion-user-avator {
+  margin: 0 10px 10px 10px !important;
+}
+
+page-appraise .cont4 .ion-user-avator .userAvator {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+page-appraise .cont4 h2 {
+  margin-bottom: 5px;
+}
+
+page-appraise .cont4 p {
+  margin: 0px;
+  font-size: 1.1rem;
+  color: #aaa;
+}
+
+page-appraise .cont4 span {
+  color: #333333;
+  margin-left: 15px;
+}
+
+page-appraise .cont4 .imgContent {
+  width: 100%;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+page-appraise .cont4 .imgContent img {
+  width: 29vw;
+  height: 29vw;
+}
+
+page-appraise .shoppingcall {
+  background: #fff;
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  width: 100%;
+}
+
+page-appraise .shoppingcall > div:nth-of-type(1) {
+  display: flex;
+  width: 40%;
+  padding: 0.5rem;
+}
+
+page-appraise .shoppingcall > div:nth-of-type(1) p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+page-appraise .shoppingcall > div:nth-of-type(1) p img {
+  width: 3rem;
+  height: 2.6rem;
+}
+
+page-appraise .shoppingcall > div:nth-of-type(1) p span {
+  color: #999;
+}
+
+page-appraise .shoppingcall > div {
+  width: 60%;
+}
+
+page-appraise .shoppingcall > div button {
+  width: 50%;
+  height: 100%;
+  color: #fff;
+}
+
+page-appraise .shoppingcall > div .join {
+  background: #fcc93c;
+}
+
+page-appraise .shoppingcall > div .shop {
+  background: #f3422b;
+}
+
+page-appraise ion-content .scroll-content {
+  margin: 0px !important;
+}
+
+page-appraise .item-ios h2 {
+  margin-top: 0px !important;
+}
+
+page-appraise .selectStyle {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  padding: 10px 20px 20px 20px;
+}
+
+page-appraise .selectStyle .options {
+  font-size: 1.3rem;
+  display: inline-block;
+  border-radius: 10px;
+  line-height: 20px;
+  padding: 4px 11px;
+  margin-right: 10px;
+  margin-top: 10px;
+  background: #ffeded;
+}
+
+page-appraise .selectStyle .checked {
+  background: #ff5d5d;
+  color: white;
+}

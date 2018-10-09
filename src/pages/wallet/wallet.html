@@ -1,0 +1,31 @@
+<!--
+  Generated template for the WalletPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>wallet</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="bg">
+        <div class="wallet">
+            <p>零钱</p>
+            <h1>¥ 1000</h1>
+        </div>
+        <div><button (click)="deposit()"> <img src="assets/imgs/images/txl.png" alt="" >提现</button><button (click)="presentActionSheet()"><img src="assets/imgs/images/chongzhi.png" alt="">充值</button></div>
+    </div>
+
+    <!-- <div class="list"><span> <img src="assets/imgs/images/qianbao1.png" alt="">提现</span><img src="assets/imgs/images/right.png" alt=""></div> -->
+    <div class="list" (click)="Record()"><span> <img src="assets/imgs/images/jiaoyijilu.png" alt="">交易记录</span><img src="assets/imgs/images/right.png" alt=""></div>
+    <div class="list" (click)="playcode()"><span> <img src="assets/imgs/images/zhifumima.png" alt="">支付密码修改</span><img src="assets/imgs/images/right.png" alt=""></div>
+    <!-- <div class="list"><span> <img src="assets/imgs/images/zhifuguanli.png" alt="">支付管理</span><img src="assets/imgs/images/right.png" alt=""></div>
+    <div class="list"><span> <img src="assets/imgs/images/zhifuanquan.png" alt="">支付安全</span><img src="assets/imgs/images/right.png" alt=""></div> -->
+    <div class="list"><span> <img src="assets/imgs/images/bangzhu.png" alt="">帮助中心</span><img src="assets/imgs/images/right.png" alt=""></div>
+</ion-content>

@@ -1,0 +1,88 @@
+page-ckeck .scroll-content {
+  padding: 0 !important;
+  background: #eee;
+}
+
+page-ckeck .titaa {
+  margin-bottom: 1rem;
+}
+
+page-ckeck .titaa .userimg {
+  width: 5rem;
+  margin-top: 1rem;
+}
+
+page-ckeck .ble {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+}
+
+page-ckeck .ble2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+page-ckeck .ble2 p {
+  font-size: 2rem;
+}
+
+page-ckeck .ble2 span {
+  margin-top: 0.5rem;
+}
+
+page-ckeck .ble2 span img {
+  width: 1rem;
+}
+
+page-ckeck .name {
+  display: flex;
+  flex-direction: column;
+}
+
+page-ckeck .djd {
+  width: 5rem;
+  height: 2rem;
+  color: #fff;
+  background: #EF8936;
+  border-radius: 2rem;
+}
+
+page-ckeck .texx {
+  padding: 1rem;
+  background: #fff;
+}
+
+page-ckeck .imglist {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  padding-bottom: 1rem;
+}
+
+page-ckeck .imglist img {
+  width: 25vw;
+  height: 25vw;
+  margin-left: 6vw;
+  margin-bottom: 1rem;
+}
+
+page-ckeck .titaa {
+  background: #fff;
+}
+
+page-ckeck .top {
+  margin-top: 2rem;
+}
+
+page-ckeck .black {
+  color: #999;
+}
+
+page-ckeck .martop {
+  margin-top: -1.5rem;
+}

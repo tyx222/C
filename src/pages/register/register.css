@@ -1,0 +1,129 @@
+page-register .btn {
+  width: 100% !important;
+  background: #e76c08;
+  color: #fff;
+  border-radius: 5px;
+  height: 3rem;
+  margin-top: 5rem;
+}
+
+page-register .btnSend {
+  width: 10rem !important;
+  background: #e76c08;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+page-register .input {
+  display: flex;
+  width: 100% !important;
+  border: 1px solid #e2e2e2;
+  margin-top: 2rem;
+  height: 4rem;
+  align-items: center;
+  border-radius: 5px;
+}
+
+page-register input {
+  height: 100% !important;
+  width: 100%;
+  border: none;
+  margin-right: 1rem;
+}
+
+page-register .iconfont {
+  font-size: 2rem;
+  margin: 0 1rem 0 1rem;
+}
+
+page-register .radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 1px solid #acacac;
+  border-radius: 50%;
+  margin: 0 1rem 0 1rem;
+}
+
+page-register .checked {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #000;
+  border-radius: 50%;
+}
+
+page-register .borderNone {
+  border: none;
+  margin-top: 1rem;
+}
+
+page-register .borderNone p {
+  color: #acacac;
+}
+
+page-register .model {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+page-register .model .box {
+  width: 80%;
+  height: 50%;
+  position: absolute;
+  top: 11rem;
+  left: 50%;
+  margin-left: -40%;
+  border-radius: 10px;
+  background: url(../assets/imgs/gongxi_03.jpg) no-repeat #fff center 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+page-register .model .box .success {
+  width: 100%;
+  height: 4rem;
+  font-size: 2rem;
+  color: #747474;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+page-register .model .box .signInShop {
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10rem;
+  color: #fb4d09;
+}
+
+page-register .model .box .select {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  border-top: 1px solid #e2e2e2;
+  height: 5rem;
+}
+
+page-register .model .box .select span {
+  font-size: 2rem;
+  color: #747474;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
