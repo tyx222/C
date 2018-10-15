@@ -97,7 +97,9 @@ export class DetailsPage {
     });
     prompt.present();
   }
-
+  Pushdiary() {
+    this.navCtrl.push("DiaryPage");
+  }
   ionViewDidLoad() {
     this.index = localStorage.getItem("index");
     this.swipers();

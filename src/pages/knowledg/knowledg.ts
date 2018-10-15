@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { UserService } from "../../app/shared/service/user.service";
-
+import { Buffer } from 'buffer';
 /**
  * Generated class for the KnowledgPage page.
  *
@@ -16,6 +16,9 @@ import { UserService } from "../../app/shared/service/user.service";
 })
 export class KnowledgPage {
   ids: any;
+  html;
+  type;
+  science_title;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -27,7 +30,11 @@ export class KnowledgPage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad KnowledgPage");
-    console.log(this.ids.science_id);
+
+    console.log(this.ids);
+    console.log(this.ids.type-0)
+    this.type=this.ids.type-0
+    this.science_title=this.ids.science_title
     this.Knows();
   }
   async Knows() {
@@ -36,7 +43,11 @@ export class KnowledgPage {
     };
     let res = await this.http.querypetdtailpolular(parmas);
     console.log(res.message)
+    let html=document.getElementById("sethtml")
     this.http.http.showToast(res.message)
-    console.log(res);
+    this.html=new Buffer(res.object.text,'base64').toString()
+    console.log(this.html)
   }
+
+  
 }

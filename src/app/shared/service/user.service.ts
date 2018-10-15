@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { MyHttpService } from "./my-http.service";
 import { ToastController } from 'ionic-angular';
+
 @Injectable()
 export class UserService {
   private api = {
@@ -18,7 +19,11 @@ export class UserService {
     querypetcardlist: "chongwu/chongwu/querypetcardlist",
     addpetcard:"chongwu/chongwu/addpetcard",
     deletePetcard:"chongwu/chongwu/deletePetcard",
-    updatepetcard:"chongwu/chongwu/updatepetcard"
+    updatepetcard:"chongwu/chongwu/updatepetcard",
+    uploadFile:"chongwu/chongwu/uploadFile",
+    querypetpetcardfeedingrankinglist:"chongwu/chongwu/querypetpetcardfeedingrankinglist",
+    addPetReceiver:"chongwu/chongwu/addPetReceiver",
+    chongwuqueryhistorytypeAlllist:"chongwu/chongwu/queryhistorytypeAlllist"
   };
   constructor(public http: MyHttpService,public toastCtrl: ToastController) {}
   
@@ -147,7 +152,38 @@ export class UserService {
   deletePetcard(data){
     return this.http.Post(this.api.deletePetcard,data)
   }
+  /**
+   * 
+   * @param data 修改宠卡
+   */
  updatepetcard(data){
 return this.http.Post(this.api.updatepetcard,data)
+ }
+/**
+ * 文件上传
+ * @param file
+ */
+ uploadFile(data){
+return this.http.upimg(this.api.uploadFile,data)
+ }
+
+ /**
+  * 今日宠榜
+  */
+ querypetpetcardfeedingrankinglist(){
+   return this.http.Post(this.api.querypetpetcardfeedingrankinglist,{})
+ }
+/**
+ * 添加收货地址
+ */
+ addPetReceiver(data){
+   return this.http.Post(this.api.addPetReceiver,data)
+ }
+
+ /**
+  * 首页动态查询
+  */
+ chongwuqueryhistorytypeAlllist(data){
+   return this.http.Post(this.api.chongwuqueryhistorytypeAlllist,data)
  }
 }

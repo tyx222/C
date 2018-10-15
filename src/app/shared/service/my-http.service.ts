@@ -3,52 +3,52 @@ import { Http, RequestOptionsArgs, Headers } from "@angular/http";
 import { DefaultAppConfig } from "../../app.config";
 // import { HttpErrorResponse } from "@angular/common/http";
 // import { throwError } from "rxjs";
-import { LoadingController, ToastController } from 'ionic-angular';
+import { LoadingController, ToastController } from "ionic-angular";
 
 @Injectable()
 export class MyHttpService {
   httpTimeout: number = 3000;
   isMock: boolean = false;
   isDev: boolean = true;
-  lodingtype:boolean=true;
-  loadingIsOpen:any;
-　　loading:any;
+  lodingtype: boolean = true;
+  loadingIsOpen: any;
+  loading: any;
   get ip(): string {
     return this.appConfig.ip;
   }
 
- 
   presentLoadingDefault() {
     let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: "Please wait..."
     });
     loading.present();
     setTimeout(() => {
-        loading.dismiss();
+      loading.dismiss();
     }, 1000);
   }
-   showLoading(content: any = ''): void {
-    　　if(typeof content != 'string'){
-      　　content = '';
-    　　}
-    　　if (!this.loadingIsOpen) {
-      　　this.loadingIsOpen = true;
-      　　this.loading = this.loadingCtrl.create({
-        　　content: content
-      　　});
-      　　this.loading.present();
-      　　setTimeout(() => { //最长显示10秒
-        　　this.loadingIsOpen && this.loading.dismiss();
-        　　this.loadingIsOpen = false;
-      　　}, 10000);
-    　　}else{
-      　　this.loading.setContent(content);
-    　　}
-  　　};
-  　　 hideLoading(): void {
-    　　this.loadingIsOpen && this.loading.dismiss();
-    　　this.loadingIsOpen = false;
-  　　};
+  showLoading(content: any = ""): void {
+    if (typeof content != "string") {
+      content = "";
+    }
+    if (!this.loadingIsOpen) {
+      this.loadingIsOpen = true;
+      this.loading = this.loadingCtrl.create({
+        content: content
+      });
+      this.loading.present();
+      setTimeout(() => {
+        //最长显示10秒
+        this.loadingIsOpen && this.loading.dismiss();
+        this.loadingIsOpen = false;
+      }, 10000);
+    } else {
+      this.loading.setContent(content);
+    }
+  }
+  hideLoading(): void {
+    this.loadingIsOpen && this.loading.dismiss();
+    this.loadingIsOpen = false;
+  }
 
   Get(url: string, options?: RequestOptionsArgs) {
     if (this.isMock) {
@@ -82,56 +82,90 @@ export class MyHttpService {
         this.handleError(e);
       });
   }
-  Postlogin(url: string, body: any, options?: RequestOptionsArgs): Promise<any> {
-    console.log(localStorage)
-     if (this.isMock) {
-       return this.mockGet(url);
-     }
-     if (!options) options = { headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}) };
-     return this.http
-       .post(`${this.ip}${url}`,this.toQueryString(body) , options)
-       .toPromise()
-       .then(rtn => {
-         let result = rtn.json() as any;
-         console.log(rtn);
-         if (rtn.status > 400 && rtn.status < 500) {
-           result = {
-             ok: false,
-             data: "资源访问错误:" + rtn.json().message,
-             status: rtn.status
-           };
-         } else if (rtn.status >= 500) {
-           result = {
-             ok: false,
-             data: this.appConfig.debug ? rtn.json().msg : "服务器内部错误:",
-             status: rtn.status
-           };
-         }
-         if (!rtn.ok) {
-           this.createMessage("error", result.msg);
-           return false;
-         } else {
-           //  this.hideLoading()
-           return result;
-         }
-       })
-       .catch(e => this.handleError(e));
-     /**超过timeout 时间就会执行以下代码,返回错误信息 */
-   }
-  Post(url: string, body: any, options?: RequestOptionsArgs): Promise<any> {
-   console.log(localStorage)
+
+  /**
+   * 文件上传
+   * @param url
+   * @param body
+   * @param options
+   */
+  upimg(url: string, body: any, options?: RequestOptionsArgs): Promise<any> {
+      options = {
+        headers: new Headers({
+          "mytoken": localStorage.getItem("mytoken"),
+          "Content-Type": "multipart/form-data",
+        })
+      };
+    return this.http
+      .post(`${this.ip}${url}`, body)
+      .toPromise()
+      .then(res => {
+        console.log(res);
+        return res.json();
+      });
+  }
+  Postlogin(
+    url: string,
+    body: any,
+    options?: RequestOptionsArgs
+  ): Promise<any> {
+    console.log(localStorage);
     if (this.isMock) {
       return this.mockGet(url);
     }
-    if (!options) options = { headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded',"mytoken":localStorage.getItem("mytoken")}) };
+    if (!options)
+      options = {
+        headers: new Headers({
+          "Content-Type": "application/x-www-form-urlencoded"
+        })
+      };
     return this.http
-      .post(`${this.ip}${url}`,this.toQueryString(body) , options)
+      .post(`${this.ip}${url}`, this.toQueryString(body), options)
       .toPromise()
       .then(rtn => {
-        console.log(rtn);
         let result = rtn.json() as any;
-        console.log(result)
-       
+        
+        if (rtn.status > 400 && rtn.status < 500) {
+          result = {
+            ok: false,
+            data: "资源访问错误:" + rtn.json().message,
+            status: rtn.status
+          };
+        } else if (rtn.status >= 500) {
+          result = {
+            ok: false,
+            data: this.appConfig.debug ? rtn.json().msg : "服务器内部错误:",
+            status: rtn.status
+          };
+        }
+        if (!rtn.ok) {
+          this.createMessage("error", result.msg);
+          return false;
+        } else {
+          //  this.hideLoading()
+          return result;
+        }
+      })
+      .catch(e => this.handleError(e));
+    /**超过timeout 时间就会执行以下代码,返回错误信息 */
+  }
+  Post(url: string, body: any, options?: RequestOptionsArgs): Promise<any> {
+    if (this.isMock) {
+      return this.mockGet(url);
+    }
+    if (!options)
+      options = {
+        headers: new Headers({
+          "Content-Type": "application/x-www-form-urlencoded",
+          mytoken: localStorage.getItem("mytoken")
+        })
+      };
+    return this.http
+      .post(`${this.ip}${url}`, this.toQueryString(body), options)
+      .toPromise()
+      .then(rtn => {
+     
+        let result = rtn.json() as any;
         if (rtn.status > 400 && rtn.status < 500) {
           result = {
             ok: false,
@@ -236,16 +270,16 @@ export class MyHttpService {
         result.push(this.toQueryPair(key, values));
       }
     }
-    return result.join('&');
+    return result.join("&");
   }
   //参数序列化
   private toQueryPair(key, value) {
-    if (typeof value == 'undefined') {
+    if (typeof value == "undefined") {
       return key;
     }
-    return key + '=' + encodeURIComponent(value === null ? '' : String(value));
+    return key + "=" + encodeURIComponent(value === null ? "" : String(value));
   }
- public showToast(mgs) {
+  public showToast(mgs) {
     let toast = this.toastCtrl.create({
       message: mgs,
       duration: 2000,
@@ -256,5 +290,10 @@ export class MyHttpService {
   createMessage(type: "error" | "success" | "warning", text) {
     // return this._message.create(type, `${text}`);
   }
-  constructor(public http: Http, public appConfig: DefaultAppConfig,public loadingCtrl:LoadingController,public toastCtrl:ToastController) {}
+  constructor(
+    public http: Http,
+    public appConfig: DefaultAppConfig,
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController
+  ) {}
 }

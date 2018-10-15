@@ -18,14 +18,27 @@ export class HomePage {
   callname = [];
   data = {
     pageNum: 1,
+    rowsPrePage: 20,
+    mytoken: ""
+  };
+  loding = false;
+  maxleng;
+  totle: any;
+  ctn = 1;
+  queryAll = {
+    pageNum: this.ctn,
     rowsPrePage: 10,
     mytoken: ""
   };
+  imgUrl;
+  petlist = [];
   constructor(public navCtrl: NavController, public http: UserService) {}
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     console.log("第一次进入");
+    this.petlist = [];
     this.SWIPER();
-    this.data.mytoken=localStorage.getItem("mytoken")
+    this.data.mytoken = localStorage.getItem("mytoken");
+    this.queryAll.mytoken = localStorage.getItem("mytoken");
     if (localStorage.getItem("mytoken") == null) {
       this.usermgs = false;
       this.goguidance = false;
@@ -33,7 +46,34 @@ export class HomePage {
     }
 
     this.querypetcardlist();
+    this.chongwuqueryhistorytypeAlllist();
   }
+
+  doRefresh(refresher) {
+    this.ctn = 1;
+    this.petlist = [];
+    this.loding = false;
+    this.maxleng;
+    this.chongwuqueryhistorytypeAlllist();
+    setTimeout(() => {
+      refresher.complete(); //停止下拉刷新
+    }, 2000);
+  }
+  doInfinite(infiniteScroll) {
+    this.ctn++;
+    this.chongwuqueryhistorytypeAlllist();
+    setTimeout(() => {
+      console.log("加载完成后，关闭刷新");
+      infiniteScroll.complete();
+      //toast提示
+      if (this.ctn >= this.maxleng) {
+        //如果都加载完成的情况，就直接 disable ，移除下拉加载
+        this.loding = true;
+        infiniteScroll.enable(false);
+      }
+    }, 2000);
+  }
+
   async querypetcardlist() {
     let res = await this.http.querypetcardlist(this.data);
     console.log(res.arrayList.length);
@@ -41,8 +81,10 @@ export class HomePage {
       console.log(res.arrayList.length);
       this.goguidance = true;
       this.usermgs = false;
-    }else{
-      this.callname=res.arrayList;
+    } else {
+      this.goguidance = false;
+      this.usermgs = true;
+      this.callname = res.arrayList;
       console.log(this.callname);
     }
   }
@@ -52,8 +94,8 @@ export class HomePage {
   gonewlay() {
     this.navCtrl.push("NewlayPage");
   }
-  gologin(){
-    this.navCtrl.push("LoginPage")
+  gologin() {
+    this.navCtrl.push("LoginPage");
   }
   gohomes(mgs) {
     console.log(mgs);
@@ -70,7 +112,15 @@ export class HomePage {
     console.log(localStorage.getItem("index"));
     this.index = localStorage.getItem("index");
   }
-
+  async chongwuqueryhistorytypeAlllist() {
+    let res = await this.http.chongwuqueryhistorytypeAlllist(this.queryAll);
+    for (let item in res.arrayList) {
+      this.petlist.push(res.arrayList[item]);
+    }
+    this.imgUrl = res.imageUrl;
+    this.maxleng = res.page.maxPage;
+    console.log(this.petlist);
+  }
   SWIPER() {
     var mySwiper = new Swiper(".swiper-container", {
       pagination: ".swiper-pagination",
@@ -81,8 +131,8 @@ export class HomePage {
       centeredSlides: true,
       slidesPerView: "auto",
       effect: "coverflow",
-      observer:true,//修改swiper自己或子元素时，自动初始化swiper
-observeParents:true,//修改swiper的父元素时，自动初始化swiper
+      observer: true, //修改swiper自己或子元素时，自动初始化swiper
+      observeParents: true, //修改swiper的父元素时，自动初始化swiper
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev"

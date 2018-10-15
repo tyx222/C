@@ -1,3 +1,4 @@
+import { File } from "@ionic-native/file";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { Component } from "@angular/core";
 import { ActionSheetController } from "ionic-angular";
@@ -8,6 +9,9 @@ import {
   NavParams,
   ToastController
 } from "ionic-angular";
+
+// import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
+import { ImgServiceProvider } from "../../providers/img-service/img-service";
 
 /**
  * Generated class for the NewlayPage page.
@@ -35,14 +39,21 @@ export class NewlayPage {
       "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538236414396&di=33c9cde6279a3527442718015b4d8497&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fcefc1e178a82b90169e520ae798da9773812efe7.jpg",
     mytoken: ""
   };
+  image_File;
+  imgfile;
+  imageURI;
+  avatar;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private toastCtrl: ToastController,
     private actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    private http: UserService
-  ) {}
+    private http: UserService,
+    public file: File,
+    private upimgserve: ImgServiceProvider
+  ) // private imagePicker: ImagePicker
+  {}
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad NewlayPage");
@@ -61,7 +72,6 @@ export class NewlayPage {
       } else {
         this.fromdata.is_sterilisation = "2";
       }
-
       this.fromdata["petcardid"] = this.navParams.get("data").id;
       console.log(this.fromdata);
       this.fromdata.kind = this.navParams.get("data").kind;
@@ -70,48 +80,17 @@ export class NewlayPage {
       this.petimage = this.navParams.get("data").headimgpath;
     }
   }
-  pushimg() {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+  initImgSer() {
+    this.upimgserve.upload.success = data => {
+      console.log(data);
     };
-
-    this.camera.getPicture(options).then(imageData => {
-      let base64Image = "data:image/jpeg;base64" + imageData;
-    }),
-      err => {
-        console.log(err);
-      };
   }
-
   userimg() {
-    const actionSheet = this.actionSheetCtrl.create({
-      // title: 'Modify your album',
-      buttons: [
-        {
-          text: "相册选择",
-          handler: () => {
-            console.log("Destructive clicked");
-          }
-        },
-        {
-          text: "拍照上传",
-          handler: () => {
-            console.log("Archive clicked");
-          }
-        },
-        {
-          text: "取消",
-          handler: () => {
-            console.log("Cancel clicked");
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
+    this.initImgSer();
+    this.upimgserve.showPicActionSheet();
+    }
+
+
 
   async subfrom() {
     this.fromdata.mytoken = localStorage.getItem("mytoken");

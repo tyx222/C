@@ -2,6 +2,17 @@ page-site input {
   text-align: right;
 }
 
+page-site .item-ios {
+  padding-left: 0px;
+}
+
+page-site map {
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 page-site .ok {
   background: #EC6D36;
   width: 90%;
@@ -10,4 +21,88 @@ page-site .ok {
   height: 5rem;
   color: #fff;
   border-radius: 0.5rem;
+}
+
+page-site .item-md {
+  padding-left: 0px;
+  padding-right: 0;
+  position: relative;
+  font-size: 1.6rem;
+  font-weight: normal;
+  text-transform: none;
+  color: #000;
+  background-color: #fff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+page-site .list-ios {
+  margin: 0 !important;
+}
+
+page-site ion-list .list-md .item-block .item-inner {
+  border: none !important;
+  margin-bottom: 0 !important;
+}
+
+page-site ion-list > .raod {
+  border-bottom: 1px solid #dedede;
+  margin: 0;
+  padding: 0;
+  display: block;
+  list-style-type: none;
+  display: flex;
+}
+
+page-site ion-list > .raod .list-header-md {
+  margin-bottom: 0;
+  min-height: 4.5rem;
+  border-top: none !important;
+  font-size: 1.4rem;
+  color: #757575;
+}
+
+page-site ion-list > .raod .radio-ios .radio-checked .radio-inner {
+  border-color: #FFC435;
+}
+
+page-site ion-list > .raod .item-ios .radio-ios {
+  position: static;
+  display: block;
+  margin: 0;
+}
+
+page-site ion-list > .raod .item-ios {
+  border-radius: 0;
+  position: relative;
+  font-size: 1.7rem;
+  color: #000;
+  background-color: #fff0;
+  -webkit-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+
+page-site ion-list > .raod .item-radio-checked.item-ios ion-label {
+  color: #FFC435 !important;
+}
+
+page-site ion-list .list-ios {
+  margin: inherit !important;
+}
+
+page-site ion-list .list-ios .item-block .item-inner {
+  border-bottom: none !important;
+}
+
+page-site ion-list .list-ios > .item-block:last-child,
+page-site ion-list .list-ios > .item-wrapper:last-child .item-block {
+  border-bottom: none !important;
+}
+
+page-site ion-list .list-header-ios {
+  padding-left: 0;
+  position: relative;
+  border-bottom: none;
 }

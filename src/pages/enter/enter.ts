@@ -1,7 +1,7 @@
 import { ReviceServeProvider } from './../../providers/revice-serve/revice-serve';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { MultiPickerModule } from 'ion-multi-picker';
+
 /**
  * Generated class for the EnterPage page.
  *

@@ -104,6 +104,7 @@ export class SciencePage {
     this.imgpaths = res.imageUrl;
   }
   expression(){
+    this.ctn = 1;
     this.finddata=[]
     this.querypetpolularlist();
   }

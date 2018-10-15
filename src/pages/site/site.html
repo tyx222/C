@@ -31,13 +31,33 @@
         </ion-item>
         <ion-item>
             <ion-label>地区</ion-label>
-            <ion-multi-picker item-content [(ngModel)]="mydata.myipam" [multiPickerColumns]="listData" #myipam></ion-multi-picker>
+            <ion-multi-picker item-content [cancelText]="'取消'" [doneText]="'完成'" [(ngModel)]="mydata.myipam" [multiPickerColumns]="listData" #myipam></ion-multi-picker>
         </ion-item>
         <ion-item>
             <ion-label>详细地址</ion-label>
             <ion-input type="text" maxlength="20" [(ngModel)]="mydata.ipam" placeholder="输入您的详细地址"></ion-input>
         </ion-item>
 
+        <ion-list class="raod" radio-group [(ngModel)]="default_address">
+            <ion-list-header>标签</ion-list-header>
+            <ion-item>
+                <ion-label fixed>学校</ion-label>
+                <ion-radio value="1"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>公司</ion-label>
+                <ion-radio value="2"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>家</ion-label>
+                <ion-radio value="3"></ion-radio>
+            </ion-item>
+        </ion-list>
+
+        <ion-item>
+            <ion-label>是否为默认地址</ion-label>
+            <ion-toggle [(ngModel)]="address_lable" checked="false"></ion-toggle>
+        </ion-item>
         <!-- <button ion-item>
         <label class="diyItem">所在地区</label>
         <label class="diyItemright"></label>
@@ -49,7 +69,7 @@
         <button class="ok" (click)="save(myipam)">保存</button>
     </ion-list>
 
-
+    <!-- <map></map> -->
 
 
 

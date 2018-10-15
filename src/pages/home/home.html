@@ -7,6 +7,10 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-refresher (ionRefresh)='doRefresh($event)'>
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新"  refreshingSpinner="circles" refreshingText="正在拼命加载">
+        </ion-refresher-content>
+    </ion-refresher>
     <div class="homebox">
         <div *ngIf="!usermgs" style="height: 10rem;line-height: 10rem;">
             <span (click)="gologin()" *ngIf="data.mytoken==null">请登录查看宠卡</span>
@@ -53,13 +57,15 @@
             </ul>
         </div> -->
 
-        <p class="gotobat" (click)="godaylist()"><span>今日宠榜</span><span><ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></span></p>
+        <p class="gotobat" (click)="godaylist()"><span>今日宠榜</span><span>
+        <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+      </span></p>
 
         <div class="notice">
             <span>小妙招</span><span>小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招</span>
         </div>
 
-        <div class="card">
+        <div class="card" *ngFor="let item of petlist">
             <div><img src="assets/imgs/logo.png" alt="" srcset=""></div>
             <div>
                 <h5>宠卡</h5>
@@ -67,9 +73,15 @@
                 <div><img src="assets/imgs/logo.png" alt="" srcset="">
                     <p>小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招</p>
                 </div>
-                <div class="Interaction"><span><img src="assets/imgs/zan.png" alt="" srcset=""></span><span><img src="assets/imgs/pl.png" alt="" srcset=""></span></div>
+                <div class="Interaction"><span><img src="assets/imgs/zan.png" alt="" srcset=""></span><span><img src="assets/imgs/pl.png"
+              alt="" srcset=""></span></div>
             </div>
         </div>
+        <p style="text-align: center;margin-bottom: 2rem;color: #ffc43596;" *ngIf="loding">已经没有更多数据咯</p>
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
         <div>
 
         </div>

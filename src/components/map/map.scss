@@ -1,0 +1,17 @@
+map {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    div {
+        height: 100%;
+    }
+    #container {
+        height: 100vh;
+    }
+    #r-result,
+    #r-result table {
+        width: 100%;
+    }
+}

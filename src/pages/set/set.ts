@@ -21,5 +21,7 @@ export class SetPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SetPage');
   }
-
+  goder(){
+    this.navCtrl.push("SitePage")
+  }
 }
