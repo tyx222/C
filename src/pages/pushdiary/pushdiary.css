@@ -5,11 +5,12 @@ page-pushdiary .scroll-content {
 
 page-pushdiary .put_box {
   background: #fff;
-  height: 7rem;
+  height: 4rem;
   display: flex;
   align-items: center;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
 page-pushdiary .put_box input {
@@ -18,7 +19,9 @@ page-pushdiary .put_box input {
 }
 
 page-pushdiary .put_box img {
-  height: 4rem;
+  height: 3rem;
+  border-radius: 50%;
+  width: 3rem;
 }
 
 page-pushdiary .area {

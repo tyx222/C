@@ -6,7 +6,7 @@ import { PardackpushPage } from "./../pages/pardackpush/pardackpush";
 import { AdditionalPage } from "./../pages/additional/additional";
 import { AuditPage } from "./../pages/audit/audit";
 
-import { IpamPage } from "./../pages/ipam/ipam";
+
 import { FileTransfer, FileUploadOptions, FileTransferObject }from'@ionic-native/file-transfer';
 import { AppraisePage } from "./../pages/appraise/appraise";
 import { BrowserModule } from "@angular/platform-browser";
@@ -50,6 +50,7 @@ import {
 import { VideoEditor } from "@ionic-native/video-editor";
 import { ImgServiceProvider } from '../providers/img-service/img-service';
 import { ToastProvider } from '../providers/toast/toast';
+import { StorageProvider } from '../providers/storage/storage';
 
 @NgModule({
   declarations: [
@@ -57,8 +58,6 @@ import { ToastProvider } from '../providers/toast/toast';
     ListPage,
     ForgetPasswordPage,
     AppraisePage,
-
-    IpamPage,
     AuditPage,
     AdditionalPage,
     PardackpushPage,
@@ -86,7 +85,6 @@ import { ToastProvider } from '../providers/toast/toast';
     ListPage,
     ForgetPasswordPage,
     AppraisePage,
-    IpamPage,
     AuditPage,
     AdditionalPage,
     PardackpushPage,
@@ -111,7 +109,8 @@ import { ToastProvider } from '../providers/toast/toast';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: DefaultAppConfig, useClass: DefaultAppConfig },
     ImgServiceProvider,
-    ToastProvider
+    ToastProvider,
+    StorageProvider
   ]
 })
 export class AppModule {}

@@ -25,7 +25,7 @@
                     <p>添加收货地址</p>
                 </div>
                 <div>
-                    <img src="assets/imgs/images/right.png" alt="">
+                    <img src="assets/imgs/images/right.png" alt="" style="width:1.5rem">
                 </div>
             </div>
         </div>
@@ -34,24 +34,29 @@
     <div class="titaa" *ngFor="let item of myipam let i=index" (swipe)="swipeEvent($event,i)">
 
         <div [ngClass]="{'ble':letfbor!==i,'ble3':letfbor==i}" (click)='setindex(i)'>
-            <p style="color: #ffc435;width: 2rem;" *ngIf="mpindex==i">默认地址</p>
+            <p style="color: #ffc435;width: 2rem;" *ngIf="item.default_address==1">默认地址</p>
+            <p style="color: #cfcfcf;width: 2rem;" (click)="petreceiverid(i)" *ngIf="item.default_address==2">设置默认</p>
             <div>
                 <img src="assets/imgs/images/xdgps.png" alt="" class="userimg">
             </div>
             <div class="ble2" (click)='letfbor=-1'>
                 <div class="name">
-                    <p><span>收货人:{{item.myname}} </span><span style="float: right;">{{item.ipone}}</span></p>
-                    <p><span>{{item.myipam}}{{item.ipam}}</span></p>
+                    <p><span>收货人:{{item.receiver_name}} 
+                        <span *ngIf="item.address_lable==1" style="color: #0cff00;font-weight: 900; margin-left: 0.5rem; border: 2px solid;border-radius: 50%;width: 1.5rem;display: inline-block;height: 1.5rem;line-height: 1.5rem;">校</span>
+                        <span *ngIf="item.address_lable==2" style="color: #ffc435;font-weight: 900; margin-left: 0.5rem; border: 2px solid;border-radius: 50%;width: 1.5rem;display: inline-block;height: 1.5rem;line-height: 1.5rem;">司</span>
+                        <span *ngIf="item.address_lable==3" style="color: red;font-weight: 900; margin-left: 0.5rem; border: 2px solid;border-radius: 50%;width: 1.5rem;display: inline-block;height: 1.5rem;line-height: 1.5rem;">家</span>
+                        </span><span style="float: right;">{{item.phone_number}}</span></p>
+                    <p><span>地址: {{item.province}} {{item.city}} {{item.county}} {{item.detaile_address}}</span></p>
 
                 </div>
                 <div>
-                    <img src="assets/imgs/images/right.png" alt="">
+                    <img src="assets/imgs/images/right.png" alt="" style="width:1.5rem">
                 </div>
             </div>
         </div>
 
         <div class="orderbutton">
-            <button>编辑</button>
+            <button (click)="saver(i)">编辑</button>
             <button (click)="rmoder(i)">删除</button>
         </div>
     </div>

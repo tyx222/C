@@ -23,8 +23,7 @@ export class CalendarPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CalendarPage');
-   
-    // this.showCalendar()
+    this.petids=this.navParams.data
   }
   ionViewWillEnter(){
     this.petids=this.navParams.data

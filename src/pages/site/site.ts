@@ -7,7 +7,7 @@ import {
   ToastController
 } from "ionic-angular";
 import { ReviceServeProvider } from "./../../providers/revice-serve/revice-serve";
-declare var BMap
+declare var BMap;
 declare var BMAP_ANIMATION_BOUNCE;
 /**
  * Generated class for the SitePage page.
@@ -29,8 +29,8 @@ export class SitePage {
     myipam: "",
     ipam: ""
   };
-  address_lable
-  default_address
+  address_lable;
+  default_address = true;
   myorder = [];
 
   listData = [];
@@ -44,16 +44,18 @@ export class SitePage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad SitePage");
-    console.log("地址" + localStorage.getItem("myipam1"));
+   console.log(this.navParams.get("datas"))
 
-    if (localStorage.getItem("myipam1") !== null) {
-      this.myorder = JSON.parse(localStorage.getItem("myipam1"));
-      // for(let i=0;i<=JSON.parse(localStorage.getItem('myipam1')).length;i++){
-      //   this.myorder.push(JSON.parse(localStorage.getItem('myipam1'))[i])
-      // }
+    if (this.navParams.get("datas") !== undefined) {
+      let mgs=this.navParams.get("datas")
+      this.mydata.myname = mgs.receiver_name;
+      this.mydata.ipone = mgs.phone_number;
+      this.mydata.myipam =`${mgs.province} ${mgs.city} ${mgs.county}`;
+     this.mydata.ipam=mgs.detaile_address,
+     this.address_lable=mgs.address_lable
     }
     console.log(this.myorder);
-    this.baidumap()
+
     this.getRequestContact();
   }
   getRequestContact() {
@@ -66,16 +68,17 @@ export class SitePage {
       }
     );
   }
+  toggleFun() {
+    console.log();
+    console.log(this.default_address);
+  }
   async save(myipam: HTMLEmbedElement) {
-    console.log(myipam["_text"]);
-    this.mydata.myipam = myipam["_text"];
-    console.log(myipam);
-
     for (let item in this.mydata) {
       if (this.mydata[item] == "") {
         const toast = this.toastCtrl.create({
           message: "请不要留空",
-          duration: 3000
+          duration: 3000,
+          position: "middle"
         });
         toast.present();
         return false;
@@ -83,10 +86,24 @@ export class SitePage {
     }
     let city = this.mydata.myipam.split(" ");
     console.log(city);
+    var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+    if (!myreg.test(this.mydata.ipone)) {
+      let message = "请输入正确手机号";
+      const toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000,
+        position: "middle"
+      });
+      toast.present();
+      return false;
+    }
+
+    
+    if(this.navParams.get("datas")==undefined){
     let parmas = {
-      address_lable: "",
+      address_lable: this.address_lable,
       receiver_name: this.mydata.myname,
-      default_address: "",
+      default_address: 1,
       phonenumber: this.mydata.ipone,
       province: city[0],
       city: city[1],
@@ -95,13 +112,44 @@ export class SitePage {
       mytoken: localStorage.getItem("mytoken")
     };
 
-    let res=await this.http.addPetReceiver(parmas)
+    if (this.default_address) {
+      parmas.default_address = 1;
+    } else {
+      parmas.default_address = 2;
+    }
+
+    let res = await this.http.addPetReceiver(parmas);
     console.log(res);
-    //   const toast = this.toastCtrl.create({
-    //     message: "保存成功",
-    //     duration: 3000
-    //   });
-    //   toast.present();
+    const toast = this.toastCtrl.create({
+      message: res.message,
+      duration: 3000,
+      position: "middle"
+    });
+    toast.present();
+  }else if(this.navParams.get("datas")!=undefined){
+    let parmas = {
+      id: this.navParams.get("datas").id,
+      mytoekn: localStorage.getItem('mytoken'),
+      receiver_name: this.mydata.myname,
+      phonenumber: this.mydata.ipone,
+      //receiver_address: this.myipam[i].receiver_address,
+      address_lable: this.address_lable,
+      default_address: 1,
+      province: city[0],
+      city: city[1],
+      county: city[2],
+      detaile_address: this.mydata.ipam
+    };
+    if (this.default_address) {
+      parmas.default_address = 1;
+    } else {
+      parmas.default_address = 2;
+    }
+    let res = await this.http.updatePetReceiver(parmas);
+    console.log(res);
+    this.http.http.showToast(res.message); 
+
+  }
     //   if (localStorage.getItem("myipamindex") == null) {
     //     localStorage.setItem("myipamindex", "0");
     //   }
@@ -112,44 +160,5 @@ export class SitePage {
     //   setTimeout(() => {
     //     this.navCtrl.pop();
     //   }, 1500);
-  }
-
-  public async baidumap() {
-
-    var map = new BMap.Map("container");
-  
-    var point = new BMap.Point(116.331398, 39.897445);
-    map.centerAndZoom(point, 12);
-    // 创建地址解析器实例
-    var myGeo = new BMap.Geocoder();
-    // 将地址解析结果显示在地图上,并调整地图视野
-  
-    myGeo.getPoint("武汉市江夏区金口街金水闸", function(point) {
-      if (point) {
-        map.centerAndZoom(point, 16);
-        map.addOverlay(new BMap.Marker(point));
-        console.log(point);
-        var marker = new BMap.Marker(point); // 创建标注
-        map.addOverlay(marker); // 将标注添加到地图中
-        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-        // marker.addEventListener("click",this.getAttr(marker));
-        var p = marker.getPosition(); //获取marker的位置
-        alert("marker的位置是" + p.lng + "," + p.lat);
-      } else {
-        alert("您选择地址没有解析到结果!");
-      }
-    });
-  
-    // console.log(point);
-    // // 创建点坐标
-    // map.centerAndZoom(point, 16);
-    // // 初始化地图， 设置中心点坐标和地图级别
-    // function myFun(result) {
-    //   var cityName = result.name;
-    //   map.setCenter(cityName);
-    //   // alert("当前定位城市:"+cityName);
-    // }
-    // var myCity = new BMap.LocalCity();
-    // myCity.get(myFun);
   }
 }

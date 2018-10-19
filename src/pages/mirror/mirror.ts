@@ -1,8 +1,6 @@
-
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-
+import { UserService } from "./../../app/shared/service/user.service";
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
 
 /**
  * Generated class for the MirrorPage page.
@@ -13,24 +11,49 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-mirror',
-  templateUrl: 'mirror.html',
+  selector: "page-mirror",
+  templateUrl: "mirror.html"
 })
 export class MirrorPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  petdata;
+  petimg = "";
+  petname = "";
+  day = "";
+  date = new Date();
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private http: UserService
+  ) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MirrorPage');
+    console.log("ionViewDidLoad MirrorPage");
+    console.log(this.navParams.get("datas"));
+    this.petdata = this.navParams.get("datas");
+    this.petimg = this.navParams.get("datas").headimgpath;
+    this.petname = this.navParams.get("datas").pet_name;
+    let l = ["日", "一", "二", "三", "四", "五", "六"];
+    let d = new Date().getDay();
+    this.day = "星期" + l[d];
   }
-  gopushdiary(){
-    this.navCtrl.push("PushdiaryPage")
+
+  gopushdiary() {
+    this.navCtrl.push("PushdiaryPage", {
+      datas : this.petdata,
+      type:1
+     });
+   
   }
-  goDiary(){
-    this.navCtrl.push("DiaryPage")
+  goDiary() {
+    let datas = this.petdata;
+    this.navCtrl.push("DiaryPage", {
+      datas
+    });
   }
-  video(){
-    this.navCtrl.push("VideoPage")
+  video() {
+    this.navCtrl.push("VideoPage",{
+     datas : this.petdata,
+     type:3
+    });
   }
 }

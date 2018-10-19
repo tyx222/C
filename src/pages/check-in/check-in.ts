@@ -1,5 +1,13 @@
+import { StorageProvider } from "./../../providers/storage/storage";
+import { UserService } from "./../../app/shared/service/user.service";
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  Tabs,
+  ModalController
+} from "ionic-angular";
 
 /**
  * Generated class for the CheckInPage page.
@@ -15,18 +23,33 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 })
 export class CheckInPage {
   checkInok = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  kind = "";
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private http: UserService,
+    private tabs: Tabs,
+    private modalCtrl: ModalController,
+    private storage: StorageProvider
+  ) {}
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad CheckInPage");
   }
   ckeckin() {
-    this.checkInok = true;
+    if (this.kind != "") {
+      console.log(this.kind);
+      this.checkInok = true;
+    } else {
+      let mgs = "请选择签到任务";
+      this.http.http.showToast(mgs);
+    }
   }
 
   golink() {
-    setTimeout(() => {
-      this.navCtrl.popToRoot();
-    }, 2000);
+    this.navCtrl.popToRoot();
+    this.storage.write("chenkin", this.kind);
+    this.tabs.select(1);
+
   }
 }

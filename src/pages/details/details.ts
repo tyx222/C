@@ -52,9 +52,8 @@ export class DetailsPage {
     this.navCtrl.popToRoot();
   }
   godate(i) {
-    console.log(this.callname[i])
    this.navCtrl.push("CalendarPage",
-     this.callname[i]
+     this.callname[i-1]
   );
   }
   postlo() {

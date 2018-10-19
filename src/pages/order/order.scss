@@ -7,22 +7,22 @@ page-order {
         margin-bottom: 1rem;
         .userimg {
             width: 6rem;
-        
         }
     }
-    .distribution{
-background: #fff;
-display: flex;
-justify-content: space-between;
-padding: 1.5rem;
+    .distribution {
+        background: #fff;
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem;
     }
     .ble {
         display: flex;
         align-items: center;
         padding: 1rem;
         background: #fff;
-        .shopingimg{
-            width: 10rem;;
+        .shopingimg {
+            width: 10rem;
+            ;
         }
     }
     .ble2 {
@@ -32,34 +32,35 @@ padding: 1.5rem;
         align-items: center;
         height: 100%;
         margin: 0 1rem;
-        p{
+        p {
             font-size: 1.8rem
         }
-        .pardack{
+        .pardack {
             color: #999
         }
-        .maxprice{
+        .maxprice {
             color: #FF7041
         }
-        .total{
-            display: flex;justify-content: space-between
+        .total {
+            display: flex;
+            justify-content: space-between
         }
-        .title{
-            display: flex;  justify-content: space-between;    flex-direction: column;
-            height:7rem;
+        .title {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            height: 7rem;
             >p {
-            font-size: 1.5rem;
-     
+                font-size: 1.5rem;
+            }
+            >p:nth-of-type(1) {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
         }
-        >p:nth-of-type(1){
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-        }
-       
         span {
             margin-top: 0.5rem;
             img {
@@ -107,63 +108,54 @@ padding: 1.5rem;
     .martop {
         margin-top: -1.5rem
     }
-
-    .tarea{
+    .tarea {
         margin-top: 1rem;
         background: #fff;
         padding: 1rem;
-        display: flex;
-        justify-content: center;
-        p{
+        p {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            width:10rem ;
+            width: 10rem;
         }
     }
-
-    .shoppingcall{
+    .shoppingcall {
         background: #fff;
         position: fixed;
         bottom: 0px;
         display: flex;
         width: 100%;
         justify-content: space-between;
-       > div:nth-of-type(1){
+        >div:nth-of-type(1) {
             display: flex;
-            width: 40%;
             padding: 1rem;
             align-items: center;
-            .maxprice{
+            .maxprice {
                 font-size: 2rem;
                 color: #FF7041
             }
-            p{
+            p {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 width: 50%;
-                img{
+                img {
                     width: 3rem;
                     height: 2.6rem;
                 }
-                span{
+                span {
                     color: #999
                 }
-
             }
         }
-        >div{
-        
-            button{
+        >div {
+            button {
                 width: 50%;
                 height: 100%;
                 color: #fff;
             }
-           
-            .shop{
+            .shop {
                 background: rgb(243, 66, 43);
                 width: 10rem;
-                height: 4rem;
             }
         }
     }

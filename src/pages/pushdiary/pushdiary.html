@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>pushdiary</ion-title>
+        <ion-title>{{PageTitle}}</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -17,7 +17,7 @@
     <div class="put_box">
 
         <input type="text" name="" placeholder="点击输入标题" id="" class="">
-        <img src="assets/imgs/images/home1_11.png" alt="">
+        <img src="{{petimg}}" alt="">
     </div>
     <div class="area">
         <textarea placeholder="记录今天成长的趣事"></textarea>
@@ -26,11 +26,11 @@
         <div class="Fileimg">
             <div class="itembox" *ngFor="let item of avatar let i =index">
                 <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
-                <img src="{{item}}" alt="" (click)="presentActionSheet(i)">
+                <img src="{{item}}" alt="" (click)="userimg(i)">
             </div>
         </div>
     </div>
     <!-- <div class="header-image" tappable [ngStyle]="{'background-image': 'url('+avatar+')'}" (click)="presentActionSheet()"></div> -->
 
-    <button class="pushimg">确认</button>
+    <button class="pushimg" (click)="addserve()">确认</button>
 </ion-content>

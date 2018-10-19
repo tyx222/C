@@ -1,3 +1,4 @@
+import { UserService } from './../../app/shared/service/user.service';
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 
@@ -16,6 +17,7 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 })
 export class DiaryPage {
   letfbor=-1
+  petdata
   data = [
     { imgurl: "assets/imgs/images/home1_15.png", title: "标题", date: "1" },
     { imgurl: "assets/imgs/images/home1_15.png", title: "标题", date: "2" },
@@ -23,13 +25,28 @@ export class DiaryPage {
     { imgurl: "assets/imgs/images/home1_15.png", title: "标题", date: "4" },
      { imgurl: "assets/imgs/images/home1_15.png", title: "标题", date: "5" },
   ];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,private http:UserService) {}
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad DiaryPage");
+    console.log(this.navParams)
+    this.petdata=this.navParams.get('datas')
+    this.queryhistoryTypetypelist()
   }
   gopushdiary(){
-    this.navCtrl.push("PushdiaryPage")
+    this.navCtrl.push("PushdiaryPage",{
+      datas:this.petdata,
+      type:2
+    })
+  }
+
+  async queryhistoryTypetypelist(){
+    let Params = {
+      type: 2,
+      petcardid: this.petdata.id
+    };
+    let res = await this.http.queryhistoryTypetypelist(Params);
+    console.log(res)
   }
 
   remlist(i){

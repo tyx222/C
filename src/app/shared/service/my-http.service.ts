@@ -50,38 +50,6 @@ export class MyHttpService {
     this.loadingIsOpen = false;
   }
 
-  Get(url: string, options?: RequestOptionsArgs) {
-    if (this.isMock) {
-      return this.mockGet(url);
-    }
-
-    return this.http
-      .get(`${this.ip}${url}`, options)
-      .toPromise()
-      .then(rtn => {
-        let result = rtn.json() as any;
-        if (rtn.status > 400 && rtn.status < 500) {
-          return (result = {
-            ok: false,
-            msg: "资源访问错误:" + rtn.json().message,
-            status: rtn.status
-          });
-        } else if (rtn.status >= 500) {
-          return (result = {
-            ok: false,
-            msg: this.appConfig.debug ? rtn.json().msg : "服务器内部错误:",
-            status: rtn.status
-          });
-        }
-        if (!result.ok) {
-          return this.createMessage("error", result.data) && false;
-        }
-        return result.data;
-      })
-      .catch(e => {
-        this.handleError(e);
-      });
-  }
 
   /**
    * 文件上传
@@ -279,6 +247,11 @@ export class MyHttpService {
     }
     return key + "=" + encodeURIComponent(value === null ? "" : String(value));
   }
+
+  /**
+   * 
+   * @param mgs 弹窗消息字符串
+   */
   public showToast(mgs) {
     let toast = this.toastCtrl.create({
       message: mgs,

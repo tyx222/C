@@ -61,14 +61,14 @@
         <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
       </span></p>
 
-        <div class="notice">
-            <span>小妙招</span><span>小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招</span>
+        <div class="notice" (click)="gotrick()">
+            <span>小妙招</span><span>{{contnet}}</span>
         </div>
 
         <div class="card" *ngFor="let item of petlist">
             <div><img src="assets/imgs/logo.png" alt="" srcset=""></div>
             <div>
-                <h5>宠卡</h5>
+                <h5>{{item.petcard.pet_name}}</h5>
                 <p><img src="assets/imgs/bq.png" alt="" srcset="">可爱调皮捣蛋</p>
                 <div><img src="assets/imgs/logo.png" alt="" srcset="">
                     <p>小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招</p>

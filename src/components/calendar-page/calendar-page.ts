@@ -111,6 +111,7 @@ export class CalendarPageComponent {
     };
     let res = await this.http.addcalenderevent(parmas);
     console.log(res);
+    this.http.http.showToast(res.message)
   }
   addsaver() {
     console.log(this.date);

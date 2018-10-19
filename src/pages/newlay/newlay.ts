@@ -80,16 +80,16 @@ export class NewlayPage {
       this.petimage = this.navParams.get("data").headimgpath;
     }
   }
-  initImgSer() {
-    this.upimgserve.upload.success = data => {
-      console.log(data);
-    };
-  }
+ 
   userimg() {
     this.initImgSer();
     this.upimgserve.showPicActionSheet();
     }
-
+ initImgSer() {
+    this.upimgserve.upload.success = data => {
+      console.log(data);
+    };
+  }
 
 
   async subfrom() {

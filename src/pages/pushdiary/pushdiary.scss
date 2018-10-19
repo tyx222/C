@@ -5,17 +5,20 @@ page-pushdiary {
     }
     .put_box {
         background: #fff;
-        height: 7rem;
+        height: 4rem;
         display: flex;
         align-items: center;
         width: 100%;
-        justify-content: space-around;
+        justify-content: space-between;
+        padding: 1rem;
         input {
             font-size: 1.5rem;
             border: 0
         }
         img {
-            height: 4rem;
+            height: 3rem;
+            border-radius: 50%;
+            width: 3rem;
         }
     }
     .area {

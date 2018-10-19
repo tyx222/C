@@ -6,13 +6,6 @@ page-site .item-ios {
   padding-left: 0px;
 }
 
-page-site map {
-  width: 100vw;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
 page-site .ok {
   background: #EC6D36;
   width: 90%;

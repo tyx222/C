@@ -15,7 +15,9 @@ export class HomePage {
   usermgs: boolean = true;
   goguidance: boolean = false;
   index = "0";
+  contnet = "";
   callname = [];
+  tkisid;
   data = {
     pageNum: 1,
     rowsPrePage: 20,
@@ -26,7 +28,7 @@ export class HomePage {
   totle: any;
   ctn = 1;
   queryAll = {
-    pageNum: this.ctn,
+    pageNum: 1,
     rowsPrePage: 10,
     mytoken: ""
   };
@@ -35,6 +37,9 @@ export class HomePage {
   constructor(public navCtrl: NavController, public http: UserService) {}
   ionViewDidEnter() {
     console.log("第一次进入");
+    if (localStorage.getItem("index") == null) {
+      localStorage.setItem("index", "0");
+    }
     this.petlist = [];
     this.SWIPER();
     this.data.mytoken = localStorage.getItem("mytoken");
@@ -47,8 +52,42 @@ export class HomePage {
 
     this.querypetcardlist();
     this.chongwuqueryhistorytypeAlllist();
+    this.queryclevertricklist();
   }
 
+  /**
+   * 小妙招查询
+   */
+  async queryclevertricklist() {
+    let parmas = {
+      pageNum: 1,
+      rowsPrePage: 10
+    };
+    let res = await this.http.queryclevertricklist(parmas);
+    this.contnet = res.arrayList[0].content;
+    this.tkisid = res.arrayList[0].id;
+  }
+
+  /**
+   *
+   */
+  async gotrick() {
+    console.log(this.tkisid);
+    let parmas = {
+      cleverid: this.tkisid
+    };
+    let res = await this.http.queryclevertrick(parmas);
+    let datas = res.object;
+    this.navCtrl.push("TrickPage", {
+      datas
+    });
+    console.log(res);
+  }
+
+  /**
+   * 下拉刷新页面
+   * @param refresher
+   */
   doRefresh(refresher) {
     this.ctn = 1;
     this.petlist = [];
@@ -59,6 +98,11 @@ export class HomePage {
       refresher.complete(); //停止下拉刷新
     }, 2000);
   }
+
+  /**
+   *
+   * @param infiniteScroll 加载更多
+   */
   doInfinite(infiniteScroll) {
     this.ctn++;
     this.chongwuqueryhistorytypeAlllist();
@@ -74,20 +118,46 @@ export class HomePage {
     }, 2000);
   }
 
+  /**
+   * 宠卡查询
+   */
   async querypetcardlist() {
     let res = await this.http.querypetcardlist(this.data);
-    console.log(res.arrayList.length);
     if (res.arrayList.length == 0) {
-      console.log(res.arrayList.length);
       this.goguidance = true;
       this.usermgs = false;
     } else {
       this.goguidance = false;
       this.usermgs = true;
       this.callname = res.arrayList;
-      console.log(this.callname);
+      setTimeout(() => {
+        this.queryCalendar();
+      }, 300);
     }
   }
+
+  /**
+   * 日历事件查询
+   */
+  async queryCalendar() {
+    console.log();
+    let index: number = JSON.parse(localStorage.getItem("index"));
+    console.log(localStorage.getItem("index"));
+    let date = new Date();
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    var d = date.getDate();
+    let dates = `${y}-${m}-${d}`;
+    console.log(this.callname);
+    let parmas = {
+      calendartime: dates,
+      mytoken: localStorage.getItem("mytoken"),
+      petcardid: this.callname[parseInt(this.index)].client_id
+    };
+    let res = await this.http.queryCalendar(parmas);
+    console.log(res);
+  }
+
   godaylist() {
     this.navCtrl.push("DaylistPage");
   }
@@ -109,17 +179,21 @@ export class HomePage {
     });
   }
   ionViewCanEnter() {
-    console.log(localStorage.getItem("index"));
+    //  console.log(localStorage.getItem("index"));
     this.index = localStorage.getItem("index");
   }
+  /**
+   * 首页动态查询
+   */
   async chongwuqueryhistorytypeAlllist() {
+    this.queryAll.pageNum = this.ctn;
     let res = await this.http.chongwuqueryhistorytypeAlllist(this.queryAll);
     for (let item in res.arrayList) {
       this.petlist.push(res.arrayList[item]);
     }
     this.imgUrl = res.imageUrl;
     this.maxleng = res.page.maxPage;
-    console.log(this.petlist);
+    // console.log(this.petlist);
   }
   SWIPER() {
     var mySwiper = new Swiper(".swiper-container", {
@@ -154,7 +228,15 @@ export class HomePage {
   }
 
   Pushdiary() {
-    this.navCtrl.push("MirrorPage");
+    if (!localStorage.getItem("mytoken")) {
+      this.http.http.showToast("请先登录");
+      return false;
+    }
+    console.log(parseInt(this.index))
+    let datas = this.callname[parseInt(this.index)];
+    this.navCtrl.push("MirrorPage", {
+      datas
+    });
   }
   checkIn() {
     this.navCtrl.push("CheckInPage");

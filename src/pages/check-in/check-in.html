@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>checkIn</ion-title>
+        <ion-title>签到</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -17,42 +17,31 @@
 
     <p style="margin:2rem 0 4rem 0">请选择您今天要完成的任务</p>
     <div class="box">
-        <div class="check">
-            <div class="radio checked">
-                <i class="iconfont icon-true"></i>
-            </div>
-            <span>洗澡</span>
-        </div>
-        <div class="check">
-            <div class="radio">
-                <i class="iconfont icon-true"></i>
-            </div>
-            <span>洗澡</span>
-        </div>
-        <div class="check">
-            <div class="radio">
-                <i class="iconfont icon-true"></i>
-            </div>
-            <span>洗澡</span>
-        </div>
-        <div class="check">
-            <div class="radio">
-                <i class="iconfont icon-true"></i>
-            </div>
-            <span>洗澡</span>
-        </div>
-        <div class="check">
-            <div class="radio">
-                <i class="iconfont icon-true"></i>
-            </div>
-            <span>洗澡</span>
-        </div>
-        <div class="check">
-            <div class="radio">
-                <i class="iconfont icon-true"></i>
-            </div>
-            <span>洗澡</span>
-        </div>
+
+        <p class="data">
+            <ion-list radio-group [(ngModel)]="kind">
+                <ion-item>
+                    <ion-label fixed>洗澡</ion-label>
+                    <ion-radio value="洗澡"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label fixed>美容</ion-label>
+                    <ion-radio value="美容"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label fixed>就医</ion-label>
+                    <ion-radio value="就医"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label fixed>配种</ion-label>
+                    <ion-radio value="配种"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label fixed>训练</ion-label>
+                    <ion-radio value="训练"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </p>
     </div>
     <div class="btnBox">
         <button class="btn" (click)='ckeckin()'>确认</button>

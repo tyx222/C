@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { MyHttpService } from "./my-http.service";
-import { ToastController } from 'ionic-angular';
+import { ToastController } from "ionic-angular";
 
 @Injectable()
 export class UserService {
@@ -17,16 +17,25 @@ export class UserService {
     queryPetConcernlist: "chongwu/chongwu/queryPetConcernlist",
     querypetcardnum: "chongwu/chongwu/querypetcardnum",
     querypetcardlist: "chongwu/chongwu/querypetcardlist",
-    addpetcard:"chongwu/chongwu/addpetcard",
-    deletePetcard:"chongwu/chongwu/deletePetcard",
-    updatepetcard:"chongwu/chongwu/updatepetcard",
-    uploadFile:"chongwu/chongwu/uploadFile",
-    querypetpetcardfeedingrankinglist:"chongwu/chongwu/querypetpetcardfeedingrankinglist",
-    addPetReceiver:"chongwu/chongwu/addPetReceiver",
-    chongwuqueryhistorytypeAlllist:"chongwu/chongwu/queryhistorytypeAlllist"
+    addpetcard: "chongwu/chongwu/addpetcard",
+    deletePetcard: "chongwu/chongwu/deletePetcard",
+    updatepetcard: "chongwu/chongwu/updatepetcard",
+    uploadFile: "chongwu/chongwu/uploadFile",
+    querypetpetcardfeedingrankinglist:
+      "chongwu/chongwu/querypetpetcardfeedingrankinglist",
+    addPetReceiver: "chongwu/chongwu/addPetReceiver",
+    chongwuqueryhistorytypeAlllist: "chongwu/chongwu/queryhistorytypeAlllist",
+    queryclevertricklist: "chongwu/app/queryclevertricklist",
+    queryclevertrick: "chongwu/app/queryclevertrick",
+    address: "/chongwu/chongwu/queryPetReceiverdetaile_address",
+    queryPetReceiverlist:"chongwu/chongwu/queryPetReceiverlist",
+    deletePetReceiver:'chongwu/chongwu/deletePetReceiver',
+    updatePetReceiver:"chongwu/chongwu/updatePetReceiver",
+    queryhistoryTypetypelist:'chongwu/chongwu/queryhistoryTypetypelist',
+    addhistoryType:"chongwu/chongwu/addhistoryType"
   };
-  constructor(public http: MyHttpService,public toastCtrl: ToastController) {}
-  
+  constructor(public http: MyHttpService, public toastCtrl: ToastController) {}
+
   /**
    * 提示框
    * @param data 提示文字
@@ -35,12 +44,11 @@ export class UserService {
     const toast = this.toastCtrl.create({
       message: data,
       duration: 3000,
-      position:"middle",
+      position: "middle"
     });
     toast.present();
   }
-  
-  
+
   /**
    *  登录
    * @param username 用户名
@@ -140,50 +148,107 @@ export class UserService {
   }
   /**
    * 添加猫卡
-   * @param 
+   * @param
    */
-  addpetcard(data){
-    return this.http.Post(this.api.addpetcard,data)
+  addpetcard(data) {
+    return this.http.Post(this.api.addpetcard, data);
   }
 
   /**
    * deletePetcard 删除宠物卡
    */
-  deletePetcard(data){
-    return this.http.Post(this.api.deletePetcard,data)
+  deletePetcard(data) {
+    return this.http.Post(this.api.deletePetcard, data);
   }
   /**
-   * 
+   *
    * @param data 修改宠卡
    */
- updatepetcard(data){
-return this.http.Post(this.api.updatepetcard,data)
- }
-/**
- * 文件上传
- * @param file
- */
- uploadFile(data){
-return this.http.upimg(this.api.uploadFile,data)
- }
+  updatepetcard(data) {
+    return this.http.Post(this.api.updatepetcard, data);
+  }
+  /**
+   * 文件上传
+   * @param file
+   */
+  uploadFile(data) {
+    return this.http.upimg(this.api.uploadFile, data);
+  }
 
- /**
-  * 今日宠榜
-  */
- querypetpetcardfeedingrankinglist(){
-   return this.http.Post(this.api.querypetpetcardfeedingrankinglist,{})
- }
-/**
- * 添加收货地址
- */
- addPetReceiver(data){
-   return this.http.Post(this.api.addPetReceiver,data)
- }
+  /**
+   * 今日宠榜
+   */
+  querypetpetcardfeedingrankinglist() {
+    return this.http.Post(this.api.querypetpetcardfeedingrankinglist, {});
+  }
+  /**
+   * 添加收货地址
+   */
+  addPetReceiver(data) {
+    return this.http.Post(this.api.addPetReceiver, data);
+  }
 
- /**
-  * 首页动态查询
-  */
- chongwuqueryhistorytypeAlllist(data){
-   return this.http.Post(this.api.chongwuqueryhistorytypeAlllist,data)
- }
+  /**
+   * 首页动态查询
+   */
+  chongwuqueryhistorytypeAlllist(data) {
+    return this.http.Post(this.api.chongwuqueryhistorytypeAlllist, data);
+  }
+
+  /**
+   * queryclevertricklist 小妙招
+   */
+  queryclevertricklist(data) {
+    return this.http.Post(this.api.queryclevertricklist, data);
+  }
+
+  /**
+   *
+   * @param data 小妙招详情
+   */
+  queryclevertrick(data) {
+    return this.http.Post(this.api.queryclevertrick, data);
+  }
+
+  /**
+   *查询默认收货地址
+   */
+  address(data) {
+    return this.http.Post(this.api.address, data);
+  }
+  /**
+   * 查询所有收货地址
+   */
+  queryPetReceiverlist(data){
+    return this.http.Post(this.api.queryPetReceiverlist,data)
+  }
+  /**
+   * 删除收货地址
+   */
+  deletePetReceiver(data){
+    return this.http.Post(this.api.deletePetReceiver,data)
+  }
+
+  /**
+   * 编辑收货地址
+   */
+  updatePetReceiver(data){
+    return this.http.Post(this.api.updatePetReceiver,data)
+  }
+  /**
+   * 按类型查询动态
+   * @param type 1:写真  2：传记  3:健康  4:活动 
+   * @param petcardid 宠卡ID
+   */
+  queryhistoryTypetypelist(data){
+    return this.http.Post(this.api.queryhistoryTypetypelist,data)
+  }
+
+  /**
+   * addhistoryType
+   * @param type 1:写真  2：传记  3:健康  4:活动 
+   */
+  addhistoryType(data){
+    return this.http.Post(this.api.addhistoryType,data)
+  }
 }

@@ -16,12 +16,12 @@
 <ion-content padding>
     <div class="datebox">
         <div>
-            <h1>8月8日</h1>
-            <p>星期三</p>
+            <h1>{{date| date:'yyyy-MM-dd'}}</h1>
+            <p>{{day}}</p>
         </div>
         <div>
-            <img src="assets/imgs/images/petImg.png" alt="">
-            <p>与阿猫阿狗相遇109天</p>
+            <img src="{{petimg}}" alt="">
+            <p>与 {{petname}} 相遇109天</p>
         </div>
     </div>
     <div class="gobtn">
