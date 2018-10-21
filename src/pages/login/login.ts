@@ -54,10 +54,11 @@ export class LoginPage {
       // divcie_type:''
     };
     let res = await this.http.login(parmas);
-     console.log(res.inifo);
+     console.log(res);
     if (res.info == "ok") {
    
       localStorage.setItem("mytoken", res.object.mytoken);
+      localStorage.setItem("mydata",JSON.stringify(res.object))
        this.navCtrl.setRoot('TabsPage')
     } else {
       let message = res.message;

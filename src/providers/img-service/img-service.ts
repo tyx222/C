@@ -20,6 +20,7 @@ import {
   MediaFileData,
   ConfigurationData
 } from "@ionic-native/media-capture";
+import { Observable } from "rxjs/Observable";
 
 /*
   Generated class for the ImgServiceProvider provider.
@@ -61,19 +62,6 @@ export class ImgServiceProvider {
     listen: () => {} //监听上传过程
   };
 
-  vdoupload: any = {
-    fileKey: "file", //接收图片时的key
-    fileName: "VideoName.mp4",
-    headers: {
-      Accept:
-        "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" //不加入 发生错误！！
-    },
-    params: {}, //需要额外上传的参数
-    success: data => {}, //图片上传成功后的回调
-    error: err => {}, //图片上传失败后的回调
-    listen: () => {} //监听上传过程
-  };
-
   constructor(
     private actionSheetCtrl: ActionSheetController,
     private noticeSer: ToastProvider,
@@ -96,14 +84,6 @@ export class ImgServiceProvider {
   }
 
   /**
-   * 视频菜单
-   */
-  showVideoUpdata() {
-    this.videoASComponent();
-  }
-
-  // 使用ionic中的ActionSheet组件
-  /**
    * 菜单组件
    */
   private useASComponent() {
@@ -120,32 +100,6 @@ export class ImgServiceProvider {
           text: "从手机相册选择",
           handler: () => {
             this.openImgPicker();
-          }
-        },
-        {
-          text: "取消",
-          role: "cancel",
-          handler: () => {}
-        }
-      ]
-    });
-    actionSheet.present();
-  }
-
-  private videoASComponent() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: "请选择",
-      buttons: [
-        {
-          text: "拍摄视频",
-          handler: () => {
-            this.takeVideo();
-          }
-        },
-        {
-          text: "从手机选择",
-          handler: () => {
-            this.vudeodit();
           }
         },
         {
@@ -181,7 +135,6 @@ export class ImgServiceProvider {
         for (var i = 0; i < results.length; i++) {
           temp = results[i];
         }
-
         this.uploadImg(temp);
       },
       err => {
@@ -221,10 +174,101 @@ export class ImgServiceProvider {
     );
   }
 
+
+  //上传成功
+  // bjecterrorcode: "200"
+  // imageUrl: "https://www.petbashi.com/imgs/"
+  // info: "ok"
+  // message: 
+  // "操作成功！"
+  // object: Object
+  // map:Object
+  //  cover: "aaf5a8250c1db2662b092007e3922812.jpg"
+  //  filename: "4ec178b28fc4b1e722f0c8f690871261.jpg"
+
+
+
+
+
+
+  /**
+   * 视频上传
+   * @param fileUrl
+   * @param options
+   */
+  public uploadByTransfer(fileUrl: string, options?: FileUploadOptions) {
+    if (!options) {
+      options = {
+        fileKey: "file",
+        fileName: fileUrl.substr(fileUrl.lastIndexOf("/") + 1)
+      };
+    }
+    return this.fileTransfer.upload(fileUrl, this.uploadApi, options).then(res=>{
+      let rtn=JSON.parse(res.response) 
+      return rtn
+    });
+  }
+
+  /**
+   * 调用视频拍摄
+   */
+  choosePhoto(successCallback) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: "选择图片来源",
+      buttons: [
+        {
+          text: "本地视频",
+          role: "destructive",
+          handler: () => {
+            this.getLocalImage(successCallback);
+          }
+        },
+        {
+          text: "拍摄视频",
+          handler: () => {
+            this.takeVideo(successCallback);
+          }
+        },
+        {
+          text: "取消",
+          role: "cancel",
+          handler: () => {}
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  /**
+   * 选择本地视频
+   */
+  getLocalImage(successCallback) {
+    let options = {
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      encodingType: this.camera.EncodingType.JPEG,
+      saveToPhotoAlbum: true,
+      mediaType: 1, //0为图片，1为视频
+      targetWidth: 600,
+      targetHeight: 600
+    };
+
+    this.camera.getPicture(options).then(
+      imageData => {
+        successCallback(imageData);
+        //  return this.uploadByTransfer(imageData);
+      },
+      err => {
+        // Handle error
+        console.log(err);
+      }
+    );
+  }
+
   /**
    * 拍摄视频 附带视频截图
    */
-  public takeVideo() {
+  private takeVideo(successCallback) {
     let options: MediaFileData = {
       codecs: "mp4",
       bitrate: 1500,
@@ -234,42 +278,16 @@ export class ImgServiceProvider {
     };
     this.mediaCapture.captureVideo(options).then(
       (data: MediaFile[]) => {
-        this.ditor(data);
-        console.log(data[0]["fullPath"]);
+        this.ditor(data, successCallback);
       },
       (err: CaptureError) => console.error(err)
     );
   }
 
   /**
-   * 选择视频上传
-   */
-  vudeodit() {
-    let options: CameraOptions = {
-      quality: 80,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      mediaType: 1,
-      sourceType: 0
-    };
-    this.camera.getPicture(options).then(url => {
-      let video = url.split("/");
-      // let videoname=video[video.length-1]
-      // let videourl=url.splice(video)
-      let data = [
-        {
-          fullPath: url.split(video)[0],
-          name: video[video.length - 1]
-        }
-      ];
-      console.log(data);
-      this.ditor(data);
-    });
-  }
-
-  /**
    * 视频压缩处理
    */
-  ditor(data) {
+  private ditor(data, successCallback) {
     console.log(data[0]["fullPath"]);
 
     let options = {
@@ -291,106 +309,75 @@ export class ImgServiceProvider {
     };
     this.videoEditor
       .transcodeVideo(options)
-      .then((fileUri: string) => {
-       // console.log("视频压缩后" + fileUri);
-        this.uploadVideo("file://" + fileUri);
-        this.create(data);
-        this.filevideoget(fileUri, data);
+      .then(async (fileUri: string) => {
+        let url = "file://" + fileUri;
+        successCallback(url);
+        //  let res = this.uploadByTransfer(url);
       })
       .catch((error: any) => console.log("video transcode error", error));
   }
 
-  /**
-   *
-   * @param data 图片压缩后
-   */
-  create(data) {
-    let options = {
-      fileUri: data[0]["fullPath"],
-      outputFileName: data[0]["name"],
-      atTime: 1,
-      width: 640,
-      height: 640,
-      quality: 80
-    };
-    this.videoEditor.createThumbnail(options).then((fileUri: string) => {
-      this.uploadImg("file://"+fileUri)
-     // this.fileimgget(fileUri, data);
-      console.log("上传" + fileUri);
-    });
-  }
-
-  /**
-   * 视频图片
-   * @param path
-   */
-  private uploadVideo(path: string) {
-    if (!path) {
-      return;
-    }
-    let options: any;
-    options = {
-      fileKey: this.vdoupload.fileKey,
-      headers: this.vdoupload.headers,
-      params: this.vdoupload.params
-    };
-    this.fileTransfer.upload(path, this.uploadApi, options).then(
-      data => {
-        if (this.vdoupload.success) {
-          this.vdoupload.success(JSON.parse(data.response));
-        }
-      },
-      err => {
-        if (this.upload.error) {
-          this.upload.error(err);
-        } else {
-          this.noticeSer.showToast("错误：上传失败！");
-        }
-      }
-    );
-  }
+  // /**
+  //  *
+  //  * @param data 图片压缩后
+  //  */
+  // private create(data) {
+  //   let options = {
+  //     fileUri: data[0]["fullPath"],
+  //     outputFileName: data[0]["name"],
+  //     atTime: 1,
+  //     width: 640,
+  //     height: 640,
+  //     quality: 80
+  //   };
+  //   this.videoEditor.createThumbnail(options).then((fileUri: string) => {
+  //     this.uploadImg("file://" + fileUri);
+  //     // this.fileimgget(fileUri, data);
+  //     console.log("上传" + fileUri);
+  //   });
+  // }
 
   /**
    * 压缩后的视频
    * @param fileUri 压缩前的视频路径
    * @param data
    */
-  filevideoget(fileUri, data) {
-    let evets = fileUri.split(data[0].name);
-    let fileName = data[0].name + ".mp4";
-    let Options = {};
-    this.file
-      .resolveDirectoryUrl("file://" + evets[0])
-      .then(res => {
-        this.file.getFile(res, fileName, Options).then(filedata => {
-          console.log("视频压缩" + filedata.fullPath);
-         this.uploadVideo("file://" + filedata.fullPath);
-        });
-      })
-      .catch(err => console.log(err));
-  }
+  // private filevideoget(fileUri, data) {
+  //   let evets = fileUri.split(data[0].name);
+  //   let fileName = data[0].name + ".mp4";
+  //   let Options = {};
+  //   this.file
+  //     .resolveDirectoryUrl("file://" + evets[0])
+  //     .then(res => {
+  //       this.file.getFile(res, fileName, Options).then(filedata => {
+  //         console.log("视频压缩" + filedata.fullPath);
+  //         this.uploadVideo("file://" + filedata.fullPath);
+  //       });
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
-  /**
-   * 压缩后的图片
-   * @param fileUri
-   * @param data
-   */
-  fileimgget(fileUri, data) {
-    let evets = fileUri.split(data[0].name);
-    let fileName = data[0].name + ".jpg";
-    let Options = {};
-    this.file
-      .resolveDirectoryUrl("file://" + evets[0])
-      .then(res => {
-        this.file.getFile(res, fileName, Options).then(filedata => {
-          console.log(filedata);
-        });
-      })
-      .catch(err => console.log(err));
-  }
+  // /**
+  //  * 压缩后的图片
+  //  * @param fileUri
+  //  * @param data
+  //  */
+  // private fileimgget(fileUri, data) {
+  //   let evets = fileUri.split(data[0].name);
+  //   let fileName = data[0].name + ".jpg";
+  //   let Options = {};
+  //   this.file
+  //     .resolveDirectoryUrl("file://" + evets[0])
+  //     .then(res => {
+  //       this.file.getFile(res, fileName, Options).then(filedata => {
+  //         console.log(filedata);
+  //       });
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
   // 停止上传
-  stopUpload() {
+  public stopUpload() {
     if (this.fileTransfer) {
       this.fileTransfer.abort();
     }

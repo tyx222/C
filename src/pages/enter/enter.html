@@ -62,15 +62,24 @@
                 <span>繁殖犬种</span>
                 <input type="text" placeholder="请输入繁殖犬种">
             </li>
+
             <!-- <ion-item>
                 <ion-label>日期</ion-label>
                 <ion-datetime [cancelText]="'取消'" [doneText]="'完成'" displayFormat="YYYY/DD/MM" [(ngModel)]="myDate"></ion-datetime>
             </ion-item> -->
-
-
-
-
         </ul>
+        <div class='selectStyle'>
+            <p>点击上传手持身份证正面照</p>
+            <button (click)="mydatasup()">
+        <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+      </button>
+        </div>
+        <div class='selectStyle'>
+            <p>点击上传手持身份证反面照</p>
+            <button (click)="mydatasout()">
+        <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+      </button>
+        </div>
         <p><input type="checkbox" name="" id="">我已同意XXX用户协议</p>
         <button class="subfrom">确认注册</button>
     </div>

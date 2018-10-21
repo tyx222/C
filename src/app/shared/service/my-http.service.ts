@@ -57,7 +57,7 @@ export class MyHttpService {
    * @param body
    * @param options
    */
-  upimg(url: string, body: any, options?: RequestOptionsArgs): Promise<any> {
+  private upimg(url: string, body: any, options?: RequestOptionsArgs): Promise<any> {
       options = {
         headers: new Headers({
           "mytoken": localStorage.getItem("mytoken"),
@@ -159,7 +159,7 @@ export class MyHttpService {
     /**超过timeout 时间就会执行以下代码,返回错误信息 */
   }
 
-  Delete(url: string, options?: RequestOptionsArgs) {
+  private Delete(url: string, options?: RequestOptionsArgs) {
     url = url.startsWith("http") ? url : `${this.ip}${url}`;
     options = options ? options : {};
     return this.http
@@ -173,7 +173,7 @@ export class MyHttpService {
       });
   }
 
-  Put(url: string, body, options?: RequestOptionsArgs) {
+  private Put(url: string, body, options?: RequestOptionsArgs) {
     url = url.startsWith("http") ? url : `${this.ip}${url}`;
     options = options ? options : {};
     // options.withCredentials = true;
@@ -187,7 +187,7 @@ export class MyHttpService {
           : this.createMessage("error", result.data);
       });
   }
-  async handleError(res: Response) {
+  private async handleError(res: Response) {
     switch (res.status) {
       case 404:
         this.createMessage("error", "404请求的资源不存在");
@@ -206,16 +206,16 @@ export class MyHttpService {
     }
     return false;
   }
-  localGet(url: string) {
+  private localGet(url: string) {
     return this.http.get(url).toPromise();
   }
-  localGetJSON(url: string) {
+  private localGetJSON(url: string) {
     return this.http
       .get(url)
       .toPromise()
       .then(rtn => rtn.json());
   }
-  mockGet(url: string) {
+ private mockGet(url: string) {
     return this.http
       .get("/assets/mock" + url + ".json")
       .toPromise()

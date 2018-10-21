@@ -28,11 +28,12 @@ export class UserService {
     queryclevertricklist: "chongwu/app/queryclevertricklist",
     queryclevertrick: "chongwu/app/queryclevertrick",
     address: "/chongwu/chongwu/queryPetReceiverdetaile_address",
-    queryPetReceiverlist:"chongwu/chongwu/queryPetReceiverlist",
-    deletePetReceiver:'chongwu/chongwu/deletePetReceiver',
-    updatePetReceiver:"chongwu/chongwu/updatePetReceiver",
-    queryhistoryTypetypelist:'chongwu/chongwu/queryhistoryTypetypelist',
-    addhistoryType:"chongwu/chongwu/addhistoryType"
+    queryPetReceiverlist: "chongwu/chongwu/queryPetReceiverlist",
+    deletePetReceiver: "chongwu/chongwu/deletePetReceiver",
+    updatePetReceiver: "chongwu/chongwu/updatePetReceiver",
+    queryhistoryTypetypelist: "chongwu/chongwu/queryhistoryTypetypelist",
+    addhistoryType: "chongwu/chongwu/addhistoryType",
+    querypetproductlist: "chongwu/chongwu/querypetproductlist"
   };
   constructor(public http: MyHttpService, public toastCtrl: ToastController) {}
 
@@ -167,13 +168,6 @@ export class UserService {
   updatepetcard(data) {
     return this.http.Post(this.api.updatepetcard, data);
   }
-  /**
-   * 文件上传
-   * @param file
-   */
-  uploadFile(data) {
-    return this.http.upimg(this.api.uploadFile, data);
-  }
 
   /**
    * 今日宠榜
@@ -219,36 +213,43 @@ export class UserService {
   /**
    * 查询所有收货地址
    */
-  queryPetReceiverlist(data){
-    return this.http.Post(this.api.queryPetReceiverlist,data)
+  queryPetReceiverlist(data) {
+    return this.http.Post(this.api.queryPetReceiverlist, data);
   }
   /**
    * 删除收货地址
    */
-  deletePetReceiver(data){
-    return this.http.Post(this.api.deletePetReceiver,data)
+  deletePetReceiver(data) {
+    return this.http.Post(this.api.deletePetReceiver, data);
   }
 
   /**
    * 编辑收货地址
    */
-  updatePetReceiver(data){
-    return this.http.Post(this.api.updatePetReceiver,data)
+  updatePetReceiver(data) {
+    return this.http.Post(this.api.updatePetReceiver, data);
   }
   /**
    * 按类型查询动态
-   * @param type 1:写真  2：传记  3:健康  4:活动 
+   * @param type 1:写真  2：传记  3:健康  4:活动
    * @param petcardid 宠卡ID
    */
-  queryhistoryTypetypelist(data){
-    return this.http.Post(this.api.queryhistoryTypetypelist,data)
+  queryhistoryTypetypelist(data) {
+    return this.http.Post(this.api.queryhistoryTypetypelist, data);
   }
 
   /**
    * addhistoryType
-   * @param type 1:写真  2：传记  3:健康  4:活动 
+   * @param type 1:写真  2：传记  3:健康  4:活动
    */
-  addhistoryType(data){
-    return this.http.Post(this.api.addhistoryType,data)
+  addhistoryType(data) {
+    return this.http.Post(this.api.addhistoryType, data);
+  }
+  /**
+   *   商品查询
+   */
+
+  querypetproductlist(data) {
+    return this.http.Post(this.api.querypetproductlist, data);
   }
 }

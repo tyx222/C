@@ -14,7 +14,7 @@ export class HomePage {
   //@ViewChild(GuidanceComponent)
   usermgs: boolean = true;
   goguidance: boolean = false;
-  index = "0";
+  index:any = 0;
   contnet = "";
   callname = [];
   tkisid;
@@ -39,6 +39,8 @@ export class HomePage {
     console.log("第一次进入");
     if (localStorage.getItem("index") == null) {
       localStorage.setItem("index", "0");
+    }else{
+      this.index =parseInt(localStorage.getItem("index")) ;
     }
     this.petlist = [];
     this.SWIPER();
@@ -180,7 +182,7 @@ export class HomePage {
   }
   ionViewCanEnter() {
     //  console.log(localStorage.getItem("index"));
-    this.index = localStorage.getItem("index");
+   
   }
   /**
    * 首页动态查询
@@ -221,6 +223,7 @@ export class HomePage {
       on: {
         slideChangeTransitionStart: function() {
           // alert(this.activeIndex);
+          console.log(this.activeIndex)
           localStorage.setItem("index", this.activeIndex);
         }
       }

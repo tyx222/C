@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { UserService } from "../../app/shared/service/user.service";
 
 /**
  * Generated class for the CallshopPage page.
@@ -10,16 +11,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-callshop',
-  templateUrl: 'callshop.html',
+  selector: "page-callshop",
+  templateUrl: "callshop.html"
 })
 export class CallshopPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  pordack = {
+    pageNum: 1,
+    rowsPrePage: 10
+  };
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public http: UserService
+  ) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CallshopPage');
+    console.log("ionViewDidLoad CallshopPage");
   }
-
+  ionViewWillEnter() {
+    this.mypordack();
+  }
+  async mypordack() {
+    let res = await this.http.querypetproductlist(this.pordack);
+    console.log(res);
+  }
 }

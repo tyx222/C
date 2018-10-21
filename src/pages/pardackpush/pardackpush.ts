@@ -18,7 +18,7 @@ import {
 } from "@ionic-native/media-capture";
 import { VideoEditor } from "@ionic-native/video-editor";
 import { File } from "@ionic-native/file";
-import { ImgServiceProvider } from '../../providers/img-service/img-service';
+import { ImgServiceProvider } from "../../providers/img-service/img-service";
 /**
  * Generated class for the PardackpushPage page.
  *
@@ -40,24 +40,19 @@ export class PardackpushPage {
     private mediaCapture: MediaCapture,
     private videoEditor: VideoEditor,
     private file: File,
-    private devolup:ImgServiceProvider
+    private devolup: ImgServiceProvider
   ) {}
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad PardackpushPage");
   }
 
-  devoup(){
-    this.initImgSer()
-    this.devolup.showVideoUpdata()
-  }
-  initImgSer() {
-    this.devolup.vdoupload.success = data => {
-      console.log(data);
-    };
-    this.devolup.upload.success = data => {
-      console.log(data);
-    };
+ devoup() {
+    this.devolup.choosePhoto(async res => {
+      console.log(res);
+      let mgs =await this.devolup.uploadByTransfer(res);
+      console.log(mgs);
+    });
   }
   // presentActionSheet() {
   //   const actionSheet = this.actionSheetCtrl.create({
@@ -88,7 +83,6 @@ export class PardackpushPage {
   //   actionSheet.present();
   // }
 
-  
   // public takeVideo() {
   //   let options: MediaFileData = {
   //     codecs: "mp4",
@@ -153,7 +147,7 @@ export class PardackpushPage {
   // /**
   //  * 压缩后的视频
   //  * @param fileUri 压缩前的视频路径
-  //  * @param data 
+  //  * @param data
   //  */
   // filevideoget(fileUri, data) {
   //   let evets = fileUri.split(data[0].name);
@@ -171,8 +165,8 @@ export class PardackpushPage {
 
   // /**
   //  * 压缩后的图片
-  //  * @param fileUri 
-  //  * @param data 
+  //  * @param fileUri
+  //  * @param data
   //  */
   // fileimgget(fileUri, data) {
   //   let evets = fileUri.split(data[0].name);
