@@ -2,7 +2,7 @@
 import { Component, Output, EventEmitter, ViewChild } from "@angular/core";
 import { NavController, IonicPage } from "ionic-angular";
 import { UserService } from "../../app/shared/service/user.service";
-
+import { Buffer } from "buffer";
 declare let Swiper: any;
 
 @IonicPage()
@@ -14,10 +14,11 @@ export class HomePage {
   //@ViewChild(GuidanceComponent)
   usermgs: boolean = true;
   goguidance: boolean = false;
-  index:any = 0;
+  index: any = 0;
   contnet = "";
   callname = [];
   tkisid;
+  imgurl = "";
   data = {
     pageNum: 1,
     rowsPrePage: 20,
@@ -32,15 +33,18 @@ export class HomePage {
     rowsPrePage: 10,
     mytoken: ""
   };
+  lulartype: number = 1;
   imgUrl;
   petlist = [];
+  guanzhulist = [];
+  huodonglist = [];
   constructor(public navCtrl: NavController, public http: UserService) {}
   ionViewDidEnter() {
     console.log("第一次进入");
     if (localStorage.getItem("index") == null) {
       localStorage.setItem("index", "0");
-    }else{
-      this.index =parseInt(localStorage.getItem("index")) ;
+    } else {
+      this.index = parseInt(localStorage.getItem("index"));   
     }
     this.petlist = [];
     this.SWIPER();
@@ -71,6 +75,81 @@ export class HomePage {
   }
 
   /**
+   * tab切换
+   */
+  expression() {
+    this.ctn = 1;
+    this.maxleng;
+    this.loding = false;
+    this.petlist = [];
+    this.guanzhulist = [];
+    this.huodonglist = [];
+    console.log(this.lulartype);
+    if (this.lulartype == 1) {
+      this.chongwuqueryhistorytypeAlllist();
+    }
+    if (this.lulartype == 2) {
+      this.guanzhu();
+    }
+    if (this.lulartype == 3) {
+      this.querypetactivitylist();
+    }
+
+    //   this.querypetpolularlist();
+  }
+  /**
+   * 关注列表
+   */
+  async guanzhu() {
+    let parmas = {
+      mytoken: localStorage.getItem("mytoken"),
+      pageNum: this.ctn,
+      rowsPrePage: 10
+    };
+    let res = await this.http.queryPetConcernhistorytypelist(parmas);
+    console.log(res);
+    for (let item in res.arrayList) {
+      this.guanzhulist.push(res.arrayList[item]);
+    }
+    this.imgUrl = res.imageUrl;
+  }
+
+  /**
+   * 评论
+   */
+  gomessagelist(i) {
+    if(this.lulartype==1){
+      this.navCtrl.push("MessagelistPage", { datas: this.petlist[i] });
+    }
+    if(this.lulartype==2){
+      this.navCtrl.push("MessagelistPage", { datas: this.guanzhulist[i] });
+    }
+    
+  }
+  /**
+   * 活动列表查询
+   */
+  async querypetactivitylist() {
+    let parmas = {
+      pageNum: this.ctn,
+      rowsPrePage: 10
+    };
+    let res = await this.http.querypetactivitylist(parmas);
+    this.maxleng = res.page.maxPage;
+    console.log(res);
+    console.log(res);
+    for (let item in res.arrayList) {
+      res.arrayList[item].content = new Buffer(
+        res.arrayList[item].content,
+        "base64"
+      ).toString();
+      this.huodonglist.push(res.arrayList[item]);
+    }
+    console.log(this.huodonglist);
+    this.imgUrl = res.imageUrl;
+  }
+
+  /**
    *
    */
   async gotrick() {
@@ -93,21 +172,49 @@ export class HomePage {
   doRefresh(refresher) {
     this.ctn = 1;
     this.petlist = [];
+    this.guanzhulist = [];
+    this.huodonglist = [];
     this.loding = false;
     this.maxleng;
-    this.chongwuqueryhistorytypeAlllist();
+    if (this.lulartype == 1) {
+      this.chongwuqueryhistorytypeAlllist();
+    }
+    if (this.lulartype == 2) {
+      this.querypetactivitylist();
+    }
+    if (this.lulartype == 3) {
+      this.querypetactivitylist();
+    }
+
     setTimeout(() => {
       refresher.complete(); //停止下拉刷新
     }, 2000);
   }
 
+  goctivity(i) {
+    console.log(this.huodonglist[i]);
+    let datas = this.huodonglist[i];
+    let petdata = this.callname[this.index];
+    this.navCtrl.push("QueryPetactivityPage", {
+      datas,
+      petdata
+    });
+  }
   /**
    *
    * @param infiniteScroll 加载更多
    */
   doInfinite(infiniteScroll) {
     this.ctn++;
-    this.chongwuqueryhistorytypeAlllist();
+    if (this.lulartype == 1) {
+      this.chongwuqueryhistorytypeAlllist();
+    }
+    if (this.lulartype == 2) {
+      this.guanzhu();
+    }
+    if (this.lulartype == 3) {
+      this.querypetactivitylist();
+    }
     setTimeout(() => {
       console.log("加载完成后，关闭刷新");
       infiniteScroll.complete();
@@ -121,6 +228,159 @@ export class HomePage {
   }
 
   /**
+   * 关注宠卡
+   */
+  async addpetConcern(i) {
+  
+    // let parmas = {
+    //   reciveclientid: this.petlist[i].petcard.client_id,
+    //   concerntype: 1,
+    //   mytoken: localStorage.getItem("mytoken"),
+    //   recivepetcardid: this.petlist[i].pet_id
+    // };
+    console.log(i)
+    if (this.lulartype == 1) {
+      let parmas = {
+        reciveclientid: this.petlist[i].petcard.client_id,
+        concerntype: 1,
+        mytoken: localStorage.getItem("mytoken"),
+        recivepetcardid: this.petlist[i].pet_id
+      };
+      console.log(this.petlist[i]);
+      let res = await this.http.addpetConcern(parmas);
+      this.http.http.showToast(res.message);
+      if(res.info=="ok"){
+        this.petlist[i].concernStatus=!this.petlist[i].concernStatus
+      }
+      console.log(res);
+    }
+    if (this.lulartype == 2) {
+      console.log(this.guanzhulist[i])
+      let parmas = {
+        reciveclientid: this.guanzhulist[i].petcard.client_id,
+        concerntype: 1,
+        mytoken: localStorage.getItem("mytoken"),
+        recivepetcardid: this.guanzhulist[i].pet_id
+      };
+      let res = await this.http.addpetConcern(parmas);
+      this.http.http.showToast(res.message);
+      if(res.info=="ok"){
+        this.guanzhulist[i].concernStatus=!this.guanzhulist[i].concernStatus
+      }
+    }
+   
+  }
+/**
+ * 取消关注
+ * @param i 
+ */
+ async addConcern(i){
+//console.log(this.petlist[i]);
+    if (this.lulartype == 1) {
+      let parmas = {
+        reciveclientid: this.petlist[i].petcard.client_id,
+        concerntype: 0,
+        mytoken: localStorage.getItem("mytoken"),
+        recivepetcardid: this.petlist[i].pet_id
+      };
+  
+      let res = await this.http.addpetConcern(parmas);
+      this.http.http.showToast(res.message);
+      if(res.info=="ok"){
+        this.petlist[i].concernStatus=!this.petlist[i].concernStatus
+      }
+    }
+
+    if (this.lulartype == 2) {
+      let parmas = {
+        reciveclientid: this.guanzhulist[i].petcard.client_id,
+        concerntype: 0,
+        mytoken: localStorage.getItem("mytoken"),
+        recivepetcardid: this.guanzhulist[i].pet_id
+      };
+  
+      let res = await this.http.addpetConcern(parmas);
+      this.http.http.showToast(res.message);
+      if(res.info=="ok"){
+        this.guanzhulist[i].concernStatus=!this.guanzhulist[i].concernStatus
+      }
+    }
+
+  }
+
+  /**
+   * 点赞动态
+   */
+  async addpetLikes(i) {
+    if (this.lulartype == 1) {
+      console.log(this.petlist[i]);
+      let parmas = {
+        receivehistorytypeid: this.petlist[i].id,
+        likestype: 1,
+        mytoken: localStorage.getItem("mytoken"),
+        receivepetcardid: this.petlist[i].pet_id
+      };
+      let res = await this.http.addpetLikes(parmas);
+      this.http.http.showToast(res.message);
+      if(res.info=="ok"){
+        this.petlist[i].isLiked=!this.petlist[i].isLiked
+      }
+      console.log(res);
+    }
+    if (this.lulartype == 2) {
+      console.log(this.guanzhulist[i]);
+      let parmas = {
+        receivehistorytypeid: this.guanzhulist[i].id,
+        likestype: 1,
+        mytoken: localStorage.getItem("mytoken"),
+        receivepetcardid: this.guanzhulist[i].pet_id
+      };
+      let res = await this.http.addpetLikes(parmas);
+      this.http.http.showToast(res.message);
+      if(res.info=="ok"){
+        this.guanzhulist[i].isLiked=!this.guanzhulist[i].isLiked
+      }
+      console.log(res);
+    }
+    }
+
+/**
+ * 取消点赞
+ */
+async qxaddpetLikes(i){
+   if (this.lulartype == 1) {
+      console.log(this.petlist[i]);
+      let parmas = {
+        receivehistorytypeid: this.petlist[i].id,
+        likestype: 0,
+        mytoken: localStorage.getItem("mytoken"),
+        receivepetcardid: this.petlist[i].pet_id
+      };
+      let res = await this.http.addpetLikes(parmas);
+      this.http.http.showToast(res.message);
+      if(res.info=="ok"){
+        this.petlist[i].isLiked=!this.petlist[i].isLiked
+      }
+      console.log(res);
+    }
+    if (this.lulartype == 2) {
+      console.log(this.guanzhulist[i]);
+      let parmas = {
+        receivehistorytypeid: this.guanzhulist[i].id,
+        likestype: 0,
+        mytoken: localStorage.getItem("mytoken"),
+        receivepetcardid: this.guanzhulist[i].pet_id
+      };
+      let res = await this.http.addpetLikes(parmas);
+      this.http.http.showToast(res.message);
+      if(res.info=="ok"){
+        this.guanzhulist[i].isLiked=!this.guanzhulist[i].isLiked
+      }
+      console.log(res);
+    }
+}
+
+  /**
    * 宠卡查询
    */
   async querypetcardlist() {
@@ -132,6 +392,7 @@ export class HomePage {
       this.goguidance = false;
       this.usermgs = true;
       this.callname = res.arrayList;
+      localStorage.setItem("petdata",JSON.stringify(this.callname[this.index-0]))
       setTimeout(() => {
         this.queryCalendar();
       }, 300);
@@ -163,6 +424,10 @@ export class HomePage {
   godaylist() {
     this.navCtrl.push("DaylistPage");
   }
+
+  /**
+   * 添加宠卡
+   */
   gonewlay() {
     this.navCtrl.push("NewlayPage");
   }
@@ -182,7 +447,6 @@ export class HomePage {
   }
   ionViewCanEnter() {
     //  console.log(localStorage.getItem("index"));
-   
   }
   /**
    * 首页动态查询
@@ -190,6 +454,8 @@ export class HomePage {
   async chongwuqueryhistorytypeAlllist() {
     this.queryAll.pageNum = this.ctn;
     let res = await this.http.chongwuqueryhistorytypeAlllist(this.queryAll);
+    console.log(res);
+    this.imgurl = res.imageUrl;
     for (let item in res.arrayList) {
       this.petlist.push(res.arrayList[item]);
     }
@@ -223,25 +489,40 @@ export class HomePage {
       on: {
         slideChangeTransitionStart: function() {
           // alert(this.activeIndex);
-          console.log(this.activeIndex)
+  
           localStorage.setItem("index", this.activeIndex);
+if(this.callname){
+  console.log(this.activeIndex);
+  localStorage.setItem("petdata",JSON.stringify(this.callname[this.activeIndex-0]))
+}
+//
         }
       }
     });
   }
 
+  /**
+   * 跳转到添加动态
+   */
   Pushdiary() {
     if (!localStorage.getItem("mytoken")) {
       this.http.http.showToast("请先登录");
       return false;
     }
-    console.log(parseInt(this.index))
+    console.log(parseInt(this.index));
     let datas = this.callname[parseInt(this.index)];
     this.navCtrl.push("MirrorPage", {
       datas
     });
   }
   checkIn() {
-    this.navCtrl.push("CheckInPage");
+    let datas = this.callname;
+    this.navCtrl.push("CheckInPage", {
+      datas
+    });
+  }
+  ionViewWillLeave(){
+    console.log(`准备离开页面了${localStorage.getItem('index')}`)
+    localStorage.setItem("petdata",JSON.stringify(this.callname[this.index-0]))
   }
 }

@@ -16,11 +16,11 @@
 <ion-content padding>
     <div class="put_box">
 
-        <input type="text" name="" placeholder="点击输入标题" id="" class="">
+        <input type="text" [(ngModel)]="title" name="" placeholder="点击输入标题" id="" class="">
         <img src="{{petimg}}" alt="">
     </div>
     <div class="area">
-        <textarea placeholder="记录今天成长的趣事"></textarea>
+        <textarea placeholder="记录今天成长的趣事" [(ngModel)]="remark"></textarea>
     </div>
     <div class="area">
         <div class="Fileimg">

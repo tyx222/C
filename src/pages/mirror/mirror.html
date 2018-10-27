@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>mirror</ion-title>
+        <ion-title>添加动态</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -34,7 +34,7 @@
                 <img src="assets/imgs/images/petImg.png" alt="">
                 <span>视频</span>
             </li>
-            <li (click)='goDiary()'>
+            <li (click)='goDiary()' *ngIf="citys">
                 <img src="assets/imgs/images/petImg.png" alt="">
                 <span>传记</span>
             </li>

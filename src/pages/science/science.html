@@ -42,8 +42,8 @@
     </div>
 
     <p class="tabs">
-        <button [ngClass]="{'cd': lulartype==1}" (click)="expression(lulartype=1)">图文</button>
-        <button [ngClass]="{'cd': lulartype==2}" (click)="expression(lulartype=2)">视频</button>
+        <button [ngClass]="{'cd': lulartype==1}" (click)="expression(lulartype=1)">视频</button>
+        <button [ngClass]="{'cd': lulartype==2}" (click)="expression(lulartype=2)">图文</button>
     </p>
     <div class="list">
 
@@ -55,7 +55,9 @@
                 <div>
                     <p *ngIf="item.science_title!==undefined">{{item.science_title}}</p>
                     <p class="pagetext" *ngIf="item.textmgs!==undefined">{{item.textmgs}}</p>
-                    <p class="tags">
+                    <p class="tags" *ngIf="lulartype==1">
+                        <img src="assets/imgs/images/home_13.png" alt="" srcset="">宠物培养</p>
+                    <p class="tags" *ngIf="lulartype==2">
                         <img src="assets/imgs/images/home_13.png" alt="" srcset="">宠物护理</p>
                 </div>
             </li>

@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { UserService } from "../../app/shared/service/user.service";
 import { Buffer } from 'buffer';
+import {DomSanitizer} from '@angular/platform-browser';
 /**
  * Generated class for the KnowledgPage page.
  *
@@ -18,12 +19,14 @@ export class KnowledgPage {
   ids: any;
   html;
   type;
+  videoid
   science_title;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public http: UserService,
-    public toasCtrl:ToastController
+    public toasCtrl:ToastController,
+    private sanitizer: DomSanitizer
   ) {
     this.ids = navParams.data;
   }
@@ -43,9 +46,18 @@ export class KnowledgPage {
     };
     let res = await this.http.querypetdtailpolular(parmas);
     console.log(res.message)
-    let html=document.getElementById("sethtml")
     this.http.http.showToast(res.message)
-    this.html=new Buffer(res.object.text,'base64').toString()
+    if(this.type==1){
+      let text=this.ids.imagepath.split("@@")
+      console.log(text)
+    this.html=text[1]
+    this.videoid=this.sanitizer.bypassSecurityTrustResourceUrl('https://v.qq.com/txp/iframe/player.html?vid='+text[0])
+  console.log(this.videoid)  
+  }
+    if(this.type==2){
+          this.html=new Buffer(res.object.text,'base64').toString()
+    }
+
     console.log(this.html)
   }
 

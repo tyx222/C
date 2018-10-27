@@ -24,6 +24,7 @@ import {
 export class CheckInPage {
   checkInok = false;
   kind = "";
+  parmars=[]
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -35,11 +36,37 @@ export class CheckInPage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad CheckInPage");
+    console.log(this.navParams.get("datas"))
+  let datas=this.navParams.get("datas")
+  
+  for (let index = 0; index < datas.length; index++) {
+    let element ={
+      petcardid:datas[index].id,
+      recive_clientid:datas[index].client_id,
+      type:'2'
+    } ;
+    this.parmars.push(element)
   }
-  ckeckin() {
+  console.log(this.parmars)
+  }
+ async ckeckin() {
+    
     if (this.kind != "") {
       console.log(this.kind);
+      let petfeedingsign={petfeedingsign:this.parmars}
+      let parmasdata={
+        jsonPramter:JSON.stringify(petfeedingsign),
+        mytoken:localStorage.getItem("mytoken")
+      }
+      console.log(parmasdata)
+    let res=await  this.http.addpetFeedingsign(parmasdata)
+    console.log(res)
+    if(res.info=='ok'){
       this.checkInok = true;
+    }else{
+      this.http.http.showToast(res.message)
+    }
+    //  
     } else {
       let mgs = "请选择签到任务";
       this.http.http.showToast(mgs);

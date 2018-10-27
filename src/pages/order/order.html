@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>order</ion-title>
+        <ion-title>订单详情</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="titaa">
+    <div class="titaa" *ngIf="type==1">
         <div class="ble">
             <div>
                 <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
@@ -64,13 +64,14 @@
     <div class="titaa" style="margin-top:-1rem">
         <div class="ble" style="height: 10rem;">
             <div class="shopingimg">
-                <img src="assets/imgs/images/goudai.png" alt="">
+                <img src="{{imgUrl}}{{imgpath}}" alt="">
             </div>
             <div class="ble2">
                 <div class="title">
-                    <p>店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称</p>
-                    <p class="pardack">商品明细</p>
-                    <p class="total"><span class="maxprice">￥1900</span><span>X1</span></p>
+                    <p>{{title}}</p>
+                    <p class="pardack" *ngIf="type==1">商品明细</p>
+                    <p class="pardack" *ngIf="type==2">购买该商品将消耗xx积分</p>
+                    <p class="total"><span class="maxprice">￥{{maxprice}}</span><span>X{{pordacknum}}</span></p>
                 </div>
                 <div>
 
@@ -90,7 +91,7 @@
     <div class="shoppingcall">
         <div>
 
-            合计金额：<span class="maxprice">￥1900</span>
+            合计金额：<span class="maxprice">￥{{maxprice}}*{{pordacknum}}</span>
 
         </div>
         <div>

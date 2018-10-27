@@ -1,0 +1,23 @@
+page-setuser {
+    .ok {
+        background: #EC6D36;
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 2rem;
+        height: 5rem;
+        color: #fff;
+        border-radius: 0.5rem;
+    }
+    .selectStyle {
+        text-align: center;
+        button {
+            width: 8rem;
+            border-radius: 50%;
+            overflow: hidden;
+            img {
+                border-radius: 50%;
+                width: 100%;
+            }
+        }
+    }
+}

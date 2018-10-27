@@ -16,6 +16,23 @@ page-home {
         height: 100%;
         background: #fff
     }
+    .tabs {
+        margin-top: 3rem;
+        width: 100%;
+        .cd {
+            color: #f57f31;
+            border: 1px solid;
+            border-radius: 0.5rem;
+        }
+        button {
+            border: none;
+            color: #666;
+            padding: 0.5rem 1rem;
+            background: #fff;
+            font-weight: 900;
+            font-size: 1.4rem
+        }
+    }
     .swiper-button-prev,
     .swiper-container-rtl .swiper-button-next {
         left: 10px;
@@ -200,17 +217,20 @@ page-home {
             padding-top: 2rem !important;
             padding: 1rem;
             >div:nth-of-type(1) {
-                width: 25rem;
+                // width: 6rem;
                 border-radius: 50%;
                 margin-top: -1rem;
                 >img {
-                    width: 100%;
+                    width: 3rem;
+                    max-width: 3rem;
+                    height: 3rem;
                     border-radius: 50%;
                     border: #c73ede;
                 }
             }
             >div:nth-of-type(2) {
                 margin-left: 0.5rem;
+                width: 80%;
                 >p {
                     color: #999;
                     margin-top: -1rem;
@@ -224,7 +244,6 @@ page-home {
                     }
                 }
                 div {
-                    display: flex;
                     margin-top: 0.5rem;
                     >img {
                         width: 5rem;
@@ -236,7 +255,7 @@ page-home {
                         -webkit-line-clamp: 4;
                         overflow: hidden;
                         color: #999;
-                        margin-left: 0.5rem;
+                        max-height: 5.5rem;
                     }
                 }
                 .Interaction {

@@ -15,6 +15,14 @@
 
 <ion-content padding>
 
-    <div *ngIf="type==1">1</div>
-    <div *ngIf="type==2" id="sethtml">2</div>
+    <div *ngIf="type==1">
+        <!-- <vg-player>
+            <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+        <source src="https://v.qq.com/txp/iframe/player.html?vid={{videoid}}" type="video/mp4">
+      </video>
+        </vg-player> -->
+        <iframe frameborder="0" [src]="videoid" allowFullScreen="true" style="width:100%"></iframe>
+        <p [innerHTML]="html " style="margin-top:2rem "></p>
+    </div>
+    <div *ngIf="type==2 " id="sethtml " [innerHTML]="html ">2</div>
 </ion-content>

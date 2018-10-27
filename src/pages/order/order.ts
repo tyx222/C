@@ -23,6 +23,15 @@ export class OrderPage {
     ipone:'',
     order:''
   };
+  imgpath = '';
+  type;
+  imgUrl = "";
+  pordacknum=1
+  maxprice;
+  title;
+  pordackpage;
+  cmment;
+  tabs = 0;
   show = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,private http:UserService) {}
 
@@ -31,19 +40,18 @@ export class OrderPage {
   }
   ionViewWillEnter() {
     this.address()
-    // if ((this.myipam = JSON.parse(localStorage.getItem("myipam1")) == null)) {
-    //   this.show = true;
-    // } else {
-    //   this.myipam = JSON.parse(localStorage.getItem("myipam1"));
-    //   console.log(localStorage.getItem("myipamindex"));
-    //   this.mpindex = JSON.parse(localStorage.getItem("myipamindex"));
-    //   this.ipamord.myname = this.myipam[this.mpindex].myname;
-    //   this.ipamord.ipone = this.myipam[this.mpindex].ipone;
-    //   this.ipamord.order = this.myipam[this.mpindex].myipam+this.myipam[this.mpindex].ipam;
-    //   console.log(this.myipam[this.mpindex]);
-    //   console.log(this.ipamord);
-    //   this.show=false
-    // }
+   console.log(this.navParams)
+  }
+
+  pordackinit(){
+    this.type = this.navParams.get("type");
+    this.imgpath=this.navParams.get("pordack").product_img1[0];
+    this.pordackpage = this.navParams.get("pordack").product_img1[1];
+    console.log(this.imgpath);
+    this.imgUrl = this.navParams.get("imgUrl");
+    this.maxprice = this.navParams.get("pordack").product_price;
+    this.title = this.navParams.get("pordack").product_name;
+    this.cmment = this.navParams.get("pordack").product_introduce;
   }
   pushipam() {
     this.navCtrl.push("IpamPage");

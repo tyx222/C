@@ -24,4 +24,7 @@ export class SetPage {
   goder(){
     this.navCtrl.push("SitePage")
   }
+  gosetuser(){
+    this.navCtrl.push("SetuserPage")
+  }
 }

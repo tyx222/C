@@ -92,6 +92,8 @@ export class NewlayPage {
   }
 
 
+
+  
   async subfrom() {
     this.fromdata.mytoken = localStorage.getItem("mytoken");
     for (let mgs in this.fromdata) {

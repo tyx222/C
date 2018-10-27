@@ -27,12 +27,15 @@ import { ImgServiceProvider } from "../../providers/img-service/img-service";
 export class PushdiaryPage {
   avatar = ["assets/imgs/images/pushimg.png"];
   type;
-  PageTitle
-  petimg
-  datas={
+  PageTitle;
+  petimg;
+  // datas={
 
-  }
-  arr=['添加写真','添加传记' ,'添加健康','添加活动' ]
+  // }
+  posthttp=true
+  remark: "";
+  title: "";
+  arr = ["添加写真", "添加传记", "添加健康", "添加活动"];
   petdata;
   constructor(
     public navCtrl: NavController,
@@ -44,9 +47,10 @@ export class PushdiaryPage {
   ionViewDidLoad() {
     console.log("ionViewDidLoad PushdiaryPage");
     console.log(this.navParams);
-    this.type=this.navParams.get("type")
-    this.petimg=this.navParams.get("datas").headimgpath
-    this.PageTitle=this.arr[this.type-1]
+    this.type = this.navParams.get("type");
+    this.petimg = this.navParams.get("datas").headimgpath;
+    console.log(this.navParams.get("cityid"));
+    this.PageTitle = this.arr[this.type - 1];
   }
 
   userimg(i) {
@@ -57,73 +61,18 @@ export class PushdiaryPage {
     console.log(i);
     this.upimgserve.upload.success = data => {
       console.log(data);
+      if(data.info=="ok"){
+         this.avatar[i]=data.imageUrl+data.object.map.filename;
+      if(this.avatar.length<5&&this.avatar.indexOf("assets/imgs/images/pushimg.png")==-1){
+        this.avatar.push("assets/imgs/images/pushimg.png")
+      } 
+      }
+    
     };
   }
-  // presentActionSheet(i) {
-  //   let actionSheet = this.actionSheetCtrl.create({
-  //     buttons: [
-  //       {
-  //         text: "拍照",
-  //         role: "takePhoto",
-  //         handler: () => {
-  //           this.takePhoto(i);
-  //         }
-  //       },
-  //       {
-  //         text: "从相册选择",
-  //         role: "chooseFromAlbum",
-  //         handler: () => {
-  //           this.chooseFromAlbum(i);
-  //         }
-  //       },
-  //       {
-  //         text: "取消",
-  //         role: "cancel",
-  //         handler: () => {
-  //           console.log("cancel");
-  //         }
-  //       }
-  //     ]
-  //   });
 
-  //   actionSheet.present().then(value => {
-  //     return value;
-  //   });
-  //   console.log(i);
-  //   // console.log(this.avatar[i])
-  //   // this.avatar[i]='assets/imgs/images/goudai.png'
-  // }
-  // takePhoto(i) {
-  //   const options: CameraOptions = {
-  //     quality: 90,
-  //     allowEdit: true,
-  //     targetWidth: 1280,
-  //     targetHeight: 720,
-  //     saveToPhotoAlbum: true
-  //   };
-  //   this.camera.getPicture(options).then(
-  //     image => {
-  //       console.log("Image URI: " + image);
-  //       // this.avatar = image.slice(7);
-  //       console.log(this.avatar[i]);
-  //       alert(image);
-  //       this.avatar[i] = image;
-  //       if (this.avatar.length < 6) {
-  //         if (this.avatar.indexOf("assets/imgs/images/pushimg.png") == -1) {
-  //           this.avatar.push("assets/imgs/images/pushimg.png");
-  //         }
-  //       }
-  //     },
-  //     error => {
-  //       console.log("Error: " + error);
-  //       // this.avatar[i] = "assets/imgs/images/goudai.png";
-
-  //       console.log(this.avatar);
-  //     }
-  //   );
-  // }
   remimages(i) {
-    // this.avatar[i]="assets/imgs/images/pushimg.png"
+    this.avatar[i] = "assets/imgs/images/pushimg.png";
     this.avatar.splice(i, 1);
     console.log(this.avatar.indexOf("assets/imgs/images/pushimg.png"));
     // this.avatar.slice(i,1)
@@ -135,28 +84,66 @@ export class PushdiaryPage {
   }
   async addserve() {
     let parmas = {
-      title: "xiaowangba", //标题
-      type: this.type, //1:写真  2：传记  3:健康  4:活动
-      chose_time: "2018-07-27 14:08:27",
-      remark: "fgt", //备注
-      pet_id: "061c5db5-8bdd-4562-8b5d-37af0576d68b",
-      activityid: "", //不参与活动给空
-      cover: "", //封面url
-      historycontentlist: [
-        {
-          //内容
-          type: 2, // 1: 视频  2:照片  3:段落 4 ：动图
-          path: "jik", //地址
-          text: "dfg" //传记段落
-        },
-        {
-          type: 0,
-          path: "jik",
-          text: "dfg"
-        }
-      ]
+          title: this.title, //标题
+          type: this.type, //1:写真  2：传记  3:健康  4:活动
+         // chose_time: new Date().getTime(),
+          remark: this.remark, //备注
+          pet_id: this.navParams.get("datas").id,
+          activityid: "", //不参与活动给空
+          cover: "", //封面url
+          historycontentlist: [
+            // {
+            //   //内容
+            //   type: 2, // 1: 视频  2:照片  3:段落 4 ：动图
+            //   path: "", //地址
+            //   text: "" //传记段落
+            // },
+            // {
+            //   type: 2,
+            //   path: "jik",
+            //   text: ""
+            // }
+          ]  
     };
-    let res = await this.http.addhistoryType(parmas);
+   if(this.avatar.length>1){
+     let lent
+     if(this.avatar.indexOf("assets/imgs/images/pushimg.png")==-1){
+       lent=this.avatar.length
+     }else{
+      lent=this.avatar.length-1
+     }
+     for (let index = 0; index < lent; index++) {
+         parmas.historycontentlist.push({
+          type:2,
+          path:this.avatar[index],
+          text:''
+         })
+     }
+   
+   }
+    if (this.navParams.get("cituid")) {
+      parmas.activityid=this.navParams.get("cituid")
+    }
+    if(this.title==""){
+      this.http.http.showToast("您是不是忘了写标题")
+      return false
+    }
+    if(this.remark==""){
+      this.http.http.showToast("您是不是忘了写内容")
+      return false
+    }
+    console.log(parmas);
+    if(!this.posthttp){
+      return false
+    }
+    let res = await this.http.addhistoryType({jsonPramter:JSON.stringify(parmas)} );
+    this.http.http.showToast(res.message)
+    if(res.info=="ok"){
+      setTimeout(()=>{
+        this.posthttp=true
+        this.navCtrl.pop()
+      },2000)
+    }
     console.log(res);
   }
   // chooseFromAlbum(i) {

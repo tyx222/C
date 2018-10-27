@@ -6,8 +6,15 @@ import { PardackpushPage } from "./../pages/pardackpush/pardackpush";
 import { AdditionalPage } from "./../pages/additional/additional";
 import { AuditPage } from "./../pages/audit/audit";
 
-
-import { FileTransfer, FileUploadOptions, FileTransferObject }from'@ionic-native/file-transfer';
+import { VgCoreModule } from "videogular2/core";
+import { VgControlsModule } from "videogular2/controls";
+import { VgOverlayPlayModule } from "videogular2/overlay-play";
+import { VgBufferingModule } from "videogular2/buffering";
+import {
+  FileTransfer,
+  FileUploadOptions,
+  FileTransferObject
+} from "@ionic-native/file-transfer";
 import { AppraisePage } from "./../pages/appraise/appraise";
 import { BrowserModule } from "@angular/platform-browser";
 import { ErrorHandler, NgModule } from "@angular/core";
@@ -18,7 +25,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { MyHttpService } from "./shared/service/my-http.service";
 
 import { MyApp } from "./app.component";
-import { MultiPickerModule } from 'ion-multi-picker';
+import { MultiPickerModule } from "ion-multi-picker";
 import { DefaultAppConfig } from "./app.config";
 import { SharedModule } from "./shared/shared.module";
 import { HttpModule } from "../../node_modules/@angular/http";
@@ -48,9 +55,9 @@ import {
   CaptureImageOptions
 } from "@ionic-native/media-capture";
 import { VideoEditor } from "@ionic-native/video-editor";
-import { ImgServiceProvider } from '../providers/img-service/img-service';
-import { ToastProvider } from '../providers/toast/toast';
-import { StorageProvider } from '../providers/storage/storage';
+import { ImgServiceProvider } from "../providers/img-service/img-service";
+import { ToastProvider } from "../providers/toast/toast";
+import { StorageProvider } from "../providers/storage/storage";
 
 @NgModule({
   declarations: [
@@ -66,6 +73,10 @@ import { StorageProvider } from '../providers/storage/storage';
   ],
   imports: [
     BrowserModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
     HttpModule,
     HttpClientModule,
     DatePickerModule,

@@ -64,26 +64,70 @@
         <div class="notice" (click)="gotrick()">
             <span>小妙招</span><span>{{contnet}}</span>
         </div>
-
-        <div class="card" *ngFor="let item of petlist">
-            <div><img src="assets/imgs/logo.png" alt="" srcset=""></div>
-            <div>
-                <h5>{{item.petcard.pet_name}}</h5>
-                <p><img src="assets/imgs/bq.png" alt="" srcset="">可爱调皮捣蛋</p>
-                <div><img src="assets/imgs/logo.png" alt="" srcset="">
-                    <p>小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招小妙招</p>
+        <p class="tabs">
+            <button [ngClass]="{'cd': lulartype==1}" (click)="expression(lulartype=1)">发现</button>
+            <button [ngClass]="{'cd': lulartype==2}" (click)="expression(lulartype=2)">关注</button>
+            <button [ngClass]="{'cd': lulartype==3}" (click)="expression(lulartype=3)">活动</button>
+        </p>
+        <div *ngIf="lulartype==1" style="width:100%">
+            <div class="card" *ngFor="let item of petlist;let i=index">
+                <div><img src="{{imgurl}}{{item.petcard.headimgpath}}" alt="" srcset=""></div>
+                <div>
+                    <h5>{{item.petcard.pet_name}} <span (click)="addpetConcern(i)" *ngIf="!item.concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">关注</span> <span (click)="addConcern(i)" *ngIf="item.concernStatus"
+                            style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span></h5>
+                    <p><img src="assets/imgs/bq.png" alt="" srcset="">{{item.title}}</p>
+                    <div>
+                        <span style=" max-height: 10rem;display: inline-flex;"><img src="{{imgurl}}{{item.cover}}" alt="" srcset="" *ngIf="item.cover!=undefined"></span>
+                        <p>{{item.petcard.comment}}</p>
+                    </div>
+                    <div class="Interaction"><span><img src="assets/imgs/zan.png" *ngIf="!item.isLiked"  alt="" srcset="" (click)="addpetLikes(i)"> <img src="assets/imgs/images/quxiaozan.png"  *ngIf="item.isLiked" alt="" srcset="" (click)="qxaddpetLikes(i)"></span><span><img src="assets/imgs/pl.png" alt="" srcset="" (click)="gomessagelist(i)"></span></div>
                 </div>
-                <div class="Interaction"><span><img src="assets/imgs/zan.png" alt="" srcset=""></span><span><img src="assets/imgs/pl.png"
-              alt="" srcset=""></span></div>
+            </div>
+            <p style="text-align: center;margin-bottom: 2rem;color: #ffc43596;" *ngIf="loding">已经没有更多数据咯</p>
+            <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+            <div>
             </div>
         </div>
-        <p style="text-align: center;margin-bottom: 2rem;color: #ffc43596;" *ngIf="loding">已经没有更多数据咯</p>
-        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
-            </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
-        <div>
+        <div *ngIf="lulartype==2" style="width:100%">
+            <div class="card" *ngFor="let item of guanzhulist;let i=index">
+                <div><img src="{{imgurl}}{{item.petcard.headimgpath}}" alt="" srcset=""></div>
+                <div>
+                    <h5>{{item.petcard.pet_name}} <span (click)="addpetConcern(i)" *ngIf="item.concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">关注</span> <span (click)="addConcern(i)" *ngIf="!item.concernStatus"
+                            style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span></h5>
+                    <p><img src="assets/imgs/bq.png" alt="" srcset="">{{item.title}}</p>
+                    <div>
+                        <span style=" max-height: 10rem;display: inline-flex;"><img src="{{imgurl}}{{item.cover}}" alt="" srcset="" *ngIf="item.cover!=undefined"></span>
+                        <p>{{item.petcard.comment}}</p>
+                    </div>
+                    <div class="Interaction"><span><img src="assets/imgs/zan.png" *ngIf="!item.isLiked"  alt="" srcset="" (click)="addpetLikes(i)"> <img src="assets/imgs/images/quxiaozan.png"  *ngIf="item.isLiked" alt="" srcset="" (click)="qxaddpetLikes(i)"></span><span><img src="assets/imgs/pl.png" alt="" srcset="" (click)="gomessagelist(i)"></span></div>
+                </div>
+            </div>
 
+            <p style="text-align: center;margin-bottom: 2rem;color: #ffc43596;" *ngIf="loding">已经没有更多数据咯</p>
+            <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+            <div>
+            </div>
+        </div>
+        <div *ngIf="lulartype==3" style="width:100%">
+            <div class="card" *ngFor="let item of huodonglist;let i=index">
+                <!-- <div><img src="{{imgurl}}{{item.petcard.headimgpath}}" alt="" srcset=""></div> -->
+                <div style="width:100%">
+                    <h5>{{item.activity_title}}</h5>
+                    <p>{{item.activity_prize}}</p>
+                    <div style="border: 1px solid #eae5e5;border-radius: 0.5rem;overflow: hidden;margin-top: 1rem; " (click)="goctivity(i)"><img src="{{imgurl}}{{item.listimg}}" alt="" srcset="">
+
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center;margin-bottom: 2rem;color: #ffc43596;" *ngIf="loding">已经没有更多数据咯</p>
+            <div>
+            </div>
         </div>
     </div>
     <guidance *ngIf="goguidance" (changehomes)="gohomes($event)"></guidance>

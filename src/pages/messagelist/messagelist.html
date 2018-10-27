@@ -1,0 +1,49 @@
+<!--
+  Generated template for the MessagelistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>评论</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <div class="card">
+        <div><img src="{{imgurl}}{{imgpath}}" alt="" srcset=""></div>
+        <div>
+            <h5>{{petname}} <span (click)="addpetConcern()" *ngIf="!concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">关注</span>
+                <span (click)="addpetConcern()" *ngIf="concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span></h5>
+            <p><img src="assets/imgs/bq.png" alt="" srcset="">{{title}}</p>
+            <div>
+                <span style=" max-height: 10rem;display: inline-flex;"><img src="{{imgurl}}{{cover}}" alt="" srcset="" *ngIf="cover!=undefined"></span>
+                <p>{{comment}}</p>
+            </div>
+            <div class="Interaction"><span><img src="assets/imgs/zan.png" *ngIf="!isLiked"  alt="" srcset="" (click)="addpetLikes(i)"> <img src="assets/imgs/images/quxiaozan.png"  *ngIf="isLiked" alt="" srcset="" (click)="qxaddpetLikes(i)"></span></div>
+        </div>
+    </div>
+
+    <div style="margin-top:30px">
+        <h5>评论</h5>
+        <ul class="messg">
+            <li *ngIf="messg">还没有评论!快去抢沙发吧</li>
+            <li *ngFor="let item of messglist"><span class="userimg"><img src="{{item.recivePetClient.headimgpath}}" alt="" srcset=""></span><span>{{item.recivePetClient.client_nikename}} : <i>{{item.messageContent}}</i></span>
+                <p style="width:100%;text-align: right;color: #999;padding-top: 1rem;">{{item.createTime}}</p>
+            </li>
+        </ul>
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="maxleng>1">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+    <div style="height:6rem"></div>
+    <div class="putbox">
+        <input type="text" class="mess" [(ngModel)]="messgtext"><button class="ok" (click)="pushmess()">发送</button>
+    </div>
+</ion-content>

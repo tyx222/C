@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>callshop</ion-title>
+        <ion-title>积分商城</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -15,22 +15,22 @@
 
 <ion-content padding>
 
-    <h5>剩余零食：10Kg</h5>
+    <h5>剩余零食：{{integral_num}}Kg</h5>
     <div class="titaa">
         <div class="ble">
-            <div>
-                <img src="assets/imgs/images/petImg.png" alt="" class="userimg">
+            <div class="userimg">
+                <img src="{{petimg}}" alt="">
             </div>
             <div class="ble2">
                 <div class="name">
-                    <p>宠卡</p>
+                    <p>{{petname}}</p>
                     <span>
             <img src="assets/imgs/bq.png" alt="">
-            <span>x1</span></span>
+            <span>{{coneprnt}}</span></span>
                 </div>
                 <div>
-                    <button class="djd">
-            <img src="assets/imgs/bq.png" alt="">去赚钱</button>
+                    <!--   <button class="djd">
+           <img src="assets/imgs/bq.png" alt="">去赚钱</button> -->
                 </div>
             </div>
         </div>
@@ -39,15 +39,15 @@
 
     <div class="shopmoss">
         <ul>
-            <li>
+            <li *ngFor="let item of pordacklist;let i=index">
+                <img src="{{imageUrl}}{{item.product_img1[0]}}" alt="" (click)="goshopping(i)">
+                <p style="margin:0;color:red;padding-left: 0.5rem">需要xxx积分兑换</p>
+                <p class="goshop sizet" (click)="goshopping(i)">{{item.product_name}}</p>
 
-                <img src="../../assets/imgs/gongxi_03.jpg" alt="">
-
-                <p class="goshop sizet">猫粮</p>
                 <p class="goshop">
                     <span>
-            <img src="assets/imgs/bq.png" alt="">  <span style="color: rgb(245, 57, 57)"> x1</span>
-                    <span class="black">可兑换</span>
+            <img src="assets/imgs/bq.png" alt="">  <span style="color: rgb(245, 57, 57)"> ¥{{item.product_price | number:'1.2-2'}}</span>
+
                     </span>
                     <button class="gogogo">兑换
 
@@ -55,7 +55,7 @@
                 </p>
             </li>
 
-            <li>
+            <!-- <li>
 
                 <img src="../../assets/imgs/gongxi_03.jpg" alt="">
 
@@ -84,7 +84,7 @@
 
           </button>
                 </p>
-            </li>
+            </li> -->
         </ul>
 
     </div>

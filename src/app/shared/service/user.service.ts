@@ -33,9 +33,26 @@ export class UserService {
     updatePetReceiver: "chongwu/chongwu/updatePetReceiver",
     queryhistoryTypetypelist: "chongwu/chongwu/queryhistoryTypetypelist",
     addhistoryType: "chongwu/chongwu/addhistoryType",
-    querypetproductlist: "chongwu/chongwu/querypetproductlist"
+    querypetproductlist: "chongwu/chongwu/querypetproductlist",
+    addpetFeedingsign: "chongwu/chongwu/addpetFeedingsign",
+    querypetactivitylist: "chongwu/chongwu/querypetactivitylist",
+    queryPetactivity: "chongwu/chongwu/queryPetactivity",
+    addpetConcern:"chongwu/chongwu/addconcern",
+    bangdingclient:"chongwu/chongwu/bangdingclient",
+    addpetLikes:"chongwu/chongwu/addpetLikes",
+    queryPetMessagelist:"chongwu/chongwu/queryPetMessagelist",
+    addpetMessage:"chongwu/chongwu/addpetMessage"
+    
+    
   };
   constructor(public http: MyHttpService, public toastCtrl: ToastController) {}
+
+  /**
+   * 活动详情
+   */
+  queryPetactivity(data) {
+    return this.http.Post(this.api.queryPetactivity, data);
+  }
 
   /**
    * 提示框
@@ -251,5 +268,55 @@ export class UserService {
 
   querypetproductlist(data) {
     return this.http.Post(this.api.querypetproductlist, data);
+  }
+
+  /**
+   * 签到
+   */
+
+  addpetFeedingsign(data) {
+    return this.http.Post(this.api.addpetFeedingsign, data);
+  }
+  /**
+   * 查询活动列表
+   * @param data
+   */
+  querypetactivitylist(data) {
+    return this.http.Post(this.api.querypetactivitylist, data);
+  }
+
+
+  /**
+   * 关注宠卡
+   */
+  addpetConcern(data){
+    return this.http.Post(this.api.addpetConcern,data)
+  }
+
+  /**
+   * 绑定用户信息
+   * @param data 
+   */
+  bangdingclient(data){
+    return this.http.Post(this.api.bangdingclient,data)
+  }
+  /**
+   * 点赞动态
+   */
+  addpetLikes(data){
+    return this.http.Post(this.api.addpetLikes,data)
+  }
+  /**
+   * 查询评论
+   * @param data 
+   */
+  queryPetMessagelist(data){
+    return this.http.Post(this.api.queryPetMessagelist,data)
+  }
+  /**
+   * 发表评论
+   */
+  addpetMessage(data){
+    return this.http.Post(this.api.addpetMessage,data)
   }
 }
