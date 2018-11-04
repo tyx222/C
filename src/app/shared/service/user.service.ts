@@ -37,13 +37,19 @@ export class UserService {
     addpetFeedingsign: "chongwu/chongwu/addpetFeedingsign",
     querypetactivitylist: "chongwu/chongwu/querypetactivitylist",
     queryPetactivity: "chongwu/chongwu/queryPetactivity",
-    addpetConcern:"chongwu/chongwu/addconcern",
-    bangdingclient:"chongwu/chongwu/bangdingclient",
-    addpetLikes:"chongwu/chongwu/addpetLikes",
-    queryPetMessagelist:"chongwu/chongwu/queryPetMessagelist",
-    addpetMessage:"chongwu/chongwu/addpetMessage"
-    
-    
+    addpetConcern: "chongwu/chongwu/addconcern",
+    bangdingclient: "chongwu/chongwu/bangdingclient",
+    addpetLikes: "chongwu/chongwu/addpetLikes",
+    queryPetMessagelist: "chongwu/chongwu/queryPetMessagelist",
+    addpetMessage: "chongwu/chongwu/addpetMessage",
+    querypetcard: "chongwu/chongwu/querypetcard",
+    addappOrder: "chongwu/chongwu/addPetOrder",
+    statuslist: "chongwu/chongwu/queryPetOrderorder_statuslist",
+    weixinor: "chongwu/app/weixinorderBeforSendapp",
+    addpetFeeding:"chongwu/chongwu/addpetFeeding",
+    querypetcardotherclientlist:"chongwu/chongwu/querypetcardotherclientlist",
+    querypetfeedingtop:"chongwu/chongwu/querypetfeedingtop",
+    queryPetConcernclientlist:"chongwu/chongwu/queryPetConcernclientlist"
   };
   constructor(public http: MyHttpService, public toastCtrl: ToastController) {}
 
@@ -285,38 +291,96 @@ export class UserService {
     return this.http.Post(this.api.querypetactivitylist, data);
   }
 
-
   /**
    * 关注宠卡
    */
-  addpetConcern(data){
-    return this.http.Post(this.api.addpetConcern,data)
+  addpetConcern(data) {
+    return this.http.Post(this.api.addpetConcern, data);
   }
 
   /**
    * 绑定用户信息
-   * @param data 
+   * @param data
    */
-  bangdingclient(data){
-    return this.http.Post(this.api.bangdingclient,data)
+  bangdingclient(data) {
+    return this.http.Post(this.api.bangdingclient, data);
   }
   /**
    * 点赞动态
    */
-  addpetLikes(data){
-    return this.http.Post(this.api.addpetLikes,data)
+  addpetLikes(data) {
+    return this.http.Post(this.api.addpetLikes, data);
   }
   /**
    * 查询评论
-   * @param data 
+   * @param data
    */
-  queryPetMessagelist(data){
-    return this.http.Post(this.api.queryPetMessagelist,data)
+  queryPetMessagelist(data) {
+    return this.http.Post(this.api.queryPetMessagelist, data);
   }
   /**
    * 发表评论
    */
-  addpetMessage(data){
-    return this.http.Post(this.api.addpetMessage,data)
+  addpetMessage(data) {
+    return this.http.Post(this.api.addpetMessage, data);
   }
+
+  /**
+   * 查询单个宠卡
+   */
+  querypetcard(data) {
+    return this.http.Post(this.api.querypetcard, data);
+  }
+
+  /**
+   * 添加订单
+   */
+  addappOrder(data) {
+    return this.http.Post(this.api.addappOrder, data);
+  }
+
+  /**
+   * 查询订单
+   */
+  statuslist(data) {
+    return this.http.Post(this.api.statuslist, data);
+  }
+
+  /**
+   * 微信支付预处理
+   */
+  weixinor(data) {
+    return this.http.Post(this.api.weixinor, data);
+  }
+
+/**
+ * 查询某用户的所有猫卡
+ * @param data 
+ */
+querypetcardotherclientlist(data){
+  return this.http.Post(this.api.querypetcardotherclientlist,data)
+}
+
+  /**
+   * 投食
+   */
+  addpetFeeding(data){
+    return this.http.Post(this.api.addpetFeeding,data)
+  }
+
+  /**
+   * 单张宠卡的投食榜
+   */
+  querypetfeedingtop(data){
+    return this.http.Post(this.api.querypetfeedingtop,data)
+  }
+
+  /**
+   * 粉丝列表
+   * @param data 
+   */
+  queryPetConcernclientlist(data){
+
+  }
+
 }

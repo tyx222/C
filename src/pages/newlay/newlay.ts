@@ -35,8 +35,7 @@ export class NewlayPage {
     comment: "",
     sex: "",
     kind: "",
-    headimgpath:
-      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538236414396&di=33c9cde6279a3527442718015b4d8497&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fcefc1e178a82b90169e520ae798da9773812efe7.jpg",
+    headimgpath:"",
     mytoken: ""
   };
   image_File;
@@ -81,6 +80,11 @@ export class NewlayPage {
     }
   }
  
+
+
+  /**
+   * 图片上传的调用方法
+   */
   userimg() {
     this.initImgSer();
     this.upimgserve.showPicActionSheet();
@@ -88,6 +92,10 @@ export class NewlayPage {
  initImgSer() {
     this.upimgserve.upload.success = data => {
       console.log(data);
+    //  this.fromdata.headimgpath=data.imageUrl+data.object.map.filename
+     // this.petimage=data.imageUrl+data.object.map.filename
+        this.fromdata.headimgpath="http://116.62.219.45/imgs/"+data.object.map.filename
+     this.petimage="http://116.62.219.45/imgs/"+data.object.map.filename
     };
   }
 
@@ -121,10 +129,10 @@ export class NewlayPage {
       comment: "",
       sex: "",
       kind: "",
-      headimgpath:
-        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538236414396&di=33c9cde6279a3527442718015b4d8497&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fcefc1e178a82b90169e520ae798da9773812efe7.jpg",
+      headimgpath:"",
       mytoken: ""
     };
+    this.petimage = "assets/imgs/images/xinzengmaoka.png"
     //  alert(this.fromdata.username+this.fromdata.text)
   }
 

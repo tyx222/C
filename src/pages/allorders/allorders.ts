@@ -1,6 +1,7 @@
 
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserService } from '../../app/shared/service/user.service';
 
 
 /**
@@ -16,8 +17,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'allorders.html',
 })
 export class AllordersPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  order_status=0
+  constructor(private http:UserService, public navCtrl: NavController, public navParams: NavParams) {
   }
   goevaluate(){
     this.navCtrl.push("EvaluatePage")
@@ -33,6 +34,26 @@ this.navCtrl.push("RefundPage")
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AllordersPage');
+  
+  }
+
+  ionViewWillEnter(){
+    this.statuslist()
+  }
+
+ async statuslist(){
+   let parmas={
+    pageNum	:1,		
+    rowsPrePage:10	,	
+    order_status:this.order_status
+   }
+let res=await this.http.statuslist(parmas)
+console.log(res)
+  }
+  status(index){
+    this.order_status=index
+    this.statuslist()
+console.log(index)
   }
 
 }

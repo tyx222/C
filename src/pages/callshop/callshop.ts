@@ -59,7 +59,9 @@ export class CallshopPage {
     this.imageUrl=res.imageUrl
     console.log(res);
   }
-
+  goorder(i){
+    this.navCtrl.push("OrderPage",{pordack:this.pordacklist[i],type:2,imgUrl:this.imageUrl})
+  }
   goshopping(i){
     console.log(this.pordacklist[i])
     this.navCtrl.push("ShoppingPage",{pordack:this.pordacklist[i],type:2,imgUrl:this.imageUrl})

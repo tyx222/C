@@ -98,5 +98,8 @@
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
     <plugin name="cordova-plugin-image-picker" spec="^1.1.3" />
+    <plugin name="cordova-plugin-wechat" spec="2.1.0">
+        <variable name="WECHATAPPID" value="wx9c8b9fc57e08cd68" />
+    </plugin>
     <engine name="android" spec="6.3.0" />
 </widget>

@@ -31,7 +31,12 @@
             </div>
         </div>
     </div>
-    <div class="titaa">
+    <p style="text-align: center;margin-bottom: 2rem;color: #ffc43596;" *ngIf="loding">已经没有更多数据咯</p>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <!-- <div class="titaa">
         <div class="ble">
             <div>
                 <img src="assets/imgs/images/petImg.png" alt="" class="userimg">
@@ -62,6 +67,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </ion-content>

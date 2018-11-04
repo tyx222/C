@@ -46,6 +46,7 @@ export class HomePage {
     } else {
       this.index = parseInt(localStorage.getItem("index"));   
     }
+    this.ctn = 1;
     this.petlist = [];
     this.SWIPER();
     this.data.mytoken = localStorage.getItem("mytoken");
@@ -55,12 +56,25 @@ export class HomePage {
       this.goguidance = false;
       return false;
     }
-
+this.localogin()
     this.querypetcardlist();
     this.chongwuqueryhistorytypeAlllist();
     this.queryclevertricklist();
   }
 
+
+  /**
+   * 登录验证
+   */
+
+  async localogin(){
+    let parmas={
+      username:JSON.parse(localStorage.getItem("mydata")).client_username ,
+      password:JSON.parse(localStorage.getItem("mydata")).client_password
+    } 
+let res=await this.http.login(parmas)
+console.log(res)
+   }
   /**
    * 小妙招查询
    */
@@ -445,6 +459,37 @@ async qxaddpetLikes(i){
       }
     });
   }
+  godetailsto(i) {
+    
+    console.log(this.petlist[i])
+    if(this.petlist[i].petcard.client_id==JSON.parse(localStorage.getItem("mydata")).client_id){
+      this.navCtrl.push("DetailsPage", {
+        datas: {
+          index: this.index
+        }
+      });
+      return false 
+    }
+        this.navCtrl.push("DetailsPage", {
+        id: this.petlist[i]
+   });
+  }
+
+  godetailstogz(i){
+    console.log(this.guanzhulist[i])
+    if(this.guanzhulist[i].petcard.client_id==JSON.parse(localStorage.getItem("mydata")).client_id){
+      this.navCtrl.push("DetailsPage", {
+        datas: {
+          index: this.index
+        }
+      });
+      return false 
+    }
+        this.navCtrl.push("DetailsPage", {
+        id: this.guanzhulist[i]
+   });
+  }
+
   ionViewCanEnter() {
     //  console.log(localStorage.getItem("index"));
   }

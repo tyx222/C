@@ -9,6 +9,17 @@ page-order {
             width: 6rem;
         }
     }
+    .pordacknum {
+        button {
+            width: 2rem;
+            height: 2rem;
+        }
+        input {
+            width: 2rem;
+            margin-left: 3px;
+            height: 2rem;
+        }
+    }
     .distribution {
         background: #fff;
         display: flex;
@@ -50,6 +61,7 @@ page-order {
             justify-content: space-between;
             flex-direction: column;
             height: 7rem;
+            width: 100%;
             >p {
                 font-size: 1.5rem;
             }
@@ -71,7 +83,6 @@ page-order {
     .name {
         display: flex;
         flex-direction: column;
-        width: 80%;
     }
     .djd {
         width: 5rem;

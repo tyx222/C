@@ -31,7 +31,7 @@ export class ProductadminPage {
     console.log('ionViewDidLoad ProductadminPage');
   }
   pardackpush(){
-    this.navCtrl.push(PardackpushPage)
+    this.navCtrl.push("PardackpushPage")
   }
   remlist(i){
     alert("我要删除"+i)

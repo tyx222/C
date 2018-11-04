@@ -18,13 +18,13 @@
         <p class="title"><span>今日宠榜</span>
             <span>零食数量(g)</span> </p>
         <ul>
-            <li class="boxs"><span class="listlv"><img src="assets/imgs/images/111111.png" alt=""></span>
+            <li class="boxs" *ngFor="let item of daypklist;let i=index"><span class="listlv"><img *ngIf="i==0" src="assets/imgs/images/111111.png" alt=""><img  *ngIf="i==1" src="assets/imgs/images/222222.png" alt=""> <img  *ngIf="i==2" src="assets/imgs/images/333333.png" alt=""> <b *ngIf="i>2">{{i}}</b></span>
                 <span class="lvuser">
-          <span><img src="assets/imgs/images/111111.png" alt="">&nbsp;大老黑</span>
-                <span>8</span>
+          <span><img src="{{item.headimgpath}}" alt="" >&nbsp;{{item.pet_name}}</span>
+                <span>{{item.petfeeding.feednum}}</span>
                 </span>
             </li>
-            <li class="boxs"><span class="listlv"><img src="assets/imgs/images/222222.png" alt=""></span>
+            <!-- <li class="boxs"><span class="listlv"><img src="assets/imgs/images/222222.png" alt=""></span>
                 <span class="lvuser">
           <span><img src="assets/imgs/images/111111.png" alt="">&nbsp;大老黑</span>
                 <span>8</span>
@@ -35,7 +35,7 @@
           <span><img src="assets/imgs/images/333333.png" alt="">&nbsp;大老黑</span>
                 <span>8</span>
                 </span>
-            </li>
+            </li> -->
         </ul>
     </div>
 </ion-content>

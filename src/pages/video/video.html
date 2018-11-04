@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>video</ion-title>
+        <ion-title>视频动态</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -17,20 +17,29 @@
     <div class="put_box">
 
         <input type="text" name="" placeholder="点击输入标题" id="" class="">
-        <img src="assets/imgs/images/home1_11.png" alt="">
+        <img src="{{imgpath}}" alt="">
     </div>
     <div class="area">
         <textarea placeholder="记录今天成长的趣事"></textarea>
     </div>
     <div class="area">
         <div class="Fileimg">
-            <!-- <div class="itembox">
-                <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
-                <img src="{{item}}" alt="">
-            </div> -->
+            <div class="itembox" *ngIf="videpath==''">
+                <span class="remimg" *ngIf="videpath!==''" (click)='remimages(i)'>X</span>
+                <img src="{{avatar}}" alt="" (click)="devoup(i)">
+            </div>
+            <div *ngIf="videpath!=''">
+                <span class="remimg" *ngIf="videpath!==''" (click)='remimages(i)'>X</span>
+                <vg-player>
+                    <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                        <source src="http://116.62.219.45/imgs/{{videpath}}" type="video/mp4">
+                    </video>
+                </vg-player>
+            </div>
+
         </div>
     </div>
     <!-- <div class="header-image" tappable [ngStyle]="{'background-image': 'url('+avatar+')'}" (click)="presentActionSheet()"></div> -->
 
-    <button class="pushimg" (click)="takeVideo()">确认</button>
+    <button class="pushimg" (click)="submit()">确认</button>
 </ion-content>

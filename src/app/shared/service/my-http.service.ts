@@ -4,6 +4,8 @@ import { DefaultAppConfig } from "../../app.config";
 // import { HttpErrorResponse } from "@angular/common/http";
 // import { throwError } from "rxjs";
 import { LoadingController, ToastController } from "ionic-angular";
+import {WechatChenyu} from "wechat-chenyu";
+
 
 @Injectable()
 export class MyHttpService {
@@ -49,6 +51,7 @@ export class MyHttpService {
     this.loadingIsOpen && this.loading.dismiss();
     this.loadingIsOpen = false;
   }
+
 
 
   /**
@@ -267,6 +270,7 @@ export class MyHttpService {
     public http: Http,
     public appConfig: DefaultAppConfig,
     public loadingCtrl: LoadingController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public Wechat:WechatChenyu
   ) {}
 }

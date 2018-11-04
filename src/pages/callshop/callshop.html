@@ -41,7 +41,7 @@
         <ul>
             <li *ngFor="let item of pordacklist;let i=index">
                 <img src="{{imageUrl}}{{item.product_img1[0]}}" alt="" (click)="goshopping(i)">
-                <p style="margin:0;color:red;padding-left: 0.5rem">需要xxx积分兑换</p>
+                <p style="margin:0;color:red;padding-left: 0.5rem">{{item.integral_proportion}}积分抵扣0.1元</p>
                 <p class="goshop sizet" (click)="goshopping(i)">{{item.product_name}}</p>
 
                 <p class="goshop">
@@ -49,9 +49,8 @@
             <img src="assets/imgs/bq.png" alt="">  <span style="color: rgb(245, 57, 57)"> ¥{{item.product_price | number:'1.2-2'}}</span>
 
                     </span>
-                    <button class="gogogo">兑换
-
-          </button>
+                    <button class="gogogo" *ngIf="item.product_guige-0==0" style="background: #999;">售完</button>
+                    <button class="gogogo" *ngIf="item.product_guige-0!==0" (click)="goorder(i)">兑换</button>
                 </p>
             </li>
 

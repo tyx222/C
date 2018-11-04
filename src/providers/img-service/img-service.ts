@@ -249,12 +249,13 @@ export class ImgServiceProvider {
       encodingType: this.camera.EncodingType.JPEG,
       saveToPhotoAlbum: true,
       mediaType: 1, //0为图片，1为视频
-      targetWidth: 600,
-      targetHeight: 600
+      targetWidth: 640,
+      targetHeight: 360
     };
 
     this.camera.getPicture(options).then(
       imageData => {
+        console.log(imageData)
         successCallback(imageData);
         //  return this.uploadByTransfer(imageData);
       },
@@ -272,8 +273,8 @@ export class ImgServiceProvider {
     let options: MediaFileData = {
       codecs: "mp4",
       bitrate: 1500,
-      height: 540,
-      width: 960,
+      height: 360,
+      width: 640,
       duration: 15
     };
     this.mediaCapture.captureVideo(options).then(
@@ -297,7 +298,7 @@ export class ImgServiceProvider {
       deleteInputFile: false, // optional (android only), defaults to false
       maintainAspectRatio: true, // optional (ios only), defaults to true
       width: 640, // optional, see note below on width and height
-      height: 640, // optional, see notes below on width and height
+      height: 360, // optional, see notes below on width and height
       videoBitrate: 1000000, // optional, bitrate in bits, defaults to 1 megabit (1000000)
       fps: 24, // optional (android only), defaults to 24
       audioChannels: 2, // optional (ios only), number of audio channels, defaults to 2

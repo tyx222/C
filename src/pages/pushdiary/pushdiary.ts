@@ -25,7 +25,7 @@ import { ImgServiceProvider } from "../../providers/img-service/img-service";
   templateUrl: "pushdiary.html"
 })
 export class PushdiaryPage {
-  avatar = ["assets/imgs/images/pushimg.png"];
+  avatar = ["assets/imgs/images/shangchuan@2x.png"];
   type;
   PageTitle;
   petimg;
@@ -63,8 +63,8 @@ export class PushdiaryPage {
       console.log(data);
       if(data.info=="ok"){
          this.avatar[i]=data.imageUrl+data.object.map.filename;
-      if(this.avatar.length<5&&this.avatar.indexOf("assets/imgs/images/pushimg.png")==-1){
-        this.avatar.push("assets/imgs/images/pushimg.png")
+      if(this.avatar.length<5&&this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png")==-1){
+        this.avatar.push("assets/imgs/images/shangchuan@2x.png")
       } 
       }
     
@@ -72,12 +72,12 @@ export class PushdiaryPage {
   }
 
   remimages(i) {
-    this.avatar[i] = "assets/imgs/images/pushimg.png";
+    this.avatar[i] = "assets/imgs/images/shangchuan@2x.png";
     this.avatar.splice(i, 1);
-    console.log(this.avatar.indexOf("assets/imgs/images/pushimg.png"));
+    console.log(this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png"));
     // this.avatar.slice(i,1)
-    if (this.avatar.indexOf("assets/imgs/images/pushimg.png") == -1) {
-      this.avatar.push("assets/imgs/images/pushimg.png");
+    if (this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png") == -1) {
+      this.avatar.push("assets/imgs/images/shangchuan@2x.png");
     }
     console.log(i);
     console.log(this.avatar);
@@ -107,7 +107,7 @@ export class PushdiaryPage {
     };
    if(this.avatar.length>1){
      let lent
-     if(this.avatar.indexOf("assets/imgs/images/pushimg.png")==-1){
+     if(this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png")==-1){
        lent=this.avatar.length
      }else{
       lent=this.avatar.length-1
@@ -161,8 +161,8 @@ export class PushdiaryPage {
   //         alert(images);
   //         this.avatar[i] = images;
   //         if (this.avatar.length < 6) {
-  //           if (this.avatar.indexOf("assets/imgs/images/pushimg.png") == -1) {
-  //             this.avatar.push("assets/imgs/images/pushimg.png");
+  //           if (this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png") == -1) {
+  //             this.avatar.push("assets/imgs/images/shangchuan@2x.png");
   //           }
   //         }
   //       }

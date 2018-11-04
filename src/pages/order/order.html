@@ -37,7 +37,7 @@
             </div>
             <div class="ble2">
                 <div class="name">
-                    <p><span>收货人:{{ipamord.myname}} 家</span><span style="float: right;">{{ipamord.ipone}}</span></p>
+                    <p><span>收货人:{{ipamord.myname}}</span><span style="float: right;">{{ipamord.ipone}}</span></p>
                     <p><span>{{ipamord.order}}</span></p>
                 </div>
                 <div>
@@ -61,7 +61,7 @@
             </div>
         </div>
     </div>
-    <div class="titaa" style="margin-top:-1rem">
+    <div class="titaa">
         <div class="ble" style="height: 10rem;">
             <div class="shopingimg">
                 <img src="{{imgUrl}}{{imgpath}}" alt="">
@@ -70,8 +70,9 @@
                 <div class="title">
                     <p>{{title}}</p>
                     <p class="pardack" *ngIf="type==1">商品明细</p>
-                    <p class="pardack" *ngIf="type==2">购买该商品将消耗xx积分</p>
-                    <p class="total"><span class="maxprice">￥{{maxprice}}</span><span>X{{pordacknum}}</span></p>
+                    <p class="pardack" *ngIf="type==2">库存:{{product_guige}} 件</p>
+                    <p class="total"><span class="maxprice">￥{{maxprice | number:'1.2-2'}}</span><span class="pordacknum"><button (click)="outout()">—</button><input type="number" min="0" (change)="nums()"  [(ngModel)]="pordacknum">
+                    <button (click)="upup()" >+</button></span></p>
                 </div>
                 <div>
 
@@ -79,9 +80,12 @@
             </div>
         </div>
     </div>
-
-    <p class="distribution"><span>配送方式：</span><span>快递 免邮</span></p>
-    <div class="tarea">
+    <p class="distribution" *ngIf="type==2"><span>零食：({{integral_num}}Kg)</span><span>每件可用{{leastpay}}Kg零食</span></p>
+    <p class="distribution" *ngIf="type==2"><span>可用抵：({{rmb*linshinum | number:'1.2-2'}}元)</span><span>使用<span class="pordacknum"><button (click)="lingshiout()">—</button><input type="number" min="0" (change)="lingshig()"  [(ngModel)]="linshinum">
+        <button (click)="lingshiup()" >+</button></span>Kg零食</span>
+    </p>
+    <p class="distribution" *ngIf="type==1"><span>配送方式：</span><span>快递 免邮</span></p>
+    <div class="tarea" *ngIf="type==1">
         <p>买家留言：</p>
         <textarea style="resize: none;width: 100%;height: 10rem;padding: 0.5rem;border: 1px solid #999;border-radius: 5px" placeholder="选填 填写内容和卖家协商"></textarea>
     </div>
@@ -91,11 +95,11 @@
     <div class="shoppingcall">
         <div>
 
-            合计金额：<span class="maxprice">￥{{maxprice}}*{{pordacknum}}</span>
+            合计金额：<span class="maxprice">￥{{maxprice*pordacknum-rmb*linshinum/integral_proportion | number:'1.2-2'}}</span>
 
         </div>
         <div>
-            <button class="shop">立即购买</button>
+            <button class="shop" (click)="clickEventHandler()">立即购买</button>
         </div>
     </div>
 </ion-content>

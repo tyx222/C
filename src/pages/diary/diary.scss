@@ -13,6 +13,7 @@ page-diary {
             margin-top: 1rem;
             overflow: hidden;
             width: 150%;
+            align-items: center;
             .list {
                 background: #fff;
                 border-radius: 1rem;
@@ -50,12 +51,15 @@ page-diary {
                 }
             }
             .date {
-                width: 17rem;
+                width: 6rem;
                 margin-top: 1rem;
             }
             .ttt {
                 display: flex;
                 height: 5.5rem;
+                .imgbox {
+                    width: 6rem;
+                }
                 img {
                     width: 18rem;
                     height: 95%;

@@ -2,7 +2,7 @@ import { UserService } from "./shared/service/user.service";
 
 import { MatchPage } from "./../pages/match/match";
 
-import { PardackpushPage } from "./../pages/pardackpush/pardackpush";
+
 import { AdditionalPage } from "./../pages/additional/additional";
 import { AuditPage } from "./../pages/audit/audit";
 
@@ -58,7 +58,7 @@ import { VideoEditor } from "@ionic-native/video-editor";
 import { ImgServiceProvider } from "../providers/img-service/img-service";
 import { ToastProvider } from "../providers/toast/toast";
 import { StorageProvider } from "../providers/storage/storage";
-
+import {WechatChenyu} from "wechat-chenyu"
 @NgModule({
   declarations: [
     MyApp,
@@ -67,7 +67,7 @@ import { StorageProvider } from "../providers/storage/storage";
     AppraisePage,
     AuditPage,
     AdditionalPage,
-    PardackpushPage,
+
     OrderdackPage,
     MatchPage
   ],
@@ -98,7 +98,6 @@ import { StorageProvider } from "../providers/storage/storage";
     AppraisePage,
     AuditPage,
     AdditionalPage,
-    PardackpushPage,
     OrderdackPage,
     MatchPage
   ],
@@ -117,6 +116,7 @@ import { StorageProvider } from "../providers/storage/storage";
     MediaCapture,
     VideoEditor,
     Device,
+    WechatChenyu,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: DefaultAppConfig, useClass: DefaultAppConfig },
     ImgServiceProvider,

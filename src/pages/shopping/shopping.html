@@ -68,12 +68,12 @@
             <li [ngClass]="{'eft': tabs==2}" (click)="tabs=2">品类介绍</li>
             <li [ngClass]="{'eft': tabs==3}" (click)="tabs=3">售后保障</li>
         </ul>
-        <div class="tabspage" [innerHtml]="cmment" *ngIf="tabs==0">
-
+        <div class="tabspage" *ngIf="tabs==0">
+            <img src="{{imgUrl}}{{pordackpage}}">
         </div>
         <div class="tabspage" *ngIf="tabs==1">
 
-            <img src="{{imgUrl}}{{pordackpage}}">
+
 
 
             <!-- <p>产品介绍：阿是大师大师的</p> -->

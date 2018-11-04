@@ -13,6 +13,7 @@ page-diary .listbox li {
   margin-top: 1rem;
   overflow: hidden;
   width: 150%;
+  align-items: center;
 }
 
 page-diary .listbox li .list {
@@ -57,13 +58,17 @@ page-diary .listbox li .listbutton .rem {
 }
 
 page-diary .listbox li .date {
-  width: 17rem;
+  width: 6rem;
   margin-top: 1rem;
 }
 
 page-diary .listbox li .ttt {
   display: flex;
   height: 5.5rem;
+}
+
+page-diary .listbox li .ttt .imgbox {
+  width: 6rem;
 }
 
 page-diary .listbox li .ttt img {

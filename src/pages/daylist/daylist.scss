@@ -22,8 +22,13 @@ page-daylist {
         margin-bottom: 1.5rem;
         .listlv {
             width: 3rem;
+            height: 3rem;
+            text-align: center;
+            line-height: 3rem;
+            margin-right: 0.5rem;
             img {
                 width: 2rem;
+                height: 2rem;
                 ;
             }
         }
@@ -44,6 +49,8 @@ page-daylist {
             }
             img {
                 width: 3rem;
+                height: 3rem;
+                ;
                 border-radius: 50%;
             }
         }

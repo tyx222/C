@@ -7,6 +7,7 @@ import {
 } from "ionic-angular";
 import { ReviceServeProvider } from "../../providers/revice-serve/revice-serve";
 import { UserService } from "../../app/shared/service/user.service";
+import { ImgServiceProvider } from "../../providers/img-service/img-service";
 
 /**
  * Generated class for the SetuserPage page.
@@ -26,7 +27,11 @@ export class SetuserPage {
     myname: "",
     ipone: "",
     myipam: "",
-    ipam: ""
+    ipam: "",
+    client_password:"",
+    sex:"",
+    client_nikename:"",
+    headimgpath:"assets/imgs/images/shangchuan@2x.png"
   };
   address_lable;
   default_address = true;
@@ -39,7 +44,8 @@ export class SetuserPage {
     //  public reviceServe: ReviceServeProvider,
     private reviceServe: ReviceServeProvider,
     public toastCtrl: ToastController,
-    private http: UserService
+    private http: UserService,
+    private upimgserve:ImgServiceProvider
   ) {}
 
   ionViewDidLoad() {
@@ -56,6 +62,24 @@ export class SetuserPage {
     );
   }
 
+/**
+ * 图片上传调用方法 userimg()   在initImgSer()中得到返回值
+ */
+  userimg() {
+    this.initImgSer();
+    this.upimgserve.showPicActionSheet();
+    }
+ initImgSer() {
+    this.upimgserve.upload.success = data => {
+      console.log(data);
+    //  this.fromdata.headimgpath=data.imageUrl+data.object.map.filename
+     // this.petimage=data.imageUrl+data.object.map.filename
+        this.mydata.headimgpath="http://116.62.219.45/imgs/"+data.object.map.filename
+     //this.petimage="http://116.62.219.45/imgs/"+data.object.map.filename
+    };
+  }
+
+
   async save(myipam: HTMLEmbedElement) {
     let city = this.mydata.myipam.split(" ");
     console.log(city);
@@ -70,14 +94,16 @@ export class SetuserPage {
       toast.present();
       return false;
     }
+    console.log(this.mydata.myipam)
+    console.log(myipam)
     let parmas = {
-      client_password: "",
-      client_nikename: "",
+      client_password: this.mydata.client_password,
+      client_nikename: this.mydata.client_nikename,
       client_username: this.mydata.myname,
       phonenumber: this.mydata.ipone,
-      headimgpath: "",
-      sex: 1,
-      address: ""
+      headimgpath:this.mydata.headimgpath,
+      sex: this.mydata.sex,
+      address:myipam['_text']+this.mydata.ipam
     };
     let res = await this.http.addPetReceiver(parmas);
     console.log(res);

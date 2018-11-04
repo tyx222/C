@@ -18,6 +18,7 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 export class DiaryPage {
   letfbor=-1
   petdata
+  gay=false
   data = [
     { imgurl: "assets/imgs/images/home1_15.png", title: "标题", date: "1" },
     { imgurl: "assets/imgs/images/home1_15.png", title: "标题", date: "2" },
@@ -30,7 +31,14 @@ export class DiaryPage {
   ionViewDidLoad() {
     console.log("ionViewDidLoad DiaryPage");
     console.log(this.navParams)
+    if(this.navParams.get("gay")){
+      this.gay=this.navParams.get("gay")
+    }
     this.petdata=this.navParams.get('datas')
+  //  this.queryhistoryTypetypelist()
+  }
+
+  ionViewWillEnter(){
     this.queryhistoryTypetypelist()
   }
   gopushdiary(){
@@ -46,6 +54,13 @@ export class DiaryPage {
       petcardid: this.petdata.id
     };
     let res = await this.http.queryhistoryTypetypelist(Params);
+    for (const iterator of res.arrayList) {
+      iterator['path']=iterator.historycontentlist[0].path
+      iterator['date']=iterator.updatetime.split(" ")[0]
+      iterator['day']=iterator.updatetime.split(" ")[1]
+    }
+    this.data=res.arrayList
+    console.log(this.data)
     console.log(res)
   }
 

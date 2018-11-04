@@ -100,12 +100,14 @@ export class MessagelistPage {
       rowsPrePage: 10,
       historytypeid: this.navParams.get("datas").id
     };
+    this.messglist = [];
     let res = await this.http.queryPetMessagelist(parmas);
     this.http.http.showToast(res.message);
     if (res.arrayList == 0) {
       this.messg = true;
       return false;
     }
+    this.messg = false
     for (let index = 0; index < res.arrayList.length; index++) {
       this.messglist.push(res.arrayList[index]);
     }
@@ -134,6 +136,7 @@ export class MessagelistPage {
       return false
     }
     let res = await this.http.addpetMessage(parmas);
+    
     this.http.http.showToast(res.message);
     this.messgtext = "";
     this.queryPetMessagelist();

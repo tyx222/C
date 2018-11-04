@@ -7,11 +7,11 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-refresher (ionRefresh)='doRefresh($event)'>
+    <ion-refresher (ionRefresh)='doRefresh($event)' *ngIf="!goguidance">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新"  refreshingSpinner="circles" refreshingText="正在拼命加载">
         </ion-refresher-content>
     </ion-refresher>
-    <div class="homebox">
+    <div class="homebox" *ngIf="!goguidance">
         <div *ngIf="!usermgs" style="height: 10rem;line-height: 10rem;">
             <span (click)="gologin()" *ngIf="data.mytoken==null">请登录查看宠卡</span>
             <span (click)="gonewlay()" *ngIf="data.mytoken!==null&&callname.length==0">点击添加宠卡</span>
@@ -71,14 +71,16 @@
         </p>
         <div *ngIf="lulartype==1" style="width:100%">
             <div class="card" *ngFor="let item of petlist;let i=index">
-                <div><img src="{{imgurl}}{{item.petcard.headimgpath}}" alt="" srcset=""></div>
+                <div (click)="godetailsto(i)"><img src="{{imgurl}}{{item.petcard.headimgpath}}" alt="" srcset=""></div>
                 <div>
+
                     <h5>{{item.petcard.pet_name}} <span (click)="addpetConcern(i)" *ngIf="!item.concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">关注</span> <span (click)="addConcern(i)" *ngIf="item.concernStatus"
                             style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span></h5>
                     <p><img src="assets/imgs/bq.png" alt="" srcset="">{{item.title}}</p>
                     <div>
-                        <span style=" max-height: 10rem;display: inline-flex;"><img src="{{imgurl}}{{item.cover}}" alt="" srcset="" *ngIf="item.cover!=undefined"></span>
-                        <p>{{item.petcard.comment}}</p>
+                        <p>{{item.remark}}</p>
+                        <span style="max-height: 20rem;overflow: hidden;display: inline-block"><img src="{{imgurl}}{{item.cover}}" alt="" srcset="" *ngIf="item.cover!=undefined"></span>
+
                     </div>
                     <div class="Interaction"><span><img src="assets/imgs/zan.png" *ngIf="!item.isLiked"  alt="" srcset="" (click)="addpetLikes(i)"> <img src="assets/imgs/images/quxiaozan.png"  *ngIf="item.isLiked" alt="" srcset="" (click)="qxaddpetLikes(i)"></span><span><img src="assets/imgs/pl.png" alt="" srcset="" (click)="gomessagelist(i)"></span></div>
                 </div>
@@ -93,14 +95,14 @@
         </div>
         <div *ngIf="lulartype==2" style="width:100%">
             <div class="card" *ngFor="let item of guanzhulist;let i=index">
-                <div><img src="{{imgurl}}{{item.petcard.headimgpath}}" alt="" srcset=""></div>
+                <div (click)="godetailstogz(i)"><img src="{{imgurl}}{{item.petcard.headimgpath}}" alt="" srcset=""></div>
                 <div>
                     <h5>{{item.petcard.pet_name}} <span (click)="addpetConcern(i)" *ngIf="item.concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">关注</span> <span (click)="addConcern(i)" *ngIf="!item.concernStatus"
                             style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span></h5>
                     <p><img src="assets/imgs/bq.png" alt="" srcset="">{{item.title}}</p>
                     <div>
                         <span style=" max-height: 10rem;display: inline-flex;"><img src="{{imgurl}}{{item.cover}}" alt="" srcset="" *ngIf="item.cover!=undefined"></span>
-                        <p>{{item.petcard.comment}}</p>
+                        <p>{{item.remark}}</p>
                     </div>
                     <div class="Interaction"><span><img src="assets/imgs/zan.png" *ngIf="!item.isLiked"  alt="" srcset="" (click)="addpetLikes(i)"> <img src="assets/imgs/images/quxiaozan.png"  *ngIf="item.isLiked" alt="" srcset="" (click)="qxaddpetLikes(i)"></span><span><img src="assets/imgs/pl.png" alt="" srcset="" (click)="gomessagelist(i)"></span></div>
                 </div>

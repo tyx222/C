@@ -11,6 +11,17 @@ page-order .titaa .userimg {
   width: 6rem;
 }
 
+page-order .pordacknum button {
+  width: 2rem;
+  height: 2rem;
+}
+
+page-order .pordacknum input {
+  width: 2rem;
+  margin-left: 3px;
+  height: 2rem;
+}
+
 page-order .distribution {
   background: #fff;
   display: flex;
@@ -60,6 +71,7 @@ page-order .ble2 .title {
   justify-content: space-between;
   flex-direction: column;
   height: 7rem;
+  width: 100%;
 }
 
 page-order .ble2 .title > p {
@@ -85,7 +97,6 @@ page-order .ble2 span img {
 page-order .name {
   display: flex;
   flex-direction: column;
-  width: 80%;
 }
 
 page-order .djd {
