@@ -14,24 +14,24 @@
 
 
 <ion-content padding>
-    <div class="date">
+    <!--<div class="date">
         时间段筛选:
-    </div>
+    </div>-->
     <div class="tabs">
         <ul>
-            <li class="eft">全部</li>
-            <li>活体</li>
-            <li>非活体</li>
-            <li>添加商品+</li>
+            <li (click)="checks(false)" [ngClass]="{'eft':living==false}">全部</li>
+            <li (click)="checks('活体')" [ngClass]="{'eft':living=='活体'}">活体</li>
+            <li (click)="checks('非活体')" [ngClass]="{'eft':living=='非活体'}">非活体</li>
+            <li></li>
         </ul>
         <div class="tabspage">
             <div class="shops">
                 <p>
                     <span>
-            <img src="assets/imgs/images/goudai.png" alt="">asdasd</span>
+					<img src="assets/imgs/images/goudai.png" alt="">asdasd</span>
                     <span>
-            <img src="assets/imgs/images/right.png" alt="" srcset="">
-          </span>
+					<img src="assets/imgs/images/right.png" alt="" srcset="">
+				  </span>
                 </p>
                 <div class="datas">
                     <div>
@@ -48,38 +48,13 @@
                     </div>
                     <div class="tag">
                         <span class="ok">同意退款</span>
-                        <span class="flow">查看物流</span>
+                        <span class="flow" (click)='shopoder()'>查看物流</span>
+						<span (click)="lookevaluate()" class="flow">订单详情</span>
                     </div>
                 </div>
             </div>
 
-            <div class="shops">
-                <p>
-                    <span>
-            <img src="assets/imgs/images/goudai.png" alt="">asdasd</span>
-                    <span>
-            <img src="assets/imgs/images/right.png" alt="" srcset="">
-          </span>
-                </p>
-                <div class="datas">
-                    <div>
-                        <img src="assets/imgs/images/goudai.png" alt="">
-                        <div>
-                            <h1>这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼</h1>
-                            <p>商品明细</p>
-                            <p>
-                                <span class="money">¥999</span>
-                                <span style="font-size: 1.5rem">X1</span>
-                            </p>
-
-                        </div>
-                    </div>
-                    <div class="tag">
-                        <span class="ok">同意退款</span>
-                        <span class="flow">查看物流</span>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </ion-content>

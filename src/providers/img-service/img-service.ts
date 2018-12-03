@@ -290,7 +290,7 @@ export class ImgServiceProvider {
    */
   private ditor(data, successCallback) {
     console.log(data[0]["fullPath"]);
-
+	let that = this
     let options = {
       fileUri: data[0]["fullPath"], // the path to the video on the device
       outputFileName: data[0]["name"], // the file name for the transcoded video
@@ -322,21 +322,22 @@ export class ImgServiceProvider {
   //  *
   //  * @param data 图片压缩后
   //  */
-  // private create(data) {
-  //   let options = {
-  //     fileUri: data[0]["fullPath"],
-  //     outputFileName: data[0]["name"],
-  //     atTime: 1,
-  //     width: 640,
-  //     height: 640,
-  //     quality: 80
-  //   };
-  //   this.videoEditor.createThumbnail(options).then((fileUri: string) => {
-  //     this.uploadImg("file://" + fileUri);
-  //     // this.fileimgget(fileUri, data);
-  //     console.log("上传" + fileUri);
-  //   });
-  // }
+   private create(data) {
+     let options = {
+       fileUri: data[0]["fullPath"],
+       outputFileName: data[0]["name"],
+       atTime: 1,
+       width: 640,
+       height: 640,
+       quality: 80
+     };
+    return this.videoEditor.createThumbnail(options).then((fileUri: string) => {
+       //console.log("上传" + fileUri);
+	   return fileUri;
+	   //this.fileimgget(fileUri, data,successCallback);
+	   //this.uploadImg("file://" + fileUri);
+     });
+   }
 
   /**
    * 压缩后的视频
@@ -363,19 +364,20 @@ export class ImgServiceProvider {
   //  * @param fileUri
   //  * @param data
   //  */
-  // private fileimgget(fileUri, data) {
-  //   let evets = fileUri.split(data[0].name);
-  //   let fileName = data[0].name + ".jpg";
-  //   let Options = {};
-  //   this.file
-  //     .resolveDirectoryUrl("file://" + evets[0])
-  //     .then(res => {
-  //       this.file.getFile(res, fileName, Options).then(filedata => {
-  //         console.log(filedata);
-  //       });
-  //     })
-  //     .catch(err => console.log(err));
-  // }
+   private fileimgget(fileUri, data, successCallback) {
+     let evets = fileUri.split(data[0].name);
+	 let that = this
+     let fileName = data[0].name + ".jpg";
+     let Options = {};
+     this.file
+       .resolveDirectoryUrl("file://" + evets[0])
+       .then(res => {
+         this.file.getFile(res, fileName, Options).then(filedata => {
+		 successCallback(filedata)
+         });
+       })
+       .catch(err => console.log(err));
+   }
 
   // 停止上传
   public stopUpload() {

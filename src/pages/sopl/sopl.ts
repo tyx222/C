@@ -31,4 +31,19 @@ export class SoplPage {
   productadmin(){
     this.navCtrl.push("ProductadminPage")
   }
+  storeproductcate(){
+    this.navCtrl.push("StoreproductcatePage")
+  }
+  storecenter(){
+    this.navCtrl.push("StorecenterPage")
+  }
+  storecarts(){
+      this.navCtrl.push("StorecartsPage")
+  }
+  mycollect(){
+        this.navCtrl.push("StorecollectPage")
+  }
+  staff(){
+	this.navCtrl.push("StorestaffPage")
+  }
 }

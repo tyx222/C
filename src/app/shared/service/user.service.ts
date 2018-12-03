@@ -46,10 +46,39 @@ export class UserService {
     addappOrder: "chongwu/chongwu/addPetOrder",
     statuslist: "chongwu/chongwu/queryPetOrderorder_statuslist",
     weixinor: "chongwu/app/weixinorderBeforSendapp",
+	alipay:"chongwu/app/alipayorderBeforSendapp",
     addpetFeeding:"chongwu/chongwu/addpetFeeding",
     querypetcardotherclientlist:"chongwu/chongwu/querypetcardotherclientlist",
     querypetfeedingtop:"chongwu/chongwu/querypetfeedingtop",
-    queryPetConcernclientlist:"chongwu/chongwu/queryPetConcernclientlist"
+    queryPetConcernclientlist:"chongwu/chongwu/queryPetConcernclientlist",
+    queryshopclassify:"chongwu/app/queryshopclassify", 
+    deleteshopclassify:"chongwu/app/deleteshopclassify",
+    queryshopclassifygoodlist:"chongwu/app/queryshopclassifygoodlist",
+	queryshopnullgoodlist:'chongwu/app/queryshopnullgoodlist',
+    addshop:"chongwu/app/addshop",
+	queryshopbyclientid:"chongwu/app/queryshopbyclientid",
+	queryshopbyshopid:"chongwu/app/queryshopbyclientid",
+    addshopclassify:"chongwu/app/addshopclassify",
+	updateshopclassify:"chongwu/app/updateshopclassify",
+    addgoods:"chongwu/app/addgoods",
+	querygoods:"chongwu/app/querygoods",
+	addappstoreOrder:"chongwu/app/addappOrder",
+	updategoods:"chongwu/app/updategoods",
+	queryshopgoods:"chongwu/app/queryshopgoods",
+    updateshopstatus:"chongwu/app/updateshopstauts",
+	querypropertylist:"chongwu/app/querypropertylist",
+	querypropertycommonlist:"chongwu/app/querypropertycommonlist",
+	queryclassbrandlist:"chongwu/app/queryclassbrandlist",
+	queryclasslist:"chongwu/app/queryclasslist",
+	updategoodshopclassify:"chongwu/app/updategoodshopclassify",
+	updategoodstatus:"chongwu/app/updategoodstatus",
+    querygoodsbyseach:"chongwu/app/querygoodsbyseach",
+	queryapporderlist:"chongwu/app/queryapporderlist",
+	addcollectoin:'chongwu/app/addcollectoin',
+	querycollectionlist:"chongwu/app/querycollectionlist",
+	deletecollection:'chongwu/app/deletecollection'
+
+
   };
   constructor(public http: MyHttpService, public toastCtrl: ToastController) {}
 
@@ -353,6 +382,15 @@ export class UserService {
     return this.http.Post(this.api.weixinor, data);
   }
 
+
+
+  /**
+   * 支付宝支付预处理
+   */
+  alipay(data) {
+    return this.http.Post(this.api.alipay, data);
+  }
+
 /**
  * 查询某用户的所有猫卡
  * @param data 
@@ -382,5 +420,226 @@ querypetcardotherclientlist(data){
   queryPetConcernclientlist(data){
 
   }
+
+  /**
+   * 查询店铺
+   * @param data 
+   */
+  queryshopbyclientid() {
+    return this.http.Post(this.api.queryshopbyclientid,{_time:110})
+  }
+
+
+	/**
+   * 查询店铺
+   * @param data 
+   */
+	queryshopbyshopid(data){
+	    return this.http.Post(this.api.queryshopbyshopid,data)
+
+	}
+  
+
+  /**
+   * 查询店铺分类
+   * @param data 
+   */
+  queryshopclassify(data) {
+    return this.http.Post(this.api.queryshopclassify,data)
+  }
+
+  /**
+   * 添加店铺分类
+   * @param data 
+   */
+  addshopclassify(data) {
+    return this.http.Post(this.api.addshopclassify,data)
+  }
+	
+	/**
+   * 编辑店铺分类
+   * @param data 
+   */
+  updateshopclassify(data) {
+      return this.http.Post(this.api.updateshopclassify,data)
+  }
+
+  /**
+   * 删除店铺分类
+   * @param data 
+   */
+  deleteshopclassify(data) {
+    return this.http.Post(this.api.deleteshopclassify,data)
+  }
+
+
+  /**
+   * 保存店铺信息
+   * @param data 
+   */
+  addshop(data) {
+    return this.http.Post(this.api.addshop,data)
+  }
+
+  /**
+   * 添加店铺商品
+   * @param data 
+   */
+  addgood(data) {
+    return this.http.Post(this.api.addgoods,data)
+  }
+
+  /**
+   * 更新店铺商品
+   * @param data 
+   */
+  updategoods(data) {
+    return this.http.Post(this.api.updategoods,data)
+  }
+
+  
+
+  /**
+   * 店铺分类下的商品
+   * @param data 
+   */
+  queryshopclassifygoodlist(data) {
+    return this.http.Post(this.api.queryshopclassifygoodlist,data)
+  }
+	
+	/**
+   * 店铺内未关联任何店铺分类的商品
+   * @param data 
+   */
+  queryshopnullgoodlist(data){
+      return this.http.Post(this.api.queryshopnullgoodlist,data)
+  }
+
+
+  /**
+   * 商品关联店铺分类
+   * @param data 
+   */
+  updategoodshopclassify(data) {
+    return this.http.Post(this.api.updategoodshopclassify,data)
+  }
+
+
+  /**
+   * 商品上下架
+   * @param data 
+   */
+  updategoodstatus(data) {
+    return this.http.Post(this.api.updategoodstatus,data)
+  }
+
+  
+
+  /**
+   * 更新店铺状态
+   * @param data 
+   */
+  updateshopstatus(data) {
+    return this.http.Post(this.api.updateshopstatus,data)
+  }
+  
+  /**
+   * 查询店铺商品
+   * @param data 
+   */
+  querygoodsbyseach(data) {
+    return this.http.Post(this.api.querygoodsbyseach,data)
+  }
+	
+	/**
+   * 查询店铺商品详情
+   * @param data 
+   */
+  querygoods(data) {
+    return this.http.Post(this.api.querygoods,data)
+  }
+
+	/**
+	 * 查询属性
+	*/
+	querypropertylist(){
+	    return this.http.Post(this.api.querypropertylist,{_time:111})
+	}
+	/**
+	 * 查询公共属性
+	*/
+	querypropertycommonlist(){
+		return this.http.Post(this.api.querypropertycommonlist,{_time:111})
+	}
+
+
+	/**
+	 * 查询全局分类
+	 * @param data 
+	 */
+	queryclasslist(){
+	    return this.http.Post(this.api.queryclasslist,{_time:111})
+
+	}
+	
+	/**
+   * 品牌列表
+   * @param data 
+   */
+	queryclassbrandlist(data){
+	    return this.http.Post(this.api.queryclassbrandlist,data)
+	}
+
+	/**
+   * 按店铺查询商品列表
+   * @param data 
+   */
+	queryshopgoods(data){
+		return this.http.Post(this.api.queryshopgoods,data)
+	}
+
+
+	/**
+   * 宠物商城添加订单
+   * @param data 
+   */
+	addappstoreOrder(data){
+		return this.http.Post(this.api.addappstoreOrder,data)
+	}
+
+	/**
+   * 宠物商城查询订单
+   * @param data 
+   */
+	queryapporderlist(data){
+		return this.http.Post(this.api.queryapporderlist,data)
+	}
+	
+	
+	/**
+   * 宠物商城添加收藏
+   * @param data 
+   */
+	addcollectoin(data){
+		return this.http.Post(this.api.addcollectoin,data)
+	}
+
+	
+	/**
+   * 宠物商城收藏列表
+   * @param data 
+   */
+	querycollectionlist(data){
+		return this.http.Post(this.api.querycollectionlist,data)
+	}
+
+	
+	/**
+   * 宠物商城移除收藏的商品
+   * @param data 
+   */
+	deletecollection(data){
+		return this.http.Post(this.api.deletecollection,data)
+	}
 
 }

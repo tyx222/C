@@ -26,7 +26,7 @@ export class EvaluatePage {
   ok2=0
   ok3=0
   text='暂无评分'
-
+  type=0
 good2=["assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png"]  
 avatar = ["/assets/imgs/images/pushimg.png"];
 constructor(    public navCtrl: NavController,
@@ -35,6 +35,11 @@ constructor(    public navCtrl: NavController,
   public alertCtrl: AlertController,
   public imagePicker: ImagePicker,
   public camera: Camera) {
+  	if(this.navParams.get('type')!=undefined){
+		// type 0买家评论  1 卖家评论
+		this.type = this.navParams.get('type');
+		console.log(this.type)
+	}
   }
 
   ionViewDidLoad() {

@@ -3,20 +3,24 @@ page-productadmin {
         padding: 0 !important;
         background: #eee
     }
+	ion-navbar .button-inner{
+		color:white
+	}
     .tabs {
-        ul {
+       ul {
             background: #fff;
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid #eee;
             li {
-                width: 24%;
+                width: 25%;
                 text-align: center;
-                padding: 1.5rem 0
+                padding: 1rem 0;
+                border-bottom: 2px solid #eee;
+                color: #666
             }
             .eft {
-                background: rgb(252, 201, 60);
-                color: #fff
+                border-bottom: 2px solid rgb(252, 201, 60) !important;
+                color: #000
             }
         }
     }
@@ -80,6 +84,7 @@ page-productadmin {
         p {
             font-size: 1.8rem
         }
+		
         .name {
             display: flex;
             flex-direction: column;
@@ -189,6 +194,15 @@ page-productadmin {
         margin-left: -13rem
     }
     .listbox {
+		.goodsimg{
+			width:100%;
+			max-width:66px;
+		}
+		.btn{
+			padding:6px;
+			color: white;
+			background-color:#f08d3f;
+		}
         li {
             display: flex;
             flex-wrap: nowrap;

@@ -18,31 +18,79 @@
         <ul>
 
             <li>
-                <span>宠物品种</span>
-                <input type="text" placeholder="请输入宠物品种名称 例:哈士奇">
+                <span>名称</span>
+                <input type="text" [(ngModel)]="proData.goods_name" placeholder="请输入宠物名称 例:哈士奇">
             </li>
             <li>
                 <span>价格</span>
-                <input type="text" placeholder="请输入宠物价格">
+                <input type="text" [(ngModel)]="proData.goods_price" placeholder="请输入宠物价格">
             </li>
-            <li>
-                <span>商品类型</span>
+			<li>
+                <span>邮费</span>
+                <input type="text" [(ngModel)]="proData.postage" placeholder="请输入物流价格">
+            </li>
+			<li>
+                <span>定金</span>
+                <input type="text" [(ngModel)]="proData.deposit" placeholder="请输入定金">
 
-                <ion-list radio-group [(ngModel)]="relationship" class="noionic">
+			</li>
+            <li>
+                <span>类型</span>
+
+                <ion-list radio-group [(ngModel)]="proData.living" class="noionic">
                     <ion-item>
                         <ion-label>活体</ion-label>
-                        <ion-radio value="活体" checked></ion-radio>
+                        <ion-radio value="0"></ion-radio>
                     </ion-item>
                     <ion-item>
                         <ion-label>非活体</ion-label>
-                        <ion-radio value="非活体"></ion-radio>
+                        <ion-radio value="1"></ion-radio>
                     </ion-item>
                     <ion-item>
                         <ion-label>关爱</ion-label>
-                        <ion-radio value="关爱" [disabled]="isDisabled"></ion-radio>
+                        <ion-radio value="2" [disabled]="isDisabled"></ion-radio>
                     </ion-item>
                 </ion-list>
             </li>
+
+			<li>
+				<ion-list class="noionic" style="width: 100%;">
+				  <ion-item>
+				  <ion-label>分类</ion-label>
+					<ion-select [(ngModel)]="proData.classify_id" (ngModelChange)="packagTypeChange()" [selectOptions]="selectOptions" multiple="false" okText="确定" cancelText="取消">
+					  <ion-option *ngFor="let item of proClassifyList" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+					</ion-select>
+				  </ion-item>
+				</ion-list>
+			</li>
+
+			
+			<li>
+				<ion-list class="noionic" style="width: 100%;">
+				  <ion-item>
+				  <ion-label>品牌</ion-label>
+					<ion-select [(ngModel)]="proData.brand_id" multiple="false" [selectOptions]="selectOptions" okText="确定" cancelText="取消">
+					  <ion-option *ngFor="let item of brandList" [value]="item.brand_id">{{ item.brand_name }}</ion-option>
+					</ion-select>
+				  </ion-item>
+				</ion-list>
+			</li>
+
+			<li *ngFor="let item of propertylist;let i = index">
+                <span>{{ item.property_name }}</span>
+                <input type="text" [(ngModel)]="propertylist[i].property_val" placeholder="请输入{{ item.property_name }}">
+
+			</li>
+	<!--
+			<li>
+                <span>描述</span>
+            </li>
+
+			<li>
+				<textarea [(ngModel)]="proData.goods_introduce" rows="4" style="width: 100%;">
+				</textarea>
+            </li>
+
             <li>
                 <span>宠物性别</span>
                 <ion-list radio-group [(ngModel)]="relationship2" class="noionic noionic2">
@@ -76,18 +124,46 @@
                 <span>疫苗详情</span>
                 <input type="text" placeholder="请输入宠物疫苗详情">
             </li>
-
+			-->
 
         </ul>
     </div>
 
     <div class="imgdata">
-        <p>商品图上传</p>
+        <p>商品轮播图上传</p>
         <ul>
             <li (click)="devoup()">
                 <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
             </li>
+			
         </ul>
-        <button class="tijiao">下一步</button>
+		<p>
+			<img (click)="delSildes(index)" class="viewimg" *ngFor="let img of slides" src="{{imageUrl}}{{img}}" />
+		</p>
+		<p>商品短视频（小于10M）</p>
+        <ul>
+            <li (click)="videoup()">
+                <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+            </li>
+			
+        </ul>
+		<p><img class="viewimg" *ngIf="video_cover_isup" src="{{video_cover}}" /></p>
+
+		<p>商品描述图上传</p>
+        <ul>
+            <li (click)="remarkimg()">
+                <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+            </li>
+        </ul>
+		<p>
+		<img  (click)="delRemarkimg(index)" class="viewimg" *ngFor="let rimg of remarkimgs" src="{{imageUrl}}{{rimg}}" />
+		</p>
+        <button class="tijiao" (click)="save()">保存</button>
+
     </div>
+
+	
+
+    
+
 </ion-content>

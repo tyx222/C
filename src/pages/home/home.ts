@@ -60,6 +60,7 @@ this.localogin()
     this.querypetcardlist();
     this.chongwuqueryhistorytypeAlllist();
     this.queryclevertricklist();
+	this.queryshopbyclientid();
   }
 
 
@@ -87,6 +88,16 @@ console.log(res)
     this.contnet = res.arrayList[0].content;
     this.tkisid = res.arrayList[0].id;
   }
+
+	
+	/**
+   * 店铺查询
+   */
+	async queryshopbyclientid() {
+    let res = await this.http.queryshopbyclientid();
+	localStorage.setItem("storeinfo", JSON.stringify(res.object));
+
+	}
 
   /**
    * tab切换

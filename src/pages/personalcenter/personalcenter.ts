@@ -38,7 +38,8 @@ export class PersonalcenterPage {
     this.navCtrl.push("CalendarPage")
   }
   Allorders(){
-    this.navCtrl.push("AllordersPage")
+      this.navCtrl.push("PersonalorderadminPage")
+    //this.navCtrl.push("AllordersPage")
   }
  callshop(){
    this.navCtrl.push("CallshopPage")
@@ -60,5 +61,8 @@ Coupon(){
 }
 Ckeck() {
   this.navCtrl.push("CkeckPage");
+}
+collect(){
+  this.navCtrl.push("StorecollectPage");
 }
 }

@@ -26,4 +26,8 @@ export class AdvicesPage {
     this.navCtrl.push("DetailsPage")
   }
 
+  gostaff(){
+      this.navCtrl.push("StaffmsgPage")
+  }
+
 }

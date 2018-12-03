@@ -8,6 +8,7 @@ page-productadmin .scroll-content {
   background: #eee;
 }
 
+
 page-productadmin .tabs ul {
   background: #fff;
   display: flex;
@@ -304,3 +305,10 @@ page-productadmin .listbox li .ttt span {
 page-productadmin .listbox p {
   color: #999;
 }
+
+page-productadmin .listbox .userimg {
+	max-width: 80px;
+    width: 100%;
+}
+
+

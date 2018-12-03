@@ -1,8 +1,8 @@
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { UserService } from '../../app/shared/service/user.service';
-
+import { WechatChenyu } from "wechat-chenyu";
 
 /**
  * Generated class for the AllordersPage page.
@@ -18,19 +18,130 @@ import { UserService } from '../../app/shared/service/user.service';
 })
 export class AllordersPage {
   order_status=0
-  constructor(private http:UserService, public navCtrl: NavController, public navParams: NavParams) {
+  order_list=[]
+  httpResponseData:any;
+  constructor(
+  private http:UserService, 
+  public actionSheetCtrl:ActionSheetController,  
+  public wechatChenyu:WechatChenyu,
+  public navCtrl: NavController, 
+  public navParams: NavParams) {
   }
   goevaluate(){
-    this.navCtrl.push("EvaluatePage")
+    this.navCtrl.push("EvaluatePage",{type:0})
+  }
+  lookevaluate(){
+      this.navCtrl.push("LookevaluatePage",{type:0})
   }
   shopoder(){
     this.navCtrl.push("ShippingoderPage")
   }
-  order(){
-    this.navCtrl.push("OrderPage")
+  // 立即付款
+  order(item){
+    //this.navCtrl.push("OrderPage")
+	this.actionSheetCtrl.create({
+		  buttons: [
+			{
+			  text: "支付宝支付",
+			  handler: () => {
+			   this.aliPay(item);
+			  }
+			},
+			{
+			  text: "微信支付",
+			  handler: () => {
+				this.weiXinPay(item);
+			  }
+			},
+			{
+			  text:"取消",
+			  role: 'cancel'
+			}
+		  ]
+		}).present();
+
+		console.log(item)	
+
   }
+	async weiXinPay(item){
+		let payResult=await this.http.weixinor({orderid:item.order_id})
+		console.log(payResult)	
+		var params = {
+          partnerid:payResult.object.partnerid, // merchant id
+          prepayid: payResult.object.prepayid, // prepay id
+          noncestr: payResult.object.noncestr, // nonce
+          timestamp: payResult.object.timestamp+"", // timestamp
+          sign: payResult.object.sign // signed string
+        };
+		this.wechatChenyu.sendPaymentRequest(params).then((result)=>{
+          //支付成功
+          this.queryapporderlist()
+        },(error)=>{
+         //支付失败
+          this.http.presentToast('支付失败')
+        })
+
+
+	}
+
+	unescapeHTML(a){
+	  let aNew = "" + a;
+		 return aNew.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+	 }
+
+	async aliPay(item){
+		let data=await this.http.alipay({orderid:item.order_id})
+		console.log(data)
+
+		let payInfo=this.unescapeHTML(data);
+		  /*cordova.plugins.alipay.payment(payInfo,(success)=>{
+			success.resultStatus==="9000"?this.paySuccess(sn): this.payFailed();
+			//支付成功
+			this.queryapporderlist();
+		  },(error)=>{
+			//支付失败
+			this.http.presentToast('支付失败')
+		  });*/
+
+
+	}
+
+	
+/*
+	async goalipay() {
+    let that = this;
+    console.log(this.httpResponseData)
+    this.alipay.pay(this.httpResponseData)
+      .then(res => {
+        
+        if(res.resultStatus=='4000'){
+          this.nativeService.showToast('订单支付失败');
+        }
+        if(res.resultStatus=='6001'){
+          console.log(res.resultStatus);
+        }
+        if(res.resultStatus=='9000'){
+          this.info.status = 2;
+          console.log('成功');
+          this.viewCtrl.dismiss();
+        }
+        
+        console.log('res',res.resultStatus)
+        console.log('memo',res.memo)
+
+      }, err => {
+        console.log('err')
+
+      })
+      .catch(e => {
+          that.info.status = 2;
+          this.viewCtrl.dismiss();
+      });
+
+  }
+*/
   gouout(){
-this.navCtrl.push("RefundPage")
+	this.navCtrl.push("RefundPage")
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AllordersPage');
@@ -38,22 +149,34 @@ this.navCtrl.push("RefundPage")
   }
 
   ionViewWillEnter(){
-    this.statuslist()
+  		this.queryapporderlist()
+    //this.statuslist()
   }
-
+async queryapporderlist(){
+	let params = {
+			order_status:this.order_status
+		}
+  	
+	let res = await this.http.queryapporderlist(params)
+	if(res.info=="ok"){
+		this.order_list = res.arrayList
+	}else{
+		this.order_list = [];
+	}
+}
  async statuslist(){
    let parmas={
     pageNum	:1,		
     rowsPrePage:10	,	
     order_status:this.order_status
    }
-let res=await this.http.statuslist(parmas)
-console.log(res)
+	let res=await this.http.statuslist(parmas)
+	console.log(res)
   }
   status(index){
     this.order_status=index
     this.statuslist()
-console.log(index)
+	console.log(index)
   }
 
 }

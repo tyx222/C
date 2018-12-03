@@ -17,28 +17,35 @@
     <div class="fromdata">
         <ul>
             <li>
-                <span>商家名称</span>
-                <input type="text" placeholder="请输入商家名称">
+                <span>商铺名称</span>
+                <input type="text" [(ngModel)]="shopData.shop_name" placeholder="请输入商铺名称">
             </li>
             <li>
-                <span>主持人</span>
-                <input type="text" placeholder="请输入主持人名称">
+                <span>商铺介绍</span>
+                <input type="text" [(ngModel)]="shopData.shop_introduce" placeholder="请输入商铺介绍">
             </li>
             <li>
-                <span>联系人姓名</span>
-                <input type="text" placeholder="请输入联系人名称">
+                <span>商铺关键字</span>
+                <input type="text" [(ngModel)]="shopData.shop_key" placeholder="请输入商铺关键字">
             </li>
             <li>
+                <span>联系电话</span>
+                <input type="text" [(ngModel)]="shopData.phonenumber" placeholder="请输入商铺负责人联系电话">
+            </li>
+
+			
+			<li>
                 <span>身份证号</span>
-                <input type="text" placeholder="请输入身份证号">
+                <input type="text" [(ngModel)]="shopData.idcard" placeholder="请输入身份证号">
             </li>
-            <li>
-                <span>手机号</span>
-                <input type="text" placeholder="请输入手机号">
-            </li>
+
             <li>
                 <span>微信号</span>
-                <input type="text" placeholder="请输入微信号">
+                <input type="text" [(ngModel)]="shopData.wechat" placeholder="请输入微信号">
+            </li>
+            <li>
+                <span>QQ号</span>
+                <input type="text" [(ngModel)]="shopData.qq" placeholder="请输入QQ号">
             </li>
 
             <ion-item>
@@ -47,26 +54,23 @@
             </ion-item>
 
             <li>
-                <span>详细地址</span>
-                <input type="text" placeholder="请输入联系地址">
+                <span>商铺详细地址</span>
+                <input type="text" [(ngModel)]="shopData.address" placeholder="请输入联系地址">
             </li>
             <li>
                 <span>CKU有效专业会员/犬舍会员编号</span>
-                <input type="text" placeholder="请输入会员编号">
+                <input type="text" [(ngModel)]="shopData.cku" placeholder="请输入会员编号">
             </li>
             <li>
                 <span>CAAC有效专业会员/猫舍会员编号</span>
-                <input type="text" placeholder="请输入会员编号">
+                <input type="text" [(ngModel)]="shopData.caac" placeholder="请输入会员编号">
             </li>
-            <li>
-                <span>繁殖犬种</span>
-                <input type="text" placeholder="请输入繁殖犬种">
-            </li>
+            
 
-            <!-- <ion-item>
-                <ion-label>日期</ion-label>
-                <ion-datetime [cancelText]="'取消'" [doneText]="'完成'" displayFormat="YYYY/DD/MM" [(ngModel)]="myDate"></ion-datetime>
-            </ion-item> -->
+            <ion-item>
+                <ion-label>营业时间</ion-label>
+                <ion-datetime [cancelText]="'取消'" [doneText]="'完成'" displayFormat="YYYY/DD/MM" [(ngModel)]="shopData.business_hours"></ion-datetime>
+            </ion-item> 
         </ul>
         <div class='selectStyle'>
             <p>点击上传手持身份证正面照</p>
@@ -80,7 +84,7 @@
         <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
       </button>
         </div>
-        <p><input type="checkbox" name="" id="">我已同意XXX用户协议</p>
-        <button class="subfrom">确认注册</button>
+        <p><input type="checkbox" [(ngModel)]="agree">我已同意XXX用户协议</p>
+        <button class="subfrom" (click)="confirmReg()">确认注册</button>
     </div>
 </ion-content>
