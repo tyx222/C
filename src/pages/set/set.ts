@@ -27,4 +27,9 @@ export class SetPage {
   gosetuser(){
     this.navCtrl.push("SetuserPage")
   }
+
+  logout(){
+	localStorage.clear()  
+	this.navCtrl.pop()
+  }
 }

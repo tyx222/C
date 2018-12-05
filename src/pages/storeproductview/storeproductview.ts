@@ -43,8 +43,8 @@ export class StoreproductviewPage {
 	public http: UserService,
     public navParams: NavParams
   ) {}
-  pushcall() {
-  	let carts:any = localStorage.getItem('carts');
+  async pushcall() {
+  	let mytoken = localStorage.getItem('mytoken');
 	if(carts){
 		carts = JSON.parse(carts)
 		this.goodsinfo["quantity"] = 1;
@@ -55,14 +55,33 @@ export class StoreproductviewPage {
 		carts.push(this.goodsinfo);
 	}
 	localStorage.setItem("carts",JSON.stringify(carts))
-
-    const toast = this.toastCtrl.create({
-      message: "成功加入购物车",
-      duration: 1000,
-      position: "middle",
-      cssClass: "borbox"
-    });
-    toast.present();
+	let mytoken = localStorage.getItem('mytoken');
+	let params = {
+		goodname:this.goodsinfo.goods_name,
+		goodprice:this.goodsinfo.goods_price,
+		goodnumber:"1",
+		goodimagepath:this.goodsinfo.cover,
+		goodid:this.goodsinfo.goods_id,
+		mytoken:mytoken
+	}
+	let res = await this.http.addshopcar(params)
+	if(res.info=="ok"){
+		const toast = this.toastCtrl.create({
+		  message: "成功加入购物车",
+		  duration: 1000,
+		  position: "middle",
+		  cssClass: "borbox"
+		});
+		toast.present();
+	}else{
+		const toast = this.toastCtrl.create({
+		  message: "加入购物车失败",
+		  duration: 1000,
+		  position: "middle",
+		  cssClass: "borbox"
+		});
+		toast.present();
+	}
   }
 
   store(){
@@ -88,7 +107,11 @@ export class StoreproductviewPage {
   async getstoreinfo(shopid){
   	let res = await this.http.queryshopbyshopid({shopid:shopid})
 	if(res.info=="ok"){
-		this.goodsinfo["shop_name"] = res.object.shop_name;
+		if(res.object!="undefined"){
+			this.goodsinfo["shop_name"] = res.object.shop_name||"";
+		}else{
+			this.goodsinfo["shop_name"] = "";
+		}
 		this.goodsinfo["quantity"] = 1
 
 	}
@@ -105,13 +128,12 @@ export class StoreproductviewPage {
   }
   async shopinit() {
   	let goodsid = this.navParams.get("goodsid")
-	
 	let res = await this.http.querygoods({goodsid:goodsid})
 	if(res.info=="ok"){
 		console.log(res.object)
+		this.goodsinfo = res.object
 		this.goodsinfo["quantity"] = 1
 		this.goodsinfo["shop_name"] = ""
-		this.goodsinfo = res.object
 		this.goodsinfo.turns_picture = this.goodsinfo.turns_picture.split(',')
   		this.goodsinfo.goods_introduce = this.goodsinfo.goods_introduce.split(',')
 

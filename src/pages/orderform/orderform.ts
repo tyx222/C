@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { UserService } from "./../../app/shared/service/user.service";
+import { DefaultAppConfig } from "./../../app/app.config";
 
 /**
  * Generated class for the OrderformPage page.
@@ -18,7 +19,10 @@ export class OrderformPage {
 	order_status = false
 	living = false
 	order_list=[]
-  constructor(public navCtrl: NavController, private actionSheetCtrl:ActionSheetController,public http: UserService, public navParams: NavParams) {
+	get imgUrl(): string {
+		return this.appConfig.ip + 'imgs/';
+	  }
+  constructor(public appConfig: DefaultAppConfig,public navCtrl: NavController, private actionSheetCtrl:ActionSheetController,public http: UserService, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -71,4 +75,8 @@ export class OrderformPage {
 	}
   }
   
+  userinfo(item){
+  
+	this.navCtrl.push("OrderotherPage",{client_id:item.client_id})
+  }
 }

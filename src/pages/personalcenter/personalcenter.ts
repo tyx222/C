@@ -1,6 +1,3 @@
-
-
-
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -32,7 +29,14 @@ export class PersonalcenterPage {
     this.navCtrl.push("EnterPage")
   }
   goshol(){
-    this.navCtrl.push("SoplPage")
+  	let store = localStorage.getItem("storeinfo")
+	console.log(store)
+	if(store != "undefined"){
+		this.navCtrl.push("SoplPage")
+	}else{
+		this.navCtrl.push("EnterPage")
+	}
+    
   }
   Detemgs(){
     this.navCtrl.push("CalendarPage")

@@ -76,7 +76,14 @@ export class UserService {
 	queryapporderlist:"chongwu/app/queryapporderlist",
 	addcollectoin:'chongwu/app/addcollectoin',
 	querycollectionlist:"chongwu/app/querycollectionlist",
-	deletecollection:'chongwu/app/deletecollection'
+	deletecollection:'chongwu/app/deletecollection',
+	addevaluate:"chongwu/app/addevaluate",
+	queryevaluatelist:"chongwu/app/queryevaluatelist",
+	addshopcar:"chongwu/app/addshopcar",
+	queryshopcar:"chongwu/app/queryshopcar",
+	updateshopcar:"chongwu/app/updateshopcar",
+	deleteshopcar:"chongwu/app/deleteshopcar"
+
 
 
   };
@@ -640,6 +647,57 @@ querypetcardotherclientlist(data){
    */
 	deletecollection(data){
 		return this.http.Post(this.api.deletecollection,data)
+	}
+
+	
+	/**
+   * 商城商品添加评价
+   * @param data 
+   */
+	addevaluate(data){
+		return this.http.Post(this.api.addevaluate,data)
+	}
+
+	
+	/**
+   * 商城商品评价列表
+   * @param data 
+   */
+	queryevaluatelist(data){
+		return this.http.Post(this.api.queryevaluatelist,data)
+	}
+
+	/**
+   * 商城添加购物车
+   * @param data 
+   */
+	addshopcar(data){
+		return this.http.Post(this.api.addshopcar,data)
+	}
+
+	/**
+   * 商城购物车列表
+   * @param data 
+   */
+	queryshopcar(data){
+		return this.http.Post(this.api.queryshopcar,data)
+	}
+
+	/**
+   * 商城修改购物车
+   * @param data 
+   */
+	updateshopcar(data){
+		return this.http.Post(this.api.updateshopcar,data)
+	}
+
+
+	/**
+   * 商城删除购物车
+   * @param data 
+   */
+	deleteshopcar(data){
+		return this.http.Post(this.api.deleteshopcar,data)
 	}
 
 }

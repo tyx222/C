@@ -9,6 +9,8 @@ import {
 
 import { ImagePicker, ImagePickerOptions } from "@ionic-native/image-picker";
 import { Camera, CameraOptions } from "@ionic-native/camera";
+import { UserService } from '../../app/shared/service/user.service';
+
 /**
  * Generated class for the EvaluatePage page.
  *
@@ -27,6 +29,10 @@ export class EvaluatePage {
   ok3=0
   text='暂无评分'
   type=0
+  order_id=""
+  content=""
+  goods_id=""
+  cover=""
 good2=["assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png"]  
 avatar = ["/assets/imgs/images/pushimg.png"];
 constructor(    public navCtrl: NavController,
@@ -34,11 +40,16 @@ constructor(    public navCtrl: NavController,
   public actionSheetCtrl: ActionSheetController,
   public alertCtrl: AlertController,
   public imagePicker: ImagePicker,
+  public http: UserService,
   public camera: Camera) {
   	if(this.navParams.get('type')!=undefined){
 		// type 0买家评论  1 卖家评论
 		this.type = this.navParams.get('type');
-		console.log(this.type)
+		this.order_id = this.navParams.get('orderid');
+		this.goods_id = this.navParams.get('goodsid');
+		this.cover = this.navParams.get('cover');
+		console.log(this.type,this.order_id,this.goods_id)
+		console.log(this.cover)
 	}
   }
 
@@ -165,5 +176,24 @@ this.ok2=i+1
     if(this.ok>=4){
       this.text='非常好'
     }
+  }
+	
+	// 保存评价信息
+  async save(){
+	let params = {
+		goodid:this.goods_id,
+		orderid:this.order_id,
+		level:"",
+		evaluatecontentlist:[{path:this.avatar.join(","),type:this.ok,text:this.content}]
+	}
+	console.log(params)
+	console.log(this.ok,this.ok2,this.ok3)
+	let res = await this.http.addevaluate({jsonPramter:JSON.stringify(params)})
+	if(res.info=="ok"){
+		this.http.presentToast("评价成功")
+		this.navCtrl.pop()
+	}else{
+		this.http.presentToast("评价失败")
+	}
   }
 }

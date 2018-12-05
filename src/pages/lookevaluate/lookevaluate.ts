@@ -27,6 +27,8 @@ export class LookevaluatePage {
   imgUrl = "";
   cityid
   type = 1
+  order_id
+  goods_id
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -41,10 +43,23 @@ export class LookevaluatePage {
   ionViewWillEnter() {
   	// type 0买家评论 1卖家评论
   	this.type = this.navParams.get('type')
+	this.goods_id = this.navParams.get('goodsid')
+	this.order_id = this.navParams.get('orderid')
+	console.log(this.goods_id)
+	console.log(this.order_id)
 	console.log(this.type)
     this.address();
+	this.getComment();
     
   }
+
+  async getComment(){
+	let res = await this.http.queryevaluatelist({goodid:this.goods_id})
+	if(res.info=="ok"){
+		console.log(res)
+	}
+  }
+
   //追平
   zping(){
 	const prompt = this.alertCtrl.create({

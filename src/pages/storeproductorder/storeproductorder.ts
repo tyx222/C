@@ -121,7 +121,16 @@ export class StoreproductorderPage {
   async addappOrder() {
 	let goodsOrder = []
 	this.goods.forEach((val,idx)=>{
-		goodsOrder.push({good_id:val.goods_id,good_num:this.goodsnum[idx],unit_price:val.goods_price})
+		goodsOrder.push({
+			good_id:val.goods_id,
+			good_num:this.goodsnum[idx],
+			unit_price:val.goods_price, // 商品单价
+			cash_price:val.goods_price, //实际支付金额
+			couponid:'',
+			coupon_amount:'0',
+			deposit:this.deposit, //定金
+			shopid: this.goods[0].shopid //商铺id
+		})
 	})
 	let goodsnum = 0;
 	this.goods.forEach((val,idx)=>{
@@ -129,16 +138,13 @@ export class StoreproductorderPage {
 	})
 
     let parmas = {
-      order_number:goodsnum, //商品数量
-      order_sum: this.total, //订单金额
-      receiver_id: this.cityid,
-	  remarks:this.remark, //备注
-      cash_sum: this.total, //实际支付金额
-      shopid: this.goods[0].shopid, //商铺id
-	  deposit:this.deposit,
-	  couponid:'',
-	  coupon_amount:'0',
-      petdtailorder: goodsOrder
+	    order_sum: this.total, //订单金额
+		receiver_id: this.cityid,
+		remarks:this.remark, //备注
+		postage:'0', //运费
+		cash_sum: this.total, //实际支付金额
+		shopid: this.goods[0].shopid, //商铺id
+		petdtailorder: goodsOrder
     };
 
 	console.log(parmas)

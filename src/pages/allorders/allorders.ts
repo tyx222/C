@@ -1,8 +1,9 @@
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 import { UserService } from '../../app/shared/service/user.service';
 import { WechatChenyu } from "wechat-chenyu";
+import { DefaultAppConfig } from "./../../app/app.config";
 
 /**
  * Generated class for the AllordersPage page.
@@ -20,24 +21,29 @@ export class AllordersPage {
   order_status=0
   order_list=[]
   httpResponseData:any;
+  get imgUrl(): string {
+	return this.appConfig.ip + 'imgs/';
+  }
   constructor(
   private http:UserService, 
   public actionSheetCtrl:ActionSheetController,  
+  public alertCtrl:AlertController,  
   public wechatChenyu:WechatChenyu,
+  public appConfig: DefaultAppConfig,
   public navCtrl: NavController, 
   public navParams: NavParams) {
   }
-  goevaluate(){
-    this.navCtrl.push("EvaluatePage",{type:0})
+  goevaluate(item,citem){
+    this.navCtrl.push("EvaluatePage",{type:0,orderid:item.order_id,goodsid:citem.goods_id,cover:this.imgUrl+citem.cover})
   }
-  lookevaluate(){
-      this.navCtrl.push("LookevaluatePage",{type:0})
+  lookevaluate(item,citem){
+      this.navCtrl.push("LookevaluatePage",{type:0,orderid:item.order_id,goodsid:citem.goods_id})
   }
   shopoder(){
     this.navCtrl.push("ShippingoderPage")
   }
   // 立即付款
-  order(item){
+  order(item,citem){
     //this.navCtrl.push("OrderPage")
 	this.actionSheetCtrl.create({
 		  buttons: [
@@ -177,6 +183,37 @@ async queryapporderlist(){
     this.order_status=index
     this.statuslist()
 	console.log(index)
+  }
+
+
+	// 取消订单
+  cancelOrder(item){
+	const confirm = this.alertCtrl.create({
+      title: '确定要取消订单吗？',
+      buttons: [
+        {
+          text: '取消',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: '确定',
+          handler: data => {
+				console.log('cancelOrder',item)
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+  
+  goodsdetail(item){
+	this.navCtrl.push("StoreproductviewPage",{goodsid:item.goods_id})
+  }
+
+  goShop(shopid){
+  	this.navCtrl.push("StorecenterPage",{shopid:shopid})
   }
 
 }

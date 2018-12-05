@@ -64,13 +64,17 @@ export class ProductadminPage {
 
   async querygoodsbyseach(){
   	if(this.keywords==''){
+		this.data = [];
 		return this.queryshopgoods()
 	}
 	let storeinfo = JSON.parse(localStorage.getItem('storeinfo'))
 	let params = {
-		shopid:storeinfo.shop_id
+		goods_name:this.keywords,
+		shopid:storeinfo.shop_id,
+		pageNum:this.pageNum,
+		rowsPrePage:this.rowsPrePage
 	}
-	let res = await this.http.queryshopgoods({goods_name:this.keywords,shopid:storeinfo.shop_id,pageNum:this.pageNum,rowsPrePage:this.rowsPrePage})
+	let res = await this.http.querygoodsbyseach({jsonPramter:JSON.stringify(params)})
 	if(res.info=="ok"){
 		this.data = res.arrayList;
 		

@@ -17,15 +17,17 @@ import { DefaultAppConfig } from "./../../app/app.config";
 })
 export class StorecenterPage {
 	ctn:number = 1;
-	cateId:number = 0;
+	cateId = "";
 	title:string = '我的店铺';
 	headimgpath="";
-	imageUrl:string = '';
+	get imageUrl(): string {
+		return this.appConfig.ip + 'imgs/';
+	  }
+
 	// 店铺分类列表
 	cateList:any = [];
 	storeinfo:any; 	
 	shopName = "";
-	mydata:any; 
 	type='1'
 	ctype=false
 	// 店铺商品列表
@@ -36,28 +38,29 @@ export class StorecenterPage {
 	public http: UserService, 
 	public appConfig :DefaultAppConfig,
 	public navParams: NavParams) { 
-		this.imageUrl = this.appConfig.ip + 'imgs/';
 		
-		console.log(this.navParams.get("shopid"))
+	}
+
+	async getstoreinfo(shopid){
+		let res = await this.http.queryshopbyshopid({shopid:shopid});
+		if(res.info=="ok"){
+			this.storeinfo = res.object
+			this.shopName = this.storeinfo.shop_name
+			this.headimgpath = res.object.head_path
+		}
+	}
+	ionViewWillEnter(){
 		if(this.navParams.get("shopid")!="" && this.navParams.get("shopid")!= undefined ){
 			this.getstoreinfo(this.navParams.get("shopid"))
 		}else{
 			this.storeinfo = JSON.parse(localStorage.getItem('storeinfo'));
-			this.mydata = JSON.parse(localStorage.getItem('mydata'));
-			this.headimgpath = this.mydata.headimgpath;
+			this.headimgpath = this.storeinfo.head_path;
 			this.shopName = this.storeinfo.shop_name
 		}
-	}
-
-	async getstoreinfo(shopid){
-		let res = await this.http.queryshopbyshopid(shopid);
-		if(res.info=="ok"){
-			this.storeinfo = res.object
-			this.shopName = this.storeinfo.shop_name
-		}
-	}
-	ionViewWillEnter(){
-		
+		setTimeout(()=>{
+			this.shopCateList()
+	    this.queryshopgoods()
+		},500)
 		
 	}
 	
@@ -73,8 +76,7 @@ export class StorecenterPage {
 	}
 
   	ionViewDidLoad() {
-	    this.shopCateList()
-	    this.queryshopgoods()
+	    
   	}
 
 	async shopCateList(){
@@ -109,9 +111,12 @@ export class StorecenterPage {
 	
 	// 商品列表
 	async queryshopgoods(){
-		let storeinfo = JSON.parse(localStorage.getItem('storeinfo'))
-
-		let res = await this.http.queryshopgoods({shopid:storeinfo.shop_id})
+		console.log(this.storeinfo)
+		let params = {shopid:this.storeinfo.shop_id}
+		if(this.cateId!=""){
+			params["shopclassifyid"] = this.cateId;
+		}
+		let res = await this.http.queryshopgoods(params)
 		if(res.info=="ok"){
 			//this.imageUrl = res.imageUrl
 			this.productList = res.arrayList;
@@ -119,12 +124,17 @@ export class StorecenterPage {
 	  }
 
 	async querygoodsbyseach(keywords){
-		
+		if(keywords==""){
+			return this.queryshopgoods()
+		}
 		let params = {
-			
+			shopid:this.storeinfo.shop_id,
 			goods_name:keywords
 		}
-
+		if(this.cateId!=""){
+			params["shopclassifyid"] = this.cateId;
+		}
+	
 		let res = await this.http.querygoodsbyseach({jsonPramter:JSON.stringify(params)});
 		if(res.info == 'ok'){
 			this.productList = res.arrayList;
@@ -137,11 +147,10 @@ export class StorecenterPage {
   	cateinfo(item){
 		if(item){
 			this.cateId = item.classify_id
-			this.shopProductList()
 		}else{
-			this.cateId = 0;
-			this.queryshopgoods()
+			this.cateId = "";
 		}
+		this.queryshopgoods()
 
   	}
 

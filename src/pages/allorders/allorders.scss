@@ -57,9 +57,11 @@ page-allorders {
             }
             .datas {
                 margin-top: 1rem;
-                div:nth-of-type(1) {
+				
+                div {
+					
                     display: flex;
-                    >img:nth-of-type(1) {
+                    >img {
                         width: 25%;
                         height: 25%;
                         margin-right: 1rem;

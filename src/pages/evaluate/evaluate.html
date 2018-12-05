@@ -16,7 +16,7 @@
 <ion-content padding>
     <div class="title2">
         <span>
-      <img src="assets/imgs/images/goudai.png" alt="">&nbsp; 符合描述:
+      <img src="{{cover}}" alt="">&nbsp; 符合描述:
     </span>
         <span>
       <span *ngFor="let item of good2 let i=index">
@@ -29,7 +29,7 @@
         <span>{{text}}</span>
     </div>
     <div class="texfiler">
-        <textarea name="" id="" placeholder="宝贝满足你的期待吗?说说它的优点和美中不足的地方吧"></textarea>
+        <textarea [(ngModel)]="content" placeholder="宝贝满足你的期待吗?说说它的优点和美中不足的地方吧"></textarea>
         <div>
             <p>上传图片</p>
             <div class="area">
@@ -42,8 +42,8 @@
             </div>
         </div>
     </div>
-
-    <div class="title2">
+	<button class="button-me" (click)="save()">提交</button>
+    <!--<div class="title2">
         <p>
             <span>
         物流服务</span>
@@ -52,7 +52,7 @@
           <img src="{{item}}" *ngIf="ok2>i" alt="" srcset="" (click)='goods2(i)'>
           <img style="width: 2.5rem;" src="assets/imgs/images/cx.png" *ngIf="ok2<=i" alt="" srcset="" (click)='goods2(i)'>
         </span>
-            <!-- <span *ngFor="let item of good let i=index"> <img src="{{item}}"  *ngIf="ok>i" alt="" srcset="" (click)='goods(i)'></span> -->
+            <!-- <span *ngFor="let item of good let i=index"> <img src="{{item}}"  *ngIf="ok>i" alt="" srcset="" (click)='goods(i)'></span> - ->
 
             </span>
         </p>
@@ -64,11 +64,11 @@
           <img src="{{item}}" *ngIf="ok3>i" alt="" srcset="" (click)='goods3(i)'>
           <img style="width: 2.5rem;" src="assets/imgs/images/cx.png" *ngIf="ok3<=i" alt="" srcset="" (click)='goods3(i)'>
         </span>
-            <!-- <span *ngFor="let item of good let i=index"> <img src="{{item}}"  *ngIf="ok>i" alt="" srcset="" (click)='goods(i)'></span> -->
+            <!-- <span *ngFor="let item of good let i=index"> <img src="{{item}}"  *ngIf="ok>i" alt="" srcset="" (click)='goods(i)'></span> -- >
 
             </span>
         </p>
 
-        <button>提交</button>
-    </div>
+        
+    </div>-->
 </ion-content>
