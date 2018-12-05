@@ -44,17 +44,6 @@ export class StoreproductviewPage {
     public navParams: NavParams
   ) {}
   async pushcall() {
-  	let carts = localStorage.getItem('carts');
-	if(carts){
-		carts = JSON.parse(carts)
-		this.goodsinfo["quantity"] = 1;
-		carts.push(this.goodsinfo);
-	}else{
-		carts = [];
-		this.goodsinfo["quantity"] = 1;
-		carts.push(this.goodsinfo);
-	}
-	localStorage.setItem("carts",JSON.stringify(carts))
 	let mytoken = localStorage.getItem('mytoken');
 	let params = {
 		goodname:this.goodsinfo.goods_name,

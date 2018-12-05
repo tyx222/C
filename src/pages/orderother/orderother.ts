@@ -16,7 +16,7 @@ import { UserService } from "./../../app/shared/service/user.service";
 })
 export class OrderotherPage {
 	client_id = "";
-	shop
+	shops
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: UserService) {
   	this.client_id = this.navParams.get('client_id')
   }
@@ -30,7 +30,7 @@ export class OrderotherPage {
 	if(this.client_id!=""){
 		let res = await this.http.queryshopbyclientid()
 		if(res.info=="ok"){
-			this.shop = res.object
+			this.shops = res.object
 		}
 	}
   }
