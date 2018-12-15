@@ -47,15 +47,15 @@ export class PardackpushPage {
 	guigeList:any = [
 		{specifications_name:"",specifications_size:"",specifications_price:"",postage:"",cover:"assets/imgs/images/dsp.png",display_price:""}
 	];
-	slides:any = [];	
-	remarkimgs:any = [];
+	slides:any = ["68094a1351e0323ce804ddb403b85f86.jpg"];	
+	remarkimgs:any = ["68094a1351e0323ce804ddb403b85f86.jpg"];
 	video_cover_isup:any = false;
 	video_cover:string='./assets/imgs/images/dsp.png';
 	selectOptions:any;
 	imageUrl:string = "http://116.62.219.45/imgs/";
 	proData:any = {
 		goods_name:'',
-		goods_price:'',
+		goods_price:'0',
 		goods_introduce:'介绍',
 		goods_key:'',
 		living:0,
@@ -148,11 +148,9 @@ export class PardackpushPage {
 	}
  }
 
- setprice(ev){
+ setprice(ev,index){
 	if(ev>0 && this.zhekou!='' && this.zhekou > 0 ){
-		this.guigeList.forEach((val, idx, array) => {
-			this.guigeList[idx]['specifications_price'] = (ev * (this.zhekou/10)).toFixed(2)
-		 });
+		this.guigeList[index]['specifications_price'] = (ev * (this.zhekou/10)).toFixed(2)
 	}
  }
 
@@ -350,6 +348,9 @@ export class PardackpushPage {
 	 // 商品规格
 	 this.guigeList.forEach((val, idx, array) => {
 		that.proData.specifications.push(val)
+		if(val.display_price>that.proData.goods_price){
+			that.proData.goods_price = val.display_price
+		}
 	 });
 
 	 this.proData.shopid = storeinfo.shop_id;
@@ -362,7 +363,7 @@ export class PardackpushPage {
 	 if(this.navGoodsInfo){
 		this.updategood()
 	 }else{
-		//this.addgood()
+		this.addgood()
 	 }
 	 
   }

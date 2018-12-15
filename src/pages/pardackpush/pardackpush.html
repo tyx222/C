@@ -119,7 +119,7 @@
 				</li>
 				<li>
 					<span>显示价格</span>
-					<input type="text" (ngModelChange)="setprice($event)" [(ngModel)]="guigeList[g].display_price" placeholder="请输入显示价格">
+					<input type="text" (ngModelChange)="setprice($event,g)" [(ngModel)]="guigeList[g].display_price" placeholder="请输入显示价格">
 				</li>
 				<li>
 					<span>价格</span>
