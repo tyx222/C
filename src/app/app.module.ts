@@ -59,6 +59,9 @@ import { ImgServiceProvider } from "../providers/img-service/img-service";
 import { ToastProvider } from "../providers/toast/toast";
 import { StorageProvider } from "../providers/storage/storage";
 import {WechatChenyu} from "wechat-chenyu"
+declare var LocationPlugin;
+
+
 @NgModule({
   declarations: [
     MyApp,

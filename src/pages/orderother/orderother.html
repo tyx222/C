@@ -20,16 +20,18 @@
 		<ion-col col-4></ion-col>
 		<ion-col col-4>
 			<div class="avatar">
-				<img src="./assets/imgs/logo.png">
+				<img src="{{client.headimgpath}}">
 			</div>
-			<p>大爱天使</p>
+			<p *ngIf="client.client_nikename != '未设置昵称'">{{client.client_nikename}}</p>
+			<p *ngIf="client.client_nikename == '未设置昵称'">{{client.client_username}}</p>
+
 		</ion-col>
 		<ion-col col-4></ion-col>
 	  </ion-row>
 	 
 	</ion-grid>
 	<div class="list-me">
-		<p (click)="shop()">访问大爱天使的店铺<ion-icon name="arrow-forward"></ion-icon></p>
+		<p (click)="shop()">访问TA的店铺<ion-icon name="arrow-forward"></ion-icon></p>
 		<p (click)="sale()">收到卖家的评论<ion-icon name="arrow-forward"></ion-icon></p>
 		<p (click)="buyer()">收到买家的评论<ion-icon name="arrow-forward"></ion-icon></p>
 		<p (click)="order()">与他正在交易的订单<ion-icon name="arrow-forward"></ion-icon></p>

@@ -66,9 +66,9 @@ export class TabsPage {
       tabTitle: "分类"
     },
     {
-      tab1Root: "ShopcallPage", //首页
+      tab1Root: "StoretwoPage", //活体商城
       tabIcon: "md-basket",
-      tabTitle: "购物车"
+      tabTitle: "活体商城"
     },
 
     {

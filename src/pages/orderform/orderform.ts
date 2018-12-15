@@ -16,8 +16,9 @@ import { DefaultAppConfig } from "./../../app/app.config";
   templateUrl: 'orderform.html',
 })
 export class OrderformPage {
-	order_status = false
-	living = false
+	order_status;
+	living = false;
+	storeinfo:any = {}
 	order_list=[]
 	get imgUrl(): string {
 		return this.appConfig.ip + 'imgs/';
@@ -26,14 +27,24 @@ export class OrderformPage {
   }
 
   ionViewDidLoad() {
+  	this.storeinfo = JSON.parse(localStorage.getItem("storeinfo"))
     console.log('ionViewDidLoad OrderformPage');
-	this.queryapporderlist()
+	this.queryshopapporderlist()
   }
 	lookevaluate(){
       this.navCtrl.push("LookevaluatePage",{type:1})
   }
-
 	
+	//发货
+	async send(order_id){
+		let res = await this.http.updateorderstatus({orderid:order_id,status:"2"})
+		if(res.info=="ok"){
+			this.http.presentToast("发货成功")
+			this.queryshopapporderlist()
+		}else{
+			this.http.presentToast("发货失败")
+		}
+	}
 	shopoder(){
 		this.navCtrl.push("ShippingoderPage")
 	  }
@@ -42,14 +53,12 @@ export class OrderformPage {
 	this.living = t
   }
 	// 订单列表
-  async queryapporderlist(){
-	let params
-  	if(this.order_status!=false){
-		let params = {
-			order_status:this.order_status
-		}
+  async queryshopapporderlist(){
+	let params = {
+		shopid:this.storeinfo.shop_id
 	}
-	let res = await this.http.queryapporderlist(params)
+  	
+	let res = await this.http.queryshopapporderlist(params)
 	if(res.info=="ok"){
 		this.order_list = res.arrayList
 	}else{
@@ -77,6 +86,6 @@ export class OrderformPage {
   
   userinfo(item){
   
-	this.navCtrl.push("OrderotherPage",{client_id:item.client_id})
+	this.navCtrl.push("OrderotherPage",{client:item.client})
   }
 }

@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams, ActionSheetController, AlertContro
 import { UserService } from '../../app/shared/service/user.service';
 import { WechatChenyu } from "wechat-chenyu";
 import { DefaultAppConfig } from "./../../app/app.config";
-
+declare let cordova;
 /**
  * Generated class for the AllordersPage page.
  *
@@ -34,13 +34,23 @@ export class AllordersPage {
   public navParams: NavParams) {
   }
   goevaluate(item,citem){
-    this.navCtrl.push("EvaluatePage",{type:0,orderid:item.order_id,goodsid:citem.goods_id,cover:this.imgUrl+citem.cover})
+    this.navCtrl.push("EvaluatePage",{type:0,orderid:item.order_id,goodsid:citem.goods.goods_id,cover:this.imgUrl+citem.goods.cover})
   }
   lookevaluate(item,citem){
-      this.navCtrl.push("LookevaluatePage",{type:0,orderid:item.order_id,goodsid:citem.goods_id})
+      this.navCtrl.push("LookevaluatePage",{type:0,orderid:item.order_id,goodsid:citem.goods.goods_id})
   }
   shopoder(){
     this.navCtrl.push("ShippingoderPage")
+  }
+
+  async shouhuo(order_id){
+	let res = await this.http.updateorderstatus({orderid:order_id,status:"3"})
+	if(res.info=="ok"){
+		this.http.presentToast("收货成功")
+		this.queryapporderlist()
+	}else{
+		this.http.presentToast("收货失败")
+	}
   }
   // 立即付款
   order(item,citem){
@@ -72,19 +82,25 @@ export class AllordersPage {
 	async weiXinPay(item){
 		let payResult=await this.http.weixinor({orderid:item.order_id})
 		console.log(payResult)	
+		var prepay = payResult.object.package.split("=");
 		var params = {
-          partnerid:payResult.object.partnerid, // merchant id
-          prepayid: payResult.object.prepayid, // prepay id
-          noncestr: payResult.object.noncestr, // nonce
-          timestamp: payResult.object.timestamp+"", // timestamp
+          partnerid:"1510171201",//payResult.object.partnerid, // merchant id 商户号
+          prepayid: prepay[1], // prepay id
+          noncestr: payResult.object.nonceStr, // nonce
+          timestamp: payResult.object.timeStamp, // timestamp
           sign: payResult.object.sign // signed string
         };
+		
+		this.http.presentToast(JSON.stringify(params))
+
 		this.wechatChenyu.sendPaymentRequest(params).then((result)=>{
           //支付成功
+		  this.http.presentToast(JSON.stringify(result))
+
           this.queryapporderlist()
         },(error)=>{
          //支付失败
-          this.http.presentToast('支付失败')
+          this.http.presentToast(JSON.stringify(error))
         })
 
 
@@ -98,54 +114,28 @@ export class AllordersPage {
 	async aliPay(item){
 		let data=await this.http.alipay({orderid:item.order_id})
 		console.log(data)
-
-		let payInfo=this.unescapeHTML(data);
-		  /*cordova.plugins.alipay.payment(payInfo,(success)=>{
-			success.resultStatus==="9000"?this.paySuccess(sn): this.payFailed();
-			//支付成功
-			this.queryapporderlist();
-		  },(error)=>{
-			//支付失败
-			this.http.presentToast('支付失败')
-		  });*/
-
+		try{
+			let payInfo=this.unescapeHTML(data);
+			this.http.presentToast(payInfo)
+			  cordova.plugins.alipay.payment(payInfo,(success)=>{
+				if(success.resultStatus==="9000"){
+					this.http.presentToast('支付成功')
+					this.queryapporderlist();
+				}else{
+					this.http.presentToast('支付失败')
+				}
+			  },(error)=>{
+				//支付失败
+				this.http.presentToast('支付失败')
+			  });
+		}catch(err){
+			this.http.presentToast('调用支付失败')
+		}
+		
 
 	}
 
 	
-/*
-	async goalipay() {
-    let that = this;
-    console.log(this.httpResponseData)
-    this.alipay.pay(this.httpResponseData)
-      .then(res => {
-        
-        if(res.resultStatus=='4000'){
-          this.nativeService.showToast('订单支付失败');
-        }
-        if(res.resultStatus=='6001'){
-          console.log(res.resultStatus);
-        }
-        if(res.resultStatus=='9000'){
-          this.info.status = 2;
-          console.log('成功');
-          this.viewCtrl.dismiss();
-        }
-        
-        console.log('res',res.resultStatus)
-        console.log('memo',res.memo)
-
-      }, err => {
-        console.log('err')
-
-      })
-      .catch(e => {
-          that.info.status = 2;
-          this.viewCtrl.dismiss();
-      });
-
-  }
-*/
   gouout(){
 	this.navCtrl.push("RefundPage")
   }
@@ -181,7 +171,7 @@ async queryapporderlist(){
   }
   status(index){
     this.order_status=index
-    this.statuslist()
+    this.queryapporderlist()
 	console.log(index)
   }
 
@@ -209,7 +199,7 @@ async queryapporderlist(){
   }
   
   goodsdetail(item){
-	this.navCtrl.push("StoreproductviewPage",{goodsid:item.goods_id})
+	this.navCtrl.push("StoreproductviewPage",{goodsid:item.goods.goods_id})
   }
 
   goShop(shopid){

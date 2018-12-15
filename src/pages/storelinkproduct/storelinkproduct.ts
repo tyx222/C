@@ -139,7 +139,7 @@ export class StorelinkproductPage {
 	
 	// 关键字搜索
 	async querygoodsbyseach(){
-		let params:any 
+		let params={goods_name:""}
 		
 		if(this.myInput!=''){
 			params.goods_name = this.myInput

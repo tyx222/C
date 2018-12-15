@@ -19,37 +19,38 @@
 
       <li>
         <span>优惠券名称</span>
-        <input type="text" placeholder="请输入优惠券名称">
+        <input type="text" [(ngModel)]="title" placeholder="请输入优惠券名称">
       </li>
       <li>
         <span>面值</span>
-        <input type="text" placeholder="请输入优惠券面值">
+        <input type="text" [(ngModel)]="price" placeholder="请输入优惠券面值">
       </li>
       <li>
-        <span>优惠券金额</span>
-        <span>
-          <input type="radio" name="money" id="">不限制</span>
-        <span>
-          <input type="radio" name="money1" id="">满
-          <input type="number" class="monet">元可使用
+        <span>优惠券类型</span>
+		<span><input type="radio" name="type" (click)="setType(1)" value="1">满减</span>
+		<span><input type="radio" name="type" (click)="setType(2)" value="2">代金券</span>
+
+      </li>
+      <li *ngIf="type==1">
+        <span>满减金额</span>
+         <span><input type="number" placeholder="满多少元可使用,0表示无限制" [(ngModel)]="full" class="monet">
         </span>
       </li>
       <li>
         <span>发放总量</span>
-        <input type="text" placeholder="请输入发放总量">
+        <input type="text" [(ngModel)]="packege_number" placeholder="请输入发放总量">
       </li>
       <li>
-        <span>生效时间</span>
-        <ion-datetime  displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="timeStarts"></ion-datetime>
+        <span>期限</span>
+        <input type="text" [(ngModel)]="term" placeholder="天">
       </li>
       <li>
-        <span>过期时间</span>
-        <ion-datetime  displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="timeStarts2"></ion-datetime>
+        <span>备注</span>
+        <input type="text" [(ngModel)]="remark" placeholder="备注">
       </li>
    
     </ul>
-    <p>
-      <input type="checkbox" name="" id="">我已同意XXX用户协议</p>
-    <button class="tijiao">确认注册</button>
+    
+    <button class="tijiao" (click)="save()">确认发布</button>
   </div>
 </ion-content>

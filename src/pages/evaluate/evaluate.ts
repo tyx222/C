@@ -183,8 +183,10 @@ this.ok2=i+1
 	let params = {
 		goodid:this.goods_id,
 		orderid:this.order_id,
-		level:"",
-		evaluatecontentlist:[{path:this.avatar.join(","),type:this.ok,text:this.content}]
+		level:this.ok,
+		type:0,
+		father_id:"0",
+		evaluatecontentlist:[{path:this.avatar.join(","),text:this.content}]
 	}
 	console.log(params)
 	console.log(this.ok,this.ok2,this.ok3)

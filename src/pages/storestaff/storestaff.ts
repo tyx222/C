@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { UserService } from "./../../app/shared/service/user.service";
 
 /**
  * Generated class for the StorestaffPage page.
@@ -15,7 +16,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 })
 export class StorestaffPage {
 	lists:any = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,public http: UserService, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -23,13 +24,23 @@ export class StorestaffPage {
 	this.list()
   }
 
-  add(data){
-	this.lists.push({name:"测试3",work:"员工",avatar:"./assets/imgs/loginLogo.png",id:1})
+  async add(data){
+  	let storeinfo = JSON.parse(localStorage.getItem("storeinfo"))
+  	let res = await this.http.addshopclient({clientid:data+"",shop_id:storeinfo.shop_id})
+	if(res.info=="ok"){
+		this.http.presentToast('发出邀请成功')
+	}else{
+		this.http.presentToast('发出邀请失败')
+	}
+	//this.lists.push({name:"测试3",work:"员工",avatar:"./assets/imgs/loginLogo.png",id:1})
   }
 
-  list(){
-	this.lists.push({name:"测试1",work:"员工",avatar:"./assets/imgs/loginLogo.png",id:1})
-	this.lists.push({name:"测试2",work:"员工",avatar:"./assets/imgs/loginLogo.png",id:2})
+  async list(){
+    let storeinfo = JSON.parse(localStorage.getItem("storeinfo"))
+  	let res = await this.http.queryclerklist({shopid:storeinfo.shop_id});
+	if(res.info=="ok"){
+		this.lists = res.arrayList;
+	}
   }
   del(index){
 	this.lists.splice(index,1)
@@ -53,10 +64,41 @@ export class StorestaffPage {
           }
         },
         {
-          text: '保存',
+          text: '查询',
           handler: data => {
-		  	this.add(data)
+		  	this.queryclientunum(data.id)
             console.log(data);
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+  async queryclientunum(num){
+	let res = await this.http.queryclientunum({clientunum:num+""})
+	if(res.info=="ok" && res.object != undefined ){
+		this.showPeoplePrompt(res.object)
+	}else{
+		this.http.presentToast('搜索不到该用户')
+	}
+  }
+
+  showPeoplePrompt(datas) {
+    const prompt = this.alertCtrl.create({
+      title: '是否邀请',
+      message: "<p><img src='"+datas.headimgpath+"' width='40'/></p><p>"+datas.client_username+"</p>",
+      buttons: [
+        {
+          text: '取消',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: '邀请',
+          handler: data => {
+		  	this.add(datas.client_id)
           }
         }
       ]

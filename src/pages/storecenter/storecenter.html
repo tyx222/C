@@ -62,7 +62,8 @@
                     <li *ngFor="let item of productList" (click)="productinfo(item)">
                         <img src="{{imageUrl}}{{ item.cover }}" alt="{{ item.goods_name }}">
                         <span>{{ item.goods_name }}</span>
-                        
+                        <span style="padding-top: 0;">￥{{ item.goods_price }}</span>
+
                     </li>
                     
                 </ul>

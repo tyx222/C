@@ -57,7 +57,7 @@ export class UserService {
 	queryshopnullgoodlist:'chongwu/app/queryshopnullgoodlist',
     addshop:"chongwu/app/addshop",
 	queryshopbyclientid:"chongwu/app/queryshopbyclientid",
-	queryshopbyshopid:"chongwu/app/queryshopbyclientid",
+	queryshopbyshopid:"chongwu/app/queryshop",
     addshopclassify:"chongwu/app/addshopclassify",
 	updateshopclassify:"chongwu/app/updateshopclassify",
     addgoods:"chongwu/app/addgoods",
@@ -82,7 +82,20 @@ export class UserService {
 	addshopcar:"chongwu/app/addshopcar",
 	queryshopcar:"chongwu/app/queryshopcar",
 	updateshopcar:"chongwu/app/updateshopcar",
-	deleteshopcar:"chongwu/app/deleteshopcar"
+	deleteshopcar:"chongwu/app/deleteshopcar",
+	queryshopapporderlist:"chongwu/app/queryshopapporderlist",
+	addcoupon:"chongwu/app/addcoupon",
+	querycouponlist:"chongwu/app/querycouponlist",
+	updatecouponstatus:"chongwu/app/updatecouponstatus",
+	updateorderstatus:"chongwu/app/updateorderstatus",
+	addshopclient:"chongwu/app/addshopclient",
+	couponclientlist:"chongwu/app/couponclientlist",
+	deletecoupon:"chongwu/app/deletecoupon",
+	queryclientunum:"chongwu/app/queryclientunum",
+	choiceclerk:"chongwu/app/choiceclerk",
+	queryappdtailOrderlist:"chongwu/app/queryappdtailOrderlist",
+	querymyclerklist:"chongwu/app/querymyclerklist",
+	queryclerklist:"chongwu/app/queryclerklist"
 
 
 
@@ -700,4 +713,101 @@ querypetcardotherclientlist(data){
 		return this.http.Post(this.api.deleteshopcar,data)
 	}
 
+	/**
+   * 商城商家订单列表
+   * @param data 
+   */
+	queryshopapporderlist(data){
+		return this.http.Post(this.api.queryshopapporderlist,data)
+	}
+
+
+	/**
+   * 商城商家发布优惠券
+   * @param data 
+   */
+	addcoupon(data){
+		return this.http.Post(this.api.addcoupon,data)
+	}
+
+	/**
+   * 商城商家优惠券列表
+   * @param data 
+   */
+	querycouponlist(data){
+		return this.http.Post(this.api.querycouponlist,data)
+	}
+	/**
+   * 商城商家派发优惠券
+   * @param data 
+   */
+	updatecouponstatus(data){
+		return this.http.Post(this.api.updatecouponstatus,data)
+	}
+
+	/**
+   * 商城商家邀请店员
+   * @param data 
+   */
+	addshopclient(data){
+		return this.http.Post(this.api.addshopclient,data)
+	}
+
+	/**
+   * 用户领取优惠卷列表
+   * @param data 
+   */
+	couponclientlist(data){
+		return this.http.Post(this.api.couponclientlist,data)
+	}
+	/**
+   * 商家发货
+   * @param data 
+   */
+	updateorderstatus(data){
+		return this.http.Post(this.api.updateorderstatus,data)
+	}
+
+	
+
+  /**
+   * 商家删除优惠券
+   */
+  deletecoupon(data) {
+    return this.http.Post(this.api.deletecoupon, data);
+  }
+  /**
+   * 数字id查询用户
+   */
+  queryclientunum(data) {
+    return this.http.Post(this.api.queryclientunum, data);
+  }
+  /**
+   * 店员被邀请拒绝或同意
+   */
+  choiceclerk(data) {
+    return this.http.Post(this.api.choiceclerk, data);
+  }
+  /**
+   * 商城订单详情
+   */
+  queryappdtailOrderlist(data) {
+    return this.http.Post(this.api.queryappdtailOrderlist, data);
+  }
+
+  /**
+   * 我收到的邀请
+   */
+  querymyclerklist() {
+    return this.http.Post(this.api.querymyclerklist, {_time:1});
+  }
+
+  
+  
+  /**
+   * 店铺邀请的店员列表
+   */
+  queryclerklist(data) {
+    return this.http.Post(this.api.queryclerklist, data);
+  }
 }

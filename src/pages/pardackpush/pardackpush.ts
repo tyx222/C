@@ -37,11 +37,16 @@ import { DefaultAppConfig } from "./../../app/app.config";
   templateUrl: "pardackpush.html"
 })
 export class PardackpushPage {
+	type = "";
 	navGoodsInfo:any = false
+	zhekou;
 	proClassify:number ;
 	proClassifyList:any = [];
 	propertylist:any = [];
 	brandList:any=[];
+	guigeList:any = [
+		{specifications_name:"",specifications_size:"",specifications_price:"",postage:"",cover:"assets/imgs/images/dsp.png",display_price:""}
+	];
 	slides:any = [];	
 	remarkimgs:any = [];
 	video_cover_isup:any = false;
@@ -58,9 +63,12 @@ export class PardackpushPage {
 		brand_id:'',
 		shopid:'',
 		classify_id:'',
+		specification:'',
+		stock:'1',
 		favorable_price:'1',
 		deposit:'0',
 		propterty:[],
+		specifications:[],
 		turns_picture:['68094a1351e0323ce804ddb403b85f86.jpg'],
 		video_path:'f9e3315645f9696fcc7864c0ca797dac.mp4',
 		cover:'',
@@ -88,7 +96,6 @@ export class PardackpushPage {
   }
 
   ionViewDidLoad() {
-  	this.querypropertylist()
 	this.queryclasslist();
 	if(this.navGoodsInfo ){
 		if(this.navGoodsInfo.goods_introduce!=''){
@@ -120,6 +127,10 @@ export class PardackpushPage {
     console.log("ionViewDidLoad PardackpushPage");
   }
 
+  check(type){
+	  this.type = type
+  }
+
   // 查询全局分类
  async queryclasslist(){
 	let res = await this.http.queryclasslist();
@@ -127,10 +138,28 @@ export class PardackpushPage {
 			this.proClassifyList = res.arrayList;
 		}
  }
+	
+	//折扣变化
+ setzhekou(ev){
+	if(ev!='' && ev>0 ){
+		this.guigeList.forEach((val, idx, array) => {
+			this.guigeList[idx]['specifications_price'] = (this.guigeList[idx]['display_price'] * (ev/10)).toFixed(2)
+		 });
+	}
+ }
+
+ setprice(ev){
+	if(ev>0 && this.zhekou!='' && this.zhekou > 0 ){
+		this.guigeList.forEach((val, idx, array) => {
+			this.guigeList[idx]['specifications_price'] = (ev * (this.zhekou/10)).toFixed(2)
+		 });
+	}
+ }
 
  packagTypeChange(){
 	if(this.proData.classify_id!=''){
 		this.queryclassbrandlist();
+		this.querypropertylist()
 	}
  }
 
@@ -148,12 +177,13 @@ export class PardackpushPage {
 	if(res.info=="ok"){
 			this.brandList = res.arrayList;
 		}
+
+		
  }
 
-	// 查询公共属性
+	// 查询属性
   async querypropertylist(){
-       let res = await this.http.querypropertycommonlist();
-	   console.log(res)
+       let res = await this.http.querypropertylist({classify_id:this.proData.classify_id});
 		if(res.info=="ok" && res.arrayList ){
 			res.arrayList.forEach((val, idx, array) => {
 				// val: 当前值
@@ -181,6 +211,22 @@ export class PardackpushPage {
 	  		selfs.http.presentToast('上传成功')
 	  		console.log(data.object.map.filename)
 			//selfs.proData.turns_picture.push(data.object.map.filename)
+		}else{
+			selfs.http.presentToast('上传失败')
+		}
+     };
+  }
+	
+	//规格上传图片
+  guigeimgup(index){
+	let selfs = this
+    this.devolup.showPicActionSheet();
+    this.devolup.upload.success = data => {
+		if(data.info=="ok"){
+			//selfs.imageUrl = data.imageUrl;
+	  		selfs.http.presentToast('上传成功')
+	  		console.log(data.object.map.filename)
+			selfs.guigeList[index].cover = data.object.map.filename
 		}else{
 			selfs.http.presentToast('上传失败')
 		}
@@ -286,13 +332,26 @@ export class PardackpushPage {
 	}
 
   save(){
+  	 if(this.guigeList[0].specifications_name=='' || this.guigeList[0].specifications_size=='' || this.guigeList[0].display_price=='' ||
+	 	this.guigeList[0].specifications_price=='' || this.guigeList[0].postage=='' || this.guigeList[0].cover==''
+	 ){
+		this.http.presentToast('请至少填全一组商品规格信息')
+		return false;
+	 }
 	 let propertys = []
+	 let that = this
 	 let storeinfo = JSON.parse(localStorage.getItem('storeinfo'))
 	 this.propertylist.forEach((val, idx, array) => {
 	 	let property = {};
 		property[val.property_name] = val.property_val
 		propertys.push(property)
 	 });
+	
+	 // 商品规格
+	 this.guigeList.forEach((val, idx, array) => {
+		that.proData.specifications.push(val)
+	 });
+
 	 this.proData.shopid = storeinfo.shop_id;
 	 this.proData.cover = this.slides[0]
 	 this.proData.propterty = propertys;
@@ -303,9 +362,14 @@ export class PardackpushPage {
 	 if(this.navGoodsInfo){
 		this.updategood()
 	 }else{
-		this.addgood()
+		//this.addgood()
 	 }
 	 
+  }
+	
+	//增加规格
+  addguige(){
+	this.guigeList.push({specifications_name:"",specifications_size:"",specifications_price:"",postage:"",cover:"",display_price:""})
   }
 	async updategood(){
 		let res = await this.http.updategoods(this.proData)

@@ -2,7 +2,10 @@ import { UserService } from "./../../app/shared/service/user.service";
 import { IpamPage } from "./../ipam/ipam";
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
-import {WechatChenyu} from "wechat-chenyu";
+import { WechatChenyu } from "wechat-chenyu";
+declare let cordova;
+
+
 /**
  * Generated class for the StoreproductorderPage page.
  *
@@ -39,6 +42,7 @@ export class StoreproductorderPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private http: UserService,
+	public wechatChenyu:WechatChenyu,
     private actionSheetCtrl:ActionSheetController
   ) {}
 
@@ -56,7 +60,7 @@ export class StoreproductorderPage {
         {
           text: "支付宝支付",
           handler: () => {
-           // this.aliPay(data);
+			this.aliPay(data);
           }
         },
         {
@@ -95,6 +99,7 @@ export class StoreproductorderPage {
 			this.shopName = val.shop_name
 		}
 	})
+	
     this.imgUrl = this.navParams.get("imgUrl");
 	console.log(this.goods)
   }
@@ -123,12 +128,14 @@ export class StoreproductorderPage {
 	this.goods.forEach((val,idx)=>{
 		goodsOrder.push({
 			good_id:val.goods_id,
-			good_num:this.goodsnum[idx],
-			unit_price:val.goods_price, // 商品单价
-			cash_price:val.goods_price, //实际支付金额
+			good_num:this.goodsnum[idx]+"",
+			unit_price:val.goods_price+"", // 商品单价
+			cash_price:val.goods_price+"", //优惠金额
 			couponid:'',
 			coupon_amount:'0',
-			deposit:this.deposit, //定金
+			deposit:this.deposit+"", //定金
+			specifications_name:"", //规格名称
+			specifications_size:"", //规格尺寸
 			shopid: this.goods[0].shopid //商铺id
 		})
 	})
@@ -138,11 +145,12 @@ export class StoreproductorderPage {
 	})
 
     let parmas = {
-	    order_sum: this.total, //订单金额
+	    order_sum: this.total+"", //订单金额
 		receiver_id: this.cityid,
 		remarks:this.remark, //备注
 		postage:'0', //运费
-		cash_sum: this.total, //实际支付金额
+		cash_sum: this.total+"", //商品价格减去优惠卷的优惠价格
+		final_payment:"", //最终支付价格",包括运费支付的
 		shopid: this.goods[0].shopid, //商铺id
 		petdtailorder: goodsOrder
     };
@@ -164,6 +172,7 @@ export class StoreproductorderPage {
   }
 
   updatecarts(){
+  	/*
 	let carts = JSON.parse(localStorage.getItem('carts'))
 	let newCarts = [];
 	carts.forEach((val,idx)=>{
@@ -172,6 +181,7 @@ export class StoreproductorderPage {
 		}
 	})
 	localStorage.setItem("carts",JSON.stringify(newCarts))
+	*/
   }
   
 
@@ -206,14 +216,60 @@ export class StoreproductorderPage {
     this.addappOrder()
   }
 
-async weiXinPay(data){
-console.log(data.order_id)
-let res=await this.http.weixinor({orderid:data.order_id})
-console.log(res)
-// this.http.http.http.post("wxpay/createPay",data).toPromise().then(res=>{
-//   console.log(res)
-// })
-};
+
+
+async weiXinPay(item){
+		let payResult=await this.http.weixinor({orderid:item.order_id})
+		console.log(payResult)	
+		var prepay = payResult.object.package.split("=");
+		var params = {
+          partnerid:"1510171201",//payResult.object.partnerid, // merchant id 商户号
+          prepayid: prepay[1], // prepay id
+          noncestr: payResult.object.nonceStr, // nonce
+          timestamp: payResult.object.timeStamp, // timestamp
+          sign: payResult.object.sign // signed string
+        };
+		
+		this.http.presentToast(JSON.stringify(params))
+
+		this.wechatChenyu.sendPaymentRequest(params).then((result)=>{
+          //支付成功
+		  this.http.presentToast(JSON.stringify(result))
+        },(error)=>{
+         //支付失败
+          this.http.presentToast(JSON.stringify(error))
+        })
+
+
+	}
+
+	unescapeHTML(a){
+	  let aNew = "" + a;
+		 return aNew.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+	 }
+
+	async aliPay(item){
+		let data=await this.http.alipay({orderid:item.order_id})
+		console.log(data)
+		try{
+			let payInfo=this.unescapeHTML(data);
+			this.http.presentToast(payInfo)
+			  cordova.plugins.alipay.payment(payInfo,(success)=>{
+				if(success.resultStatus==="9000"){
+					this.http.presentToast('支付成功')
+				}else{
+					this.http.presentToast('支付失败')
+				}
+			  },(error)=>{
+				//支付失败
+				this.http.presentToast('支付失败')
+			  });
+		}catch(err){
+			this.http.presentToast('调用支付失败')
+		}
+		
+
+	}
 
 
   

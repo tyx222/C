@@ -83,7 +83,14 @@ export class ProductadminPage {
 
   async queryshopgoods(){
 	let storeinfo = JSON.parse(localStorage.getItem('storeinfo'))
-	let res = await this.http.queryshopgoods({type:this.type,shopid:storeinfo.shop_id,pageNum:this.pageNum,rowsPrePage:this.rowsPrePage})
+	let Living;
+	if(this.type=='活体'){
+		Living = 0
+	}
+	if(this.type=='非活体'){
+		Living = 1
+	}
+	let res = await this.http.queryshopgoods({Living:Living,shopid:storeinfo.shop_id,pageNum:this.pageNum,rowsPrePage:this.rowsPrePage})
 	if(res.info=="ok"){
 		this.imageUrl = 'http://116.62.219.45/imgs/'
 		res.arrayList.forEach((val,index)=>{

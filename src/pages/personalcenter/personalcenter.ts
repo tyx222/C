@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams  } from 'ionic-angular';
 
 
 /**
@@ -16,12 +16,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PersonalcenterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController , public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PersonalcenterPage');
   }
+	
+	ionViewWillEnter(){
+		
+	}
+
   wallet() {
     this.navCtrl.push("WalletPage");
   }
@@ -61,7 +66,7 @@ advices(){
   this.navCtrl.push("AdvicesPage")
 }
 Coupon(){
-  this.navCtrl.push("CouponPage")
+  this.navCtrl.push("UsercouponPage")
 }
 Ckeck() {
   this.navCtrl.push("CkeckPage");
@@ -69,4 +74,8 @@ Ckeck() {
 collect(){
   this.navCtrl.push("StorecollectPage");
 }
+
+
+
+
 }

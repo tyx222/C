@@ -29,6 +29,7 @@ export class LookevaluatePage {
   type = 1
   order_id
   goods_id
+  orderinfo:any = {}
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -48,11 +49,19 @@ export class LookevaluatePage {
 	console.log(this.goods_id)
 	console.log(this.order_id)
 	console.log(this.type)
+	this.getDetail()
     this.address();
 	this.getComment();
     
   }
-
+	async getDetail(){
+		
+		let res = await this.http.queryappdtailOrderlist({orderid:this.order_id})
+		if(res.info=="ok"){
+			this.orderinfo = res.object
+			console.log(res)
+		}
+	}
   async getComment(){
 	let res = await this.http.queryevaluatelist({goodid:this.goods_id})
 	if(res.info=="ok"){

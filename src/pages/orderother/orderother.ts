@@ -15,24 +15,25 @@ import { UserService } from "./../../app/shared/service/user.service";
   templateUrl: 'orderother.html',
 })
 export class OrderotherPage {
-	client_id = "";
-	shops
+	client;
+	shops;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: UserService) {
-  	this.client_id = this.navParams.get('client_id')
+  	this.client = this.navParams.get('client')
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrderotherPage');
-	console.log(this.client_id)
 	this.queryshopbyclientid()
   }
   async queryshopbyclientid(){
-	if(this.client_id!=""){
+    /*
+	if(this.client.client_id!=""){
 		let res = await this.http.queryshopbyclientid()
 		if(res.info=="ok"){
 			this.shops = res.object
 		}
 	}
+	*/
   }
   shop(){}
   sale(){}

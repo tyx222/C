@@ -106,6 +106,13 @@ export class StoreproductviewPage {
 	}
   }
 
+  async queryevaluatelist(){
+	let res = await this.http.queryevaluatelist({goodid:this.goodsinfo.goods_id})
+	if(res.info=="ok"){
+		this.cmment = res.arrayList
+	}
+  }
+
   async addcollect(){
 	let res = await this.http.addcollectoin({goodsid:this.goodsinfo.goods_id})
 	if(res.info=="ok"){
@@ -135,6 +142,7 @@ export class StoreproductviewPage {
 		this.imgpath = this.goodsinfo.turns_picture;
 		this.pordackpage = this.goodsinfo.goods_introduce;
 		this.getstoreinfo(this.goodsinfo.shopid)
+		this.queryevaluatelist()
 
 	}else{
 		this.http.presentToast('商品信息不存在')

@@ -1,0 +1,115 @@
+<!--
+  Generated template for the StorePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-header no-border>
+    <ion-navbar color="primary" #header>
+        <ion-title style="display: none">商城</ion-title>
+        <div class="titlebox"><button (click)="scan()"><img src="assets/imgs/images/sao.png" alt="" class="sao"></button><input type='text' class='sousuo'><button (click)='gonews()'><img src="assets/imgs/images/lingdang.png" alt=""></button></div>
+    </ion-navbar>
+</ion-header>
+
+
+
+
+
+<ion-content fullscreen padding (ionScroll)="scrollEvent($event)">
+
+    <div class="fenlei">
+        <ul>
+            <li *ngFor="let item of titles let i=index" (click)="goshop(i)">
+                <img src="{{item.imgurl}}" alt="">
+                <span>{{item.title}}</span>
+            </li>
+
+        </ul>
+
+        <p>
+            <span>公告:</span>
+            <span>公告公告:公告:公告公告:公告:公告公告:公告:公告:公告:公告:公告:</span>
+            <span>|&nbsp;更多</span>
+        </p>
+    </div>
+
+    <div class="type">
+        <ul>
+            <li>
+                <h1>发现好货</h1>
+                <p>零食大汇集,总有一款适合你</p>
+                <img src="assets/imgs/images/s11.png" alt="">
+            </li>
+            <li>
+                <h1>品牌特价</h1>
+                <p>零食大汇集,总有一款适合你</p>
+                <img src="assets/imgs/images/s11.png" alt="">
+            </li>
+            <li>
+                <h1>会买专辑</h1>
+                <p>零食大汇集,总有一款适合你</p>
+                <img src="assets/imgs/images/s11.png" alt="">
+            </li>
+            <li>
+                <h1>专属权益</h1>
+                <p>零食大汇集,总有一款适合你</p>
+                <img src="assets/imgs/images/s11.png" alt="">
+            </li>
+        </ul>
+    </div>
+
+    <div class="fenlei2">
+        <h1>猜你喜欢</h1>
+        <ul>
+            <li>
+                <img src="assets/imgs/images/s1.png" alt="">
+                <span>推荐1</span>
+            </li>
+            <li>
+                <img src="assets/imgs/images/s2.png" alt="">
+                <span>推荐1</span>
+            </li>
+            <li>
+                <img src="assets/imgs/images/s3.png" alt="">
+                <span>推荐1</span>
+            </li>
+
+            <li>
+                <img src="assets/imgs/images/s5.png" alt="">
+                <span>推荐1</span>
+            </li>
+            <li>
+                <img src="assets/imgs/images/s7.png" alt="">
+                <span>推荐1</span>
+            </li>
+            <li>
+                <img src="assets/imgs/images/s8.png" alt="">
+                <span>推荐1</span>
+            </li>
+            <li>
+                <img src="assets/imgs/images/s9.png" alt="">
+                <span>推荐1</span>
+            </li>
+            <li>
+                <img src="assets/imgs/images/s10.png" alt="">
+                <span>推荐1</span>
+            </li>
+
+        </ul>
+    </div>
+    <div style="height: 6rem;"></div>
+</ion-content>
+<!-- <ion-footer>
+    <ion-toolbar>
+        <ul class="footers">
+            <li class="showtitle"><span> <ion-icon name="ios-home-outline"></ion-icon></span><span>首页</span></li>
+            <li><span><ion-icon name="ios-cart-outline"></ion-icon></span><span>分类</span></li>
+            <li><span> <ion-icon name="ios-list-box-outline"></ion-icon></span><span>购物车</span></li>
+            <li><span><ion-icon name="person"></ion-icon></span><span>我的</span></li>
+            <li (click)='black()'><span><ion-icon name="redo"></ion-icon></span><span>离开</span></li>
+        </ul>
+
+    </ion-toolbar>
+</ion-footer> -->
