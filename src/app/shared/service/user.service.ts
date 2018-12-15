@@ -582,8 +582,8 @@ querypetcardotherclientlist(data){
 	/**
 	 * 查询属性
 	*/
-	querypropertylist(){
-	    return this.http.Post(this.api.querypropertylist,{_time:111})
+	querypropertylist(data){
+	    return this.http.Post(this.api.querypropertylist,data)
 	}
 	/**
 	 * 查询公共属性
