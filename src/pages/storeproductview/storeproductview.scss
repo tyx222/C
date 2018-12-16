@@ -60,6 +60,18 @@ page-storeproductview {
             margin-top: 0.5rem
         }
     }
+	.guige{
+		    display: -webkit-box;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-align: center;
+			-webkit-align-items: center;
+			-ms-flex-align: center;
+			align-items: center;
+			padding: 0.5rem;
+			background: #fff;
+	}
     .ble {
         display: flex;
         align-items: center;

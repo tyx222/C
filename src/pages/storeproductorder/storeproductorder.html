@@ -69,8 +69,8 @@
             <div class="ble2">
                 <div class="title">
                     <p>{{item.goods_name}}</p>
-                    <p class="pardack">商品明细</p>
-                    <p class="total"><span class="maxprice">￥{{item.goods_price | number:'1.2-2'}}</span><span class="pordacknum"><button (click)="outout(i)">—</button><input type="number" min="0" (change)="nums(i)"  [(ngModel)]="goodsnum[i]">
+                    <p class="pardack">{{item.specifications_name||""}}</p>
+                    <p class="total"><span class="maxprice">￥{{item.specifications_price | number:'1.2-2'}}</span><span class="pordacknum"><button (click)="outout(i)">—</button><input type="number" min="0" (change)="nums(i)"  [(ngModel)]="goodsnum[i]">
                     <button (click)="upup(i)" >+</button></span></p>
                 </div>
                 <div>
@@ -80,7 +80,7 @@
         </div>
     </div>
         
-    <p class="distribution"><span>配送方式：</span><span>快递 免邮</span></p>
+    <p class="distribution"><span>配送方式：</span><span>快递 <em *ngIf="postage!='包邮'">￥ </em>{{ postage }}</span></p>
     <div class="tarea">
         <p>买家留言：</p>
         <textarea [(ngModel)]="remark" style="resize: none;width: 100%;height: 10rem;padding: 0.5rem;border: 1px solid #999;border-radius: 5px" placeholder="选填 填写内容和卖家协商"></textarea>

@@ -37,6 +37,8 @@ export class StoreproductorderPage {
   platformprice:number = 0;
   cityid
   deposit = 0
+  postage = "包邮"
+  youhuiprice=0;
   remark
   constructor(
     public navCtrl: NavController,
@@ -50,8 +52,8 @@ export class StoreproductorderPage {
     console.log("ionViewDidLoad OrderPage");
   }
   ionViewWillEnter() {
-    this.address();
     this.pordackinit();
+	this.address();
   }
 
   openPayActionSheet(data) {
@@ -84,14 +86,17 @@ export class StoreproductorderPage {
 
   pordackinit() {
   	this.goods = this.navParams.get("pordack")
+	console.log(this.goods)
 	if(this.goods.length<1){
 		this.http.presentToast('请选择至少一个商品提交')
 		return this.navCtrl.pop();
 	}
+	var postage = 0;
 	this.goods.forEach((val,idx)=>{
 		this.goodsids.push(val.goods_id)
 		this.goodsnum[idx] = val.quantity;
-		this.total += val.goods_price * val.quantity 
+		postage += val.specifications_postage
+		this.total += val.specifications_price * val.quantity 
 		if(val.deposit>0){
 			this.deposit += val.deposit
 		}
@@ -99,6 +104,11 @@ export class StoreproductorderPage {
 			this.shopName = val.shop_name
 		}
 	})
+	console.log('postage',postage)
+	if(postage>0){
+		this.postage = postage;
+		this.total += postage;
+	}
 	
     this.imgUrl = this.navParams.get("imgUrl");
 	console.log(this.goods)
@@ -118,24 +128,28 @@ export class StoreproductorderPage {
   nums(index) {
   	this.total = 0
     this.goods.forEach((val,idx)=>{
-		this.total += val.goods_price * this.goodsnum[idx]
+		this.total += val.specifications_price * this.goodsnum[idx]
 	})
+	this.total += this.postage;
+
   }
 
 
   async addappOrder() {
 	let goodsOrder = []
+	let goods_sum = 0;
 	this.goods.forEach((val,idx)=>{
+		goods_sum += val.goods_price
 		goodsOrder.push({
 			good_id:val.goods_id,
 			good_num:this.goodsnum[idx]+"",
 			unit_price:val.goods_price+"", // 商品单价
-			cash_price:val.goods_price+"", //优惠金额
+			cash_price:this.youhuiprice, //优惠金额
 			couponid:'',
 			coupon_amount:'0',
 			deposit:this.deposit+"", //定金
-			specifications_name:"", //规格名称
-			specifications_size:"", //规格尺寸
+			specifications_name:val.specifications_name, //规格名称
+			specifications_size:val.specifications_size, //规格尺寸
 			shopid: this.goods[0].shopid //商铺id
 		})
 	})
@@ -145,12 +159,12 @@ export class StoreproductorderPage {
 	})
 
     let parmas = {
-	    order_sum: this.total+"", //订单金额
+	    order_sum: this.total+this.postage, //订单金额
 		receiver_id: this.cityid,
 		remarks:this.remark, //备注
-		postage:'0', //运费
-		cash_sum: this.total+"", //商品价格减去优惠卷的优惠价格
-		final_payment:"", //最终支付价格",包括运费支付的
+		postage:this.postage, //运费
+		cash_sum: goods_sum-this.youhuiprice, //商品价格减去优惠卷的优惠价格
+		final_payment:this.total+this.postage, //最终支付价格",包括运费支付的
 		shopid: this.goods[0].shopid, //商铺id
 		petdtailorder: goodsOrder
     };

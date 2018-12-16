@@ -1,0 +1,35 @@
+page-storeproductguige {
+	.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{
+		color:white;
+	}
+
+	.shoppingcall {
+        background: #fff;
+        position: fixed;
+        bottom: 0px;
+        display: flex;
+        width: 100%;
+        div {
+			display: flex;
+			padding: 0.5rem;
+            width: 100%;
+            button {
+                width: 50%;
+                height: 50px;
+                color: #fff;
+            }
+            .join {
+                background: rgb(252, 201, 60)
+            }
+            .shop {
+                background: rgb(243, 66, 43)
+            }
+        }
+    }
+
+	.eft{
+		background: #f8d452!important;
+		color:white!important;
+	}
+
+}

@@ -6,7 +6,8 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ToastController
+  ToastController,
+  ModalController
 } from "ionic-angular";
 
 declare let Swiper: any;
@@ -29,14 +30,17 @@ export class StoreproductviewPage {
   title;
   pordackpage;
   goodsinfo:any={};
+  specifications:any = [];
   cmment;
   collectTxt = "";
   hasvideo = false;
   tabs = 0;
+  postage="包邮"
   get imgUrl(): string {
 		return this.appConfig.ip + 'imgs/';
 	  }
   constructor(
+  	public modalCtrl: ModalController,
     public toastCtrl: ToastController,
 	public appConfig: DefaultAppConfig,
     public navCtrl: NavController,
@@ -77,12 +81,15 @@ export class StoreproductviewPage {
 	this.navCtrl.push("StorecenterPage",{shopid:this.goodsinfo.shopid})
   }
   goshop() {
+	this.viewGuige();
+	/*
   	let params = []
 		params.push(this.goodsinfo)
     this.navCtrl.push("StoreproductorderPage", {
       pordack: params,
       imgUrl:this.imgUrl
     });
+	*/
   }
   ionViewWillEnter() {
 	this.shopinit();
@@ -91,6 +98,15 @@ export class StoreproductviewPage {
   }
   ionViewDidLoad() {
 	
+  }
+
+  viewGuige(){
+		let profileModal = this.modalCtrl.create('StoreproductguigePage', { goods: this.goodsinfo,specifications:this.specifications });
+	   profileModal.onDidDismiss(data => {
+		 console.log(data);
+	   });
+	   profileModal.present();
+  
   }
 
   async getstoreinfo(shopid){
@@ -127,7 +143,8 @@ export class StoreproductviewPage {
 	let res = await this.http.querygoods({goodsid:goodsid})
 	if(res.info=="ok"){
 		console.log(res.object)
-		this.goodsinfo = res.object
+		this.goodsinfo = res.object;
+		this.specifications = res.arrayList;
 		this.goodsinfo["quantity"] = 1
 		this.goodsinfo["shop_name"] = ""
 		this.goodsinfo.turns_picture = this.goodsinfo.turns_picture.split(',')
@@ -142,6 +159,15 @@ export class StoreproductviewPage {
 		this.imgpath = this.goodsinfo.turns_picture;
 		this.pordackpage = this.goodsinfo.goods_introduce;
 		this.getstoreinfo(this.goodsinfo.shopid)
+		var postage = 0;
+		res.arrayList.forEach((val,idx)=>{
+			if(val.postage>postage){
+				postage = val.postage
+			}
+		})
+		if(postage>0){
+			this.postage = postage;
+		}
 		this.queryevaluatelist()
 
 	}else{
