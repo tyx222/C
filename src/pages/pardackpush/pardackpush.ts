@@ -92,12 +92,25 @@ export class PardackpushPage {
 	  title: '请选择'
 	};
 	this.imageUrl = this.appConfig.ip + 'imgs/';
-	this.navGoodsInfo = this.navParams.get('goodsinfo')
+	//this.navGoodsInfo = this.navParams.get('goodsinfo')
   }
 
   ionViewDidLoad() {
-	this.queryclasslist();
-	if(this.navGoodsInfo ){
+	
+	if(this.navParams.get('goodsinfo')!=undefined ){
+		var navGoodsInfo = this.navParams.get('goodsinfo')
+		this.goodsInfo(navGoodsInfo.goods_id)
+	}else{
+		this.queryclasslist();
+	}
+    console.log("ionViewDidLoad PardackpushPage");
+  }
+
+  async goodsInfo(goods_id){
+  	let res = await this.http.querygoods({goodsid:goods_id});
+	if(res.info=="ok"){
+		this.navGoodsInfo = res.object;
+		this.guigeList = res.arrayList;
 		if(this.navGoodsInfo.goods_introduce!=''){
 			this.remarkimgs = this.navGoodsInfo.goods_introduce.split(',')
 		}
@@ -117,14 +130,15 @@ export class PardackpushPage {
 		this.proData.classify_id = this.navGoodsInfo.classify_id
 		this.proData.favorable_price = this.navGoodsInfo.favorable_price
 		this.proData.shopid = this.navGoodsInfo.shopid
+		this.proData.cover = this.navGoodsInfo.cover
 		this.proData.deposit = this.navGoodsInfo.deposit
-		this.proData.shopid = this.navGoodsInfo.shopid
-
 		this.proData.status = this.navGoodsInfo.status
-
+		this.proData.specification = this.navGoodsInfo.specifications
 	}
-	console.log(this.proData)
-    console.log("ionViewDidLoad PardackpushPage");
+			console.log(this.proData)
+		console.log(this.guigeList)
+
+	this.queryclasslist();
   }
 
   check(type){
@@ -135,8 +149,9 @@ export class PardackpushPage {
  async queryclasslist(){
 	let res = await this.http.queryclasslist();
 	if(res.info=="ok"){
-			this.proClassifyList = res.arrayList;
-		}
+		this.proClassifyList = res.arrayList;
+		
+	}
  }
 	
 	//折扣变化
@@ -348,8 +363,8 @@ export class PardackpushPage {
 	 // 商品规格
 	 this.guigeList.forEach((val, idx, array) => {
 		that.proData.specifications.push(val)
-		if(val.display_price>that.proData.goods_price){
-			that.proData.goods_price = val.display_price
+		if(val.specifications_price>that.proData.goods_price){
+			that.proData.goods_price = val.specifications_price
 		}
 	 });
 
@@ -360,6 +375,7 @@ export class PardackpushPage {
 	 this.proData.goods_introduce = this.remarkimgs.join(',')
 	 this.proData.turns_picture = this.slides.join(',')
 	 console.log(JSON.stringify(this.proData)) ;
+	 
 	 if(this.navGoodsInfo){
 		this.updategood()
 	 }else{

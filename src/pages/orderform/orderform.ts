@@ -20,6 +20,12 @@ export class OrderformPage {
 	living = false;
 	storeinfo:any = {}
 	order_list=[]
+	sendData={
+		orderid:"",
+		express_company:"",
+		express_code:"",
+		express_number:""
+	}
 	get imgUrl(): string {
 		return this.appConfig.ip + 'imgs/';
 	  }
@@ -37,7 +43,12 @@ export class OrderformPage {
 	
 	//发货
 	async send(order_id){
-		let res = await this.http.updateorderstatus({orderid:order_id,status:"2"})
+		this.sendData.orderid = order_id
+		if(this.sendData.express_company=='' || this.sendData.express_code=='' || this.sendData.express_number=='' ){
+			return this.http.presentToast("请填全发货信息")
+		}
+		//let res = await this.http.updateorderstatus({orderid:order_id,status:"2"})
+		let res = await this.http.logistics(this.sendData)
 		if(res.info=="ok"){
 			this.http.presentToast("发货成功")
 			this.queryshopapporderlist()

@@ -7,6 +7,7 @@ import {
   NavController,
   NavParams,
   ToastController,
+  LoadingController,
   ModalController
 } from "ionic-angular";
 
@@ -35,7 +36,7 @@ export class StoreproductviewPage {
   collectTxt = "";
   hasvideo = false;
   tabs = 0;
-  postage="包邮"
+  postage=0
   get imgUrl(): string {
 		return this.appConfig.ip + 'imgs/';
 	  }
@@ -44,6 +45,7 @@ export class StoreproductviewPage {
     public toastCtrl: ToastController,
 	public appConfig: DefaultAppConfig,
     public navCtrl: NavController,
+	public loadingCtrl: LoadingController,
 	public http: UserService,
     public navParams: NavParams
   ) {}
@@ -80,17 +82,56 @@ export class StoreproductviewPage {
   store(){
 	this.navCtrl.push("StorecenterPage",{shopid:this.goodsinfo.shopid})
   }
+
   goshop() {
-	this.viewGuige();
+  	if(this.specifications.length>1){
+		this.viewGuige();
+	}
+
+
+	if(this.specifications.length==1){
+		this.goodsinfo['specifications_id'] = this.specifications[0].specifications_id
+		this.goodsinfo['specifications_price'] = this.specifications[0].specifications_price
+		this.goodsinfo['specifications_postage'] = this.specifications[0].postage
+		this.goodsinfo['specifications_name'] = this.specifications[0].specifications_name
+
+		let params = []
+			params.push(this.goodsinfo)
+		this.navCtrl.push("StoreproductorderPage", {
+		  pordack: params,
+		  imgUrl:this.imgUrl
+		});
+	}
+
 	/*
-  	let params = []
-		params.push(this.goodsinfo)
-    this.navCtrl.push("StoreproductorderPage", {
-      pordack: params,
-      imgUrl:this.imgUrl
-    });
+	if(this.specifications.length<1){
+		let params = []
+			params.push(this.goodsinfo)
+		this.navCtrl.push("StoreproductorderPage", {
+		  pordack: params,
+		  imgUrl:this.imgUrl
+		});
+	}
 	*/
   }
+
+  
+  viewGuige(){
+  		const loader = this.loadingCtrl.create({
+		  content: "",
+		});
+		loader.present();
+
+		let profileModal = this.modalCtrl.create('StoreproductguigePage', { goods: this.goodsinfo,specifications:this.specifications },{cssClass:'mymodal'});
+	   profileModal.onDidDismiss(data => {
+		 console.log(data);
+		 loader.dismiss();
+	   });
+	   profileModal.present();
+  
+  }
+
+
   ionViewWillEnter() {
 	this.shopinit();
 	this.swipers();
@@ -100,14 +141,6 @@ export class StoreproductviewPage {
 	
   }
 
-  viewGuige(){
-		let profileModal = this.modalCtrl.create('StoreproductguigePage', { goods: this.goodsinfo,specifications:this.specifications });
-	   profileModal.onDidDismiss(data => {
-		 console.log(data);
-	   });
-	   profileModal.present();
-  
-  }
 
   async getstoreinfo(shopid){
   	let res = await this.http.queryshopbyshopid({shopid:shopid})

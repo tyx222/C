@@ -34,7 +34,9 @@ export class StoreproductguigePage {
     console.log(this.navParams);
 	    console.log(this.goodsinfo);
     console.log(this.specifications);
-
+	setTimeout(()=>{
+		this.checks(this.specifications[0])
+	},300)
   }
 
   dismiss(){
@@ -72,6 +74,7 @@ export class StoreproductguigePage {
 	}
 
 	goshop(){
+		
 		let params = []
 		this.goodsinfo['quantity'] = this.buynum
 		params.push(this.goodsinfo)

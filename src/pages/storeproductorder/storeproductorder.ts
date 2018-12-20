@@ -37,8 +37,11 @@ export class StoreproductorderPage {
   platformprice:number = 0;
   cityid
   deposit = 0
-  postage = "包邮"
-  youhuiprice=0;
+  postage=0
+  fullcourt_amount=0; // 通用券金额
+  fullcourt_couponid = '';
+  couponid=''
+  coupon_amount=0 //商家优惠卷金额
   remark
   constructor(
     public navCtrl: NavController,
@@ -109,6 +112,10 @@ export class StoreproductorderPage {
 		this.postage = postage;
 		this.total += postage;
 	}
+
+	if(this.deposit>0){
+		this.total = this.deposit;
+	}
 	
     this.imgUrl = this.navParams.get("imgUrl");
 	console.log(this.goods)
@@ -126,12 +133,16 @@ export class StoreproductorderPage {
   }
 
   nums(index) {
-  	this.total = 0
-    this.goods.forEach((val,idx)=>{
-		this.total += val.specifications_price * this.goodsnum[idx]
-	})
-	this.total += this.postage;
-
+  	
+	if(this.deposit>0){
+		this.total = this.deposit
+	}else{
+		this.total = 0
+		this.goods.forEach((val,idx)=>{
+			this.total += val.specifications_price * this.goodsnum[idx]
+		})
+		this.total += this.postage;
+	}	
   }
 
 
@@ -143,13 +154,9 @@ export class StoreproductorderPage {
 		goodsOrder.push({
 			good_id:val.goods_id,
 			good_num:this.goodsnum[idx]+"",
-			unit_price:val.goods_price+"", // 商品单价
-			cash_price:this.youhuiprice, //优惠金额
-			couponid:'',
-			coupon_amount:'0',
-			deposit:this.deposit+"", //定金
-			specifications_name:val.specifications_name, //规格名称
-			specifications_size:val.specifications_size, //规格尺寸
+			unit_price:val.goods_price+"", // 所选择规格价格
+			cash_price:val.goods_price*this.goodsnum[idx]+"", //总金额
+			specificationsid:val.specifications_id, //规格ID
 			shopid: this.goods[0].shopid //商铺id
 		})
 	})
@@ -159,12 +166,16 @@ export class StoreproductorderPage {
 	})
 
     let parmas = {
-	    order_sum: this.total+this.postage, //订单金额
+	    order_sum: this.total+"", //订单金额,没包括运费
 		receiver_id: this.cityid,
 		remarks:this.remark, //备注
-		postage:this.postage, //运费
-		cash_sum: goods_sum-this.youhuiprice, //商品价格减去优惠卷的优惠价格
-		final_payment:this.total+this.postage, //最终支付价格",包括运费支付的
+		postage:this.postage+"", //运费
+		couponid:this.couponid+"", //商家优惠卷ID
+		coupon_amount:this.coupon_amount+"", //商家优惠卷金额
+		fullcourt_couponid:this.fullcourt_couponid+"",
+		fullcourt_amount:this.fullcourt_amount+"",//通用卷金额
+		deposit:this.deposit+"", //定金
+		final_payment:this.total+"", //最终支付价格",包括运费支付的
 		shopid: this.goods[0].shopid, //商铺id
 		petdtailorder: goodsOrder
     };
@@ -244,14 +255,14 @@ async weiXinPay(item){
           sign: payResult.object.sign // signed string
         };
 		
-		this.http.presentToast(JSON.stringify(params))
+		//this.http.presentToast(JSON.stringify(params))
 
 		this.wechatChenyu.sendPaymentRequest(params).then((result)=>{
           //支付成功
 		  this.http.presentToast(JSON.stringify(result))
         },(error)=>{
          //支付失败
-          this.http.presentToast(JSON.stringify(error))
+          this.http.presentToast('支付失败'+JSON.stringify(error))
         })
 
 

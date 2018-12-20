@@ -95,7 +95,9 @@ export class UserService {
 	choiceclerk:"chongwu/app/choiceclerk",
 	queryappdtailOrderlist:"chongwu/app/queryappdtailOrderlist",
 	querymyclerklist:"chongwu/app/querymyclerklist",
-	queryclerklist:"chongwu/app/queryclerklist"
+	queryclerklist:"chongwu/app/queryclerklist",
+	wxGoBackOrder:"chongwu/app/wxGoBackOrder",
+	logistics:"chongwu/app/logistics"
 
 
 
@@ -810,4 +812,14 @@ querypetcardotherclientlist(data){
   queryclerklist(data) {
     return this.http.Post(this.api.queryclerklist, data);
   }
+
+  wxGoBackOrder(data) {
+    return this.http.Post(this.api.wxGoBackOrder, data);
+  }
+
+  logistics(data) {
+    return this.http.Post(this.api.logistics, data);
+  }
+
+
 }
