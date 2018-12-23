@@ -1,0 +1,104 @@
+<!--
+  Generated template for the OrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>订单详情</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <div class="titaa" (click)='pushipam()' *ngIf="show">
+        <div class="ble">
+            <div>
+                <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
+            </div>
+            <div class="ble2">
+                <div class="name">
+                    <p>选择收货地址</p>
+                </div>
+                <div>
+                    <img src="assets/imgs/images/right.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="titaa" (click)='pushipam()' *ngIf="!show">
+        <div class="ble">
+            <div>
+                <img src="assets/imgs/images/xdgps.png" alt="" class="userimg" style="width:3rem">
+            </div>
+            <div class="ble2">
+                <div class="name">
+                    <p><span>收货人:{{ipamord.myname||''}}</span><span style="float: right;">{{ipamord.ipone||''}}</span></p>
+                    <p><span>{{ipamord.order||''}}</span></p>
+                </div>
+                <div>
+                    <img src="assets/imgs/images/right.png" alt="" style="width:1.5rem">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="titaa">
+        <div class="ble">
+            <div>
+                <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
+            </div>
+            <div class="ble2">
+                <div class="name">
+                    <p>{{shopName}}</p>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="titaa">
+        <div class="ble" style="height: 10rem;" *ngFor="let item of goods;let i = index">
+            <div class="shopingimg">
+                <img src="{{imgUrl}}{{item.cover}}" alt="">
+            </div>
+            <div class="ble2">
+                <div class="title">
+                    <p>{{item.goods_name}}</p>
+                    <p class="pardack">{{item.specifications_name||""}}</p>
+                    <p class="total"><span *ngIf="item.specifications_price" class="maxprice">￥{{item.specifications_price | number:'1.2-2'}}</span><span *ngIf="!item.specifications_price" class="maxprice">￥{{item.goods_price | number:'1.2-2'}}</span><span class="pordacknum"><button (click)="outout(i)">—</button><input type="number" min="0" (change)="nums(i)"  [(ngModel)]="goodsnum[i]">
+                    <button (click)="upup(i)" >+</button></span></p>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<p class="distribution"><span>定金：</span><span style="color:#FF7041;">￥ {{ deposit }}</span></p>
+
+        
+    <p class="distribution"><span>快递：</span><span *ngIf="postage>0" style="color:#FF7041;">￥ {{ postage }}</span><span *ngIf="postage<1">包邮</span></p>
+    <div class="tarea">
+        <p>买家留言：</p>
+        <textarea [(ngModel)]="remark" style="resize: none;width: 100%;height: 10rem;padding: 0.5rem;border: 1px solid #999;border-radius: 5px" placeholder="选填 填写内容和卖家协商"></textarea>
+    </div>
+
+    <div style="height: 7rem;"></div>
+
+    <div class="shoppingcall">
+        <div>
+
+            合计金额：<span class="maxprice">￥{{ total | number:'1.2-2'}}<span *ngIf="deposit>0">(首付定金)</span></span>
+
+        </div>
+        <div>
+            <button class="shop" (click)="clickEventHandler()">立即购买</button>
+        </div>
+    </div>
+</ion-content>

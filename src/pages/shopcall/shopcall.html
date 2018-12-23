@@ -14,22 +14,23 @@
 
 
 <ion-content padding>
-    <div class="callbox">
+
+    <div class="callbox" *ngFor="let item of carts; let i = index">
         <p class="shops2">
-            <input type="radio" name="" id="">
-            <img src="assets/imgs/images/dp.png" alt="" srcset=""> 店铺名称></p>
+            <input type="checkbox" *ngIf="!checks[i].checked"><input checked type="checkbox" *ngIf="checks[i].checked">
+            <img src="assets/imgs/images/dp.png" alt="" srcset=""> {{item.shop_name}}></p>
         <div class="shops">
 
             <div class="datas">
-                <div> <input type="radio" name="" id=""></div>
+                <div (click)="check(i)"> <input type="checkbox" *ngIf="!checks[i].checked"><input checked type="checkbox" *ngIf="checks[i].checked"></div>
                 <div>
-                    <img src="assets/imgs/images/goudai.png" alt="">
+                    <img (click)="goodinfo(item.goods_id)" src="{{imgUrl}}{{item.cover}}" alt="">
                     <div>
-                        <h1>这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼这里是称呼</h1>
-                        <p>商品明细</p>
+                        <h1>{{item.goods_name}}</h1>
+                        <p>{{item.goods_key}}</p>
                         <p>
-                            <span class="money">¥999</span>
-                            <span style="font-size: 1.5rem"><button>-</button><input type="text" value="1"><button>+</button></span>
+                            <span class="money">¥{{item.goods_price| number:'1.2-2'}}</span>
+                            <span style="font-size: 1.5rem"><button (click)="changeQuantity(i, 0)">-</button><input [(ngModel)]="item.quantity" (ngModelChange)="modelChange(i,$event)" type="text" value="1"><button (click)="changeQuantity(i, 1)">+</button></span>
                         </p>
 
                     </div>
@@ -41,6 +42,6 @@
 
     <div style="height: 5rem;"></div>
     <div class="jiesuan">
-        <span> <input type="radio" name="" id="">全选</span> <span> <span>合计 <span style="color: #fb7a3a;font-size: 1.5rem">¥999</span></span> <button>结算</button></span>
+        <span (click)="checkAll()"> <input type="checkbox" *ngIf="checkTxt=='全选'"><input type="checkbox" *ngIf="checkTxt=='取消全选'" checked>{{checkTxt}}</span> <span> <span>合计 <span style="color: #fb7a3a;font-size: 1.5rem">¥{{this.total| number:'1.2-2'}}</span></span> <button (click)="gopay()">结算</button></span>
     </div>
 </ion-content>

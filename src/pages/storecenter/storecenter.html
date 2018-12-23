@@ -1,0 +1,74 @@
+<!--
+  Generated template for the StorecenterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div class="tophead">
+    	<ion-list>
+    	  <ion-item>
+    	    <ion-thumbnail item-start>
+    	      <img src="{{headimgpath}}" width="100%" height="100%">
+    	    </ion-thumbnail>
+    	    <h2>{{shopName}}的小店</h2>
+    	  </ion-item>
+    	</ion-list>
+    </div>
+	<div class="box">
+        <div class="tuijian">
+            <ul>
+				<li (click)="cateinfo('')"> 
+					<h1 [ngClass]="{'eft':cateId==''}">全部</h1>
+                </li>
+
+                <li *ngFor="let item of cateList" (click)="cateinfo(item)"> 
+					<h1 [ngClass]="{'eft':cateId==item.classify_id}">{{ item.classify_name }}</h1>
+						<!--<dl *ngIf="item.childs.length > 0">
+							<dd *ngFor="let citem of item.childs" (click)="cateinfo(citem)">{{ citem.classify_name }}</dd>
+                        </dl>-->
+                
+                </li>
+                
+            </ul>
+        </div>
+        <div class="fenlei">
+            <div class="searchbox">
+                <ion-searchbar  placeholder="店铺内搜索" (ionInput)="getItems($event)"></ion-searchbar>
+            </div>
+			<div class="sort">
+				<ul>
+					<li>排序：</li>
+					<li (click)="checks('1')" [ngClass]="{'eft':type=='1'}">综合</li>
+					<li (click)="checks('2')" [ngClass]="{'eft':type=='2'}">销量</li>
+					<li (click)="checks('3')" [ngClass]="{'eft':type=='3'}">
+					价格<ion-icon *ngIf="ctype==true && type=='3'" name="md-arrow-dropdown"></ion-icon><ion-icon name="md-arrow-dropup" *ngIf="ctype==false && type=='3'"></ion-icon>
+					
+					</li>
+				</ul>
+			</div>
+
+            <div class="list">
+                <ul>
+                    <li *ngFor="let item of productList" (click)="productinfo(item)">
+                        <img src="{{imageUrl}}{{ item.cover }}" alt="{{ item.goods_name }}">
+                        <span>{{ item.goods_name }}</span>
+                        <span style="padding-top: 0;">￥{{ item.goods_price }}</span>
+
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+</ion-content>

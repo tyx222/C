@@ -93,11 +93,11 @@ export class OrderPage {
     this.maxprice = this.navParams.get("pordack").product_price;
     this.title = this.navParams.get("pordack").product_name;
     this.cmment = this.navParams.get("pordack").product_introduce;
-    this.leastpay = this.navParams.get("pordack").leastpay;
+    this.leastpay = this.navParams.get("pordack").leastpay||1;
     this.integral_proportion = this.navParams.get(
       "pordack"
-    ).integral_proportion;
-    this.product_guige = this.navParams.get("pordack").product_guige;
+    ).integral_proportion||1;
+    this.product_guige = this.navParams.get("pordack").product_guige||1;
     console.log(this.product_guige);
   }
 
@@ -157,6 +157,7 @@ export class OrderPage {
         }
       ]
     };
+	
     let res = await this.http.addappOrder({jsonPramter:JSON.stringify(parmas)});
     this.http.http.showToast(res.message)
     if(res.info=="ok"){
@@ -221,10 +222,12 @@ export class OrderPage {
       mytoken: localStorage.getItem("mytoken")
     };
     let res = await this.http.address(parmas);
-    console.log(res);
-    this.ipamord.myname = res.arrayList[0].receiver_name;
-    this.ipamord.ipone = res.arrayList[0].phone_number,
-      this.ipamord.order =
+	if(res.arrayList.length<1){
+		return
+	}else{
+		this.ipamord.myname = res.arrayList[0].receiver_name;
+		this.ipamord.ipone = res.arrayList[0].phone_number,
+		this.ipamord.order =
         res.arrayList[0].province +
         " " +
         res.arrayList[0].city +
@@ -233,6 +236,9 @@ export class OrderPage {
         " " +
         res.arrayList[0].detaile_address;
         this.cityid=res.arrayList[0].id
+	}
+    console.log(res);
+    
   }
 
   /**

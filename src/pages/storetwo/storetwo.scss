@@ -1,0 +1,245 @@
+page-storetwo {
+	.scroll-content {
+        padding: 0 !important;
+        background: #eee
+    }
+    ion-footer {
+        left: 0;
+        bottom: 0!important;
+        position: absolute;
+        z-index: 10;
+        background: #fff;
+        display: block;
+        width: 100%;
+        .footers {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+            li {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                span {
+                    color: #666
+                }
+                span:nth-of-type(1) {
+                    font-size: 2rem
+                }
+            }
+            .showtitle {
+                span {
+                    color: #FFC435
+                }
+            }
+        }
+    }
+    .titlebox {
+        width: 100%;
+        display: flex;
+        padding: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        button {
+            font-size: 1.8rem;
+            color: #fff;
+            background: none;
+            margin-top: 0.5rem;
+            img {
+                width: 3rem
+            }
+            .sao {
+                width: 2rem;
+            }
+        }
+        .sousuo {
+            border: none;
+            width: 65vw;
+            border-radius: 1rem;
+            height: 2rem;
+            margin: 0 1rem
+        }
+    }
+    .toolbar-background-ios {
+        /* background: -webkit-gradient(linear, left top, right top, from(#F9D753), to(#EC6D36)); */
+        /* background: linear-gradient(to right, #F9D753, #EC6D36); */
+        background: rgba($color: #fff, $alpha: 0)!important
+    }
+    .toolbar-md-primary .toolbar-background-md {
+        background: rgba($color: #fff, $alpha: 0)!important
+    }
+    .fenlei {
+        background: url(../assets/imgs/images/callbg.png) no-repeat;
+        background-size: 100%;
+        padding: 1.5rem;
+        width: 100%;
+        .bannar {
+            height: 10rem;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        h1 {
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            font-weight: 900;
+            border-left: 5px solid red;
+            padding-left: 0.5rem
+        }
+        p {
+            background: #fff;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            span {
+                display: inline-block;
+            }
+            span:nth-of-type(1) {
+                color: red;
+                font-size: 1.5rem;
+                width: 15%;
+            }
+            span:nth-of-type(2) {
+                width: 68%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap
+            }
+            span:nth-of-type(3) {
+                width: 15%;
+                text-align: right;
+            }
+        }
+        ul {
+            background: #fff;
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10rem;
+            box-shadow: 0px 0px 38px 9px #fff;
+            li {
+                width: 20%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-left: 1px solid #eee;
+                border-bottom: 1px solid #eee;
+                padding-top: 0.5rem;
+                img {
+                    width: 80%;
+                }
+                span {
+                    text-align: center;
+                    padding: 0.5rem;
+                }
+            }
+        }
+    }
+    .type {
+        padding: 1rem;
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            background: #fff;
+            li {
+                width: 50%;
+                border: 1px solid #eee;
+                padding: 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                p {
+                    color: #999;
+                    width: 100%;
+                }
+                h1 {
+                    font-size: 1.7rem;
+                    font-weight: 900;
+                    width: 100%;
+                }
+                img {
+                    width: 8rem;
+                    height: 8rem;
+                    ;
+                }
+            }
+            li:nth-of-type(1) h1 {
+                color: rgb(56, 88, 230)
+            }
+            li:nth-of-type(2) h1 {
+                color: rgb(230, 56, 230)
+            }
+            li:nth-of-type(3) h1 {
+                color: rgb(228, 60, 110)
+            }
+            li:nth-of-type(4) h1 {
+                color: rgb(56, 230, 79)
+            }
+        }
+    }
+    .fenlei2 {
+        padding: 1rem;
+        width: 100%;
+        .bannar {
+            height: 10rem;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        h1 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            padding: 1rem;
+            width: 100%;
+            background: #fff;
+            margin-bottom: 0rem;
+        }
+        p {
+            background: #fff;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            span {
+                display: inline-block;
+            }
+            span:nth-of-type(1) {
+                color: red;
+                font-size: 1.5rem;
+                width: 15%;
+            }
+            span:nth-of-type(2) {
+                width: 68%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap
+            }
+            span:nth-of-type(3) {
+                width: 15%;
+                text-align: right;
+            }
+        }
+        ul {
+            background: #fff;
+            display: flex;
+            flex-wrap: wrap;
+            padding-bottom: 1rem;
+            li {
+                width: 25%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding-top: 0.5rem;
+                img {
+                    width: 80%;
+                }
+                span {
+                    text-align: center;
+                    padding: 0.5rem;
+                }
+            }
+        }
+    }
+}

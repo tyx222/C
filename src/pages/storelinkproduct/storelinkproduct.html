@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar>
+            <ion-title>关联商品</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-searchbar class="mysearchbar" [(ngModel)]="myInput"
+        [showCancelButton]="shouldShowCancel"
+        placeholder="按关键字搜索"
+        (ionInput)="onInput($event)"
+        (ionCancel)="onCancel($event)">
+    </ion-searchbar>
+
+     <div style="text-align: center;margin-top: 5px;margin-button: 5px;clear: both;">
+
+        <button ion-button (click)="save()">保存</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button ion-button (click)="dismiss()">取消</button>
+    </div>
+	
+	<div padding>
+	  <ion-segment [(ngModel)]="type">
+		<ion-segment-button (click)="link('no')" value="no">
+		  未关联
+		</ion-segment-button>
+		<ion-segment-button (click)="link('yes')" value="yes">
+		  已关联
+		</ion-segment-button>
+	  </ion-segment>
+	</div>
+	<div [ngSwitch]="type">
+	  <ion-list *ngSwitchCase="'no'">
+		<ion-item *ngFor="let item of proList">
+		  <ion-thumbnail item-start>
+			<img src="{{imageUrl}}{{item.cover}}">
+		  </ion-thumbnail>
+		  <h2>{{ item.goods_name }}</h2>
+		  <input type="checkbox" class="itemcheckboxright" (click)="checkpro(item.goods_id)">
+		</ion-item>
+	  </ion-list>
+
+	  <ion-list *ngSwitchCase="'yes'">
+		<ion-item *ngFor="let item of proList">
+		  <ion-thumbnail item-start>
+			<img src="{{imageUrl}}{{item.cover}}">
+		  </ion-thumbnail>
+		  <h2>{{ item.goods_name }}</h2>
+		  <input type="checkbox" class="itemcheckboxright"  (click)="checkpro(item.goods_id)">
+		</ion-item>
+	  </ion-list>
+	</div>
+
+   
+</ion-content>

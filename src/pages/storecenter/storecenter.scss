@@ -1,0 +1,109 @@
+page-storecenter {
+	.list{
+		margin: -1px 0 0px;
+	}
+    .tophead{
+        border-bottom:0.55px solid #bdbdbd;
+    }
+	ion-searchbar{
+		background:#ffffff!important;
+	}
+	
+	.box {
+        display: flex;
+        flex-wrap: nowrap;
+		height: 100%;
+        .tuijian {
+        	//padding-top: 5rem;
+		    width: 34vw;
+			//background-color: #eeeeee;
+            h1 {
+				 margin-top: 1rem;
+                font-size: 1.3rem;
+                font-weight: 900;
+                border-left: 5px solid #ffc435;
+                padding-left: 0.5rem
+            }
+			h1.eft{
+				border-color: #ec6f36!important;
+			}
+            ul>li {
+                text-align: left;
+                color: #666;
+                padding: 0.24rem;
+                //background: #eee;
+                //margin-top: 0.5rem
+				border-bottom: 0.55px solid #c8c7cc
+            }
+            dd {
+            	text-align: left;
+			    color: #666;
+			    padding: 0.5rem 0.5rem 0.5rem 0.8rem;
+			    background: #eee;
+			    margin-top: 0.5rem;
+            }
+        }
+        .fenlei {
+			border-left: 0.55px solid #c8c7cc;
+            width: 100%;
+			ion-searchbar{
+				padding:0;
+			}
+            .searchbox {
+                height: auto;
+				border-bottom: 0.55px solid #c8c7cc;
+    			padding: 2px 1.5rem;
+            }
+			.searchbar-input{
+				-webkit-box-shadow:none;
+				box-shadow:none;
+				line-height: 2.42rem;
+			}
+			.sort ul {
+				margin:0px;
+			  background: #fff;
+			  display: flex;
+			  border-bottom: 2px solid #eee;
+			}
+
+			.sort ul li {
+			  width: 20%;
+			  text-align: center;
+			  padding: 1.0585rem 0;
+			  margin-left: 0;
+			  color: #666;
+			  flex-direction: column;
+              justify-content: center;
+			}
+
+			.sort ul .eft {
+			  border-bottom: 2px solid #fcc93c !important;
+			  color: #000;
+			}
+
+            h1 {
+                font-size: 1.3rem;
+                margin-top: 2rem;
+                font-weight: 900;
+                border-left: 5px solid red;
+                padding-left: 0.5rem
+            }
+            .list ul {
+                display: flex;
+                flex-wrap: wrap;
+                margin-top:1rem;
+                li {
+                    width: 28%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    margin-left: 4%;
+                    span {
+                        text-align: center;
+                        padding: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,80 @@
+<!--
+  Generated template for the StorecartsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的购物车</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="cart">
+  <ion-list>
+    <ion-card *ngFor="let item of carts; let i = index">
+      <ion-item text-wrap (click)="goodinfo(item.goods_id)">
+        <ion-thumbnail item-left>
+          <img src="{{imgUrl}}{{item.cover}}" *ngIf="item.cover">
+        </ion-thumbnail>
+        <h2>{{item.goods_name}}</h2>
+        <p>{{item.goods_key}}</p>
+      </ion-item>
+      
+      <ion-item>
+        <ion-note item-left>数量</ion-note>
+		        <ion-note item-left>{{item.quantity}}</ion-note>
+        <ion-note item-right>
+			<button full primary style="width: 2rem;height: 2rem;margin-right: 1rem;" (click)="changeQuantity(i, 1)">
+			<ion-icon name="add"></ion-icon>
+			</button>
+			<button full primary style="width: 2rem;height: 2rem;" (click)="changeQuantity(i, 0)">
+			<ion-icon name="remove"></ion-icon>
+			</button>
+		</ion-note>
+        <ion-note item-right>
+		<button full secondary (click)="removeItem(i)">
+			<img src="./assets/imgs/carts/del.jpg" style="width:2.4rem" />
+		</button>
+		</ion-note>
+      </ion-item>
+      
+      <ion-item>
+	    <ion-note item-left (click)="check(i)">
+			<ion-icon style="font-size: 2.2em;" *ngIf="!checks[i].checked" name="ios-checkmark-circle-outline"></ion-icon>
+			<ion-icon style="font-size: 2.2em;" *ngIf="checks[i].checked" name="ios-checkmark-circle"></ion-icon>
+
+		</ion-note>
+        <ion-note item-left>单价</ion-note>
+        <ion-note item-left primary>￥{{item.goods_price| number:'1.2-2'}}</ion-note>
+      </ion-item> 
+       
+    </ion-card>
+    
+  </ion-list>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+	<ion-buttons left (click)="checkAll()">
+       <button ion-button>
+        <ion-icon style="font-size: 2.2em;" *ngIf="checkTxt=='全选'" name="ios-checkmark-circle-outline"></ion-icon>
+		<ion-icon style="font-size: 2.2em;" *ngIf="checkTxt=='取消全选'" name="ios-checkmark-circle"></ion-icon>
+		{{checkTxt}}
+        </button>
+    </ion-buttons>
+    <ion-title class="total">总计：￥{{this.total| number:'1.2-2'}}</ion-title>
+
+	<ion-buttons right (click)="gopay()">
+		<button style="background-color:red;padding: 0px 2rem;" ion-button block>
+			购买
+		</button>
+	</ion-buttons>
+
+  </ion-toolbar>
+  
+</ion-footer>

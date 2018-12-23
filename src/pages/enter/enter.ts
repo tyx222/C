@@ -48,6 +48,20 @@ export class EnterPage {
   myDate = "";
   mydata;
   asscity = "";
+  shopData = {
+	shop_name:"",
+	shop_introduce:"",
+	shop_key:"",
+	phonenumber:"",
+	business_hours:"",
+	idcard:"",
+	wechat:"",
+	qq:"",
+	address:"",
+	cku:"",
+	caac:""
+  };
+  agree = false;
   items = [
     { title: "item1" },
     { title: "item2" },
@@ -233,4 +247,21 @@ headlogo() {
       this.jsonParamter.idcardimg1=data.imageUrl+data.object.map.filename
     };
   }
+
+	/**
+	 * 确认注册
+	*/
+	async confirmReg(){
+		if(this.agree == false){
+			console.log('请同意协议')
+			return 
+
+		}
+		
+		let res = await this.http.addshop({jsonPramter:JSON.stringify(this.shopData)})
+		if(res.info=='ok'){
+			this.navCtrl.pop();
+		}
+
+	}
 }

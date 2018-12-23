@@ -1,0 +1,197 @@
+page-storeproductview {
+	
+    .scroll-content {
+        padding: 0 !important;
+        background: #eee
+    }
+    .swiper-container {
+        width: 100vw;
+        height: 100%;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .swiper-pagination-bullet-active {
+        background: #EC6D36;
+        opacity: 1;
+    }
+    .imgpage {
+        width: 100vw;
+        height: 15rem;
+        background: #fff
+    }
+    .msg {
+        padding: 1rem;
+        background: #fff;
+        ;
+        .title {
+            font-size: 1.8rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .price {
+            margin-top: 1rem; // font-weight: 900;
+            >span:nth-of-type(2) {
+                margin-left: 3rem
+            }
+            >span {
+                font-size: 1.5rem;
+            }
+            .maxprice {
+                color: #FF7041;
+                font-size: 2rem
+            }
+            .minprice {
+                font-size: 2rem
+            }
+        }
+    }
+    .eee {
+        color: #999
+    }
+    .titaa {
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+        .userimg {
+            width: 5rem;
+            margin-top: 0.5rem
+        }
+    }
+	.guige{
+		    display: -webkit-box;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-align: center;
+			-webkit-align-items: center;
+			-ms-flex-align: center;
+			align-items: center;
+			padding: 0.5rem;
+			background: #fff;
+	}
+    .ble {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        background: #fff;
+    }
+    .ble2 {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 1rem;
+        p {
+            font-size: 2rem
+        }
+        span {
+            margin-top: 0.5rem;
+            img:nth-of-type(1) {
+                width: 2rem;
+            }
+        }
+    }
+    .name {
+        display: flex;
+        flex-direction: column
+    }
+    .djd {
+        width: 5rem;
+        height: 2rem;
+        color: #fff;
+        background: #EF8936;
+        border-radius: 2rem
+    }
+    .texx {
+        padding: 1rem;
+        background: #fff;
+    }
+    .imglist {
+        display: flex;
+        flex-wrap: wrap;
+        background: #fff;
+        padding-bottom: 1rem;
+        img {
+            width: 25vw;
+            height: 25vw;
+            margin-left: 6vw;
+            margin-bottom: 1rem
+        }
+    }
+    .titaa {
+        background: #fff
+    }
+    .top {
+        margin-top: 2rem
+    }
+    .black {
+        color: #999
+    }
+    .martop {
+        margin-top: -1.5rem
+    }
+    .tabs {
+        background: #fff;
+        ul {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            li {
+                width: 24%;
+                text-align: center;
+                padding: 1.5rem 0
+            }
+            .eft {
+                background: rgb(252, 201, 60);
+                color: #fff
+            }
+        }
+        .tabspage {
+            padding: 1rem;
+            color: #999
+        }
+    }
+    .shoppingcall {
+        background: #fff;
+        position: fixed;
+        bottom: 0px;
+        display: flex;
+        width: 100%;
+        >div:nth-of-type(1) {
+            display: flex;
+            width: 40%;
+            padding: 0.5rem;
+            p {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                img {
+                    width: 3rem;
+                    height: 2.6rem;
+                }
+                span {
+                    color: #999
+                }
+            }
+        }
+        >div {
+            width: 60%;
+            button {
+                width: 50%;
+                height: 100%;
+                color: #fff;
+            }
+            .join {
+                background: rgb(252, 201, 60)
+            }
+            .shop {
+                background: rgb(243, 66, 43)
+            }
+        }
+    }
+}

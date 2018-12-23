@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>代金券</ion-title>
+        <ion-title>优惠券</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -20,30 +20,24 @@
                 <img src="assets/imgs/images/youhuiquan.png" alt="" srcset="">
             </li>
 
-            <li>
+            <li *ngFor="let item of coupon">
                 <div>
                     <img src="assets/imgs/images/quan.png" alt="">
-                    <span>库存:98</span>
-                    <span>已领取:98</span>
+                   <!-- <span>库存:98</span> -->
                 </div>
                 <div>
-                    <h1>¥99</h1>
-                    <p>满 100 减 99</p>
-                    <span>2018-01-11 到 2018-9-30</span>
+                    <h1>¥{{item.price}}</h1>
+                    <p *ngIf="item.type==1">满 {{item.price}} 减 {{item.full}}</p>
+					<p *ngIf="item.type==2">代金券</p>
+                    <span>{{item.term}}天</span>
                 </div>
+				<div>
+					<span *ngIf="item.status==0" class="paifa" (click)="updatecouponstatus(item.coupon_id,1)">派发</span>
+					<span *ngIf="item.status==1" class="paifa" (click)="updatecouponstatus(item.coupon_id,0)">关闭</span>
+
+				</div>
             </li>
-            <li>
-                <div>
-                    <img src="assets/imgs/images/quan.png" alt="">
-                    <span>库存:98</span>
-                    <span>已领取:98</span>
-                </div>
-                <div>
-                    <h1>¥99</h1>
-                    <p>满 100 减 99</p>
-                    <span>2018-01-11 到 2018-9-30</span>
-                </div>
-            </li>
+           
         </ul>
     </div>
 </ion-content>

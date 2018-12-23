@@ -17,7 +17,7 @@
     <div class="imgpage">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" *ngFor="let item of imgpath"><img src="{{imgUrl}}{{item}}" alt="" srcset="" *ngIf="item!==''"></div>
+                <div class="swiper-slide" *ngFor="let item of imgpath;let i = index;" (click)="openVideo(i)"><img src="{{imgUrl}}{{ item }}" alt="{{ item }}" srcset="" *ngIf="item!==''"></div>
 
             </div>
             <!-- 如果需要分页器 -->
@@ -34,7 +34,7 @@
         <span class="maxprice">￥{{maxprice}}</span>
             </span>
             <span *ngIf="type==1">定金:
-        <span class="minprice">￥18</span>
+        <span class="minprice">￥{{deposit}}</span>
             </span>
             <span *ngIf="type==2">积分:
                 <span class="minprice">88</span>
@@ -49,8 +49,8 @@
             </div>
             <div class="ble2">
                 <div class="name">
-                    <p>店铺名称</p>
-                    <span class="eee">已成功交易 0 单</span>
+                    <p>{{storeinfo.shop_name}}</p>
+                    <span class="eee">已成功交易 {{orderCount}} 单</span>
                 </div>
                 <div>
                     <span>
@@ -68,7 +68,10 @@
             <li [ngClass]="{'eft': tabs==2}" (click)="tabs=2">品类介绍</li>
             <li [ngClass]="{'eft': tabs==3}" (click)="tabs=3">售后保障</li>
         </ul>
-        <div class="tabspage" *ngIf="tabs==0">
+        <div class="tabspage" *ngIf="tabs==0 && type==1">
+            <img *ngFor="let im of pordackpage" src="{{imgUrl}}{{im}}">
+        </div>
+		<div class="tabspage" *ngIf="tabs==0 && type!=1">
             <img src="{{imgUrl}}{{pordackpage}}">
         </div>
         <div class="tabspage" *ngIf="tabs==1">

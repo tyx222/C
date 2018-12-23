@@ -58,4 +58,8 @@ this.navCtrl.push("PlaycodePage",{
     });
     confirm.present();
   }
+  logout(){
+	localStorage.clear()  
+	this.navCtrl.pop()
+  }
 }

@@ -53,8 +53,10 @@ export class LoginPage {
       // divcie_key:'',
       // divcie_type:''
     };
+	     console.log(JSON.stringify(parmas));
+
     let res = await this.http.login(parmas);
-     console.log(res);
+     console.log(JSON.stringify(res));
     if (res.info == "ok") {
    
       localStorage.setItem("mytoken", res.object.mytoken);

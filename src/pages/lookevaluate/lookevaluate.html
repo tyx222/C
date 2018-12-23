@@ -1,0 +1,115 @@
+<!--
+  Generated template for the LookevaluatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>订单详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	
+    <div class="titaa">
+        <div class="ble">
+            <div>
+                <img src="assets/imgs/images/xdgps.png" alt="" class="userimg" style="width:3rem">
+            </div>
+            <div class="ble2">
+                <div class="name">
+                    <p><span>收货人:{{ipamord.myname||''}}</span><span style="float: right;">{{ipamord.ipone||''}}</span></p>
+                    <p><span>{{ipamord.order||''}}</span></p>
+                </div>
+                <div>
+                    <!--<img src="assets/imgs/images/right.png" alt="" style="width:1.5rem">-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="titaa">
+        <div class="ble">
+            <div>
+                <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
+            </div>
+            <div class="ble2">
+                <div class="name">
+                    <p>{{shopName}}</p>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="titaa">
+        <div class="ble" style="height: 10rem;" *ngFor="let item of goods;let i = index">
+            <div class="shopingimg">
+                <img src="{{imgUrl}}{{item.cover}}" alt="">
+            </div>
+            <div class="ble2">
+                <div class="title">
+                    <p>{{item.goods_name}}</p>
+                    <p class="pardack">商品明细</p>
+                    <p class="total"><span class="maxprice">￥{{item.goods_price | number:'1.2-2'}}</span><span class="pordacknum"><button (click)="outout(i)">—</button><input type="number" min="0" (change)="nums(i)"  [(ngModel)]="goodsnum[i]">
+                    <button (click)="upup(i)" >+</button></span></p>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <p class="distribution"><span>配送方式：</span><span>快递 免邮</span></p>
+    <div class="tarea">
+        <p>买家留言：</p>
+        <textarea disabled style="resize: none;width: 100%;height: 4rem;padding: 0.5rem;border: 1px solid #999;border-radius: 5px" placeholder="选填 填写内容和卖家协商">{{orderinfo.remarks}}</textarea>
+    </div>
+	
+	<div class="tarea">
+        <p>评价信息：</p>
+        <div class="comment">
+			<ion-list>
+			  <ion-item>
+			  	<ion-avatar item-start>
+				  <img src="./assets/imgs/logo.png">
+				</ion-avatar>
+				  Herbology
+				<ion-note item-end style="color:black;">5星</ion-note>
+				<ion-note item-end>2018-09-19</ion-note>
+
+			  </ion-item>
+				<ion-item class="commentimg">
+				<img src="./assets/imgs/logo.png">
+				<img src="./assets/imgs/logo.png">
+				</ion-item>
+			</ion-list>
+				
+			<ion-card style="margin:0px;">
+
+			  <ion-card-content>
+			  	这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！2018/12/3 星期一<br/>
+				<hr/>
+				  <div class="replay">
+					商家回复：感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！
+				  </div>
+			  </ion-card-content>
+			</ion-card>
+		
+		</div>
+    </div>
+
+    <div style="height: 7rem;"></div>
+	<div class="jiesuan">
+		<span><button (click)="zping()"><ion-icon name="ios-create-outline"></ion-icon> &nbsp;追评</button></span>
+		<span><button (click)="pingl()"> <ion-icon name="logo-twitch"></ion-icon> &nbsp;评论</button></span>
+
+
+    </div>
+    
+</ion-content>

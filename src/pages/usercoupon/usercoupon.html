@@ -1,0 +1,41 @@
+<!--
+  Generated template for the UsercouponPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>UsercouponPage</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+    <div class="coupon">
+        <ul>
+
+            <li *ngFor="let item of coupon">
+                <div>
+                    <img src="assets/imgs/images/quan.png" alt="">
+                   <!-- <span>库存:98</span> -->
+                </div>
+                <div>
+                    <h1>¥{{item.price}}</h1>
+                    <p *ngIf="item.type==1">满 {{item.price}} 减 {{item.full}}</p>
+					<p *ngIf="item.type==2">代金券</p>
+                    <span>{{item.term}}天</span>
+                </div>
+				<div>
+					<span *ngIf="item.status==0" class="paifa" (click)="updatecouponstatus(item.coupon_id,1)">派发</span>
+					<span *ngIf="item.status==1" class="paifa" (click)="updatecouponstatus(item.coupon_id,0)">关闭</span>
+
+				</div>
+            </li>
+           
+        </ul>
+    </div>
+</ion-content>

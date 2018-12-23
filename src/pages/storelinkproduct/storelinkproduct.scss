@@ -1,0 +1,42 @@
+page-storelinkproduct {
+	.searchbar{
+		//background:#ffc435!important;
+	}
+	.segment-button.segment-activated{
+		 color: #ffc435!important;
+	}
+	.button{
+        color: #fff;
+        background: #ffc435;
+        border-radius: 0.5rem;
+	}
+  	.toptitle{
+  		display: flex;
+	    justify-content:center;
+	    align-items:Center;
+	    color:white;
+	    font-size: 20px;
+  	}
+  	.prolist p{
+  		text-align: center;
+  	}
+  	
+  	.prolist .itemcheckboxright{
+  		position: absolute;
+  		right:2px;
+  		top:2px;
+  	}
+	
+	.checked{
+		border: 0.5px solid #f98004;
+	}
+
+	.itemcheckboxright{
+		float:right;
+	}
+	.segment-button.segment-activated{
+		color: #ffffff !important;
+	}
+}
+
+

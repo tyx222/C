@@ -26,6 +26,7 @@ page-coupon {
                 padding: 1rem;
              
             }
+			p{ text-align:center;}
             div:nth-of-type(1) {
                 width: 30%;
                 border-right: 1px solid #eee;
@@ -45,6 +46,11 @@ page-coupon {
                     color: #999
                 }
             }
+			.paifa{
+				border: 1px solid #bdbdbd;
+				padding: 6px;
+				border-radius: 5px;
+			}
         }
     }
 }

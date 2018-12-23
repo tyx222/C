@@ -1,8 +1,5 @@
-
-
-
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams  } from 'ionic-angular';
 
 
 /**
@@ -20,6 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class PersonalcenterPage {
 userimg
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
   }
 
   ionViewDidLoad() {
@@ -31,6 +29,8 @@ userimg
     }
    
   }
+	
+
   wallet() {
     this.navCtrl.push("WalletPage");
   }
@@ -42,13 +42,21 @@ userimg
     this.navCtrl.push("EnterPage")
   }
   goshol(){
-    this.navCtrl.push("SoplPage")
+  	let store = localStorage.getItem("storeinfo")
+	console.log(store)
+	if(store != "undefined"){
+		this.navCtrl.push("SoplPage")
+	}else{
+		this.navCtrl.push("EnterPage")
+	}
+    
   }
   Detemgs(){
     this.navCtrl.push("CalendarPage")
   }
   Allorders(){
-    this.navCtrl.push("AllordersPage")
+      this.navCtrl.push("PersonalorderadminPage")
+    //this.navCtrl.push("AllordersPage")
   }
  callshop(){
    this.navCtrl.push("CallshopPage")
@@ -66,9 +74,16 @@ advices(){
   this.navCtrl.push("AdvicesPage")
 }
 Coupon(){
-  this.navCtrl.push("CouponPage")
+  this.navCtrl.push("UsercouponPage")
 }
 Ckeck() {
   this.navCtrl.push("CkeckPage");
 }
+collect(){
+  this.navCtrl.push("StorecollectPage");
+}
+
+
+
+
 }

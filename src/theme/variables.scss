@@ -65,3 +65,8 @@ $loading-wp-border-radius: 0;
 // --------------------------------------------------
 @import "roboto";
 @import "noto-sans";
+.mymodal {
+    bottom: 0;
+    height: 70%;
+    top: initial;
+}

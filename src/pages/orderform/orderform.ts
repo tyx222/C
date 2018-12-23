@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { UserService } from "./../../app/shared/service/user.service";
+import { DefaultAppConfig } from "./../../app/app.config";
 
 /**
  * Generated class for the OrderformPage page.
@@ -14,12 +16,87 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'orderform.html',
 })
 export class OrderformPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	order_status;
+	living = false;
+	storeinfo:any = {}
+	order_list=[]
+	sendData={
+		orderid:"",
+		express_company:"",
+		express_code:"",
+		express_number:""
+	}
+	get imgUrl(): string {
+		return this.appConfig.ip + 'imgs/';
+	  }
+  constructor(public appConfig: DefaultAppConfig,public navCtrl: NavController, private actionSheetCtrl:ActionSheetController,public http: UserService, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+  	this.storeinfo = JSON.parse(localStorage.getItem("storeinfo"))
     console.log('ionViewDidLoad OrderformPage');
+	this.queryshopapporderlist()
+  }
+	lookevaluate(){
+      this.navCtrl.push("LookevaluatePage",{type:1})
+  }
+	
+	//发货
+	async send(order_id){
+		this.sendData.orderid = order_id
+		if(this.sendData.express_company=='' || this.sendData.express_code=='' || this.sendData.express_number=='' ){
+			return this.http.presentToast("请填全发货信息")
+		}
+		//let res = await this.http.updateorderstatus({orderid:order_id,status:"2"})
+		let res = await this.http.logistics(this.sendData)
+		if(res.info=="ok"){
+			this.http.presentToast("发货成功")
+			this.queryshopapporderlist()
+		}else{
+			this.http.presentToast("发货失败")
+		}
+	}
+	shopoder(){
+		this.navCtrl.push("ShippingoderPage")
+	  }
+
+  checks(t){
+	this.living = t
+  }
+	// 订单列表
+  async queryshopapporderlist(){
+	let params = {
+		shopid:this.storeinfo.shop_id
+	}
+  	
+	let res = await this.http.queryshopapporderlist(params)
+	if(res.info=="ok"){
+		this.order_list = res.arrayList
+	}else{
+		this.order_list = [];
+	}
   }
 
+// 活体筛选
+ async queryapporderlistbylive(){
+ 	let params
+  	if(this.living!=false){
+		let params = {
+			living:this.living
+		}
+	}else{
+		let params = {t:1}
+	}
+	let res = await this.http.queryapporderlist(params)
+	if(res.info=="ok"){
+		this.order_list = res.arrayList
+	}else{
+		this.order_list = [];
+	}
+  }
+  
+  userinfo(item){
+  
+	this.navCtrl.push("OrderotherPage",{client:item.client})
+  }
 }

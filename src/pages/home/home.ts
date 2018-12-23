@@ -4,6 +4,7 @@ import { NavController, IonicPage } from "ionic-angular";
 import { UserService } from "../../app/shared/service/user.service";
 import { Buffer } from "buffer";
 declare let Swiper: any;
+declare var LocationPlugin;
 
 @IonicPage()
 @Component({
@@ -42,11 +43,15 @@ export class HomePage {
   constructor(public navCtrl: NavController, public http: UserService) {}
   ionViewDidLoad() {
     console.log("第一次进入");
+		
+
     if (localStorage.getItem("index") == null) {
       localStorage.setItem("index", "0");
     } else {
       this.index = parseInt(localStorage.getItem("index"));
     }
+	
+
     this.ctn = 1;
     this.petlist = [];
     this.SWIPER();
@@ -62,6 +67,8 @@ export class HomePage {
     this.querypetcardlist();
 
     this.queryclevertricklist();
+  this.queryshopbyclientid();
+  this.getCurrentPosition();
   }
 
   /**
@@ -88,6 +95,16 @@ export class HomePage {
     this.contnet = res.arrayList[0].content;
     this.tkisid = res.arrayList[0].id;
   }
+
+	
+	/**
+   * 店铺查询
+   */
+	async queryshopbyclientid() {
+    let res = await this.http.queryshopbyclientid();
+	localStorage.setItem("storeinfo", JSON.stringify(res.object));
+
+	}
 
   /**
    * tab切换
@@ -632,4 +649,31 @@ export class HomePage {
       JSON.stringify(this.callname[this.index - 0])
     );
   }
+
+
+
+
+	//  ionViewDidLoad() {
+	// 	 this.getCurrentPosition();
+	//  }
+   
+	 /**
+	  * 获取当前地理位置
+	  */
+	getCurrentPosition() {
+		try{
+			LocationPlugin.getLocation(data => {
+				localStorage.setItem("geolocation",JSON.stringify(data))
+				this.http.http.showToast("定位城市：" + data.city + data.district);
+			}, msg => {
+				this.http.http.showToast("定位失败");
+				console.log('geolocation is fail')
+			})
+		}catch(error){
+			console.log('geolocation is fail')
+			this.http.http.showToast("定位失败");
+		}
+		
+	 }
+
 }

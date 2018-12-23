@@ -55,4 +55,8 @@ export class AdvicesPage {
       type:this.index
     });
   }
+  gostaff(){
+      this.navCtrl.push("StaffmsgPage")
+  }
+
 }

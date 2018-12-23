@@ -1,0 +1,56 @@
+page-usercoupon {
+	.scroll-content {
+        padding: 0 !important;
+        background: #eee
+    }
+    .coupon {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        li {
+            border-radius: 0.7rem;
+            text-align: center;
+            background: #fff;
+            width: 100%;
+            padding: 0 1rem;
+            margin-top: 2rem;
+            display: flex;
+            >img {
+                margin: 1rem;
+            }
+            div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 1rem;
+             
+            }
+			p{ text-align:center;}
+            div:nth-of-type(1) {
+                width: 30%;
+                border-right: 1px solid #eee;
+            }
+            div:nth-of-type(2) {
+                h1 {
+                    color: #ff7e00;
+                    text-align: left;
+                    width: 100%;
+                }
+                p {
+                    width: 100%;
+                    text-align: left;
+                }
+                span {
+                    margin-top: 1rem;
+                    color: #999
+                }
+            }
+			.paifa{
+				border: 1px solid #bdbdbd;
+				padding: 6px;
+				border-radius: 5px;
+			}
+        }
+    }
+}
