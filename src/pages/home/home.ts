@@ -15,6 +15,7 @@ export class HomePage {
   usermgs: boolean = true;
   goguidance: boolean = false;
   index: any = 0;
+  petid:""
   contnet = "";
   callname = [];
   tkisid;
@@ -39,42 +40,42 @@ export class HomePage {
   guanzhulist = [];
   huodonglist = [];
   constructor(public navCtrl: NavController, public http: UserService) {}
-  ionViewDidEnter() {
+  ionViewDidLoad() {
     console.log("第一次进入");
     if (localStorage.getItem("index") == null) {
       localStorage.setItem("index", "0");
     } else {
-      this.index = parseInt(localStorage.getItem("index"));   
+      this.index = parseInt(localStorage.getItem("index"));
     }
     this.ctn = 1;
     this.petlist = [];
     this.SWIPER();
     this.data.mytoken = localStorage.getItem("mytoken");
     this.queryAll.mytoken = localStorage.getItem("mytoken");
+    this.chongwuqueryhistorytypeAlllist();
     if (localStorage.getItem("mytoken") == null) {
       this.usermgs = false;
       this.goguidance = false;
       return false;
     }
-this.localogin()
+    this.localogin();
     this.querypetcardlist();
-    this.chongwuqueryhistorytypeAlllist();
+
     this.queryclevertricklist();
   }
-
 
   /**
    * 登录验证
    */
 
-  async localogin(){
-    let parmas={
-      username:JSON.parse(localStorage.getItem("mydata")).client_username ,
-      password:JSON.parse(localStorage.getItem("mydata")).client_password
-    } 
-let res=await this.http.login(parmas)
-console.log(res)
-   }
+  async localogin() {
+    let parmas = {
+      username: JSON.parse(localStorage.getItem("mydata")).client_username,
+      password: JSON.parse(localStorage.getItem("mydata")).client_password
+    };
+    let res = await this.http.login(parmas);
+    console.log(res);
+  }
   /**
    * 小妙招查询
    */
@@ -122,23 +123,35 @@ console.log(res)
     };
     let res = await this.http.queryPetConcernhistorytypelist(parmas);
     console.log(res);
-    for (let item in res.arrayList) {
-      this.guanzhulist.push(res.arrayList[item]);
+    if (res.info == "ok") {
+      this.maxleng = res.page.maxPage;
+      for (let item in res.arrayList) {
+        if (res.arrayList[item].historycontentlist.length != 0) {
+          if (
+            (res.arrayList[item].type == 1 &&
+              res.arrayList[item].historycontentlist[0].type == 1) ||
+            (res.arrayList[item].type == 4 &&
+              res.arrayList[item].historycontentlist[0].type == 1)
+          ) {
+            res.arrayList[item]["mp4"] = true;
+          }
+        }
+        this.guanzhulist.push(res.arrayList[item]);
+      }
+      this.imgUrl = res.imageUrl;
     }
-    this.imgUrl = res.imageUrl;
   }
 
   /**
    * 评论
    */
   gomessagelist(i) {
-    if(this.lulartype==1){
+    if (this.lulartype == 1) {
       this.navCtrl.push("MessagelistPage", { datas: this.petlist[i] });
     }
-    if(this.lulartype==2){
+    if (this.lulartype == 2) {
       this.navCtrl.push("MessagelistPage", { datas: this.guanzhulist[i] });
     }
-    
   }
   /**
    * 活动列表查询
@@ -219,6 +232,11 @@ console.log(res)
    * @param infiniteScroll 加载更多
    */
   doInfinite(infiniteScroll) {
+    if (this.ctn >= this.maxleng) {
+      this.loding = true;
+      infiniteScroll.enable(false);
+      return false;
+    }
     this.ctn++;
     if (this.lulartype == 1) {
       this.chongwuqueryhistorytypeAlllist();
@@ -245,14 +263,7 @@ console.log(res)
    * 关注宠卡
    */
   async addpetConcern(i) {
-  
-    // let parmas = {
-    //   reciveclientid: this.petlist[i].petcard.client_id,
-    //   concerntype: 1,
-    //   mytoken: localStorage.getItem("mytoken"),
-    //   recivepetcardid: this.petlist[i].pet_id
-    // };
-    console.log(i)
+    console.log(i);
     if (this.lulartype == 1) {
       let parmas = {
         reciveclientid: this.petlist[i].petcard.client_id,
@@ -263,13 +274,13 @@ console.log(res)
       console.log(this.petlist[i]);
       let res = await this.http.addpetConcern(parmas);
       this.http.http.showToast(res.message);
-      if(res.info=="ok"){
-        this.petlist[i].concernStatus=!this.petlist[i].concernStatus
+      if (res.info == "ok") {
+        this.petlist[i].concernStatus = !this.petlist[i].concernStatus;
       }
       console.log(res);
     }
     if (this.lulartype == 2) {
-      console.log(this.guanzhulist[i])
+      console.log(this.guanzhulist[i]);
       let parmas = {
         reciveclientid: this.guanzhulist[i].petcard.client_id,
         concerntype: 1,
@@ -278,18 +289,17 @@ console.log(res)
       };
       let res = await this.http.addpetConcern(parmas);
       this.http.http.showToast(res.message);
-      if(res.info=="ok"){
-        this.guanzhulist[i].concernStatus=!this.guanzhulist[i].concernStatus
+      if (res.info == "ok") {
+        this.guanzhulist[i].concernStatus = !this.guanzhulist[i].concernStatus;
       }
     }
-   
   }
-/**
- * 取消关注
- * @param i 
- */
- async addConcern(i){
-//console.log(this.petlist[i]);
+  /**
+   * 取消关注
+   * @param i
+   */
+  async addConcern(i) {
+    //console.log(this.petlist[i]);
     if (this.lulartype == 1) {
       let parmas = {
         reciveclientid: this.petlist[i].petcard.client_id,
@@ -297,11 +307,11 @@ console.log(res)
         mytoken: localStorage.getItem("mytoken"),
         recivepetcardid: this.petlist[i].pet_id
       };
-  
+
       let res = await this.http.addpetConcern(parmas);
       this.http.http.showToast(res.message);
-      if(res.info=="ok"){
-        this.petlist[i].concernStatus=!this.petlist[i].concernStatus
+      if (res.info == "ok") {
+        this.petlist[i].concernStatus = !this.petlist[i].concernStatus;
       }
     }
 
@@ -312,14 +322,13 @@ console.log(res)
         mytoken: localStorage.getItem("mytoken"),
         recivepetcardid: this.guanzhulist[i].pet_id
       };
-  
+
       let res = await this.http.addpetConcern(parmas);
       this.http.http.showToast(res.message);
-      if(res.info=="ok"){
-        this.guanzhulist[i].concernStatus=!this.guanzhulist[i].concernStatus
+      if (res.info == "ok") {
+        this.guanzhulist[i].concernStatus = !this.guanzhulist[i].concernStatus;
       }
     }
-
   }
 
   /**
@@ -336,8 +345,9 @@ console.log(res)
       };
       let res = await this.http.addpetLikes(parmas);
       this.http.http.showToast(res.message);
-      if(res.info=="ok"){
-        this.petlist[i].isLiked=!this.petlist[i].isLiked
+      if (res.info == "ok") {
+        this.petlist[i].isLiked = !this.petlist[i].isLiked;
+        this.petlist[i].likesNum += 1;
       }
       console.log(res);
     }
@@ -351,18 +361,19 @@ console.log(res)
       };
       let res = await this.http.addpetLikes(parmas);
       this.http.http.showToast(res.message);
-      if(res.info=="ok"){
-        this.guanzhulist[i].isLiked=!this.guanzhulist[i].isLiked
+      if (res.info == "ok") {
+        this.guanzhulist[i].isLiked = !this.guanzhulist[i].isLiked;
+        this.guanzhulist[i].likesNum += 1;
       }
       console.log(res);
     }
-    }
+  }
 
-/**
- * 取消点赞
- */
-async qxaddpetLikes(i){
-   if (this.lulartype == 1) {
+  /**
+   * 取消点赞
+   */
+  async qxaddpetLikes(i) {
+    if (this.lulartype == 1) {
       console.log(this.petlist[i]);
       let parmas = {
         receivehistorytypeid: this.petlist[i].id,
@@ -372,8 +383,9 @@ async qxaddpetLikes(i){
       };
       let res = await this.http.addpetLikes(parmas);
       this.http.http.showToast(res.message);
-      if(res.info=="ok"){
-        this.petlist[i].isLiked=!this.petlist[i].isLiked
+      if (res.info == "ok") {
+        this.petlist[i].isLiked = !this.petlist[i].isLiked;
+        this.petlist[i].likesNum -= 1;
       }
       console.log(res);
     }
@@ -387,12 +399,13 @@ async qxaddpetLikes(i){
       };
       let res = await this.http.addpetLikes(parmas);
       this.http.http.showToast(res.message);
-      if(res.info=="ok"){
-        this.guanzhulist[i].isLiked=!this.guanzhulist[i].isLiked
+      if (res.info == "ok") {
+        this.guanzhulist[i].isLiked = !this.guanzhulist[i].isLiked;
+        this.guanzhulist[i].likesNum -= 1;
       }
       console.log(res);
     }
-}
+  }
 
   /**
    * 宠卡查询
@@ -406,7 +419,10 @@ async qxaddpetLikes(i){
       this.goguidance = false;
       this.usermgs = true;
       this.callname = res.arrayList;
-      localStorage.setItem("petdata",JSON.stringify(this.callname[this.index-0]))
+      localStorage.setItem(
+        "petdata",
+        JSON.stringify(this.callname[this.index - 0])
+      );
       setTimeout(() => {
         this.queryCalendar();
       }, 300);
@@ -436,7 +452,9 @@ async qxaddpetLikes(i){
   }
 
   godaylist() {
-    this.navCtrl.push("DaylistPage");
+    this.navCtrl.push("DaylistPage", {
+      type: 1
+    });
   }
 
   /**
@@ -460,34 +478,39 @@ async qxaddpetLikes(i){
     });
   }
   godetailsto(i) {
-    
-    console.log(this.petlist[i])
-    if(this.petlist[i].petcard.client_id==JSON.parse(localStorage.getItem("mydata")).client_id){
+    console.log(this.petlist[i]);
+    if (
+      this.petlist[i].petcard.client_id ==
+      JSON.parse(localStorage.getItem("mydata")).client_id
+    ) {
       this.navCtrl.push("DetailsPage", {
         datas: {
           index: this.index
         }
       });
-      return false 
+      return false;
     }
-        this.navCtrl.push("DetailsPage", {
-        id: this.petlist[i]
-   });
+    this.navCtrl.push("DetailsPage", {
+      id: this.petlist[i]
+    });
   }
 
-  godetailstogz(i){
-    console.log(this.guanzhulist[i])
-    if(this.guanzhulist[i].petcard.client_id==JSON.parse(localStorage.getItem("mydata")).client_id){
+  godetailstogz(i) {
+    console.log(this.guanzhulist[i]);
+    if (
+      this.guanzhulist[i].petcard.client_id ==
+      JSON.parse(localStorage.getItem("mydata")).client_id
+    ) {
       this.navCtrl.push("DetailsPage", {
         datas: {
           index: this.index
         }
       });
-      return false 
+      return false;
     }
-        this.navCtrl.push("DetailsPage", {
-        id: this.guanzhulist[i]
-   });
+    this.navCtrl.push("DetailsPage", {
+      id: this.guanzhulist[i]
+    });
   }
 
   ionViewCanEnter() {
@@ -502,11 +525,39 @@ async qxaddpetLikes(i){
     console.log(res);
     this.imgurl = res.imageUrl;
     for (let item in res.arrayList) {
+      if (res.arrayList[item].historycontentlist.length != 0) {
+        if (
+          (res.arrayList[item].type == 1 &&
+            res.arrayList[item].historycontentlist[0].type == 1) ||
+          (res.arrayList[item].type == 4 &&
+            res.arrayList[item].historycontentlist[0].type == 1)
+        ) {
+          res.arrayList[item]["mp4"] = true;
+        }
+      }
       this.petlist.push(res.arrayList[item]);
     }
     this.imgUrl = res.imageUrl;
+    console.log(res)
     this.maxleng = res.page.maxPage;
     // console.log(this.petlist);
+  }
+ async showResult(){
+    console.log(this.petid)
+    if(this.petid!=''){
+      let parmas={
+        petnum:this.petid,
+      }
+      let res=await this.http.querypetcardnum(parmas)
+      console.log(res)
+      this.http.http.showToast(res.message)
+      if(res.info=="ok"){
+        this.navCtrl.push("DetailsPage",{
+          type:0,
+          id:res.arrayList
+        })
+      }
+    }
   }
   SWIPER() {
     var mySwiper = new Swiper(".swiper-container", {
@@ -514,6 +565,7 @@ async qxaddpetLikes(i){
       // loop:true,
       //autoplay:1000,
       //grabCursor:true,
+
       initialSlide: this.index,
       centeredSlides: true,
       slidesPerView: "auto",
@@ -534,13 +586,16 @@ async qxaddpetLikes(i){
       on: {
         slideChangeTransitionStart: function() {
           // alert(this.activeIndex);
-  
+
           localStorage.setItem("index", this.activeIndex);
-if(this.callname){
-  console.log(this.activeIndex);
-  localStorage.setItem("petdata",JSON.stringify(this.callname[this.activeIndex-0]))
-}
-//
+          if (this.callname) {
+            console.log(this.activeIndex);
+            localStorage.setItem(
+              "petdata",
+              JSON.stringify(this.callname[this.activeIndex - 0])
+            );
+          }
+          //
         }
       }
     });
@@ -552,6 +607,10 @@ if(this.callname){
   Pushdiary() {
     if (!localStorage.getItem("mytoken")) {
       this.http.http.showToast("请先登录");
+      return false;
+    }
+    if(!localStorage.getItem("petdata")){
+      this.http.http.showToast("请先添加宠卡");
       return false;
     }
     console.log(parseInt(this.index));
@@ -566,8 +625,11 @@ if(this.callname){
       datas
     });
   }
-  ionViewWillLeave(){
-    console.log(`准备离开页面了${localStorage.getItem('index')}`)
-    localStorage.setItem("petdata",JSON.stringify(this.callname[this.index-0]))
+  ionViewWillLeave() {
+    console.log(`准备离开页面了${localStorage.getItem("index")}`);
+    localStorage.setItem(
+      "petdata",
+      JSON.stringify(this.callname[this.index - 0])
+    );
   }
 }

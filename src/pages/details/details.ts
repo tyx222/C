@@ -30,7 +30,10 @@ export class DetailsPage {
   gaylist: Array<any>;
   integral_num;
   gay = true;
+  checked = true;
   callname = [];
+  daylist = [];
+  myboject;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -41,18 +44,32 @@ export class DetailsPage {
 
   ionViewWillEnter() {
     this.swipers();
-    if (!this.navParams.get("id")) {
-      this.index = parseInt(localStorage.getItem("index")) - 0;
-      this.querypetcardlist();
-      this.gay = true;
+    if (!this.navParams.get("type")) {
+      if (!this.navParams.get("id")) {
+        this.index = parseInt(localStorage.getItem("index")) - 0;
+        this.querypetcardlist();
+        this.gay = true;
+      } else {
+        this.integral_num = this.navParams.get("id").integral_num;
+        this.querypetcard();
+        this.gay = false;
+      }
     } else {
-      this.integral_num = this.navParams.get("id").integral_num;
       this.querypetcard();
-      this.gay = false;
+      this.gay = true;
     }
+
     console.log(this.gay);
-    console.log(this.navParams.get("id"));
+    console.log(this.navParams);
   }
+
+/**
+ * 获取经纬度
+ */
+async gps(){
+let res=await this.http.getGPS()
+console.log()
+}
 
   /**
    * 初始化宠卡
@@ -60,21 +77,156 @@ export class DetailsPage {
   async querypetcard() {
     this.callname = [];
     let parmas = {
-      clientId: this.navParams.get("id").petcard.client_id
+      clientId: ""
     };
+
+    if (this.navParams.get("type") == 0) {
+      parmas.clientId = this.navParams.get("id")[0].client_id;
+    }else if(this.navParams.get("type") == 9){
+      parmas.clientId = this.navParams.get("id").client_id
+    } else {
+      parmas.clientId = this.navParams.get("id").petcard.client_id;
+    }
+
     let res = await this.http.querypetcardotherclientlist(parmas);
+    console.log(res);
     if (res.info == "ok") {
       for (let index = 0; index < res.arrayList.length; index++) {
-        if (res.arrayList[index].headimgpath.indexOf("https") == -1) {
+        if (
+          res.arrayList[index].headimgpath.indexOf("https") == -1 &&
+          res.arrayList[index].headimgpath.indexOf("http") == -1
+        ) {
           res.arrayList[index].headimgpath =
             "https://www.petbashi.com/imgs/" + res.arrayList[index].headimgpath;
         }
+        if (this.navParams.get("type") == 0) {
+          if (
+            res.arrayList[index].pet_num - 0 ==
+            this.navParams.get("id")[0].pet_num - 0
+          ) {
+            console.log(index);
+            this.callname = [];
+            this.callname.push(res.arrayList[index]);
+            if (
+              res.arrayList[index].client_id ==
+              JSON.parse(localStorage.getItem("mydata")).client_id
+            ) {
+              this.gay = true;
+            } else {
+              this.gay = false;
+            }
+          }
+        }
+        if (res.arrayList[index].mating_status == 0) {
+          res.arrayList[index]["peizhong"] = false;
+        } else {
+          res.arrayList[index]["peizhong"] = true;
+        }
       }
-      this.callname = res.arrayList;
+      if (this.navParams.get("type") != 0) {
+        this.callname = res.arrayList;
+      }
+
       this.integral_num = this.callname[0].integral_num;
+      console.log(this.callname);
       this.querypetfeedingtop();
     }
-    //   console.log(res);
+  }
+
+  /**
+   * 举报
+   */
+  jubao(i) {
+    const prompt = this.alertCtrl.create({
+      title: "举报",
+      message: "举报的理由",
+      inputs: [
+        {
+          name: "title",
+          placeholder: "Title"
+        }
+      ],
+      buttons: [
+        {
+          text: "确定",
+          handler: async data => {
+            let parmas = {
+              report_petcardid: this.callname[i].id,
+              mytoken: localStorage.getItem("mytoken"),
+              report_reason: data.title,
+              receive_clientid: this.callname[i].client_id
+            };
+            let res = await this.http.addreport(parmas);
+            this.http.http.showToast(res.message);
+          }
+        },
+        {
+          text: "取消",
+          handler: data => {}
+        }
+      ]
+    });
+    prompt.present();
+  }
+  /**
+   * 配种开关
+   * @param i
+   */
+  async updatemating(i, j) {
+    console.log(i, j);
+    let buff = 1;
+    if (!j) {
+      buff = 1;
+    } else {
+      buff = 0;
+    }
+    let gps=await this.http.getGPS()
+    let parmas = {
+      petcardid: this.callname[i].id,
+      mating_status: buff,
+      gps_longitude:gps['longitude'].toString(),
+      gps_latitude:gps['latitude'].toString()
+    };
+    console.log(parmas)
+    let res = await this.http.updatemating(parmas);
+    this.http.http.showToast(res.message);
+    console.log(res);
+  }
+
+  /**
+   * 加入黑名单
+   */
+  lahei(i) {
+    const prompt = this.alertCtrl.create({
+      title: "拉黑",
+      message: "拉黑的理由",
+      inputs: [
+        {
+          name: "title",
+          placeholder: "拉黑理由"
+        }
+      ],
+      buttons: [
+        {
+          text: "确定",
+          handler: async data => {
+            let parmas = {
+              mytoken: localStorage.getItem("mytoken"),
+              reason: data.title,
+              black_clientid: this.callname[i].client_id
+            };
+
+            let res = await this.http.addblack(parmas);
+            this.http.http.showToast(res.message);
+          }
+        },
+        {
+          text: "取消",
+          handler: data => {}
+        }
+      ]
+    });
+    prompt.present();
   }
 
   /**
@@ -82,7 +234,6 @@ export class DetailsPage {
    * @param petdata
    */
   async querypetfeedingtop() {
-    console.log(this.callname[this.index]);
     this.gaylist = [];
     let parmas = {
       petcardid: this.callname[this.index].id,
@@ -90,6 +241,8 @@ export class DetailsPage {
     };
     let res = await this.http.querypetfeedingtop(parmas);
     if (res.info == "ok") {
+      this.myboject = res.object;
+      this.daylist = res.arrayList;
       if (res.arrayList.length !== 0) {
         if (res.arrayList.length <= 5) {
           this.gaylist = res.arrayList;
@@ -100,21 +253,15 @@ export class DetailsPage {
         }
       }
     }
-    console.log(res);
   }
 
-  Godaylist() {
-    console.log(1);
-  }
   gohome() {
     this.tabs.select(0);
     this.navCtrl.popToRoot();
-    console.log(this.tabs);
   }
   goguanai() {
     this.tabs.select(1);
     this.navCtrl.popToRoot();
-    console.log(this.tabs);
   }
   Personalcenter() {
     this.tabs.select(4);
@@ -125,8 +272,6 @@ export class DetailsPage {
    * 投食
    */
   async addpetFeeding() {
-    console.log(this.navParams.get("id"));
-    console.log(this.callname[this.index]);
     let parmas = {
       mytoken: localStorage.getItem("mytoken"), //	[string]	是	用户mykoken
       petcardid: this.callname[this.index].id, //[string]	是	被投食猫卡Id
@@ -141,37 +286,45 @@ export class DetailsPage {
     } else {
       this.http.http.showToast(res.message);
     }
-    console.log(res);
+  }
+
+  /**
+   *
+   */
+  godaylist() {
+    this.navCtrl.push("DaylistPage", {
+      daylist: this.daylist,
+      object: this.myboject,
+      type: 2
+    });
   }
 
   /**
    * 查看关注列表
    */
-  felelist(){
-    this.navCtrl.push("FelselistPage",{
-      petcardid:this.callname[this.index]
-    })
+  felelist() {
+    this.navCtrl.push("FelselistPage", {
+      petcardid: this.callname[this.index - 0].id
+    });
   }
-  godate(i) {
+  godate() {
     if (!this.gay) {
       return false;
     }
-    this.navCtrl.push("CalendarPage", this.callname[i - 1]);
+    this.navCtrl.push("CalendarPage", this.callname[this.index]);
   }
-  postlo() {
-    console.log(localStorage.getItem("index"));
+  postlo(i) {
     const prompt = this.alertCtrl.create({
       title: "请求配种",
       inputs: [
         {
-          type: "number",
           name: "联系方式",
           placeholder: "联系方式"
         },
-        {
-          name: "text",
-          placeholder: "推荐微信"
-        },
+        // {
+        //   name: "text",
+        //   placeholder: "地址"
+        // },
         {
           name: "配种理由",
           placeholder: "配种理由"
@@ -180,18 +333,29 @@ export class DetailsPage {
       buttons: [
         {
           text: "取消",
-          handler: data => {
-            console.log("Cancel clicked");
-          }
+          handler: data => {}
         },
         {
           text: "确认",
-          handler: data => {
+          handler: async data => {
             console.log(prompt.data.inputs);
-            this.userpage.iphome = prompt.data.inputs[0].value;
-            this.userpage.weixL = prompt.data.inputs[1].value;
-            this.userpage.text = prompt.data.inputs[2].value;
-            alert(this.userpage);
+            // this.userpage.iphome = prompt.data.inputs[0].value;
+            // this.userpage.weixL = prompt.data.inputs[1].value;
+            // this.userpage.text = prompt.data.inputs[2].value;
+            console.log(prompt);
+            console.log(this.callname[i].id);
+            let parmas = {
+              // mytoken:localStorage.getItem("mytoken"),//..	[string]	是
+              petcardid: JSON.parse(localStorage.getItem("petdata")).id, //	[string]	是	猫卡id
+              mating_status: "", //	[string]	是	配种状态 0.等待配种 1.完成配种
+              phonenum: prompt.data.inputs[0].value, //	[string]	是	联系方式
+              remark: prompt.data.inputs[1].value, //	[string]	是	备注，要求等
+              otherpetcardid: this.callname[i].id, //被请求猫卡ID
+              otherclientid: this.callname[i].client_id,
+              otherphone: ""
+            };
+            let res = await this.http.addmating(parmas);
+            this.http.http.showToast(res.message)
           }
         }
       ]
@@ -201,7 +365,13 @@ export class DetailsPage {
   Pushdiary() {
     this.navCtrl.push("DiaryPage", {
       datas: this.callname[this.index],
-      gay: true
+      gay: this.gay
+    });
+  }
+  xiezhen() {
+    this.navCtrl.push("XiezhenPage", {
+      datas: this.callname[this.index],
+      gay: this.gay
     });
   }
 
@@ -214,13 +384,36 @@ export class DetailsPage {
     data.mytoken = localStorage.getItem("mytoken");
     let res = await this.http.querypetcardlist(data);
     if (res.info == "ok") {
+      for (let index = 0; index < res.arrayList.length; index++) {
+        if (this.navParams.get("type") == 0) {
+          if (
+            res.arrayList[index].pet_num - 0 ==
+            this.navParams.get("id")[0].pet_num - 0
+          ) {
+            console.log(index);
+            this.callname = [];
+            this.callname.push(res.arrayList[index]);
+            if (
+              res.arrayList[index].client_id ==
+              JSON.parse(localStorage.getItem("mydata")).client_id
+            ) {
+              this.gay = true;
+            } else {
+              this.gay = false;
+            }
+          }
+        }
+        if (res.arrayList[index].mating_status == 0) {
+          res.arrayList[index]["peizhong"] = false;
+        } else {
+          res.arrayList[index]["peizhong"] = true;
+        }
+      }
       this.callname = res.arrayList;
       console.log(this.callname);
       this.integral_num = res.arrayList[this.index - 0].integral_num;
       this.querypetfeedingtop();
     }
-
-    console.log(this.callname);
   }
 
   swipers() {
@@ -257,10 +450,11 @@ export class DetailsPage {
               _this.integral_num = _this.callname[_this.index - 0].integral_num;
             }
             _this.querypetfeedingtop();
-          }, 500);
+          }, 1000);
           //   }
-
-          localStorage.setItem("index", this.activeIndex);
+          if (_this.gay) {
+            localStorage.setItem("index", this.activeIndex);
+          }
         }
       }
     });

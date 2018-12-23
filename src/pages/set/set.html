@@ -7,14 +7,14 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>set</ion-title>
+        <ion-title>设置</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <div class="toggle">
+    <!-- <div class="toggle">
         <span>截屏后提示分享</span>
         <span>
 
@@ -25,13 +25,23 @@
     <div class="toggle" style="margin-top: 1rem">
         <span>WIFI下自动播放视频</span>
         <span><ion-toggle checked="true"></ion-toggle></span>
-    </div>
+    </div> -->
     <div class="toggle" style="margin-top: 1rem" (click)="goder()">
         <span>设置收货地址</span>
         <span></span>
     </div>
     <div class="toggle" style="margin-top: 1rem" (click)="gosetuser()">
-        <span>绑定用户信息</span>
+        <span>设置用户信息</span>
         <span></span>
     </div>
+    <div class="toggle" style="margin-top: 1rem" (click)="playcode(0)">
+        <span>设置手机号</span>
+        <span></span>
+    </div>
+    <div class="toggle" style="margin-top: 1rem" (click)="playcode(1)">
+        <span>设置密码</span>
+        <span></span>
+    </div>
+
+    <button class="outlogin" (click)="showConfirm()">退出登录</button>
 </ion-content>

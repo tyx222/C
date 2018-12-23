@@ -106,6 +106,7 @@ this.navCtrl.push("SitePage",{
     console.log(res);
     this.http.http.showToast(res.message);
     this.myipam.splice(i, 1);
+    this.letfbor = -1
   }
   swipeEvent(e, i) {
     // console.log(e.offsetDirection);

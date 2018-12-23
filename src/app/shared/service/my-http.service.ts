@@ -4,8 +4,7 @@ import { DefaultAppConfig } from "../../app.config";
 // import { HttpErrorResponse } from "@angular/common/http";
 // import { throwError } from "rxjs";
 import { LoadingController, ToastController } from "ionic-angular";
-import {WechatChenyu} from "wechat-chenyu";
-
+import { WechatChenyu } from "wechat-chenyu";
 
 @Injectable()
 export class MyHttpService {
@@ -52,21 +51,23 @@ export class MyHttpService {
     this.loadingIsOpen = false;
   }
 
-
-
   /**
    * 文件上传
    * @param url
    * @param body
    * @param options
    */
-  private upimg(url: string, body: any, options?: RequestOptionsArgs): Promise<any> {
-      options = {
-        headers: new Headers({
-          "mytoken": localStorage.getItem("mytoken"),
-          "Content-Type": "multipart/form-data",
-        })
-      };
+  private upimg(
+    url: string,
+    body: any,
+    options?: RequestOptionsArgs
+  ): Promise<any> {
+    options = {
+      headers: new Headers({
+        mytoken: localStorage.getItem("mytoken"),
+        "Content-Type": "multipart/form-data"
+      })
+    };
     return this.http
       .post(`${this.ip}${url}`, body)
       .toPromise()
@@ -95,7 +96,7 @@ export class MyHttpService {
       .toPromise()
       .then(rtn => {
         let result = rtn.json() as any;
-        
+
         if (rtn.status > 400 && rtn.status < 500) {
           result = {
             ok: false,
@@ -124,18 +125,23 @@ export class MyHttpService {
     if (this.isMock) {
       return this.mockGet(url);
     }
+    let mytoken;
+    if (localStorage.getItem("mytoken")) {
+      mytoken = localStorage.getItem("mytoken");
+    } else {
+      mytoken = -111111111;
+    }
     if (!options)
       options = {
         headers: new Headers({
           "Content-Type": "application/x-www-form-urlencoded",
-          mytoken: localStorage.getItem("mytoken")
+          mytoken: mytoken
         })
       };
     return this.http
       .post(`${this.ip}${url}`, this.toQueryString(body), options)
       .toPromise()
       .then(rtn => {
-     
         let result = rtn.json() as any;
         if (rtn.status > 400 && rtn.status < 500) {
           result = {
@@ -218,7 +224,7 @@ export class MyHttpService {
       .toPromise()
       .then(rtn => rtn.json());
   }
- private mockGet(url: string) {
+  private mockGet(url: string) {
     return this.http
       .get("/assets/mock" + url + ".json")
       .toPromise()
@@ -252,7 +258,7 @@ export class MyHttpService {
   }
 
   /**
-   * 
+   *
    * @param mgs 弹窗消息字符串
    */
   public showToast(mgs) {
@@ -271,6 +277,6 @@ export class MyHttpService {
     public appConfig: DefaultAppConfig,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
-    public Wechat:WechatChenyu
+    public Wechat: WechatChenyu
   ) {}
 }

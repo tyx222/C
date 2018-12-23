@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ModalController  } from 'ionic-angular';
 
 import { DatePickerProvider } from 'ionic2-date-picker';
+import { UserService } from '../../app/shared/service/user.service';
 /**
  * Generated class for the CalendarPage page.
  *
@@ -18,7 +19,7 @@ import { DatePickerProvider } from 'ionic2-date-picker';
 export class CalendarPage {
 
   petids:any
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController,public navParams: NavParams,private datePickerProvider: DatePickerProvider ) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,public navParams: NavParams,private datePickerProvider: DatePickerProvider,private http:UserService ) {
   }
 
   ionViewDidLoad() {
@@ -28,8 +29,18 @@ export class CalendarPage {
   ionViewWillEnter(){
     this.petids=this.navParams.data
     console.log(this.petids)
+    this.initlist()
   }
-
+async initlist(){
+console.log(new Date().getTime())
+  this.petids=this.navParams.data
+  let parmas={
+    calendartime:new Date().getTime(),
+    petcardid:this.navParams.data.id
+  }
+  let res=await this.http.queryCalendar(parmas)
+  console.log(res)
+}
 
 
 }

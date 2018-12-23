@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>绑定用户信息</ion-title>
+        <ion-title>设置用户信息</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -35,10 +35,10 @@
             <ion-label fixed>联系电话</ion-label>
             <ion-input type="tel" [(ngModel)]="mydata.ipone" placeholder="用户手机号"></ion-input>
         </ion-item>
-        <ion-item>
+        <!--  <ion-item>
             <ion-label fixed>用户密码</ion-label>
             <ion-input type="tel" [(ngModel)]="mydata.client_password" placeholder="用户密码"></ion-input>
-        </ion-item>
+        </ion-item> -->
         <ion-item>
             <ion-label>地区</ion-label>
             <ion-multi-picker item-content [cancelText]="'取消'" [doneText]="'完成'" [(ngModel)]="mydata.myipam" [multiPickerColumns]="listData" #myipam></ion-multi-picker>

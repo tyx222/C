@@ -29,12 +29,14 @@ export class PetAdminPage {
     console.log('ionViewDidLoad PetAdminPage');
     this.querypetcardlist()
   }
+  gotongcheng(){
+    this.navCtrl.push('TongchenglistPage')
+  }
   async querypetcardlist() {
     let res = await this.http.querypetcardlist(this.data);
     console.log(res.arrayList.length);
     if (res.arrayList.length == 0) {
       console.log(res.arrayList.length);
-
     }else{
       this.callname=res.arrayList;
       console.log(this.callname);

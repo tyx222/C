@@ -36,7 +36,7 @@ export class NewlayPage {
     sex: "",
     kind: "",
     headimgpath:"",
-    mytoken: ""
+  //  mytoken: ""
   };
   image_File;
   imgfile;
@@ -103,7 +103,7 @@ export class NewlayPage {
 
   
   async subfrom() {
-    this.fromdata.mytoken = localStorage.getItem("mytoken");
+    //this.fromdata.mytoken = localStorage.getItem("mytoken");
     for (let mgs in this.fromdata) {
       console.log(this.fromdata[mgs]);
       if (this.fromdata[mgs] == "" || this.fromdata[mgs] == null) {
@@ -130,7 +130,7 @@ export class NewlayPage {
       sex: "",
       kind: "",
       headimgpath:"",
-      mytoken: ""
+     // mytoken: ""
     };
     this.petimage = "assets/imgs/images/xinzengmaoka.png"
     //  alert(this.fromdata.username+this.fromdata.text)

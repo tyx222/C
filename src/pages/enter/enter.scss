@@ -2,6 +2,35 @@ page-enter {
     .scroll-content {
         padding: 0 !important;
     }
+    .map_container {
+        width: 100%;
+        height: 100vh;
+    }
+    #mapbox {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        background: #fff
+    }
+    .maptitle {
+        position: absolute;
+        top: 4rem!important;
+        z-index: 9999;
+        color: #ffc435;
+        background: #ffffff78;
+        width: 100%;
+    }
+    #ok {
+        position: absolute;
+        bottom: 4rem;
+        right: 1rem;
+        z-index: 999;
+        padding: 0.5rem 1rem;
+        background: #f9a042;
+        color: #fff;
+        border-radius: 0.5rem;
+    }
     .fromdata {
         ul {
             display: flex;

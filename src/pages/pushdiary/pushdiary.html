@@ -19,18 +19,54 @@
         <input type="text" [(ngModel)]="title" name="" placeholder="点击输入标题" id="" class="">
         <img src="{{petimg}}" alt="">
     </div>
-    <div class="area">
-        <textarea placeholder="记录今天成长的趣事" [(ngModel)]="remark"></textarea>
+    <div style="width: 90vw; margin-left: 5vw;background: #fff; margin-top: 1rem;" *ngIf="type==2&&!show">
+        <div *ngFor=" let item of zhuanjilist;let i=index" style="display: flex;flex-direction: column;justify-content: space-between;width: 100%;">
+            <textarea *ngIf="item.text!=''" [(ngModel)]="item.text"></textarea>
+            <img src="{{item.path}} " *ngIf="item.path!='' " alt=" " srcset=" ">
+            <span class="serve "> <button (click)="upindex(i) ">向上</button>  <button (click)="rmindex(i)">删除</button></span>
+        </div>
     </div>
-    <div class="area">
-        <div class="Fileimg">
-            <div class="itembox" *ngFor="let item of avatar let i =index">
-                <span class="remimg" *ngIf="item!=='assets/imgs/images/shangchuan@2x.png'" (click)='remimages(i)'>X</span>
-                <img src="{{item}}" alt="" (click)="userimg(i)">
+    <div style="width: 90vw; margin-left: 5vw;background: #fff; margin-top: 1rem;" *ngIf="type==2&&show">
+        <div *ngFor=" let item of zhuanjilist;let i=index" style="display: flex;flex-direction: column;justify-content: space-between;width: 100%;">
+            <p *ngIf="item.text!=''">{{item.text}}</p>
+            <img src="{{item.path}} " *ngIf="item.path!='' " alt=" " srcset=" ">
+        </div>
+    </div>
+    <div class="xiezhen " *ngIf="type==1 ">
+        <div class="area ">
+            <textarea placeholder="记录今天成长的趣事 " [(ngModel)]="remark "></textarea>
+        </div>
+        <div class="area ">
+            <div class="Fileimg ">
+                <div class="itembox " *ngFor="let item of avatar let i=index ">
+                    <span class="remimg " *ngIf="item!=='assets/imgs/images/shangchuan@2x.png' " (click)='remimages(i)'>X</span>
+                    <img src="{{item}} " alt=" " (click)="userimg(i) ">
+                </div>
             </div>
         </div>
     </div>
-    <!-- <div class="header-image" tappable [ngStyle]="{'background-image': 'url('+avatar+')'}" (click)="presentActionSheet()"></div> -->
 
-    <button class="pushimg" (click)="addserve()">确认</button>
+    <div class="zhuanji " *ngIf="type==2 ">
+        <div class="area ">
+            <textarea placeholder="记录今天成长的趣事 " [(ngModel)]="remark "></textarea>
+        </div>
+        <div class="btnbox">
+            <button (click)="pushtext() ">新建段落</button>
+            <button (click)="pushimg() ">添加图片</button>
+            <button *ngIf="!show" (click)="shows()">预览</button>
+            <button *ngIf="show" (click)="shows()">取消预览</button>
+        </div>
+        <div class="area" *ngIf="type==1">
+            <p style="background: #fff ">最多添加6张图片</p>
+            <div class="Fileimg " *ngIf="type==1">
+                <div class="itembox " *ngFor="let item of avatar let i=index ">
+                    <span class="remimg " *ngIf="item!=='assets/imgs/images/shangchuan@2x.png' " (click)='remimages(i)'>X</span>
+                    <img src="{{item}} " alt=" " (click)="userimg(i) ">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="header-image " tappable [ngStyle]="{ 'background-image': 'url('+avatar+ ')'} " (click)="presentActionSheet() "></div> -->
+
+    <button class="pushimg " (click)="addserve() ">确认</button>
 </ion-content>

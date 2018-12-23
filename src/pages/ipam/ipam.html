@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>ipam</ion-title>
+        <ion-title>收货地址管理</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -15,7 +15,7 @@
 
 <ion-content padding>
 
-    <div class="titaa" (click)="goder()" *ngIf="ipml<3">
+    <div class="titaa" (click)="goder()">
         <div class="ble">
             <div>
                 <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
@@ -42,9 +42,9 @@
             <div class="ble2" (click)='letfbor=-1'>
                 <div class="name">
                     <p><span>收货人:{{item.receiver_name}} 
-                        <span *ngIf="item.address_lable==1" style="color: #0cff00;font-weight: 900; margin-left: 0.5rem; border: 2px solid;border-radius: 50%;width: 1.5rem;display: inline-block;height: 1.5rem;line-height: 1.5rem;">校</span>
+                        <!-- <span *ngIf="item.address_lable==1" style="color: #0cff00;font-weight: 900; margin-left: 0.5rem; border: 2px solid;border-radius: 50%;width: 1.5rem;display: inline-block;height: 1.5rem;line-height: 1.5rem;">校</span>
                         <span *ngIf="item.address_lable==2" style="color: #ffc435;font-weight: 900; margin-left: 0.5rem; border: 2px solid;border-radius: 50%;width: 1.5rem;display: inline-block;height: 1.5rem;line-height: 1.5rem;">司</span>
-                        <span *ngIf="item.address_lable==3" style="color: red;font-weight: 900; margin-left: 0.5rem; border: 2px solid;border-radius: 50%;width: 1.5rem;display: inline-block;height: 1.5rem;line-height: 1.5rem;">家</span>
+                        <span *ngIf="item.address_lable==3" style="color: red;font-weight: 900; margin-left: 0.5rem; border: 2px solid;border-radius: 50%;width: 1.5rem;display: inline-block;height: 1.5rem;line-height: 1.5rem;">家</span> -->
                         </span><span style="float: right;">{{item.phone_number}}</span></p>
                     <p><span>地址: {{item.province}} {{item.city}} {{item.county}} {{item.detaile_address}}</span></p>
 

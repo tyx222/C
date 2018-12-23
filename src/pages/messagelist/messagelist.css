@@ -55,7 +55,6 @@ page-messagelist .card > div:nth-of-type(2) div > p {
   -webkit-line-clamp: 4;
   overflow: hidden;
   color: #999;
-  max-height: 5.5rem;
 }
 
 page-messagelist .card > div:nth-of-type(2) .Interaction {
@@ -69,6 +68,17 @@ page-messagelist .card > div:nth-of-type(2) .Interaction span {
 
 page-messagelist .card > div:nth-of-type(2) .Interaction span img {
   width: 1.5rem;
+}
+
+page-messagelist .imgbox1 {
+  width: 30%;
+  margin: 1%;
+  height: 6rem;
+}
+
+page-messagelist .imgbox1 img {
+  width: 100% !important;
+  height: 100%;
 }
 
 page-messagelist .messg {

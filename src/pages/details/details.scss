@@ -48,6 +48,14 @@ page-details {
             height: 1.5rem;
         }
     }
+    .baybay {
+        button {
+            padding: 0.5rem;
+            background: #FDD439;
+            border-radius: 0.5rem;
+            margin-right: 0.5rem
+        }
+    }
     .addshow {
         width: 90%;
         background: #fff;
@@ -67,11 +75,11 @@ page-details {
         p {
             display: flex;
             flex-wrap: nowrap;
+            align-items: center;
             button {
                 padding: 0.2rem 0.8rem;
                 display: flex;
                 align-items: center;
-                background: rgb(173, 36, 214);
                 color: #fff;
                 margin-left: 1rem;
                 border-radius: 1rem;

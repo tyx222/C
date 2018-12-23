@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UserService } from '../../app/shared/service/user.service';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { UserService } from "../../app/shared/service/user.service";
 
 /**
  * Generated class for the FelselistPage page.
@@ -11,28 +11,32 @@ import { UserService } from '../../app/shared/service/user.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-felselist',
-  templateUrl: 'felselist.html',
+  selector: "page-felselist",
+  templateUrl: "felselist.html"
 })
 export class FelselistPage {
-felselist=[]
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http:UserService) {
-  }
+  felselist = [];
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public http: UserService
+  ) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FelselistPage');
+    console.log("ionViewDidLoad FelselistPage");
   }
-  ionViewWillEnter(){
-   this.navParams.get("petcardid")
- this.list()
+  ionViewWillEnter() {
+    this.navParams.get("petcardid");
+    console.log(this.navParams)
+    this.list();
   }
- async list(){
-   let parmas={
-    petcardid:this.navParams.get("petcardid")
-   }
- let res=await this.http.queryPetConcernclientlist(parmas)
- console.log(res)
-// this.felselist=res.listdata
+  async list() {
+    let parmas = {
+      petcardid: this.navParams.get("petcardid")
+    };
+    let res = await this.http.queryPetConcernclientlist(parmas);
+    console.log(res);
+    this.felselist=res.arrayList
+    // this.felselist=res.listdata
   }
-
 }

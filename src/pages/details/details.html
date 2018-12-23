@@ -22,9 +22,13 @@
                         <div class="addshow">
                             <div>
                                 <h1> {{item.pet_name}}</h1>
-                                <p> <button (click)="postlo()">
-                    <ion-icon ios="ios-male" md="md-male"></ion-icon>请求配种
-                  </button><span>{{item.petAge}}</span>
+                                <p> <button style="background: rgb(173, 36, 214);" (click)="postlo(i)" *ngIf="!gay&&item.peizhong">
+                                    <button style="background: rgb(142, 140, 143);" *ngIf="!gay&&!item.peizhong"></button>
+                                    <span *ngIf="item.is_sterilisation=='1'" style="color:#fff">GG</span> <span *ngIf="item.is_sterilisation=='2'" style="color:#fff">MM</span> 请求配种
+                                    </button>
+                                    <ion-toggle style="margin-left: 0.5rem;" [checked]="item.peizhong" (ionChange)="updatemating(i,item.peizhong)" *ngIf="gay"></ion-toggle>
+
+                                    <span> {{item.petAge}}</span>
                                     <!-- <span>射手座</span> -->
                                 </p>
 
@@ -43,11 +47,19 @@
                                         <img src="assets/imgs/images/jiantou.png" alt="">
                                         <span>总能量值 {{item.integral_num}}kg</span>
                                     </div>
+                                    <div class="baybay" *ngIf="!gay">
+                                        <button (click)="jubao(i)">举报</button>
+                                        <button (click)="lahei(i)" *ngIf="!item.blackstatus">加入黑名单</button>
+                                        <button (click)="lahei(i)" *ngIf="item.blackstatus">移出黑名单</button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="addimg" (click)="godate(index)">
                                 <span><img src="{{item.headimgpath}}" alt="" srcset=""></span>
-                                <span style="width: 10rem;">猫卡号:{{item.pet_num}}</span></div>
+                                <span style="width: 10rem;">猫卡号:{{item.pet_num}}</span>
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -104,7 +116,7 @@
 
         </div>
 
-        <div class="pk_box" (click)="Godaylist()">
+        <div class="pk_box" (click)="godaylist()">
             <div class="pk">
                 投食榜
                 <!-- <p class="kg">233kG</p> -->
@@ -134,23 +146,32 @@
         </span>
             </p>
         </div>
-        <div class="consult2" (click)="Pushdiary()">
-            <p>
-                <span>
-          <img src="assets/imgs/images/home1_15.png" alt="">
-          <span>
-            <span class="D">相遇180天</span>
-                <br>
-                <span>有2篇传记</span>
-                </span>
-                </span>
+        <div class="consult" *ngIf="gay">
+            <p (click)="godate()">
+                <span>我的日历</span>
                 <span>
           <img src="assets/imgs/images/right.png" alt="">
         </span>
             </p>
         </div>
+        <div class="consult" (click)="Pushdiary()">
+            <p>
+                <span>传记</span>
+                <span>
+          <img src="assets/imgs/images/right.png" alt="">
+        </span>
+            </p>
+        </div>
+        <div class="consult" (click)="xiezhen()">
+            <p>
+                <span>写真</span>
+                <span>
+              <img src="assets/imgs/images/right.png" alt="">
+            </span>
+            </p>
+        </div>
     </div>
-    <div style="height:8rem"></div>
+    <!-- <div style="height:8rem"></div>
     <ion-footer>
         <div class="terbox">
             <div> <img src="assets/imgs/images/home1_15.png" alt=""></div>
@@ -166,5 +187,5 @@
             </div>
             <div><button ion-button>取消关注</button></div>
         </div>
-    </ion-footer>
+    </ion-footer> -->
 </ion-content>

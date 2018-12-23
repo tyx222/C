@@ -1,5 +1,4 @@
 page-ckeck {
-
     .scroll-content {
         padding: 0 !important;
         background: #eee
@@ -8,7 +7,9 @@ page-ckeck {
         margin-bottom: 1rem;
         .userimg {
             width: 5rem;
-            margin-top: 1rem
+            margin-top: 1rem;
+            border-radius: 50%;
+            height: 4rem;
         }
     }
     .ble {

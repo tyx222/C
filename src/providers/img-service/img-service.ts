@@ -363,19 +363,19 @@ export class ImgServiceProvider {
   //  * @param fileUri
   //  * @param data
   //  */
-  // private fileimgget(fileUri, data) {
-  //   let evets = fileUri.split(data[0].name);
-  //   let fileName = data[0].name + ".jpg";
-  //   let Options = {};
-  //   this.file
-  //     .resolveDirectoryUrl("file://" + evets[0])
-  //     .then(res => {
-  //       this.file.getFile(res, fileName, Options).then(filedata => {
-  //         console.log(filedata);
-  //       });
-  //     })
-  //     .catch(err => console.log(err));
-  // }
+  private fileimgget(fileUri, data) {
+    let evets = fileUri.split(data[0].name);
+    let fileName = data[0].name + ".jpg";
+    let Options = {};
+    this.file
+      .resolveDirectoryUrl("file://" + evets[0])
+      .then(res => {
+        this.file.getFile(res, fileName, Options).then(filedata => {
+          console.log(filedata);
+        });
+      })
+      .catch(err => console.log(err));
+  }
 
   // 停止上传
   public stopUpload() {

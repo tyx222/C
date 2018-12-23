@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>ckeck</ion-title>
+        <ion-title>我的关注</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -16,17 +16,17 @@
 <ion-content padding>
 
     <div class="titaa">
-        <div class="ble">
+        <div class="ble" *ngFor="let item of pitarr;let i=index">
             <div>
-                <img src="assets/imgs/images/petImg.png" alt="" class="userimg">
+                <img src="{{item.petcard.headimgpath}}" alt="" class="userimg">
             </div>
             <div class="ble2">
                 <div class="name">
-                    <p>宠卡</p>
-                    <span><img src="assets/imgs/bq.png" alt=""> 可爱调皮捣蛋</span>
+                    <p>{{item.petcard.pet_name}}</p>
+                    <span>{{item.petcard.comment}}</span>
                 </div>
                 <div>
-                    <button class="djd">+关注</button>
+                    <button class="djd" *ngIf="!item.petcard.concernStatus" (click)="quxiao(i)">取消关注</button>
                 </div>
             </div>
         </div>

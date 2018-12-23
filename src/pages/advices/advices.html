@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>advices</ion-title>
+        <ion-title>消息通知</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -23,33 +23,33 @@
       <span>收到的赞</span>
     </button> -->
 
-        <button ion-item>
+        <button ion-item (click)="gofivebotice(index=0)">
       <span class="numimg">
         <img src="assets/imgs/images/petImg.png" alt="" srcset="">
-        <span>1</span>
+        <span *ngIf="messagelist.length>0" >{{messagelist.length}}</span>
       </span>
-      <span> 收到的评论</span>
+      <span>收到的评论</span>
     </button>
 
-        <button ion-item>
+        <button ion-item (click)="gofivebotice(index=1)">
       <span class="numimg">
         <img src="assets/imgs/images/petImg.png" alt="" srcset="">
-        <span>1</span>
+        <span *ngIf="concernlist.length>0" >{{concernlist.length}}</span>
       </span>
       <span> 新的关注</span>
     </button>
 
-        <button ion-item (click)='godetails()'>
+        <!-- <button ion-item (click)='godetails()'>
       <span class="numimg">
         <img src="assets/imgs/images/petImg.png" alt="" srcset="">
         <span>1</span>
       </span>
       <span class="texmgs">
-        <span>猫卡</span>
-        <span>不知道说了些什么</span>
+        <span>配种申请</span>
+        <span></span>
       </span>
 
-    </button>
+    </button> -->
 
 
     </ion-list>

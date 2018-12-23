@@ -44,7 +44,7 @@ page-diary .listbox li .listbutton {
 page-diary .listbox li .listbutton button {
   width: 6rem;
   color: #fff;
-  height: 10rem;
+  height: 8rem;
   font-weight: 900;
   font-size: 1.5rem;
 }
@@ -65,6 +65,7 @@ page-diary .listbox li .date {
 page-diary .listbox li .ttt {
   display: flex;
   height: 5.5rem;
+  width: 100%;
 }
 
 page-diary .listbox li .ttt .imgbox {

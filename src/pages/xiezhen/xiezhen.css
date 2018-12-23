@@ -1,0 +1,22 @@
+page-xiezhen .mp4btn {
+  position: absolute;
+  background: rgba(19, 19, 19, 0.54);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+page-xiezhen .mp4btn img {
+  width: 2rem;
+  height: 2rem;
+}
+
+page-xiezhen ion-label {
+  overflow: initial;
+}
+
+page-xiezhen ion-label h2 {
+  font-size: 0.8rem;
+}

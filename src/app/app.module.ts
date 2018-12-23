@@ -31,10 +31,9 @@ import { SharedModule } from "./shared/shared.module";
 import { HttpModule } from "../../node_modules/@angular/http";
 import { HttpClientModule } from "@angular/common/http";
 import { ListPage } from "../pages/list/list";
-
 //import { listener } from "@angular/core/src/render3/instructions";
 import { ForgetPasswordPage } from "../pages/forget-password/forget-password";
-
+import { Geolocation } from '@ionic-native/geolocation';
 import { OrderdackPage } from "../pages/orderdack/orderdack";
 
 // import { CalendarModule } from "ionic3-calendar";
@@ -67,7 +66,6 @@ import {WechatChenyu} from "wechat-chenyu"
     AppraisePage,
     AuditPage,
     AdditionalPage,
-
     OrderdackPage,
     MatchPage
   ],
@@ -80,7 +78,6 @@ import {WechatChenyu} from "wechat-chenyu"
     HttpModule,
     HttpClientModule,
     DatePickerModule,
-
     SharedModule.forRoot(),
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: "true",
@@ -121,7 +118,8 @@ import {WechatChenyu} from "wechat-chenyu"
     { provide: DefaultAppConfig, useClass: DefaultAppConfig },
     ImgServiceProvider,
     ToastProvider,
-    StorageProvider
+    StorageProvider,
+    Geolocation
   ]
 })
 export class AppModule {}

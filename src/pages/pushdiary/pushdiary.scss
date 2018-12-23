@@ -22,18 +22,43 @@ page-pushdiary {
         }
     }
     .area {
-        display: flex;
-        justify-content: center;
-        margin-top: 3rem
+        margin-top: 3rem;
+        margin-left: 5vw;
+        width: 90vw;
+    }
+    .pushtext {
+        width: 90vw;
+        margin-left: 5vw;
+        padding: 1rem
     }
     textarea {
         width: 90vw; //初始宽度 
         max-width: 90vw; //最大宽度
-        height: 40vh; //初始高度 
         max-height: 40vh; //最大高度
         overflow-y: auto; //让滚动条自适应，保证兼容性
         border: 0;
         padding: 1rem
+    }
+    .serve {
+        display: flex;
+        justify-content: space-between;
+        button {
+            height: 2rem;
+            width: 5rem;
+            margin-top: 1rem;
+        }
+    }
+    .btnbox {
+        display: flex;
+        justify-content: space-between;
+        width: 90vw;
+        margin-left: 5vw;
+        margin-top: 1rem;
+        button {
+            padding: 1rem;
+            width: 8rem;
+            ;
+        }
     }
     .Fileimg {
         background: #fff;
@@ -44,6 +69,7 @@ page-pushdiary {
         .itembox {
             width: 24%;
             margin: 4.5%;
+            height: 9rem;
             position: relative;
             .remimg {
                 width: 1.5rem;
@@ -62,6 +88,7 @@ page-pushdiary {
         }
         img {
             width: 100%;
+            height: 100%;
             // margin: 100%;
         }
     }

@@ -25,11 +25,10 @@ import { ImgServiceProvider } from "../../providers/img-service/img-service";
 export class SetuserPage {
   mydata = {
     myname: "",
-    ipone: "",
     myipam: "",
     ipam: "",
-    client_password:"",
     sex:"",
+    ipone:"",
     client_nikename:"",
     headimgpath:"assets/imgs/images/shangchuan@2x.png"
   };
@@ -81,9 +80,9 @@ export class SetuserPage {
 
 
   async save(myipam: HTMLEmbedElement) {
-    let city = this.mydata.myipam.split(" ");
+    let city =  myipam['_text'].split(" ") ;
     console.log(city);
-    var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+   var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
     if (!myreg.test(this.mydata.ipone)) {
       let message = "请输入正确手机号";
       const toast = this.toastCtrl.create({
@@ -97,11 +96,11 @@ export class SetuserPage {
     console.log(this.mydata.myipam)
     console.log(myipam)
     let parmas = {
-      client_password: this.mydata.client_password,
+     // client_password: this.mydata.client_password,
       client_nikename: this.mydata.client_nikename,
       client_username: this.mydata.myname,
-      phonenumber: this.mydata.ipone,
-      headimgpath:this.mydata.headimgpath,
+    phonenumber: this.mydata.ipone,
+      headimgpath:"123123123",//this.mydata.headimgpath,
       sex: this.mydata.sex,
       address:myipam['_text']+this.mydata.ipam
     };

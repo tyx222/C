@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { MyHttpService } from "./my-http.service";
 import { ToastController } from "ionic-angular";
-
+import { Geolocation } from "@ionic-native/geolocation";
 @Injectable()
 export class UserService {
   private api = {
@@ -46,12 +46,61 @@ export class UserService {
     addappOrder: "chongwu/chongwu/addPetOrder",
     statuslist: "chongwu/chongwu/queryPetOrderorder_statuslist",
     weixinor: "chongwu/app/weixinorderBeforSendapp",
-    addpetFeeding:"chongwu/chongwu/addpetFeeding",
-    querypetcardotherclientlist:"chongwu/chongwu/querypetcardotherclientlist",
-    querypetfeedingtop:"chongwu/chongwu/querypetfeedingtop",
-    queryPetConcernclientlist:"chongwu/chongwu/queryPetConcernclientlist"
+    addpetFeeding: "chongwu/chongwu/addpetFeeding",
+    querypetcardotherclientlist: "chongwu/chongwu/querypetcardotherclientlist",
+    querypetfeedingtop: "chongwu/chongwu/querypetfeedingtop",
+    queryPetConcernclientlist: "chongwu/chongwu/queryPetConcernclientlist",
+    querymessageNew: "chongwu/chongwu/querymessageNew",
+    deletehistoryType: "chongwu/chongwu/deletehistoryType",
+    querypethistorytypecontent: "chongwu/chongwu/querypethistorytypecontent",
+    addreport: "chongwu/chongwu/addreport",
+    addblack: "chongwu/app/addblack",
+    querypetfeedinglist: "chongwu/chongwu/querypetfeedinglist",
+    querypetfeedingclientlist: "chongwu/chongwu/querypetfeedingclientlist",
+    updatemating: "chongwu/chongwu/updatemating",
+    addmating: "chongwu/app/addmating",
+    querypetcardmatinglist: "chongwu/app/querypetcardmatinglist",
+    addshop:"chongwu/app/addshop"
   };
-  constructor(public http: MyHttpService, public toastCtrl: ToastController) {}
+  constructor(
+    public http: MyHttpService,
+    public toastCtrl: ToastController,
+    public geolocation: Geolocation
+  ) {}
+
+  /**
+   * gps定位
+   */
+  public getGPS() {
+    return this.geolocation
+      .getCurrentPosition()
+      .then(position => {
+        // var x = position.coords.latitude;
+        // var y = position.coords.longitude;
+        var city = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        };
+        // var pi = (3.14159265358979324 * 3000.0) / 180.0,
+        //   z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * pi),
+        //   theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * pi),
+        //   lon = z * Math.cos(theta) + 0.0065,
+        //   lan = z * Math.sin(theta) + 0.006;
+
+        if (!city.latitude || !city.longitude) {
+          alert("地址获取失败，请刷新页面重新获取！");
+          return false;
+        }
+        // var city = {
+        //   x: lan,//latitude
+        //   y: lon//longitude
+        // };
+        return city;
+      })
+      .catch(error => {
+        console.log("Error getting location", error);
+      });
+  }
 
   /**
    * 活动详情
@@ -353,34 +402,103 @@ export class UserService {
     return this.http.Post(this.api.weixinor, data);
   }
 
-/**
- * 查询某用户的所有猫卡
- * @param data 
- */
-querypetcardotherclientlist(data){
-  return this.http.Post(this.api.querypetcardotherclientlist,data)
-}
+  /**
+   * 查询某用户的所有猫卡
+   * @param data
+   */
+  querypetcardotherclientlist(data) {
+    return this.http.Post(this.api.querypetcardotherclientlist, data);
+  }
 
   /**
    * 投食
    */
-  addpetFeeding(data){
-    return this.http.Post(this.api.addpetFeeding,data)
+  addpetFeeding(data) {
+    return this.http.Post(this.api.addpetFeeding, data);
   }
 
   /**
    * 单张宠卡的投食榜
    */
-  querypetfeedingtop(data){
-    return this.http.Post(this.api.querypetfeedingtop,data)
+  querypetfeedingtop(data) {
+    return this.http.Post(this.api.querypetfeedingtop, data);
   }
 
   /**
    * 粉丝列表
-   * @param data 
+   * @param data
    */
-  queryPetConcernclientlist(data){
-
+  queryPetConcernclientlist(data) {
+    return this.http.Post(this.api.queryPetConcernclientlist, data);
   }
 
+  /**
+   * 查询通知消息
+   */
+  querymessageNew(data) {
+    return this.http.Post(this.api.querymessageNew, data);
+  }
+  /**
+   * 删除动态
+   */
+  deletehistoryType(data) {
+    return this.http.Post(this.api.deletehistoryType, data);
+  }
+
+  /**
+   * 查询单条动态
+   */
+  querypethistorytypecontent(data) {
+    return this.http.Post(this.api.querypethistorytypecontent, data);
+  }
+  /**
+   *
+   * @param data 举报
+   */
+  addreport(data) {
+    return this.http.Post(this.api.addreport, data);
+  }
+
+  /**
+   * 加入黑名单
+   */
+  addblack(data) {
+    return this.http.Post(this.api.addblack, data);
+  }
+
+  /**
+   * 查询我投食
+   */
+  querypetfeedinglist(data) {
+    return this.http.Post(this.api.querypetfeedinglist, data);
+  }
+  /**
+   * 查询别人给我的投食记录
+   */
+  querypetfeedingclientlist(data) {
+    return this.http.Post(this.api.querypetfeedingclientlist, data);
+  }
+
+  /**
+   * 配种状态设置
+   */
+  updatemating(data) {
+    return this.http.Post(this.api.updatemating, data);
+  }
+
+  /**
+   * 发送配种消息
+   */
+  addmating(data) {
+    return this.http.Post(this.api.addmating, data);
+  }
+  /**
+   * 同城配种猫卡
+   */
+  querypetcardmatinglist(data) {
+    return this.http.Post(this.api.querypetcardmatinglist, data);
+  }
+  addshop(data){
+    return this.http.Post(this.api.addshop,data)
+  }
 }

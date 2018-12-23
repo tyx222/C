@@ -17,7 +17,7 @@
     <div class="day">
         <ul>
             <li (click)="Ckeck()"><span>我的关注</span><span>2</span></li>
-            <li><img src="assets/imgs/images/petImg.png" alt="" srcset=""></li>
+            <li><img src="{{userimg}}" alt="" srcset=""></li>
             <li (click)="Coupon()"><span>代金券</span><span>2</span></li>
         </ul>
     </div>
@@ -36,6 +36,18 @@
                 </p>
                 <p>兑换</p>
             </li>
+            <li (click)="gotoushilist(0)">
+                <p>
+                    <img src="assets/imgs/images/duihuan.png" alt="">
+                </p>
+                <p>投食记录</p>
+            </li>
+            <!-- <li (click)="gotoushilist(1)">
+                <p>
+                    <img src="assets/imgs/images/duihuan.png" alt="">
+                </p>
+                <p>黑名单</p>
+            </li> -->
 
         </ul>
     </div>

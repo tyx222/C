@@ -20,12 +20,32 @@
         <div>
             <h5>{{petname}} <span (click)="addpetConcern()" *ngIf="!concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">关注</span>
                 <span (click)="addpetConcern()" *ngIf="concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span></h5>
-            <p><img src="assets/imgs/bq.png" alt="" srcset="">{{title}}</p>
-            <div>
-                <span style=" max-height: 10rem;display: inline-flex;"><img src="{{imgurl}}{{cover}}" alt="" srcset="" *ngIf="cover!=undefined"></span>
+            <p><span *ngIf="type==4" style="margin-right: 1rem;background: #21abeb;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">活动</span><span *ngIf="type==2" style="margin-right: 1rem;background: #eec10e;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">传记</span>{{title}}</p>
+            <div *ngIf="type==1||type==4">
                 <p>{{comment}}</p>
+                <div *ngIf="!mp4" style="display: flex;flex-wrap: wrap;">
+                    <div *ngFor="let item of pathlist" class="imgbox1">
+                        <img src="https://www.petbashi.com/imgs/{{item.path}}" alt="" srcset="">
+                    </div>
+                </div>
+                <span *ngFor="let item of pathlist">
+          <vg-player *ngIf="mp4">
+            <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+              <source src="https://www.petbashi.com/imgs/{{item.path}}" type="video/mp4">
+            </video>
+          </vg-player>
+        </span>
+
             </div>
-            <div class="Interaction"><span><img src="assets/imgs/zan.png" *ngIf="!isLiked"  alt="" srcset="" (click)="addpetLikes(i)"> <img src="assets/imgs/images/quxiaozan.png"  *ngIf="isLiked" alt="" srcset="" (click)="qxaddpetLikes(i)"></span></div>
+            <div *ngIf="type==2">
+                <div *ngFor="let item of pathlist">
+                    <p>{{item.text}}</p>
+                    <p> <img src="{{item.path}}" alt="" srcset=""></p>
+                </div>
+
+            </div>
+            <div class="Interaction"><span><img src="assets/imgs/zan.png" *ngIf="!isLiked" alt="" srcset="" (click)="addpetLikes(i)">
+          <img src="assets/imgs/images/quxiaozan.png" *ngIf="isLiked" alt="" srcset="" (click)="qxaddpetLikes(i)"></span></div>
         </div>
     </div>
 
@@ -33,7 +53,11 @@
         <h5>评论</h5>
         <ul class="messg">
             <li *ngIf="messg">还没有评论!快去抢沙发吧</li>
-            <li *ngFor="let item of messglist"><span class="userimg"><img src="{{item.recivePetClient.headimgpath}}" alt="" srcset=""></span><span>{{item.recivePetClient.client_nikename}} : <i>{{item.messageContent}}</i></span>
+            <li *ngFor="let item of messglist;let i=index"><span class="userimg"><img src="{{item.recivePetClient.headimgpath}}"
+            alt="" srcset=""></span><span (click)="huifu(i)">{{item.recivePetClient.client_nikename}} : <i>{{item.messageContent}}</i></span>
+                <ol>
+                    <li *ngFor="let items of item.petMessages;let j=index" (click)="huifu2(i,j)" style="word-break: break-all;"><span style="width:auto">{{items.sendPetClient.client_nikename}} 回复 {{items.recivePetClient.client_nikename}}:{{items.messageContent}}</span></li>
+                </ol>
                 <p style="width:100%;text-align: right;color: #999;padding-top: 1rem;">{{item.createTime}}</p>
             </li>
         </ul>

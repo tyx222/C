@@ -39,7 +39,9 @@ page-personalcenter .day ul li:nth-of-type(2) {
 }
 
 page-personalcenter .day ul li:nth-of-type(2) img {
-  width: 8rem;
+  width: 5rem;
+  border-radius: 50%;
+  height: 5rem;
 }
 
 page-personalcenter .list {

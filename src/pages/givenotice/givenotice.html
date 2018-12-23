@@ -1,0 +1,49 @@
+<!--
+  Generated template for the GivenoticePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>我的消息</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <div class="comments" *ngIf="type==0">
+        <ul class="messg">
+            <li *ngIf="listdata.length==0">还没有评论!快去抢沙发吧</li>
+            <li *ngFor="let item of listdata;let i=index" (click)="gomess(i)"><span class="userimg"><img src="{{item.recivePetClient.headimgpath}}"
+            alt="" srcset=""></span><span>{{item.recivePetClient.client_nikename}} : <i>{{item.messageContent}}</i></span>
+                <p style="width:100%;text-align: right;color: #999;padding-top: 1rem;">{{item.createTime}}</p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="feles" *ngIf="type==1">
+
+        <div class="titaa" *ngFor="let item of listdata;let i=index">
+            <div class="ble">
+                <div (click)="clickEventHandler(i)">
+                    <img src="{{item.petcard.headimgpath}}" alt="" class="userimg">
+                </div>
+                <div class="ble2">
+                    <div class="name">
+                        <p>{{item.petcard.pet_name}}</p>
+                        <span></span>
+                    </div>
+                    <div>
+                        <button class="djd" *ngIf="!item.petcard.concernStatus" (click)="guanzhu(i)">+关注</button>
+                        <button class="djd" *ngIf="item.petcard.concernStatus" (click)="guanzhu(i)">取消关注</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ion-content>

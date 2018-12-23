@@ -17,21 +17,19 @@
     <div class="listbox">
         <ul>
             <li *ngFor="let item of data let i=index" (swipe)="swipeEvent($event,i)">
-                <div [ngClass]="{'list':letfbor!==i,'list2':letfbor==i}" (click)='letfbor=-1'>
+                <div [ngClass]="{'list':letfbor!==i,'list2':letfbor==i}" (click)="gomess(i)" (click)='letfbor=-1'>
                     <div class="date">
-                        <p>{{item.date}}</p>
-                        <p>{{item.day}}</p>
+                        <img src="{{item.path}}" alt="">
                     </div>
                     <div class="ttt">
-                        <span class="imgbox">
-              <img src="{{item.path}}" alt="">
-            </span>
                         <span class="ddd">
               <span class="hh">{{item.title}}</span>
                         <span>
                 {{item.remark}}
               </span>
+                        <span>{{item.date}}</span>
                         </span>
+
                     </div>
 
                 </div>
@@ -43,7 +41,7 @@
         </ul>
     </div>
 
-    <button class="gopage" (click)='gopushdiary()' *ngIf="!gay">
+    <button class="gopage" (click)='gopushdiary()' *ngIf="gay">
     <img src="assets/imgs/images/imhpush.png" alt="">
   </button>
 </ion-content>

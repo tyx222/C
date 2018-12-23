@@ -5,6 +5,9 @@ page-pet-admin {
     .list-header-md {
         border: none!important
     }
+    ion-title {
+        padding: 0!important
+    }
     .petBox {
         position: relative;
         width: 100%;

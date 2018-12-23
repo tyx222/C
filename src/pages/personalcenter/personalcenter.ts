@@ -18,15 +18,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'personalcenter.html',
 })
 export class PersonalcenterPage {
-
+userimg
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PersonalcenterPage');
   }
+  ionViewWillEnter(){
+    if(localStorage.getItem('mydata')){
+     this.userimg=JSON.parse(localStorage.getItem('mydata')).headimgpath 
+    }
+   
+  }
   wallet() {
     this.navCtrl.push("WalletPage");
+  }
+  gotoushilist(i){
+    console.log(i)
+    this.navCtrl.push("ToushilistPage",{type:i})
   }
   enter(){
     this.navCtrl.push("EnterPage")

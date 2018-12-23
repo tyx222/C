@@ -14,11 +14,79 @@
 
 
 <ion-content padding>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" *ngFor="let item of advertimg;let i=index">
+                <img *ngIf="item!=''" src="/assets/imgs/images/goudai.png" alt="">
+            </div>
+            <div class="swiper-slide" *ngFor="let item of advertimg;let i=index">
+                <img *ngIf="item!=''" src="/assets/imgs/images/goudai.png" alt="">
+            </div>
+            <div class="swiper-slide" *ngFor="let item of advertimg;let i=index">
+                <img *ngIf="item!=''" src="/assets/imgs/images/goudai.png" alt="">
+            </div>
 
-    <div [innerHTML]='content'>
+        </div>
+    </div>
+    <div class="pk_box" (click)="gohuodongpage()">
+        <div style="width:8rem;font-size: 1.5rem">
+            活动详情
+            <!-- <p class="kg">233kG</p> -->
+        </div>
+        <div style="width:100%;text-align:right">
+            <img src="assets/imgs/images/right.png" alt="" style="width: 1rem;" srcset="">
+        </div>
+    </div>
+    <div class="pk_box">
+        <div style="width:8rem">
+            活动信息
+            <!-- <p class="kg">233kG</p> -->
+        </div>
+        <div style="width:100%;color:red">
+            {{huojiangtext}}
+        </div>
+    </div>
+    <div class="pk_box" (click)="godaylist()">
+        <div class="pk">
+            活动排行榜
+            <!-- <p class="kg">233kG</p> -->
+        </div>
+        <div class="imgsT">
+            <img *ngFor="let item of historyimg" src="https://www.petbashi.com/imgs/{{item.cover}}" alt="">
+            <!-- <img src="assets/imgs/images/home1_15.png" alt="">
+                    <img src="assets/imgs/images/home1_15.png" alt="">
+                    <img src="assets/imgs/images/home1_15.png" alt="">
+                    <img src="assets/imgs/images/home1_15.png" alt=""> -->
+        </div>
+    </div>
+    <div class="card" *ngFor="let item of historytypelist;let i=index">
+        <div (click)="godetailsto(i)"><img src="https://www.petbashi.com/imgs/{{item.petcard.headimgpath}}" alt="" srcset=""></div>
+        <div>
 
+            <h5>{{item.petcard.pet_name}} <span (click)="addpetConcern(i)" *ngIf="!item.concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">关注</span> <span (click)="addConcern(i)" *ngIf="item.concernStatus"
+                    style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span></h5>
+            <p><span *ngIf="item.type==2" style="margin-right: 1rem;background: #eec10e;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">传记</span><span *ngIf="item.type==4" style="margin-right: 1rem;background: #21abeb;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">活动</span>{{item.title}}</p>
+            <div (click)="gomessagelist(i)" *ngIf="item.mp4">
+                <p>{{item.remark}}</p>
+                <span style="max-height: 20rem;overflow: hidden;display: inline-block;position: relative;"><span *ngIf="item.mp4" style="position:absolute;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;background: #00000096;"><img src="assets/imgs/showmp4.png" alt="" srcset=""></span>
+                <img src="https://www.petbashi.com/imgs/{{item.cover}}" alt="" srcset="" *ngIf="item.cover!=undefined"></span>
+
+            </div>
+            <div (click)="gomessagelist(i)" *ngIf="!item.mp4">
+                <p>{{item.remark}}</p>
+                <span *ngFor="let items of item.historycontentlist">
+                    <span *ngIf="items.path!=''" style="padding: 0.5rem;width: 30%;height: 7rem;display: inline-block;"><img style="width:100%;height:100%" src="https://www.petbashi.com/imgs/{{items.path}}" alt="" srcset=""></span>
+                </span>
+            </div>
+            <div class="Interaction"><span><img src="assets/imgs/zan.png" *ngIf="!item.isLiked"  alt="" srcset="" (click)="addpetLikes(i)"> <img src="assets/imgs/images/quxiaozan.png"  *ngIf="item.isLiked" alt="" srcset="" (click)="qxaddpetLikes(i)"></span><span><img src="assets/imgs/pl.png" alt="" srcset=""></span></div>
+        </div>
     </div>
 
-    <button (click)="gohuodong()">参加活动</button>
-    <button>活动已经结束</button>
+    <div style="height:8rem"></div>
+    <!-- <div [innerHTML]='content'>
+
+    </div> -->
+    <button class="canjia jiesu" *ngIf="activitystart==1">活动已经结束</button>
+    <button class="canjia kaishi" (click)="gohuodong()" *ngIf="activitystart==0">参加活动</button>
+
 </ion-content>

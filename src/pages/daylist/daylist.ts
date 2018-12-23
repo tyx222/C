@@ -16,6 +16,8 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 })
 export class DaylistPage {
   daypklist = [];
+myboject
+type
   constructor(
     public http: UserService,
     public navCtrl: NavController,
@@ -26,7 +28,28 @@ export class DaylistPage {
     console.log("ionViewDidLoad DaylistPage");
   }
   ionViewWillEnter() {
-    this.querypetpetcardfeedingrankinglist();
+    this.type=this.navParams.get("type")
+    if(this.navParams.get("type")==1){
+       this.querypetpetcardfeedingrankinglist();
+    }
+   if(this.navParams.get("type")==2){
+     this.daypklist=this.navParams.get("daylist")
+     this.myboject=this.navParams.get("object")
+    //  for (let i = 0; i <  this.daypklist.length; i++) {
+    //   this.daypklist[i].petfeeding.feednum =  this.daypklist[i].feedingNum;
+    //  }
+     console.log(this.myboject)
+     console.log(this.daypklist)
+   }
+   if(this.navParams.get("type")==3){
+   this.daypklist=this.navParams.get("object")
+   //this.myboject=this.navParams.get("object")
+   //  for (let i = 0; i <  this.daypklist.length; i++) {
+   //   this.daypklist[i].petfeeding.feednum =  this.daypklist[i].feedingNum;
+   //  }
+    console.log(this.myboject)
+    console.log(this.daypklist)
+  }
   }
   async querypetpetcardfeedingrankinglist() {
     let res = await this.http.querypetpetcardfeedingrankinglist();

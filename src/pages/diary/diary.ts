@@ -19,13 +19,7 @@ export class DiaryPage {
   letfbor=-1
   petdata
   gay=false
-  data = [
-    { imgurl: "assets/imgs/images/home1_15.png", title: "标题", date: "1" },
-    { imgurl: "assets/imgs/images/home1_15.png", title: "标题", date: "2" },
-    { imgurl: "assets/imgs/images/home1_15.png", title: "标题", date: "3" },
-    { imgurl: "assets/imgs/images/home1_15.png", title: "标题", date: "4" },
-     { imgurl: "assets/imgs/images/home1_15.png", title: "标题", date: "5" },
-  ];
+  data = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,private http:UserService) {}
 
   ionViewDidLoad() {
@@ -54,26 +48,42 @@ export class DiaryPage {
       petcardid: this.petdata.id
     };
     let res = await this.http.queryhistoryTypetypelist(Params);
-    for (const iterator of res.arrayList) {
-      iterator['path']=iterator.historycontentlist[0].path
-      iterator['date']=iterator.updatetime.split(" ")[0]
-      iterator['day']=iterator.updatetime.split(" ")[1]
-    }
+    // for (const iterator of res.arrayList) {
+    //   iterator['path']=iterator.historycontentlist[0].path
+    //   iterator['date']=iterator.updatetime.split(" ")[0]
+    //   iterator['day']=iterator.updatetime.split(" ")[1]
+    // }
+    console.log(res)
     this.data=res.arrayList
     console.log(this.data)
     console.log(res)
   }
 
-  remlist(i){
-    alert("我要删除"+i)
-    
-   this.data.splice(this.letfbor,1)
+async  remlist(i){
+   // alert("我要删除"+i)
+    console.log(this.data[i])
+    let parmas={
+      historyTypeid:this.data[i].id
+    }
+    let res=await this.http.deletehistoryType(parmas)
+    console.log(res)
+    if(res.info=="ok"){
+        this.data.splice(this.letfbor,1)
    this.letfbor=-1
+    }
    console.log(this.data)
-    
+  }
+  gomess(i){
+    this.letfbor=-1
+    this.navCtrl.push("MessagelistPage",{
+      datas:this.data[i]
+    })
   }
   swipeEvent(e,i) {
     // console.log(e.offsetDirection);
+    if(!this.gay){
+      return false
+    }
     if (e.offsetDirection == 2) {
     this.letfbor=i
     }

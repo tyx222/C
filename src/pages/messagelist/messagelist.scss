@@ -46,7 +46,6 @@ page-messagelist {
                     -webkit-line-clamp: 4;
                     overflow: hidden;
                     color: #999;
-                    max-height: 5.5rem;
                 }
             }
             .Interaction {
@@ -59,6 +58,15 @@ page-messagelist {
                     }
                 }
             }
+        }
+    }
+    .imgbox1 {
+        width: 30%;
+        margin: 1%;
+        height: 6rem;
+        img {
+            width: 100%!important;
+            height: 100%;
         }
     }
     .messg {

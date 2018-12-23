@@ -1,3 +1,4 @@
+import { UserService } from './../../app/shared/service/user.service';
 import { ImgServiceProvider } from './../../providers/img-service/img-service';
 import { Component } from "@angular/core";
 import {
@@ -42,14 +43,15 @@ export class VideoPage {
     public actionSheetCtrl: ActionSheetController,
     public alertCtrl: AlertController,
     private mediaCapture: MediaCapture,
-    private devolup: ImgServiceProvider
-    
+    private devolup: ImgServiceProvider,
+    private http:UserService
   ) {}
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad PushdiaryPage");
     console.log(this.navParams.get("datas"))
     this.imgpath=this.navParams.get("datas").headimgpath
+    console.log(this.navParams.get("cityi"))
 
   }
   /**
@@ -68,10 +70,10 @@ export class VideoPage {
   remimages (){
     this.videpath=""
   }
-  submit(){
+ async submit(){
     let parmas = {
       title: this.title, //标题
-      type: this.type, //1:写真  2：传记  3:健康  4:活动
+      type: 1, //1:写真  2：传记  3:健康  4:活动
      // chose_time: new Date().getTime(),
       remark: this.remark, //备注
       pet_id: this.navParams.get("datas").id,
@@ -84,8 +86,30 @@ export class VideoPage {
           path: "http://116.62.219.45/imgs/"+this.videpath, //地址
           text: "" //传记段落
         },
-      
       ]  
   }
+  if(this.videpath==''){
+    this.http.http.showToast("请添加视频")
+    return false
+  }
+  if(this.title==''){
+    this.http.http.showToast("请添加标题")
+    return false
+  }
+  if(this.navParams.get("cityi")){
+    parmas.type=4
+  }
+  let res = await this.http.addhistoryType({
+    jsonPramter: JSON.stringify(parmas)
+  });
+  console.log(res)
+  this.http.http.showToast(res.message);
+  if (res.info == "ok") {
+    setTimeout(() => {
+     // this.posthttp = true;
+      this.navCtrl.pop();
+    }, 2000);
+  }
 }
+
 }

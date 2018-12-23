@@ -1,6 +1,6 @@
 import { UserService } from "./../../app/shared/service/user.service";
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { IonicPage, NavController, NavParams, AlertController } from "ionic-angular";
 
 /**
  * Generated class for the MessagelistPage page.
@@ -30,19 +30,39 @@ export class MessagelistPage {
   maxleng;
   loding = false;
   imageUrl;
+  mp4;
+  type;
+  pathlist = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private http: UserService
+    private http: UserService,
+    public alertCtrl:AlertController
   ) {}
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad MessagelistPage");
-    console.log(this.navParams.get("datas"));
-    this.initdata();
+    console.log(this.navParams);
+    // this.initdata();
+    this.querypethistorytypecontent();
     this.queryPetMessagelist();
   }
 
+  async querypethistorytypecontent() {
+    let parmas = {
+      historytypeid: this.navParams.get("datas").id
+    };
+    let res = await this.http.querypethistorytypecontent(parmas);
+    if (res.info == "ok") {
+      if ((res.object.type == 1 && res.object.historycontentlist[0].type == 1)||(res.object.type == 4 && res.object.historycontentlist[0].type == 1)) {
+        res.object.mp4 = "mp4";
+      }
+      this.initdata(res.object);
+    }
+
+    console.log(res);
+  }
+  
   doInfinite(infiniteScroll) {
     this.ctn++;
     this.queryPetMessagelist();
@@ -60,15 +80,17 @@ export class MessagelistPage {
   /**
    * 初始化评论详情
    */
-  initdata() {
-    this.imgpath = this.navParams.get("datas").petcard.headimgpath;
-    this.petname = this.navParams.get("datas").petcard.pet_name;
-    this.cover = this.navParams.get("datas").cover;
-    this.comment = this.navParams.get("datas").petcard.comment;
-    this.title = this.navParams.get("datas").title;
-    this.concernStatus = this.navParams.get("datas").concernStatus;
-    this.isLiked = this.navParams.get("datas").isLiked;
-    console.log(this.concernStatus);
+  initdata(data) {
+    this.imgpath = data.petcard.headimgpath;
+    this.petname = data.petcard.pet_name;
+    this.cover = data.cover;
+    this.comment = data.petcard.comment;
+    this.title = data.title;
+    this.concernStatus = data.concernStatus;
+    this.isLiked = data.isLiked;
+    this.mp4 = data.mp4;
+    this.pathlist = data.historycontentlist;
+    this.type = data.type;
   }
 
   async addpetConcern() {
@@ -90,7 +112,6 @@ export class MessagelistPage {
       this.concernStatus = !this.concernStatus;
     }
   }
-
   /**
    * 获取评论列表
    */
@@ -107,7 +128,7 @@ export class MessagelistPage {
       this.messg = true;
       return false;
     }
-    this.messg = false
+    this.messg = false;
     for (let index = 0; index < res.arrayList.length; index++) {
       this.messglist.push(res.arrayList[index]);
     }
@@ -132,16 +153,133 @@ export class MessagelistPage {
       this.http.http.showToast("不能超过100个字");
       return false;
     }
-    if(this.messgtext.length==0){
-      return false
+    if (this.messgtext.length == 0) {
+      return false;
     }
     let res = await this.http.addpetMessage(parmas);
-    
+
     this.http.http.showToast(res.message);
     this.messgtext = "";
     this.queryPetMessagelist();
     console.log(res);
   }
+
+/**
+   * 回复留言
+   * @param i 
+   */
+ async huifu(i){
+   if(this.messglist[i].sendPetClient.client_id==JSON.parse(localStorage.getItem("mydata")).client_id){
+return false
+   }
+  
+console.log(this.messglist[i])
+  const prompt = this.alertCtrl.create({
+    title: '回复留言',
+    message: `输入你要回复 ${this.messglist[i].sendPetClient.client_nikename} 的消息`,
+    inputs: [
+      {
+        name: 'title',
+        placeholder: '回复'
+      },
+    ],
+    buttons: [
+      {
+        text: '确定',
+        handler:async data => {
+          console.log(data)
+          let parmas = {
+            mytoken: localStorage.getItem("mytoken"),
+            messageContent: data.title,
+            reciveClient: this.messglist[i].recivePetClient.client_id,
+            historytypeid: this.messglist[i].historytypeid,
+            parents_message_id:this.messglist[i].messageId,
+            type: 1
+          };
+          if (data.title.length > 100) {
+            this.http.http.showToast("不能超过100个字");
+            return false;
+          }
+          if (data.title.length == 0) {
+            return false;
+          }
+          let res = await this.http.addpetMessage(parmas);
+      
+          this.http.http.showToast(res.message);
+         
+          if(res.info=="ok"){
+              this.queryPetMessagelist();
+          }
+        
+          console.log(res);
+        }
+      },
+      {
+        text: '取消',
+        handler: data => {
+          console.log('Saved clicked');
+        }
+      }
+    ]
+  });
+  prompt.present();
+}
+  
+huifu2(i,j){
+  console.log(this.messglist[i])
+  if(this.messglist[i].petMessages[j].sendPetClient.client_id==JSON.parse(localStorage.getItem("mydata")).client_id){
+    return false
+       }
+  const prompt = this.alertCtrl.create({
+    title: '回复留言',
+    message: `输入你要回复 ${this.messglist[i].petMessages[j].sendPetClient.client_nikename} 的消息`,
+    inputs: [
+      {
+        name: 'title',
+        placeholder: '回复'
+      },
+    ],
+    buttons: [
+      {
+        text: '确定',
+        handler:async data => {
+          console.log(data)
+          let parmas = {
+            mytoken: localStorage.getItem("mytoken"),
+            messageContent: data.title,
+            reciveClient: this.messglist[i].petMessages[j].recivePetClient.client_id,
+            historytypeid: this.messglist[i].petMessages[j].historytypeid,
+            parents_message_id:this.messglist[i].petMessages[j].messageId,
+            type: 1
+          };
+          if (data.title.length > 100) {
+            this.http.http.showToast("不能超过100个字");
+            return false;
+          }
+          if (data.title.length == 0) {
+            return false;
+          }
+          let res = await this.http.addpetMessage(parmas);
+      
+          this.http.http.showToast(res.message);
+         
+          if(res.info=="ok"){
+              this.queryPetMessagelist();
+          }
+        
+          console.log(res);
+        }
+      },
+      {
+        text: '取消',
+        handler: data => {
+          console.log('Saved clicked');
+        }
+      }
+    ]
+  });
+  prompt.present();
+}
 
   /**
    * 点赞动态
@@ -154,7 +292,13 @@ export class MessagelistPage {
       receivepetcardid: this.navParams.get("datas").pet_id
     };
     let res = await this.http.addpetLikes(parmas);
-    this.http.http.showToast(res.message);
+    if (res.info == "ok") {
+      this.isLiked = !this.isLiked;
+      this.http.http.showToast(res.message);
+    } else {
+      this.http.http.showToast(res.message);
+    }
+
     console.log(res);
   }
 
@@ -169,7 +313,12 @@ export class MessagelistPage {
       receivepetcardid: this.navParams.get("datas").pet_id
     };
     let res = await this.http.addpetLikes(parmas);
-    this.http.http.showToast(res.message);
+    if (res.info == "ok") {
+      this.isLiked = !this.isLiked;
+      this.http.http.showToast(res.message);
+    } else {
+      this.http.http.showToast(res.message);
+    }
     console.log(res);
   }
 }

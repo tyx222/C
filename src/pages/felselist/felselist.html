@@ -6,13 +6,26 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>felselist</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>粉丝列表</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <div class="ble" *ngFor="let item of felselist">
+        <div>
+            <img src="{{item.petclient.headimgpath}}" alt="" class="userimg" style="width:5rem;border-radius:50%">
+        </div>
+        <div class="ble2">
+            <div class="name">
+                <p>{{item.petclient.client_nikename}}</p>
+                <!-- <span>可爱调皮捣蛋</span> -->
+            </div>
+            <!-- <div>
+                <button class="djd">+关注</button>
+            </div> -->
+        </div>
+    </div>
 </ion-content>

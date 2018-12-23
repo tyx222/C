@@ -5,15 +5,15 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
     <ion-navbar>
-        <ion-title>playcode</ion-title>
+        <ion-title>{{title}}</ion-title>
     </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-    <div class="playcode"><img src="assets/imgs/images/re_12.png" alt="" srcset=""> <input type="text" placeholder="请设置您的密码"></div>
+    <div class="playcode" *ngIf="type==0"><img src="assets/imgs/images/re_12.png" alt="" srcset=""> <input type="text" placeholder="请设置您的手机号"></div>
+    <div class="playcode" *ngIf="type!==0"><img src="assets/imgs/images/re_12.png" alt="" srcset=""> <input type="text" placeholder="请设置您的密码"></div>
+    <div class="yanzm"><button class="yanz" [disabled]="disabled">获取验证码<span *ngIf="num>0" (click)="yanzm()" >({{num}})</span></button><input type="text" placeholder="请输入验证码"></div>
     <button class="isok">确认</button>
 </ion-content>

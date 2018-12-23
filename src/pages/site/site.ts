@@ -73,6 +73,7 @@ export class SitePage {
     console.log(this.default_address);
   }
   async save(myipam: HTMLEmbedElement) {
+    console.log(myipam)
     for (let item in this.mydata) {
       if (this.mydata[item] == "") {
         const toast = this.toastCtrl.create({
@@ -84,7 +85,7 @@ export class SitePage {
         return false;
       }
     }
-    let city = this.mydata.myipam.split(" ");
+    let city = myipam['_text'].split(" ");
     console.log(city);
     var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
     if (!myreg.test(this.mydata.ipone)) {

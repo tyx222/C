@@ -54,6 +54,13 @@ page-details .msg2 img {
   height: 1.5rem;
 }
 
+page-details .baybay button {
+  padding: 0.5rem;
+  background: #FDD439;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 page-details .addshow {
   width: 90%;
   background: #fff;
@@ -77,13 +84,13 @@ page-details .addshow > div:nth-of-type(1) h1 {
 page-details .addshow p {
   display: flex;
   flex-wrap: nowrap;
+  align-items: center;
 }
 
 page-details .addshow p button {
   padding: 0.2rem 0.8rem;
   display: flex;
   align-items: center;
-  background: #ad24d6;
   color: #fff;
   margin-left: 1rem;
   border-radius: 1rem;

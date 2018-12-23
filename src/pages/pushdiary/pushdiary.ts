@@ -25,18 +25,26 @@ import { ImgServiceProvider } from "../../providers/img-service/img-service";
   templateUrl: "pushdiary.html"
 })
 export class PushdiaryPage {
-  avatar = ["assets/imgs/images/shangchuan@2x.png"];
+  avatar = ["assets/imgs/images/shangchuan@2x.png","http://116.62.219.45/imgs/7ad3044c6a38b809d1bd3f802d5d5ffa.jpg "];
   type;
   PageTitle;
   petimg;
   // datas={
 
   // }
-  posthttp=true
-  remark: "";
-  title: "";
+  posthttp = true;
+  remark = "";
+  title = "";
   arr = ["添加写真", "添加传记", "添加健康", "添加活动"];
   petdata;
+  show = false;
+  zhuanjilist = [
+    //   {
+    //   type:2,
+    //   path:"",
+    //   text:"123123"
+    // }
+  ];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -52,30 +60,90 @@ export class PushdiaryPage {
     console.log(this.navParams.get("cityid"));
     this.PageTitle = this.arr[this.type - 1];
   }
-
+  pushtext() {
+    console.log(this.remark);
+    if (this.remark != "") {
+      this.zhuanjilist.push({
+        type: 2,
+        text: this.remark,
+        path: ""
+      });
+      this.remark = "";
+    }
+    console.log(this.zhuanjilist);
+  }
+  shows() {
+    this.show = !this.show;
+  }
+  upindex(i) {
+    if (i != 0) {
+      console.log(this.zhuanjilist[i]);
+      let cont = this.zhuanjilist[i - 1];
+      this.zhuanjilist[i - 1] = this.zhuanjilist[i];
+      this.zhuanjilist[i] = cont;
+    }
+  }
+  rmindex(i) {
+    this.zhuanjilist.splice(i, 1);
+    for (let index = 0; index < this.avatar.length; index++) {
+      if (this.zhuanjilist[i].path) {
+        if (this.zhuanjilist[i].path == this.avatar[index]) {
+          this.avatar.splice(index, 1);
+        }
+      }
+    }
+  }
   userimg(i) {
     this.initImgSer(i);
     this.upimgserve.showPicActionSheet();
   }
+
+  pushimg() {
+    this.initimg();
+    this.upimgserve.showPicActionSheet();
+  }
+  initimg() {
+    this.upimgserve.upload.success = data => {
+      console.log(data);
+      if (data.info == "ok") {
+        this.zhuanjilist.push({
+          type: 2,
+          path: `http://116.62.219.45/imgs/${data.object.map.filename}`,
+          text: ""
+        });
+      }
+    };
+  }
+
   initImgSer(i) {
     console.log(i);
     this.upimgserve.upload.success = data => {
       console.log(data);
-      if(data.info=="ok"){
-         this.avatar[i]=data.imageUrl+data.object.map.filename;
-      if(this.avatar.length<5&&this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png")==-1){
-        this.avatar.push("assets/imgs/images/shangchuan@2x.png")
-      } 
+      if (data.info == "ok") {
+        this.avatar[i] = `http://116.62.219.45/imgs/${data.object.map.filename}`;
+        if (
+          this.avatar.length < 5 &&
+          this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png") == -1
+        ) {
+          this.avatar.push("assets/imgs/images/shangchuan@2x.png");
+        }
       }
-    
     };
   }
 
   remimages(i) {
+    if (this.type == 2) {
+      for (const item of this.zhuanjilist) {
+        if (this.zhuanjilist[item].path == this.avatar[i]) {
+          this.zhuanjilist.splice(item, 1);
+        }
+      }
+    }
     this.avatar[i] = "assets/imgs/images/shangchuan@2x.png";
     this.avatar.splice(i, 1);
     console.log(this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png"));
     // this.avatar.slice(i,1)
+
     if (this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png") == -1) {
       this.avatar.push("assets/imgs/images/shangchuan@2x.png");
     }
@@ -84,65 +152,72 @@ export class PushdiaryPage {
   }
   async addserve() {
     let parmas = {
-          title: this.title, //标题
-          type: this.type, //1:写真  2：传记  3:健康  4:活动
-         // chose_time: new Date().getTime(),
-          remark: this.remark, //备注
-          pet_id: this.navParams.get("datas").id,
-          activityid: "", //不参与活动给空
-          cover: "", //封面url
-          historycontentlist: [
-            // {
-            //   //内容
-            //   type: 2, // 1: 视频  2:照片  3:段落 4 ：动图
-            //   path: "", //地址
-            //   text: "" //传记段落
-            // },
-            // {
-            //   type: 2,
-            //   path: "jik",
-            //   text: ""
-            // }
-          ]  
+      title: this.title, //标题
+      type: this.type, //1:写真  2：传记  3:健康  4:活动
+      // chose_time: new Date().getTime(),
+      remark: this.remark, //备注
+      pet_id: this.navParams.get("datas").id,
+      activityid: "", //不参与活动给空
+      cover: "", //封面url
+      historycontentlist: [
+        // {
+        //   //内容
+        //   type: 2, // 1: 视频  2:照片  3:段落 4 ：动图
+        //   path: "", //地址
+        //   text: "" //传记段落
+        // },
+        // {
+        //   type: 2,
+        //   path: "jik",
+        //   text: ""
+        // }
+      ]
     };
-   if(this.avatar.length>1){
-     let lent
-     if(this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png")==-1){
-       lent=this.avatar.length
-     }else{
-      lent=this.avatar.length-1
-     }
-     for (let index = 0; index < lent; index++) {
-         parmas.historycontentlist.push({
-          type:2,
-          path:this.avatar[index],
-          text:''
-         })
-     }
-   
-   }
+    if (this.type == 1) {
+      if (this.navParams.get("cityid")) {
+        parmas.type = 4;
+      }
+      if (this.avatar.length > 1) {
+        let lent;
+        if (this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png") == -1) {
+          lent = this.avatar.length;
+        } else {
+          lent = this.avatar.length - 1;
+        }
+        for (let index = 0; index < lent; index++) {
+          parmas.historycontentlist.push({
+            type: 2,
+            path: this.avatar[index],
+            text: ""
+          });
+        }
+      }
+    }
+    if (this.type == 2) {
+      parmas.historycontentlist = this.zhuanjilist;
+    }
+
     if (this.navParams.get("cituid")) {
-      parmas.activityid=this.navParams.get("cituid")
+      parmas.activityid = this.navParams.get("cituid");
     }
-    if(this.title==""){
-      this.http.http.showToast("您是不是忘了写标题")
-      return false
+    if (this.title == "") {
+      this.http.http.showToast("您是不是忘了写标题");
+      return false;
     }
-    if(this.remark==""){
-      this.http.http.showToast("您是不是忘了写内容")
-      return false
-    }
+   
     console.log(parmas);
-    if(!this.posthttp){
-      return false
+    if (!this.posthttp) {
+      return false;
     }
-    let res = await this.http.addhistoryType({jsonPramter:JSON.stringify(parmas)} );
-    this.http.http.showToast(res.message)
-    if(res.info=="ok"){
-      setTimeout(()=>{
-        this.posthttp=true
-        this.navCtrl.pop()
-      },2000)
+    let res = await this.http.addhistoryType({
+      jsonPramter: JSON.stringify(parmas)
+    });
+    this.http.http.showToast(res.message);
+    if (res.info == "ok") {
+      setTimeout(() => {
+        this.posthttp = true;
+        this.navCtrl.pop();
+      }, 2000);
     }
     console.log(res);
   }

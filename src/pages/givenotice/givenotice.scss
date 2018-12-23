@@ -1,0 +1,73 @@
+page-givenotice {
+    .messg {
+        width: 100%;
+        border-radius: 0.5rem;
+        border: 1px solid #F9D753;
+        li {
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            span {
+                display: inline-block;
+                word-break: break-all;
+                width: 84%;
+                i {
+                    font-style: normal;
+                    color: #666
+                }
+            }
+        }
+        .userimg {
+            width: 13%!important;
+            margin-right: 0.5rem;
+            height: 3rem;
+            border-radius: 3rem;
+            display: inline-block;
+            overflow: hidden;
+            img {
+                width: 100%;
+            }
+            ;
+        }
+    }
+    .titaa {
+        margin-bottom: 1rem;
+        border: 1px solid #f3e0a6;
+        border-radius: 5px;
+        overflow: hidden;
+        .userimg {
+            width: 5rem;
+            margin-top: 1rem;
+            border-radius: 50%
+        }
+        .ble {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: #fff;
+        }
+        .ble2 {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 1rem;
+            p {
+                font-size: 2rem
+            }
+            span {
+                margin-top: 0.5rem;
+                img {
+                    width: 1rem;
+                }
+            }
+        }
+        .djd {
+            width: 5rem;
+            height: 2rem;
+            color: #fff;
+            background: #EF8936;
+            border-radius: 2rem
+        }
+    }
+}

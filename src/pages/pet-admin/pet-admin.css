@@ -6,6 +6,10 @@ page-pet-admin .list-header-md {
   border: none !important;
 }
 
+page-pet-admin ion-title {
+  padding: 0 !important;
+}
+
 page-pet-admin .petBox {
   position: relative;
   width: 100%;

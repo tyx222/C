@@ -25,19 +25,48 @@ page-pushdiary .put_box img {
 }
 
 page-pushdiary .area {
-  display: flex;
-  justify-content: center;
   margin-top: 3rem;
+  margin-left: 5vw;
+  width: 90vw;
+}
+
+page-pushdiary .pushtext {
+  width: 90vw;
+  margin-left: 5vw;
+  padding: 1rem;
 }
 
 page-pushdiary textarea {
   width: 90vw;
   max-width: 90vw;
-  height: 40vh;
   max-height: 40vh;
   overflow-y: auto;
   border: 0;
   padding: 1rem;
+}
+
+page-pushdiary .serve {
+  display: flex;
+  justify-content: space-between;
+}
+
+page-pushdiary .serve button {
+  height: 2rem;
+  width: 5rem;
+  margin-top: 1rem;
+}
+
+page-pushdiary .btnbox {
+  display: flex;
+  justify-content: space-between;
+  width: 90vw;
+  margin-left: 5vw;
+  margin-top: 1rem;
+}
+
+page-pushdiary .btnbox button {
+  padding: 1rem;
+  width: 8rem;
 }
 
 page-pushdiary .Fileimg {
@@ -51,6 +80,7 @@ page-pushdiary .Fileimg {
 page-pushdiary .Fileimg .itembox {
   width: 24%;
   margin: 4.5%;
+  height: 9rem;
   position: relative;
 }
 
@@ -71,6 +101,7 @@ page-pushdiary .Fileimg .itembox .remimg {
 
 page-pushdiary .Fileimg img {
   width: 100%;
+  height: 100%;
 }
 
 page-pushdiary .pushimg {
