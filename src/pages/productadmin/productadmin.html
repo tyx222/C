@@ -28,42 +28,36 @@
         </ul>
         <div class="tabspage">
 			<div class="searchbox">
-				<ion-searchbar  placeholder="店铺内搜索" (ionInput)="getItems($event)"></ion-searchbar>
+				<ion-searchbar  placeholder="店铺内搜索" debounce="2000" (ionInput)="getItems($event)"></ion-searchbar>
 			</div>
         </div>
     </div>
     <div class="listbox">
 		<ion-list *ngFor="let item of data let i=index">
 		  <ion-item>
-		  <ion-note item-left>
-<ion-thumbnail item-start>
-			  <img src="{{imageUrl}}{{item.cover}}">
-			</ion-thumbnail>
-			
-		
-		</ion-note>
 			<ion-note item-left>
-			<h2>{{item.goods_name}}</h2>
-			<p>¥ {{item.goods_price}}</p>
-			<p>已售{{item.goods_price}}</p>
+				<ion-thumbnail item-start>
+				  <img src="{{imageUrl}}{{item.cover}}">
+				</ion-thumbnail>
+			</ion-note>
+			<ion-note item-left>
+				<h2>{{item.goods_name}}</h2>
+				<p>¥ {{item.goods_price}}</p>
+				<p>已售{{item.goods_price}}</p>
 			</ion-note>
 
 			<ion-note item-right>
-			<p><button (click)="edit(item)" class="btn">编辑</button></p>
-			<p><button (click)="view(item)" class="btn">查看</button></p>
-			<p>
-			<button style="background-color:red;" *ngIf="item.status == '1'" (click)="updatestatus(item.goods_id,0)" class="btn">上架</button>
-			<button style="background-color:red;" *ngIf="item.status == '0'" (click)="updatestatus(item.goods_id,1)" class="btn">下架</button>
-			</p>
+				<p><button (click)="edit(item)" class="btn">编辑</button></p>
+				<p><button (click)="view(item)" class="btn">详情</button></p>
+				<p>
+					<button style="background-color:red;" *ngIf="item.status == '1'" (click)="updatestatus(item.goods_id,0)" class="btn">上架</button>
+					<button style="background-color:red;" *ngIf="item.status == '0'" (click)="updatestatus(item.goods_id,1)" class="btn">下架</button>
+				</p>
+				<p><button (click)="evaluate(item.goods_id)" class="btn">查看评价</button></p>
 			</ion-note>
-
-
-			
-
 		  </ion-item>
-		          
-
 		</ion-list>
+
 		<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
 			<ion-infinite-scroll-content
 			  loadingSpinner="bubbles"

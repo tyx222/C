@@ -72,6 +72,32 @@
 				</ion-list>
 			</li>
 
+		
+
+			<li *ngIf="childs[0]">
+				<ion-list class="noionic" style="width: 100%;">
+				  <ion-item>
+				  <ion-label>子分类</ion-label>
+					<ion-select [(ngModel)]="childids[0]" (ngModelChange)="childChange(1)" [selectOptions]="selectOptions" multiple="false" okText="确定" cancelText="取消">
+					  <ion-option *ngFor="let item of childs[0]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+					</ion-select>
+				  </ion-item>
+				</ion-list>
+			</li>
+
+			<li *ngIf="childs[1]">
+				<ion-list class="noionic" style="width: 100%;">
+				  <ion-item>
+				  <ion-label>子分类</ion-label>
+					<ion-select [(ngModel)]="childids[1]" (ngModelChange)="childChange(2)" [selectOptions]="selectOptions" multiple="false" okText="确定" cancelText="取消">
+					  <ion-option *ngFor="let item of childs[1]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+					</ion-select>
+				  </ion-item>
+				</ion-list>
+			</li>
+
+
+
 			
 			<li>
 				<ion-list class="noionic" style="width: 100%;">

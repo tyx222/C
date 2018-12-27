@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ActionSheetController, AlertContro
 import { UserService } from '../../app/shared/service/user.service';
 import { WechatChenyu } from "wechat-chenyu";
 import { DefaultAppConfig } from "./../../app/app.config";
+
 declare let cordova;
 /**
  * Generated class for the AllordersPage page.
@@ -45,6 +46,8 @@ export class AllordersPage {
 
   async shouhuo(order_id){
 	let res = await this.http.updateorderstatus({orderid:order_id,status:"3"})
+	//let res = await this.http.updateorderstatus({status:"3",orderid:order_id,express_company:"none",express_code:"none",express_number:"none"})
+
 	if(res.info=="ok"){
 		this.http.presentToast("收货成功")
 		this.queryapporderlist()
@@ -52,6 +55,12 @@ export class AllordersPage {
 		this.http.presentToast("收货失败")
 	}
   }
+
+  //尾款支付
+  orderPaywk(item,citem){
+	this.order(item,citem)
+  }
+
   // 立即付款
   order(item,citem){
     //this.navCtrl.push("OrderPage")
@@ -87,7 +96,7 @@ export class AllordersPage {
           partnerid:"1510171201",//payResult.object.partnerid, // merchant id 商户号
           prepayid: prepay[1], // prepay id
           noncestr: payResult.object.nonceStr, // nonce
-          timestamp: payResult.object.timeStamp, // timestamp
+          timestamp: payResult.object.timeStamp+"", // timestamp
           sign: payResult.object.sign // signed string
         };
 		
@@ -113,10 +122,8 @@ export class AllordersPage {
 
 	async aliPay(item){
 		let data=await this.http.alipay({orderid:item.order_id})
-		console.log(data)
 		try{
-			let payInfo=this.unescapeHTML(data);
-			this.http.presentToast(payInfo)
+			let payInfo=this.unescapeHTML(data.object);
 			  cordova.plugins.alipay.payment(payInfo,(success)=>{
 				if(success.resultStatus==="9000"){
 					this.http.presentToast('支付成功')

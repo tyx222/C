@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from "./../../app/shared/service/user.service";
 import { IpamPage } from "./../ipam/ipam";
 import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
+import { DefaultAppConfig } from "./../../app/app.config";
 
 /**
  * Generated class for the LookevaluatePage page.
@@ -18,20 +19,30 @@ import { IonicPage, NavController, NavParams, ActionSheetController, AlertContro
 export class LookevaluatePage {
 	goods:any =[];
 	shopName = "";
+	shop={};
+	commects = [];
 	total = 0;
 	ipamord = {
 		myname: "",
 		ipone: "",
 		order: ""
 	  };
-  imgUrl = "";
+  get imgUrl(): string {
+	return this.appConfig.ip + 'imgs/';
+  }
   cityid
-  type = 1
+  type = 1 //0买家 1卖家
   order_id
   goods_id
+  buyerid=""
+  buyerCommentCount = 0
+  salerid=""
+  salerCommentCount = 0
   orderinfo:any = {}
+  goodssumprice=0
   constructor(
     public navCtrl: NavController,
+	public appConfig: DefaultAppConfig,
     public navParams: NavParams,
 	public alertCtrl: AlertController,
     private http: UserService,
@@ -51,7 +62,6 @@ export class LookevaluatePage {
 	console.log(this.type)
 	this.getDetail()
     this.address();
-	this.getComment();
     
   }
 	async getDetail(){
@@ -59,18 +69,47 @@ export class LookevaluatePage {
 		let res = await this.http.queryappdtailOrderlist({orderid:this.order_id})
 		if(res.info=="ok"){
 			this.orderinfo = res.object
+			this.goods = res.arrayList
+			this.goods.forEach((val)=>{
+				this.goodssumprice += val.unit_price
+			})
+			this.buyerid = res.object.client_id
 			console.log(res)
+			let res1 = await this.http.queryshopbyshopid({shopid:this.orderinfo.shopid})
+			if(res1.info=="ok"){
+				this.shop = res1.object
+				this.salerid = res1.object.client_id
+				this.shopName = res1.object.shop_name
+			}
+			//this.getComment();
 		}
 	}
   async getComment(){
 	let res = await this.http.queryevaluatelist({goodid:this.goods_id})
 	if(res.info=="ok"){
+		this.commects = res.arrayList
+		res.arrayList.forEach((val,index)=>{
+			if(val.client_id==this.buyerid){
+				this.buyerCommentCount++
+			}
+			if(val.client_id==this.salerid){
+				this.salerCommentCount++
+			}
+			val.evaluateContentList.forEach((v,i)=>{
+				this.commects[index]["evaluateContentList"][i]["path"] = v.path.split(',')
+			})
+			
+		})
 		console.log(res)
 	}
   }
 
+
+
+ 
+
   //追平
-  zping(){
+  zping(evaluate_id){
 	const prompt = this.alertCtrl.create({
       title: '追加评论',
       inputs: [
@@ -89,7 +128,7 @@ export class LookevaluatePage {
         {
           text: '保存',
           handler: data => {
-		  	this.addzping(data)
+		  	this.addzping(data,evaluate_id)
           }
         }
       ]
@@ -97,7 +136,13 @@ export class LookevaluatePage {
     prompt.present();
   }
 
-  addzping(data) {
+  addzping(data,evaluate_id) {
+  		var params = {
+			goodid: this.goods_id,
+			orderid:this.order_id,
+			father_id:evaluate_id
+
+		}
       console.log(data);
 
   }

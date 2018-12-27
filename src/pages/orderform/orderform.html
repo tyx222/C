@@ -27,10 +27,7 @@
         <div class="tabspage">
             <div class="shops" *ngFor="let item of order_list;let i = index;">
                 <p (click)="userinfo(item)">
-                    <span *ngIf="item.client.client_nikename != '未设置昵称'">
-					<img src="{{item.client.headimgpath}}" alt="">{{item.client.client_nikename}}
-					</span>
-					 <span *ngIf="item.client.client_nikename == '未设置昵称'">
+					 <span *ngIf="item.client.client_username">
 					<img src="{{item.client.headimgpath}}" alt="">{{item.client.client_username}}
 					</span>
                     <span>
@@ -38,12 +35,13 @@
 				  </span>
                 </p>
                 <div class="datas" *ngFor="let citem of item.dtailOrderList;let i = index;">
-                    <div>
+                    <div (click)="goodsdetail(citem)">
                         <img src="{{imgUrl}}{{citem.goods.cover}}" alt="">
                         <div>
                             <h1>{{citem.goods.goods_name}}</h1>
+							<p *ngIf="citem.specifications">{{citem.specifications.specifications_name}}</p>
                             <p>
-                                <span class="money">¥{{citem.goods.goods_price}}</span>
+                                <span class="money">¥{{citem.unit_price}}</span>
                                 <span style="font-size: 1.5rem">X{{citem.good_num}}</span>
                             </p>
 
@@ -52,6 +50,9 @@
                     <div class="tag">
 					    <span (click)="send(item.order_id)" *ngIf="item.order_status == 1" class="ok">发货</span>
 						<span *ngIf="item.order_status == 0" class="ok">待付款</span>
+                        <span *ngIf="item.order_status == 3" class="ok">待评价</span>
+						<span *ngIf="item.order_status == 4" class="ok">待支付尾款</span>
+                        <span *ngIf="item.order_status == 5" class="ok">退款/售后</span>
 
                         <span *ngIf="item.order_status == 4" class="ok">同意退款</span>
                         <span *ngIf="item.order_status >= 2" class="flow" (click)='shopoder()'>查看物流</span>

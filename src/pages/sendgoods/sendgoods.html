@@ -1,0 +1,42 @@
+<!--
+  Generated template for the SendgoodsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>发货</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list>
+
+	  <ion-item>
+		<ion-label floating>快递公司</ion-label>
+		<ion-input type="text" [(ngModel)]="express_company"></ion-input>
+	  </ion-item>
+	 
+	  <ion-item>
+		<ion-label floating>公司编码</ion-label>
+		<ion-input type="text" [(ngModel)]="express_code"></ion-input>
+	  </ion-item>
+	 
+
+	  <ion-item>
+		<ion-label floating>快递单号</ion-label>
+		<ion-input type="text" [(ngModel)]= "express_number"></ion-input>
+	  </ion-item>
+	 
+
+	</ion-list>
+	<div padding>
+	  <button ion-button style="color: #fff;" (click)="confirmsend()">确定发货</button>
+	  <button ion-button style="color: #fff;" (click)="nowuliusend()">免物流发货</button>
+	  <button ion-button style="color: #fff;" (click)="cancel()">取消</button>
+	</div>
+</ion-content>

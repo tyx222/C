@@ -251,7 +251,7 @@ async weiXinPay(item){
           partnerid:"1510171201",//payResult.object.partnerid, // merchant id 商户号
           prepayid: prepay[1], // prepay id
           noncestr: payResult.object.nonceStr, // nonce
-          timestamp: payResult.object.timeStamp, // timestamp
+          timestamp: payResult.object.timeStamp+"", // timestamp
           sign: payResult.object.sign // signed string
         };
 		
@@ -275,10 +275,12 @@ async weiXinPay(item){
 
 	async aliPay(item){
 		let data=await this.http.alipay({orderid:item.order_id})
-		console.log(data)
+		let payInfos=this.unescapeHTML(data.object);
+
+		console.log(payInfos)
 		try{
-			let payInfo=this.unescapeHTML(data);
-			this.http.presentToast(payInfo)
+			let payInfo=this.unescapeHTML(data.object);
+			  //this.http.presentToast(payInfo)
 			  cordova.plugins.alipay.payment(payInfo,(success)=>{
 				if(success.resultStatus==="9000"){
 					this.http.presentToast('支付成功')

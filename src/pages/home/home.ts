@@ -78,8 +78,13 @@ export class HomePage {
       username:JSON.parse(localStorage.getItem("mydata")).client_username ,
       password:JSON.parse(localStorage.getItem("mydata")).client_password
     } 
-let res=await this.http.login(parmas)
-console.log(res)
+	let res=await this.http.login(parmas)
+	if(res.info=="ok"){
+		localStorage.setItem("mytoken", res.object.mytoken);
+		localStorage.setItem("mydata",JSON.stringify(res.object))
+
+	}
+	console.log(res)
    }
   /**
    * 小妙招查询

@@ -18,16 +18,16 @@
 	  <ion-item *ngFor="let item of lists;let i = index;">
 	  
 		<ion-note item-left>
-		<p>XXX店邀请您为该店铺员工</p>
-		<p>职位：{{item.work}}</p>
+		<p>{{item.shop.shop_name}}店邀请您为该店铺员工</p>
+		<p>职位：店员</p>
 		</ion-note>
 		<ion-note item-right *ngIf="item.status<1">
 		<p><button (click)="set(i,1)" class="btn">同意</button></p>
-		<p><button (click)="set(i,2)" class="btnd">拒绝</button></p>
+		<p><button (click)="set(i,0)" class="btnd">拒绝</button></p>
 		</ion-note>
 		<ion-note item-right *ngIf="item.status>0">
 		<p><button *ngIf="item.status==1">已同意</button></p>
-		<p><button *ngIf="item.status==2">已拒绝</button></p>
+		<p><button *ngIf="item.status==0">已拒绝</button></p>
 		</ion-note>
 	  </ion-item>
 	</ion-list>

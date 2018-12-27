@@ -94,7 +94,27 @@
             <img *ngFor="let im of pordackpage" src="{{imgUrl}}{{im}}">
         </div>
         <div class="tabspage" *ngIf="tabs==1">
-            <p>暂无评价~</p>
+            <div class="comment">
+			<div *ngFor="let c of comments;">
+				<ion-list>
+					<ion-item>
+						<ion-avatar item-start>
+						  <img src="./assets/imgs/logo.png">
+						</ion-avatar>
+					  用户名
+						<ion-note item-end style="color:black;">{{c.level}}星</ion-note>
+						<ion-note item-end>{{c.createtime}}</ion-note>
+					</ion-item>
+					<ion-item class="commentimg">
+						<div *ngFor="let im of c.evaluateContentList">
+						<img *ngFor="let imgs of im.path" src="{{imgs}}" />
+						<p style="clear:both"></p>
+						<p>{{im.text}}</p>
+						</div>
+					</ion-item>
+				</ion-list>
+			</div>
+		</div>
         </div>
         <div class="tabspage" *ngIf="tabs==2">
             品类介绍

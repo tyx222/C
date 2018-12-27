@@ -16,7 +16,7 @@
 <ion-content>
   <ion-list>
     <ion-card *ngFor="let item of collect; let i = index">
-      <ion-item text-wrap>
+      <ion-item text-wrap (click)="info(item)">
         <ion-thumbnail item-left>
           <img src="{{imgUrl}}{{item.cover}}" *ngIf="item.cover">
         </ion-thumbnail>
@@ -43,7 +43,7 @@
     </ion-card>
     
   </ion-list>
-  
+  <!-- <button (click)="shows()">商品详情</button> -->
 </ion-content>
 
 <ion-footer>

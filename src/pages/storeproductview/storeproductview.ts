@@ -32,7 +32,7 @@ export class StoreproductviewPage {
   pordackpage;
   goodsinfo:any={};
   specifications:any = [];
-  cmment;
+  comments;
   collectTxt = "";
   hasvideo = false;
   tabs = 0;
@@ -158,7 +158,13 @@ export class StoreproductviewPage {
   async queryevaluatelist(){
 	let res = await this.http.queryevaluatelist({goodid:this.goodsinfo.goods_id})
 	if(res.info=="ok"){
-		this.cmment = res.arrayList
+		this.comments = res.arrayList
+		res.arrayList.forEach((val,index)=>{
+			val.evaluateContentList.forEach((v,i)=>{
+				this.comments[index]["evaluateContentList"][i]["path"] = v.path.split(',')
+			})
+			
+		})
 	}
   }
 

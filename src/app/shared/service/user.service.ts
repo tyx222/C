@@ -46,7 +46,7 @@ export class UserService {
     addappOrder: "chongwu/chongwu/addPetOrder",
     statuslist: "chongwu/chongwu/queryPetOrderorder_statuslist",
     weixinor: "chongwu/app/weixinorderBeforSendapp",
-	alipay:"chongwu/app/alipayorderBeforSendapp",
+	alipay:"chongwu/app/alipayorderBeforSend",
     addpetFeeding:"chongwu/chongwu/addpetFeeding",
     querypetcardotherclientlist:"chongwu/chongwu/querypetcardotherclientlist",
     querypetfeedingtop:"chongwu/chongwu/querypetfeedingtop",
@@ -97,7 +97,8 @@ export class UserService {
 	querymyclerklist:"chongwu/app/querymyclerklist",
 	queryclerklist:"chongwu/app/queryclerklist",
 	wxGoBackOrder:"chongwu/app/wxGoBackOrder",
-	logistics:"chongwu/app/logistics"
+	logistics:"chongwu/app/logistics",
+	queryclasschildlist:"chongwu/app/queryclasschildlist"
 
 
 
@@ -819,6 +820,14 @@ querypetcardotherclientlist(data){
 
   logistics(data) {
     return this.http.Post(this.api.logistics, data);
+  }
+	
+	/**
+   * 子分类
+   */
+
+  queryclasschildlist(data) {
+    return this.http.Post(this.api.queryclasschildlist, data);
   }
 
 

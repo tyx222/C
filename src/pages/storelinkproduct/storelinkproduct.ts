@@ -30,7 +30,7 @@ export class StorelinkproductPage {
 
   ionViewDidLoad() {
   	this.storeinfo = JSON.parse(localStorage.getItem("storeinfo"))
-    this.queryshopnullgoodlist()
+    this.queryshopclassifygoodlist()
   }
 
 	checkpro(proid){
@@ -69,7 +69,10 @@ export class StorelinkproductPage {
 		}
 
 		if(this.type=='yes'){ // 去掉关联
-			datas.shop_classifyid=''
+			datas.shop_classifyid='0'
+		}
+		if(this.type=='no'){ // 去掉关联
+			datas.shop_classifyid=this.cateId
 		}
 		
 		let res = await this.http.updategoodshopclassify(datas)
@@ -87,7 +90,7 @@ export class StorelinkproductPage {
 		if(this.type=='yes'){
 			this.queryshopgoods()
 		}else{
-			this.queryshopnullgoodlist()
+			this.queryshopclassifygoodlist()
 		}
 		
 	}
@@ -101,12 +104,11 @@ export class StorelinkproductPage {
 	// 已经关联的列表
 	async queryshopgoods(){
 		let params = {
-			pageNum:this.pageNum,
-			rowsPrePage:10,
-			shopclassifyid:this.cateId,
+			shop_classify_id:this.cateId,
 			shopid:this.storeinfo.shop_id
 		}
-		let res = await this.http.queryshopgoods(params)
+		let res = await this.http.querygoodsbyseach({jsonPramter:JSON.stringify(params)})
+
 		if(res.info == 'ok'){
 			if(res.arrayList && res.arrayList.length>0){
 				this.proList = res.arrayList;
@@ -119,13 +121,12 @@ export class StorelinkproductPage {
 	
 	}
 	// 未关联分类的商品列表
-	async queryshopnullgoodlist(){
+	async queryshopclassifygoodlist(){
 		let params = {
-			pageNum:this.pageNum,
-			rowsPrePage:10,
+			shop_classify_id:"0",
 			shopid:this.storeinfo.shop_id
 		}
-		let res = await this.http.queryshopnullgoodlist(params)
+		let res = await this.http.querygoodsbyseach({jsonPramter:JSON.stringify(params)})
 		if(res.info == 'ok'){
 			if(res.arrayList && res.arrayList.length>0){
 				this.proList = res.arrayList;
@@ -139,10 +140,17 @@ export class StorelinkproductPage {
 	
 	// 关键字搜索
 	async querygoodsbyseach(){
-		let params={goods_name:""}
-		
+		let params={}
+			params["shopid"] = this.storeinfo.shop_id
+
 		if(this.myInput!=''){
-			params.goods_name = this.myInput
+			params["goods_name"] = this.myInput
+		}
+		if(this.type=="no"){
+			params["shop_classify_id"] = "0"
+		}
+		if(this.type=="yes"){
+			params["shop_classify_id"] = this.cateId
 		}
 		let res = await this.http.querygoodsbyseach({jsonPramter:JSON.stringify(params)})
 		if(res.info == 'ok'){
