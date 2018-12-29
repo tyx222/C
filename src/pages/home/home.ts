@@ -596,7 +596,8 @@ if(this.callname){
 
 
 	 ionViewDidLoad() {
-		 this.getCurrentPosition();
+	 	//定位
+		 //this.getCurrentPosition();
 	 }
    
 	 /**

@@ -35,8 +35,10 @@
             <div class="area">
                 <div class="Fileimg">
                     <div class="itembox" *ngFor="let item of avatar let i =index">
-                        <span class="remimg" *ngIf="item!=='/assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
-                        <img src="{{item}}" alt="" (click)="presentActionSheet(i)">
+                        <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
+                        <img *ngIf="item!=='assets/imgs/images/pushimg.png'" src="{{imgUrl}}{{item}}" alt="" (click)="imgup(i)">
+						<img *ngIf="item=='assets/imgs/images/pushimg.png'" src="{{item}}" alt="" (click)="imgup(i)">
+
                     </div>
                 </div>
             </div>

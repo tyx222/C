@@ -19,15 +19,15 @@
 				<ion-list>
 					<ion-item>
 						<ion-avatar item-start>
-						  <img src="./assets/imgs/logo.png">
+						  <img src="{{c.client.headimgpath}}">
 						</ion-avatar>
-					  用户名
+					  {{c.client.phonenumber}}
 						<ion-note item-end style="color:black;">{{c.level}}星</ion-note>
 						<ion-note item-end>{{c.createtime}}</ion-note>
 					</ion-item>
 					<ion-item class="commentimg">
 						<div *ngFor="let im of c.evaluateContentList">
-						<img style="width:80px;height:80px;" *ngFor="let imgs of im.path" src="{{imgs}}" />
+						<img style="width:80px;height:80px;" *ngFor="let imgs of im.path" src="{{imgUrl}}{{imgs}}" />
 						<p style="clear:both"></p>
 						<p>{{im.text}}</p>
 						</div>

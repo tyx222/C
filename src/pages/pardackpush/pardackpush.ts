@@ -55,7 +55,7 @@ export class PardackpushPage {
 	video_cover_isup:any = false;
 	video_cover:string='./assets/imgs/images/dsp.png';
 	selectOptions:any;
-	imageUrl:string = "http://116.62.219.45/imgs/";
+	imageUrl:string = "";
 	proData:any = {
 		goods_name:'',
 		goods_price:'0',

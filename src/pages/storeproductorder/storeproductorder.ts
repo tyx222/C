@@ -248,10 +248,10 @@ async weiXinPay(item){
 		console.log(payResult)	
 		var prepay = payResult.object.package.split("=");
 		var params = {
-          partnerid:"1510171201",//payResult.object.partnerid, // merchant id 商户号
+          partnerid:payResult.object.partnerid, // merchant id 商户号
           prepayid: prepay[1], // prepay id
           noncestr: payResult.object.nonceStr, // nonce
-          timestamp: payResult.object.timeStamp+"", // timestamp
+          timestamp: payResult.object.timeStamp, // timestamp
           sign: payResult.object.sign // signed string
         };
 		

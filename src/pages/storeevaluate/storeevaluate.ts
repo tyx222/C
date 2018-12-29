@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { UserService } from "./../../app/shared/service/user.service";
+import { DefaultAppConfig } from "./../../app/app.config";
 
 /**
  * Generated class for the StoreevaluatePage page.
@@ -17,7 +18,10 @@ import { UserService } from "./../../app/shared/service/user.service";
 export class StoreevaluatePage {
 	goodsid=""
 	commects = []
-  constructor(public navCtrl: NavController, public http: UserService, public navParams: NavParams, public alertCtrl: AlertController) {
+	get imgUrl(): string {
+		return this.appConfig.ip + 'imgs/';
+	  }
+  constructor(public navCtrl: NavController, public appConfig: DefaultAppConfig,public http: UserService, public navParams: NavParams, public alertCtrl: AlertController) {
   	this.goodsid = this.navParams.get("goods_id")
   }
 
@@ -30,12 +34,13 @@ export class StoreevaluatePage {
 	let res = await this.http.queryevaluatelist({goodid:this.goodsid})
 	if(res.info=="ok"){
 		this.commects = res.arrayList
-		res.arrayList.forEach((val,index)=>{
-			val.evaluateContentList.forEach((v,i)=>{
-				this.commects[index]["evaluateContentList"][i]["path"] = v.path.split(',')
+		if(res.arrayList){
+			res.arrayList.forEach((val,index)=>{
+				val.evaluateContentList.forEach((v,i)=>{
+					this.commects[index]["evaluateContentList"][i]["path"] = v.path.split(',')
+				})
 			})
-			
-		})
+		}
 		console.log(res)
 	}
   }

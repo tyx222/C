@@ -88,19 +88,21 @@ export class AllordersPage {
 		console.log(item)	
 
   }
+
+
 	async weiXinPay(item){
 		let payResult=await this.http.weixinor({orderid:item.order_id})
 		console.log(payResult)	
 		var prepay = payResult.object.package.split("=");
 		var params = {
-          partnerid:"1510171201",//payResult.object.partnerid, // merchant id 商户号
+          partnerid:payResult.object.partnerid, // merchant id 商户号
           prepayid: prepay[1], // prepay id
           noncestr: payResult.object.nonceStr, // nonce
-          timestamp: payResult.object.timeStamp+"", // timestamp
+          timestamp: payResult.object.timeStamp + "", // timestamp
           sign: payResult.object.sign // signed string
         };
 		
-		this.http.presentToast(JSON.stringify(params))
+		//this.http.presentToast(JSON.stringify(params))
 
 		this.wechatChenyu.sendPaymentRequest(params).then((result)=>{
           //支付成功
@@ -109,7 +111,7 @@ export class AllordersPage {
           this.queryapporderlist()
         },(error)=>{
          //支付失败
-          this.http.presentToast(JSON.stringify(error))
+		  this.http.presentToast('支付失败'+JSON.stringify(error))
         })
 
 
