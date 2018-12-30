@@ -22,26 +22,18 @@ import { ImgServiceProvider } from "../../providers/img-service/img-service";
 
 @IonicPage()
 @Component({
-  selector: 'page-refund',
-  templateUrl: 'refund.html',
+  selector: 'page-shoprefund',
+  templateUrl: 'shoprefund.html',
 })
-export class RefundPage {
+export class ShoprefundPage {
   avatar = ["assets/imgs/images/pushimg.png"];
   imgUrl=""
   info={}
   refundContent = ""
-  type = 1
+  status = 1
+  refundable_id
   refundImgs = ['assets/imgs/images/pushimg.png','68094a1351e0323ce804ddb403b85f86.jpg']
   refundPrice = 0
-  refundable_adress
-  express_company
-  express_number
-  ipamord = {
-    myname: "",
-    ipone: "",
-    order: ""
-  };
-  show = false
   constructor(    public navCtrl: NavController,
     public navParams: NavParams,
 	public http: UserService,
@@ -56,65 +48,25 @@ export class RefundPage {
   }
 
   ionViewDidLoad() {
-  	this.address();
   	console.log(this.info)
     console.log('ionViewDidLoad RefundPage');
   }
 
-settype(){
-if(this.type==2){
-	
-}
-	console.log(this.type);
+setstatus(){
+	console.log(this.status);
 }
 save(){
-	this.addrefundable();
+	this.refuserefundable();
 }
   
-  pushipam() {
-    this.navCtrl.push("IpamPage");
-  }
-
-    async address() {
-    let parmas = {
-      mytoken: localStorage.getItem("mytoken")
-    };
-    let res = await this.http.address(parmas);
-	if(res.arrayList.length<1){
-		return
-	}else{
-		this.ipamord.myname = res.arrayList[0].receiver_name;
-		this.ipamord.ipone = res.arrayList[0].phone_number,
-		this.ipamord.order =
-        res.arrayList[0].province +
-        " " +
-        res.arrayList[0].city +
-        " " +
-        res.arrayList[0].county +
-        " " +
-        res.arrayList[0].detaile_address;
-        this.cityid=res.arrayList[0].id
-	}
-    console.log(res);
-    
-  }
-
-	async addrefundable(){
+	async refuserefundable(){
 		let params = {
-			type:this.type, //1.仅退款，未到货 2.退货退款
-			order_id:this.info.order_id,
-			goodid:this.info.dtailOrderList[0].goods.goods_id,
-			order_detail_id:this.info.order_id,
-			reason:this.refundContent,
-			goodnum:this.info.dtailOrderList[0].good_num,
-			price:this.info.cash_sum,
-			order_code:this.info.order_id,
-			picture:this.refundImgs,
-			refundable_adress:this.refundable_adress,
-			express_company:this.express_company,
-			express_number:this.express_number
+			refundable_id:this.refundable_id, 
+			status:this.status, //1.商家同意退款 2商家拒绝退款
+			shop_reason:this.refundContent,
+			shop_picture:this.refundImgs
 		}
-		let res = await this.http.addrefundable(params);
+		let res = await this.http.refuserefundable(params);
 		if(res.info=="ok"){
 			this.http.presentToast("操作成功")
 		}else{

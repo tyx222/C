@@ -40,6 +40,10 @@ export class OrderformPage {
   goodsdetail(item){
 	this.navCtrl.push("StoreproductviewPage",{goodsid:item.goods.goods_id})
   }
+
+  refund(item){
+	this.navCtrl.push("ShoprefundPage",{info:item})
+  }
 	
 	//发货
 	async send(order_id){

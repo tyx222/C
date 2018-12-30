@@ -53,7 +53,7 @@
                         <span *ngIf="item.order_status == 3" class="ok">待评价</span>
 						<span *ngIf="item.order_status == 4" class="ok">待支付尾款</span>
                         <span *ngIf="item.order_status == 5" class="ok">退款/售后</span>
-
+                        <span (click)="refund(item)" *ngIf="item.order_status >= 0" class="ok">查看退款</span>
                         <span *ngIf="item.order_status == 4" class="ok">同意退款</span>
                         <span *ngIf="item.order_status >= 2" class="flow" (click)='shopoder()'>查看物流</span>
 						<span (click)="lookevaluate(item)" class="flow">订单详情</span>

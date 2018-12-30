@@ -17,7 +17,8 @@
 
     <div class="tabs">
         <ul>
-            <li [ngClass]="{'eft':order_status==0}" (click)="status(0)">未支付</li>
+		    <li [ngClass]="{'eft':order_status===''}" (click)="status('')">全部</li>
+            <li [ngClass]="{'eft':order_status===0}" (click)="status(0)">未支付</li>
             <li [ngClass]="{'eft':order_status==1}" (click)="status(1)">待发货</li>
             <li [ngClass]="{'eft':order_status==2}" (click)="status(2)">已发货</li>
             <li [ngClass]="{'eft':order_status==3}" (click)="status(3)">已完成</li>
@@ -48,7 +49,7 @@
                     </div>
                     <div class="tag">
                         <span *ngIf="item.order_status >= 4">交易成功</span>
-						<button *ngIf="item.order_status == 4" (click)='gouout()'>申请退款</button>
+						<button *ngIf="item.order_status == 3" (click)='gouout(item)'>申请退款</button>
 						<button *ngIf="item.order_status == 0" (click)="order(item,citem)">立即付款</button>
 						<button *ngIf="item.order_status == 6" (click)="orderPaywk(item,citem)">支付尾款</button>
 						<button *ngIf="item.order_status == 0" (click)="cancelOrder(item)">取消订单</button>

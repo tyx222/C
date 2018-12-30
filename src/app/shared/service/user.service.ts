@@ -98,12 +98,36 @@ export class UserService {
 	queryclerklist:"chongwu/app/queryclerklist",
 	wxGoBackOrder:"chongwu/app/wxGoBackOrder",
 	logistics:"chongwu/app/logistics",
-	queryclasschildlist:"chongwu/app/queryclasschildlist"
+	queryclasschildlist:"chongwu/app/queryclasschildlist",
+	addrefundable:"chongwu/app/addrefundable",
+	intervention:"chongwu/app/intervention",
+	refuserefundable:"chongwu/app/refuserefundable"
 
 
 
   };
   constructor(public http: MyHttpService, public toastCtrl: ToastController) {}
+
+  /**
+   * 退货
+   */
+  addrefundable(data) {
+    return this.http.Post(this.api.addrefundable, data);
+  }
+
+  /**
+   * 退货客服介入
+   */
+  intervention(data) {
+    return this.http.Post(this.api.intervention, data);
+  }
+
+  /**
+   * 商家处理退款
+   */
+  refuserefundable(data) {
+    return this.http.Post(this.api.refuserefundable, data);
+  }
 
   /**
    * 活动详情
