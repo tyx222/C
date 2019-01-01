@@ -28,7 +28,8 @@ import { ImgServiceProvider } from "../../providers/img-service/img-service";
 export class ShoprefundPage {
   avatar = ["assets/imgs/images/pushimg.png"];
   imgUrl=""
-  info={}
+  info:any ={}
+  refundinfo:any = {};
   refundContent = ""
   status = 1
   refundable_id
@@ -48,6 +49,7 @@ export class ShoprefundPage {
   }
 
   ionViewDidLoad() {
+  	this.queryRefundable(this.refundable_id)
   	console.log(this.info)
     console.log('ionViewDidLoad RefundPage');
   }
@@ -95,6 +97,16 @@ save(){
     }
     console.log(i);
     console.log(this.refundImgs);
+  }
+	
+	//退款详情
+  async queryRefundable(refundable_id){
+	let res = await this.http.queryRefundable({refundable_id:refundable_id});
+		if(res.info=="ok"){
+			this.refundinfo = res.object
+		}else{
+			this.http.presentToast('退款数据不存在')
+		}
   }
  
 }

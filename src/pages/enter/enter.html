@@ -73,16 +73,31 @@
             </ion-item> 
         </ul>
         <div class='selectStyle'>
+            <p>点击上传店铺头像</p>
+            <button (click)="headpathup()">
+        <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+      </button>
+	   <button>
+			<img *ngIf="shopData.head_path!=''" src="{{shopData.head_path}}" alt="" srcset="">
+		  </button>
+        </div>
+        <div class='selectStyle'>
             <p>点击上传手持身份证正面照</p>
             <button (click)="mydatasup()">
         <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
       </button>
+	  <button>
+			<img *ngIf="shopData.idcardimg1!=''" src="{{shopData.idcardimg1}}" alt="" srcset="">
+		  </button>
         </div>
         <div class='selectStyle'>
             <p>点击上传手持身份证反面照</p>
             <button (click)="mydatasout()">
         <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
       </button>
+		  <button>
+			<img *ngIf="shopData.idcardimg2!=''" src="{{shopData.idcardimg2}}" alt="" srcset="">
+		  </button>
         </div>
         <p><input type="checkbox" [(ngModel)]="agree">我已同意XXX用户协议</p>
         <button class="subfrom" (click)="confirmReg()">确认注册</button>

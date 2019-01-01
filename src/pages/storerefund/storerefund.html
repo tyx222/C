@@ -1,27 +1,25 @@
 <!--
-  Generated template for the AllordersPage page.
+  Generated template for the StorerefundPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>全部订单</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>退款请求</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
-    <div class="tabs">
+ <div class="tabs">
         <ul>
-		    <li [ngClass]="{'eft':order_status===''}" (click)="status('')">全部</li>
-            <li [ngClass]="{'eft':order_status===0}" (click)="status(0)">未支付</li>
-            <li [ngClass]="{'eft':order_status==1}" (click)="status(1)">待发货</li>
-            <li [ngClass]="{'eft':order_status==2}" (click)="status(2)">已发货</li>
-            <li [ngClass]="{'eft':order_status==3}" (click)="status(3)">已完成</li>
+            <li [ngClass]="{'eft':order_status===0}" (click)="status(0)">退款中</li>
+            <li [ngClass]="{'eft':order_status==1}" (click)="status(1)">已同意</li>
+			<li [ngClass]="{'eft':order_status==2}" (click)="status(2)">已拒绝</li>
+			<li [ngClass]="{'eft':order_status==3}" (click)="status(3)">退款成功</li>
         </ul>
         <div class="tabspage">
 
@@ -49,15 +47,7 @@
                     </div>
                     <div class="tag">
                         <span *ngIf="item.order_status >= 4">交易成功</span>
-						<button *ngIf="item.order_status > 0 && item.order_status < 3" (click)='gouout(item)'>申请退款</button>
-						<button *ngIf="item.order_status == 0" (click)="order(item,citem)">立即付款</button>
-						<button *ngIf="item.order_status == 6" (click)="orderPaywk(item,citem)">支付尾款</button>
-						<button *ngIf="item.order_status == 10" (click)="cancelOrder(item)">取消订单</button>
-						<button *ngIf="item.order_status == 2" (click)='shouhuo(item.order_id)'>确认收货</button>
-
-						<button *ngIf="item.order_status >= 2" (click)='shopoder()'>查看物流</button>
-						<!-- <button *ngIf="item.order_status == 2">延长收货</button> -->
-						<button *ngIf="item.order_status == 3" (click)='goevaluate(item,citem)'>评价</button>
+						<span (click)="refund(item)" *ngIf="item.order_status >= 0" class="ok">查看退款</span>
 						<button (click)='lookevaluate(item,citem)'>订单详情</button>
                     </div>
                 </div>

@@ -101,7 +101,10 @@ export class UserService {
 	queryclasschildlist:"chongwu/app/queryclasschildlist",
 	addrefundable:"chongwu/app/addrefundable",
 	intervention:"chongwu/app/intervention",
-	refuserefundable:"chongwu/app/refuserefundable"
+	refuserefundable:"chongwu/app/refuserefundable",
+	queryRefundable:"chongwu/app/queryRefundable",
+	queryRefundablelist:"chongwu/app/queryRefundablelist",
+	addevaluatechild:"chongwu/app/addevaluatechild"
 
 
 
@@ -852,6 +855,30 @@ querypetcardotherclientlist(data){
 
   queryclasschildlist(data) {
     return this.http.Post(this.api.queryclasschildlist, data);
+  }
+	/**
+   * 商家退款列表
+   */
+
+  queryRefundablelist(data) {
+    return this.http.Post(this.api.queryRefundablelist, data);
+  }
+
+	/**
+   * 商家退款详情
+   */
+
+  queryRefundable(data) {
+    return this.http.Post(this.api.queryRefundable, data);
+  }
+
+
+	/**
+   * 追平
+   */
+
+  addevaluatechild(data) {
+    return this.http.Post(this.api.addevaluatechild, data);
   }
 
 

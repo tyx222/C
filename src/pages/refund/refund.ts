@@ -28,7 +28,7 @@ import { ImgServiceProvider } from "../../providers/img-service/img-service";
 export class RefundPage {
   avatar = ["assets/imgs/images/pushimg.png"];
   imgUrl=""
-  info={}
+  info:any ={}
   refundContent = ""
   type = 1
   refundImgs = ['assets/imgs/images/pushimg.png','68094a1351e0323ce804ddb403b85f86.jpg']
@@ -52,13 +52,19 @@ export class RefundPage {
     public imagePicker: ImagePicker,
     public camera: Camera) {
 	this.imgUrl = this.appConfig.ip + 'imgs/';
-	this.info = this.navParams.get('info')
+	this.info = this.navParams.get('info');
   }
 
   ionViewDidLoad() {
-  	this.address();
+  	this.refundinfo()
+  	
   	console.log(this.info)
     console.log('ionViewDidLoad RefundPage');
+  }
+
+  refundinfo(){
+	let info = this.navParams.get('info')
+	this.address();
   }
 
 settype(){
@@ -93,13 +99,18 @@ save(){
         res.arrayList[0].county +
         " " +
         res.arrayList[0].detaile_address;
-        this.cityid=res.arrayList[0].id
 	}
     console.log(res);
     
   }
 
 	async addrefundable(){
+		let refundImgs = []
+		this.refundImgs.forEach((val)=>{
+			if(val!='assets/imgs/images/pushimg.png'){
+				refundImgs.push(val)
+			}
+		})
 		let params = {
 			type:this.type, //1.仅退款，未到货 2.退货退款
 			order_id:this.info.order_id,
@@ -109,7 +120,7 @@ save(){
 			goodnum:this.info.dtailOrderList[0].good_num,
 			price:this.info.cash_sum,
 			order_code:this.info.order_id,
-			picture:this.refundImgs,
+			picture:refundImgs,
 			refundable_adress:this.refundable_adress,
 			express_company:this.express_company,
 			express_number:this.express_number
