@@ -78,8 +78,8 @@ export class ShoppingPage {
 			this.imgpath.reverse()
 		}
 	}else{
-		this.imgpath.push(products.product_img1[0])
-		 this.pordackpage = products.product_img1[1];
+		this.imgpath=products.product_img1.split(",")
+		// this.pordackpage = products.product_img1[1];
 	}
 	
 

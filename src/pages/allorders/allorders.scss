@@ -8,6 +8,70 @@ page-allorders {
         padding: 1rem;
         background: #fff
     }
+    .jforder {
+        background: #fff;
+        padding: 1rem;
+        margin-top: 1rem;
+        .boxd {
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: inherit;
+            >div {
+                width: 100%;
+                min-width: 6rem;
+                margin: 1rem;
+            }
+        }
+        div {
+            >img {
+                margin-right: 1rem;
+                width: 6rem;
+            }
+            div {
+                display: flex;
+                flex-direction: column
+            }
+            p {
+                color: #999;
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 0.5rem;
+                .money {
+                    color: #fb7a3a
+                }
+            }
+        }
+        h3 {
+            font-size: 1.3rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+    }
+    .tag {
+        color: #999;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        span {
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.3rem;
+            margin-left: 1rem;
+            padding: 0.5rem
+        }
+        button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #eee;
+            color: #666;
+            background: #fff;
+            margin-left: 1rem;
+            border-radius: 0.2rem;
+        }
+    }
     .tabs {
         ul {
             background: #fff;
@@ -57,9 +121,7 @@ page-allorders {
             }
             .datas {
                 margin-top: 1rem;
-				
                 div {
-					
                     display: flex;
                     >img {
                         width: 25%;

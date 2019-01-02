@@ -64,13 +64,15 @@ export class HomePage {
       return false;
     }
     this.localogin();
-    this.querypetcardlist();
+  
 
     this.queryclevertricklist();
   this.queryshopbyclientid();
   this.getCurrentPosition();
   }
-
+  ionViewWillEnter(){
+    this.querypetcardlist();
+  }
   /**
    * 登录验证
    */
@@ -116,7 +118,6 @@ export class HomePage {
     this.petlist = [];
     this.guanzhulist = [];
     this.huodonglist = [];
-    console.log(this.lulartype);
     if (this.lulartype == 1) {
       this.chongwuqueryhistorytypeAlllist();
     }
@@ -404,7 +405,6 @@ export class HomePage {
         this.petlist[i].isLiked = !this.petlist[i].isLiked;
         this.petlist[i].likesNum -= 1;
       }
-      console.log(res);
     }
     if (this.lulartype == 2) {
       console.log(this.guanzhulist[i]);
@@ -420,7 +420,6 @@ export class HomePage {
         this.guanzhulist[i].isLiked = !this.guanzhulist[i].isLiked;
         this.guanzhulist[i].likesNum -= 1;
       }
-      console.log(res);
     }
   }
 
@@ -429,6 +428,7 @@ export class HomePage {
    */
   async querypetcardlist() {
     let res = await this.http.querypetcardlist(this.data);
+    console.log(res)
     if (res.arrayList.length == 0) {
       this.goguidance = true;
       this.usermgs = false;
@@ -450,22 +450,19 @@ export class HomePage {
    * 日历事件查询
    */
   async queryCalendar() {
-    console.log();
     let index: number = JSON.parse(localStorage.getItem("index"));
-    console.log(localStorage.getItem("index"));
     let date = new Date();
     var y = date.getFullYear();
     var m = date.getMonth() + 1;
     var d = date.getDate();
     let dates = `${y}-${m}-${d}`;
-    console.log(this.callname);
+ 
     let parmas = {
       calendartime: dates,
       mytoken: localStorage.getItem("mytoken"),
       petcardid: this.callname[parseInt(this.index)].client_id
     };
     let res = await this.http.queryCalendar(parmas);
-    console.log(res);
   }
 
   godaylist() {
@@ -484,7 +481,6 @@ export class HomePage {
     this.navCtrl.push("LoginPage");
   }
   gohomes(mgs) {
-    console.log(mgs);
     this.goguidance = mgs;
   }
   godetails() {
@@ -495,7 +491,6 @@ export class HomePage {
     });
   }
   godetailsto(i) {
-    console.log(this.petlist[i]);
     if (
       this.petlist[i].petcard.client_id ==
       JSON.parse(localStorage.getItem("mydata")).client_id
@@ -513,7 +508,6 @@ export class HomePage {
   }
 
   godetailstogz(i) {
-    console.log(this.guanzhulist[i]);
     if (
       this.guanzhulist[i].petcard.client_id ==
       JSON.parse(localStorage.getItem("mydata")).client_id
@@ -539,7 +533,6 @@ export class HomePage {
   async chongwuqueryhistorytypeAlllist() {
     this.queryAll.pageNum = this.ctn;
     let res = await this.http.chongwuqueryhistorytypeAlllist(this.queryAll);
-    console.log(res);
     this.imgurl = res.imageUrl;
     for (let item in res.arrayList) {
       if (res.arrayList[item].historycontentlist.length != 0) {
@@ -555,18 +548,15 @@ export class HomePage {
       this.petlist.push(res.arrayList[item]);
     }
     this.imgUrl = res.imageUrl;
-    console.log(res)
     this.maxleng = res.page.maxPage;
     // console.log(this.petlist);
   }
  async showResult(){
-    console.log(this.petid)
     if(this.petid!=''){
       let parmas={
         petnum:this.petid,
       }
       let res=await this.http.querypetcardnum(parmas)
-      console.log(res)
       this.http.http.showToast(res.message)
       if(res.info=="ok"){
         this.navCtrl.push("DetailsPage",{
@@ -606,7 +596,6 @@ export class HomePage {
 
           localStorage.setItem("index", this.activeIndex);
           if (this.callname) {
-            console.log(this.activeIndex);
             localStorage.setItem(
               "petdata",
               JSON.stringify(this.callname[this.activeIndex - 0])
@@ -630,7 +619,7 @@ export class HomePage {
       this.http.http.showToast("请先添加宠卡");
       return false;
     }
-    console.log(parseInt(this.index));
+
     let datas = this.callname[parseInt(this.index)];
     this.navCtrl.push("MirrorPage", {
       datas
@@ -643,7 +632,6 @@ export class HomePage {
     });
   }
   ionViewWillLeave() {
-    console.log(`准备离开页面了${localStorage.getItem("index")}`);
     localStorage.setItem(
       "petdata",
       JSON.stringify(this.callname[this.index - 0])
@@ -667,10 +655,8 @@ export class HomePage {
 				this.http.http.showToast("定位城市：" + data.city + data.district);
 			}, msg => {
 				this.http.http.showToast("定位失败");
-				console.log('geolocation is fail')
 			})
 		}catch(error){
-			console.log('geolocation is fail')
 			this.http.http.showToast("定位失败");
 		}
 		

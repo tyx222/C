@@ -2,7 +2,20 @@ import { Injectable } from "@angular/core";
 import { MyHttpService } from "./my-http.service";
 import { ToastController } from "ionic-angular";
 import { Geolocation } from "@ionic-native/geolocation";
+import { WechatChenyu } from 'wechat-chenyu';
+declare var Wechat: any;
+
+export interface WechatPayParam {  
+  partnerid: string;  
+  prepayid: string;  
+  noncestr: string;  
+  timestamp: string;  
+  sign: string;  
+} 
 @Injectable()
+
+
+
 export class UserService {
   private api = {
     userLogin: "chongwu/app/Applogin",
@@ -43,9 +56,9 @@ export class UserService {
     queryPetMessagelist: "chongwu/chongwu/queryPetMessagelist",
     addpetMessage: "chongwu/chongwu/addpetMessage",
     querypetcard: "chongwu/chongwu/querypetcard",
-    addappOrder: "chongwu/chongwu/addPetOrder",
+    addPetOrder: "chongwu/chongwu/addPetOrder",
     statuslist: "chongwu/chongwu/queryPetOrderorder_statuslist",
-    weixinor: "chongwu/app/weixinorderBeforSendapp",
+    weixinor: "chongwu/app/weixinorderBeforSendpet",
     addpetFeeding: "chongwu/chongwu/addpetFeeding",
     querypetcardotherclientlist: "chongwu/chongwu/querypetcardotherclientlist",
     querypetfeedingtop: "chongwu/chongwu/querypetfeedingtop",
@@ -107,15 +120,19 @@ export class UserService {
 	querymyclerklist:"chongwu/app/querymyclerklist",
 	queryclerklist:"chongwu/app/queryclerklist",
 	wxGoBackOrder:"chongwu/app/wxGoBackOrder",
-	logistics:"chongwu/app/logistics"
+  logistics:"chongwu/app/logistics",
+  queryPetOrderlist:"chongwu/chongwu/queryPetOrderlist",
+  deletePetOrder:"chongwu/chongwu/deletePetOrder"
 
 
 
   };
+  
   constructor(
     public http: MyHttpService,
     public toastCtrl: ToastController,
-    public geolocation: Geolocation
+    public geolocation: Geolocation,
+    public  wechat:WechatChenyu
   ) {}
 
   /**
@@ -434,8 +451,8 @@ export class UserService {
   /**
    * 添加订单
    */
-  addappOrder(data) {
-    return this.http.Post(this.api.addappOrder, data);
+  addPetOrder(data) {
+    return this.http.Post(this.api.addPetOrder, data);
   }
 
   /**
@@ -932,5 +949,33 @@ querypetcardotherclientlist(data){
     return this.http.Post(this.api.logistics, data);
   }
 
+/**
+ * 积分商城所有订单
+ * @param data 
+ */
+queryPetOrderlist(data){
+return this.http.Post(this.api.queryPetOrderlist,data)
+}
 
+/**
+ * 
+ * @param params 积分商城订单删除
+ */
+deletePetOrder(data){
+  return this.http.Post(this.api.deletePetOrder,data)
+}
+
+/**
+ * 微信支付订单处理
+ * https://api.mch.weixin.qq.com/pay/unifiedorder
+ */
+ sendPaymentRequest(params: WechatPayParam) {  
+  return new Promise((resolve, reject) => {  
+   Wechat.sendPaymentRequest(params, result => {  
+      resolve(result);  
+    }, error => {  
+      reject(error);  
+    });  
+  });  
+} 
 }

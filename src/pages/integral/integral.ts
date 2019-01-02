@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the PersonalorderadminPage page.
+ * Generated class for the IntegralPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,21 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-personalorderadmin',
-  templateUrl: 'personalorderadmin.html',
+  selector: 'page-integral',
+  templateUrl: 'integral.html',
 })
-export class PersonalorderadminPage {
+export class IntegralPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PersonalorderadminPage');
-  }
-
-
-  orderadmin(val){
-	this.navCtrl.push('AllordersPage',{type:val})
+    console.log('ionViewDidLoad IntegralPage');
   }
 
 }

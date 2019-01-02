@@ -57,7 +57,7 @@
                             <div class="addimg" (click)="godate(index)">
                                 <span><img src="{{item.headimgpath}}" alt="" srcset=""></span>
                                 <span style="width: 10rem;">猫卡号:{{item.pet_num}}</span>
-
+                                <p *ngIf="!gay" style="margin-top:0.5rem">{{item.citycode}}</p>
                             </div>
 
                         </div>

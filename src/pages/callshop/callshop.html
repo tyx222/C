@@ -40,7 +40,7 @@
     <div class="shopmoss">
         <ul>
             <li *ngFor="let item of pordacklist;let i=index">
-                <img src="{{imageUrl}}{{item.product_img1[0]}}" alt="" (click)="goshopping(i)">
+                <img src="{{imageUrl}}{{item.product_img2}}" alt="" (click)="goshopping(i)">
                 <p style="margin:0;color:red;padding-left: 0.5rem">{{item.integral_proportion}}积分抵扣0.1元</p>
                 <p class="goshop sizet" (click)="goshopping(i)">{{item.product_name}}</p>
 
