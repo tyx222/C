@@ -22,8 +22,7 @@
 			<div class="avatar">
 				<img src="{{client.headimgpath}}">
 			</div>
-			<p *ngIf="client.client_nikename != '未设置昵称'">{{client.client_nikename}}</p>
-			<p *ngIf="client.client_nikename == '未设置昵称'">{{client.client_username}}</p>
+			<p *ngIf="client.client_username">{{client.client_username}}</p>
 
 		</ion-col>
 		<ion-col col-4></ion-col>

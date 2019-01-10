@@ -1,5 +1,5 @@
-page-orderform {
-    .scroll-content {
+page-storerefund {
+	.scroll-content {
         padding: 0 !important;
         background: #eee
     }
@@ -57,9 +57,11 @@ page-orderform {
             }
             .datas {
                 margin-top: 1rem;
-                div:nth-of-type(1) {
+				
+                div {
+					
                     display: flex;
-                    >img:nth-of-type(1) {
+                    >img {
                         width: 25%;
                         height: 25%;
                         margin-right: 1rem;
@@ -81,8 +83,6 @@ page-orderform {
                 }
                 h1 {
                     font-size: 1.5rem;
-                    height: 2rem;
-                    ;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     display: -webkit-box;
@@ -91,18 +91,24 @@ page-orderform {
                 }
             }
             .tag {
-                color: #fff;
+                color: #999;
                 display: flex;
                 justify-content: flex-end;
                 margin-top: 1rem;
-                span{
-                    padding:0.2rem 0.5rem;
+                flex-wrap: wrap;
+                span {
+                    padding: 0.2rem 0.5rem;
                     border-radius: 0.3rem;
-                    margin-left: 1rem
+                    margin-left: 1rem;
+                    padding: 0.5rem
                 }
-                .ok {background: red}
-                .flow{
-                    background: #fb7a3a
+                button {
+                    padding: 0.5rem 1rem;
+                    border: 1px solid #eee;
+                    color: #666;
+                    background: #fff;
+                    margin-left: 1rem;
+                    border-radius: 0.2rem;
                 }
             }
         }

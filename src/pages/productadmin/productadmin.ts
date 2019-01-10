@@ -41,6 +41,10 @@ export class ProductadminPage {
 	this.querygoodsbyseach()
   }
 
+  evaluate(goods_id){
+	this.navCtrl.push("StoreevaluatePage",{goods_id:goods_id})
+  }
+
   pardackpush(){
     this.navCtrl.push("PardackpushPage")
   }

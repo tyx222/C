@@ -33,6 +33,14 @@ export class StorecollectPage {
 	  this.getCollect()
   }
 
+  shows(){
+	this.navCtrl.push("StoreproductviewPage",{goodsid:"4092bb42-5416-4b79-b0d9-c46623fd780d"})
+  }
+
+  info(item){
+	//this.navCtrl.push("StoreproductviewPage",{goodsid:item.goods_id})
+  }
+
 	
 	checkAll(){
 		if(!this.collect){

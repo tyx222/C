@@ -4,6 +4,8 @@ import { ImgServiceProvider } from "../../providers/img-service/img-service";
 import { UserService } from "../../app/shared/service/user.service";
 import { Component, ViewChild, ElementRef } from "@angular/core";
 declare var AMap;
+declare var LocationPlugin;
+
 /**
  * Generated class for the EnterPage page.
  *
@@ -51,10 +53,18 @@ export class EnterPage {
   shopData = {
 	shop_name:"",
 	shop_introduce:"",
+	shop_type:"0",
+	business_license:"",
 	shop_key:"",
+	head_path:"",
 	phonenumber:"",
 	business_hours:"",
 	idcard:"",
+	idcardimg1:"",
+	idcardimg2:"",
+	latitude:"",
+	longitude:"",
+	remark:"",
 	wechat:"",
 	qq:"",
 	address:"",
@@ -83,12 +93,7 @@ export class EnterPage {
   ionViewDidLoad() {
     console.log("ionViewDidLoad EnterPage");
     this.getRequestContact();
-    this.gps();
-    // this.mapinit()
-  }
-  async gps() {
-    this.rgps = await this.http.getGPS();
-    console.log(this.rgps);
+	this.getCurrentPosition();
   }
   getRequestContact() {
     this.reviceServe.getRequestContact().subscribe(
@@ -213,6 +218,31 @@ headlogo() {
       this.jsonParamter.head_path=data.imageUrl+data.object.map.filename
     };
   }
+/**
+	  * 获取当前地理位置
+	  */
+	getCurrentPosition() {
+		var isHave = localStorage.getItem('geolocation')
+		if(isHave=='undefined'){
+			try{
+				LocationPlugin.getLocation(data => {
+					localStorage.setItem("geolocation",JSON.stringify(data))
+					this.shopData.latitude = data.latitude+""
+					this.shopData.longitude = data.longitude+""
+					//this.http.http.showToast("定位城市：" + data.city + data.district);
+				}, msg => {
+					this.http.http.showToast("定位失败");
+					console.log('geolocation is fail')
+				})
+			}catch(error){
+				console.log('geolocation is fail')
+				this.http.http.showToast("定位失败");
+			}
+		}
+
+		
+	 }
+
 
   /**
    * 营业执照
@@ -232,20 +262,34 @@ headlogo() {
     // console.log(res)
     this.upimgserve.showPicActionSheet();
     this.upimgserve.upload.success = data => {
-      console.log(data);
-      this.jsonParamter.idcardimg1=data.imageUrl+data.object.map.filename
+	this.shopData.idcardimg1 = data.object.map.filename
+     console.log(data) ;
     };
-  }
+    }
 
+	async headpathup(){
+		this.upimgserve.showPicActionSheet();
+		this.upimgserve.upload.success = data => {
+			this.shopData.head_path = data.object.map.filename
+		};
+	}
+ 
   /**
    * 身份证反面
    */
   async mydatasout() {
     this.upimgserve.showPicActionSheet();
     this.upimgserve.upload.success = data => {
-      console.log(data);
-      this.jsonParamter.idcardimg1=data.imageUrl+data.object.map.filename
-    };
+		this.shopData.idcardimg2 = data.object.map.filename
+      console.log(data) ;
+     };
+    }
+  removeItem(item) {
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i] == item) {
+        this.items.splice(i, 1);
+      }
+    }
   }
 
 	/**

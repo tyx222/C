@@ -89,12 +89,12 @@ export class MyHttpService {
           "Content-Type": "application/x-www-form-urlencoded"
         })
       };
+	  console.log(JSON.stringify(options))
     return this.http
       .post(`${this.ip}${url}`, this.toQueryString(body), options)
       .toPromise()
       .then(rtn => {
         let result = rtn.json() as any;
-
         if (rtn.status > 400 && rtn.status < 500) {
           result = {
             ok: false,

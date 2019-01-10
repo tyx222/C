@@ -44,6 +44,9 @@ export class PardackpushPage {
 	proClassifyList:any = [];
 	propertylist:any = [];
 	brandList:any=[];
+	childs:any=[];
+	childids:any=["","",""];
+	childid:string="";
 	guigeList:any = [
 		{specifications_name:"",specifications_size:"",specifications_price:"",postage:"",cover:"assets/imgs/images/dsp.png",display_price:""}
 	];
@@ -52,7 +55,7 @@ export class PardackpushPage {
 	video_cover_isup:any = false;
 	video_cover:string='./assets/imgs/images/dsp.png';
 	selectOptions:any;
-	imageUrl:string = "http://116.62.219.45/imgs/";
+	imageUrl:string = "";
 	proData:any = {
 		goods_name:'',
 		goods_price:'0',
@@ -169,11 +172,17 @@ export class PardackpushPage {
 	}
  }
 
+ childChange(index){
+	this.queryclasschildlist(this.childids[index-1],index)
+	this.childid = this.childids[index-1];
+ }
+
  packagTypeChange(){
 	if(this.proData.classify_id!=''){
 		this.queryclassbrandlist();
 		this.querypropertylist()
 	}
+		this.queryclasschildlist(this.proData.classify_id,0)
  }
 
  // 查询全局分类下的品牌
@@ -190,6 +199,34 @@ export class PardackpushPage {
 	if(res.info=="ok"){
 			this.brandList = res.arrayList;
 		}
+
+		
+ }
+
+ // 查询全局分类下的子分类
+ async queryclasschildlist(classify_prentid,index){
+ 	if(this.proData.classify_id==''){
+		return
+	}
+ 	let params = {
+		classify_prentid:classify_prentid
+	}
+	let res = await this.http.queryclasschildlist(params);
+	if(index==0){
+		this.childids = ["","",""];
+		this.childid = "";
+	}
+	if(res.info=="ok"){
+		if(res.arrayList&&res.arrayList.length>0){
+			this.childs[index] = res.arrayList;
+		}else{
+			this.childs.splice(index,1)
+		}
+	}
+
+	console.log(this.childs)
+	console.log(this.childids)
+	console.log(this.childid)
 
 		
  }
@@ -374,6 +411,9 @@ export class PardackpushPage {
  	 this.proData.goods_key = this.proData.goods_name;
 	 this.proData.goods_introduce = this.remarkimgs.join(',')
 	 this.proData.turns_picture = this.slides.join(',')
+	 if(this.childid!=""){ //如果选择了子分类
+		this.proData.classify_id = this.childid
+	 }
 	 console.log(JSON.stringify(this.proData)) ;
 	 
 	 if(this.navGoodsInfo){

@@ -9,6 +9,7 @@ import {
 import { UserService } from "../../app/shared/service/user.service";
 import { WechatChenyu } from "wechat-chenyu";
 import { DefaultAppConfig } from "./../../app/app.config";
+
 declare let cordova;
 
 /**
@@ -107,6 +108,12 @@ export class AllordersPage {
   complain(orderid){
     this.navCtrl.push("RefundPage",{type:"jf",orderid:orderid});
   }
+
+  //尾款支付
+  orderPaywk(item,citem){
+	this.order(item,citem)
+  }
+
   // 立即付款
   order(item, citem) {
     //this.navCtrl.push("OrderPage")

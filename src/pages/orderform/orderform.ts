@@ -20,41 +20,36 @@ export class OrderformPage {
 	living = false;
 	storeinfo:any = {}
 	order_list=[]
-	sendData={
-		orderid:"",
-		express_company:"",
-		express_code:"",
-		express_number:""
-	}
+	
 	get imgUrl(): string {
 		return this.appConfig.ip + 'imgs/';
 	  }
   constructor(public appConfig: DefaultAppConfig,public navCtrl: NavController, private actionSheetCtrl:ActionSheetController,public http: UserService, public navParams: NavParams) {
   }
 
+  ionViewWillEnter(){
+  	this.queryshopapporderlist()
+  }
+
   ionViewDidLoad() {
   	this.storeinfo = JSON.parse(localStorage.getItem("storeinfo"))
-    console.log('ionViewDidLoad OrderformPage');
-	this.queryshopapporderlist()
   }
-	lookevaluate(){
-      this.navCtrl.push("LookevaluatePage",{type:1})
+	lookevaluate(item){
+      this.navCtrl.push("LookevaluatePage",{type:1,orderid:item.order_id,goodsid:item.dtailOrderList[0].goods.goods_id})
+  }
+  goodsdetail(item){
+	this.navCtrl.push("StoreproductviewPage",{goodsid:item.goods.goods_id})
+  }
+
+  refund(item){
+	this.navCtrl.push("ShoprefundPage",{info:item})
   }
 	
 	//发货
 	async send(order_id){
-		this.sendData.orderid = order_id
-		if(this.sendData.express_company=='' || this.sendData.express_code=='' || this.sendData.express_number=='' ){
-			return this.http.presentToast("请填全发货信息")
-		}
-		//let res = await this.http.updateorderstatus({orderid:order_id,status:"2"})
-		let res = await this.http.logistics(this.sendData)
-		if(res.info=="ok"){
-			this.http.presentToast("发货成功")
-			this.queryshopapporderlist()
-		}else{
-			this.http.presentToast("发货失败")
-		}
+		
+		this.navCtrl.push("SendgoodsPage",{orderid:order_id})
+		
 	}
 	shopoder(){
 		this.navCtrl.push("ShippingoderPage")

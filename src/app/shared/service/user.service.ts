@@ -131,8 +131,15 @@ export class UserService {
     addwallet:"chongwu/app/addwallet",
     getwalletbalance:"chongwu/app/getwalletbalance",
     addappeal:"chongwu/chongwu/addappeal",
-    queryclient:"chongwu/app/queryclient"
-  };
+    queryclient:"chongwu/app/queryclient",
+	queryclasschildlist:"chongwu/app/queryclasschildlist",
+	addrefundable:"chongwu/app/addrefundable",
+	intervention:"chongwu/app/intervention",
+	refuserefundable:"chongwu/app/refuserefundable",
+	queryRefundable:"chongwu/app/queryRefundable",
+	queryRefundablelist:"chongwu/app/queryRefundablelist",
+	addevaluatechild:"chongwu/app/addevaluatechild"
+  }
 
   constructor(
     public http: MyHttpService,
@@ -173,6 +180,27 @@ export class UserService {
       .catch(error => {
         console.log("Error getting location", error);
       });
+  }
+
+  /**
+   * 退货
+   */
+  addrefundable(data) {
+    return this.http.Post(this.api.addrefundable, data);
+  }
+
+  /**
+   * 退货客服介入
+   */
+  intervention(data) {
+    return this.http.Post(this.api.intervention, data);
+  }
+
+  /**
+   * 商家处理退款
+   */
+  refuserefundable(data) {
+    return this.http.Post(this.api.refuserefundable, data);
   }
 
   /**
@@ -978,6 +1006,38 @@ getwalletbalance(data){
 
   logistics(data) {
     return this.http.Post(this.api.logistics, data);
+  }
+	
+	/**
+   * 子分类
+   */
+
+  queryclasschildlist(data) {
+    return this.http.Post(this.api.queryclasschildlist, data);
+  }
+	/**
+   * 商家退款列表
+   */
+
+  queryRefundablelist(data) {
+    return this.http.Post(this.api.queryRefundablelist, data);
+  }
+
+	/**
+   * 商家退款详情
+   */
+
+  queryRefundable(data) {
+    return this.http.Post(this.api.queryRefundable, data);
+  }
+
+
+	/**
+   * 追平
+   */
+
+  addevaluatechild(data) {
+    return this.http.Post(this.api.addevaluatechild, data);
   }
 
   /**

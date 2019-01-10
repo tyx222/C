@@ -10,6 +10,8 @@ import {
 import { ImagePicker, ImagePickerOptions } from "@ionic-native/image-picker";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { UserService } from '../../app/shared/service/user.service';
+import { ImgServiceProvider } from "../../providers/img-service/img-service";
+import { DefaultAppConfig } from "./../../app/app.config";
 
 /**
  * Generated class for the EvaluatePage page.
@@ -32,14 +34,17 @@ export class EvaluatePage {
   order_id=""
   content=""
   goods_id=""
+  imgUrl
   cover=""
 good2=["assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png","assets/imgs/images/dingdan.png"]  
-avatar = ["/assets/imgs/images/pushimg.png"];
+avatar = ["assets/imgs/images/pushimg.png"];
 constructor(    public navCtrl: NavController,
   public navParams: NavParams,
   public actionSheetCtrl: ActionSheetController,
   public alertCtrl: AlertController,
+  private devolup: ImgServiceProvider,
   public imagePicker: ImagePicker,
+  public appConfig: DefaultAppConfig,
   public http: UserService,
   public camera: Camera) {
   	if(this.navParams.get('type')!=undefined){
@@ -51,6 +56,7 @@ constructor(    public navCtrl: NavController,
 		console.log(this.type,this.order_id,this.goods_id)
 		console.log(this.cover)
 	}
+	this.imgUrl = this.appConfig.ip + 'imgs/';
   }
 
   ionViewDidLoad() {
@@ -131,6 +137,22 @@ constructor(    public navCtrl: NavController,
     console.log(i);
     console.log(this.avatar);
   }
+
+  	
+  async imgup(i){
+	let selfs = this
+    this.devolup.showPicActionSheet();
+    this.devolup.upload.success = data => {
+		if(data.info=="ok"){
+			//selfs.http.presentToast(JSON.stringify(data))
+			selfs.avatar.push(data.object.map.filename);
+	  		//selfs.http.presentToast('上传成功')
+		}else{
+			selfs.http.presentToast('上传失败')
+		}
+     };
+  }
+
   chooseFromAlbum(i) {
     const options: ImagePickerOptions = {
       maximumImagesCount: 1,
@@ -180,13 +202,19 @@ this.ok2=i+1
 	
 	// 保存评价信息
   async save(){
+  	let avatar = []
+	this.avatar.forEach((val,i)=>{
+		if(val!='assets/imgs/images/pushimg.png'){
+			avatar.push(val)
+		}
+	})
 	let params = {
 		goodid:this.goods_id,
 		orderid:this.order_id,
 		level:this.ok,
 		type:0,
 		father_id:"0",
-		evaluatecontentlist:[{path:this.avatar.join(","),text:this.content}]
+		evaluatecontentlist:[{path:avatar.join(","),text:this.content}]
 	}
 	console.log(params)
 	console.log(this.ok,this.ok2,this.ok3)

@@ -54,16 +54,31 @@
             </li>
         </ul>
         <div class='selectStyle'>
+            <p>点击上传店铺头像</p>
+            <button (click)="headpathup()">
+        <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+      </button>
+	   <button>
+			<img *ngIf="shopData.head_path!=''" src="{{shopData.head_path}}" alt="" srcset="">
+		  </button>
+        </div>
+        <div class='selectStyle'>
             <p>点击上传手持身份证正面照</p>
             <button (click)="mydatasup()">
         <img src="{{jsonParamter.idcardimg1}}" alt="" srcset="">
       </button>
+	  <button>
+			<img *ngIf="shopData.idcardimg1!=''" src="{{shopData.idcardimg1}}" alt="" srcset="">
+		  </button>
         </div>
         <div class='selectStyle'>
             <p>点击上传手持身份证反面照</p>
             <button (click)="mydatasout()">
         <img src="{{jsonParamter.idcardimg2}}" alt="" srcset="">
       </button>
+		  <button>
+			<img *ngIf="shopData.idcardimg2!=''" src="{{shopData.idcardimg2}}" alt="" srcset="">
+		  </button>
         </div>
         <div class='selectStyle'>
             <p>营业执照</p>

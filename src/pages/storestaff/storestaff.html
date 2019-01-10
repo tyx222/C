@@ -18,19 +18,21 @@
 
 <ion-content padding>
 	<ion-list>
-	  <ion-item *ngFor="let item of lists;let i = index;">
-	  <ion-note item-left>
-		<ion-avatar item-start>
-		  <img src="{{item.avatar}}">
-		</ion-avatar>
-		</ion-note>
-		<ion-note item-left>
-		<p>昵称：{{item.name}}</p>
-		<p>职位：{{item.work}}</p>
-		</ion-note>
-		<ion-note item-right>
-		<button (click)="del(i)" class="btn">删除</button>
-		</ion-note>
+	  <ion-item *ngFor="let item of datas">
+		  <ion-note item-left>
+			<ion-avatar item-start>
+			  <img *ngIf="item.client.headimgpath" src="{{item.client.headimgpath}}">
+			</ion-avatar>
+			</ion-note>
+			<ion-note item-left>
+			<p>昵称：{{item.client.client_username}}</p>
+			<p>职位：员工</p>
+			</ion-note>
+			<ion-note item-right>
+				<span *ngIf="item.status==0">待同意</span>
+				<span *ngIf="item.status>0">已同意</span>
+			<!--<button (click)="del(i)" class="btn">删除</button>-->
+			</ion-note>
 	  </ion-item>
 	</ion-list>
 </ion-content>

@@ -15,7 +15,7 @@ import { UserService } from "./../../app/shared/service/user.service";
   templateUrl: 'storestaff.html',
 })
 export class StorestaffPage {
-	lists:any = [];
+	datas:any = [];
   constructor(public navCtrl: NavController,public http: UserService, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
@@ -39,11 +39,12 @@ export class StorestaffPage {
     let storeinfo = JSON.parse(localStorage.getItem("storeinfo"))
   	let res = await this.http.queryclerklist({shopid:storeinfo.shop_id});
 	if(res.info=="ok"){
-		this.lists = res.arrayList;
+		this.datas = res.arrayList;
 	}
+	console.log(this.datas)
   }
   del(index){
-	this.lists.splice(index,1)
+	//this.lists.splice(index,1)
   }
 
   showPrompt() {

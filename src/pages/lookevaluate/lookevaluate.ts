@@ -1,13 +1,9 @@
 import { Component } from "@angular/core";
 import { UserService } from "./../../app/shared/service/user.service";
 import { IpamPage } from "./../ipam/ipam";
-import {
-  IonicPage,
-  NavController,
-  NavParams,
-  ActionSheetController,
-  AlertController
-} from "ionic-angular";
+
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
+import { DefaultAppConfig } from "./../../app/app.config";
 
 /**
  * Generated class for the LookevaluatePage page.
@@ -31,7 +27,9 @@ export class LookevaluatePage {
     ipone: "",
     order: ""
   };
-  imgUrl = "";
+  commects
+  shop
+  buyerid
   cityid;
   type = 1;
   order_id;
@@ -52,8 +50,18 @@ export class LookevaluatePage {
       order_code:""
   }
 
+
+  get imgUrl(): string {
+	return this.appConfig.ip + 'imgs/';
+  }
+
+  buyerCommentCount = 0
+  salerid=""
+  salerCommentCount = 0
+  goodssumprice=0
   constructor(
     public navCtrl: NavController,
+	public appConfig: DefaultAppConfig,
     public navParams: NavParams,
     public alertCtrl: AlertController,
     private http: UserService,
@@ -105,26 +113,56 @@ this.jfdata.express_company=res.object.express_company
 this.jfdata.express_number=res.object.express_number
 }
 
-  async getDetail() {
-    let res = await this.http.queryappdtailOrderlist({
-      orderid: this.order_id
-    });
-    if (res.info == "ok") {
-      this.orderinfo = res.object;
-      console.log(res);
-    }
-  }
-  async getComment() {
-    let res = await this.http.queryevaluatelist({ goodid: this.goods_id });
-    if (res.info == "ok") {
-      console.log(res);
-    }
+
+	async getDetail(){
+		
+		let res = await this.http.queryappdtailOrderlist({orderid:this.order_id})
+		if(res.info=="ok"){
+			this.orderinfo = res.object
+			this.goods = res.arrayList
+			this.goods.forEach((val)=>{
+				this.goodssumprice += val.unit_price
+			})
+			this.buyerid = res.object.client_id
+			console.log(res)
+			let res1 = await this.http.queryshopbyshopid({shopid:this.orderinfo.shopid})
+			if(res1.info=="ok"){
+				this.shop = res1.object
+				this.salerid = res1.object.client_id
+				this.shopName = res1.object.shop_name
+			}
+			//this.getComment();
+		}
+	}
+  async getComment(){
+	let res = await this.http.queryevaluatelist({goodid:this.goods_id})
+	if(res.info=="ok"){
+		this.commects = res.arrayList
+		res.arrayList.forEach((val,index)=>{
+			if(val.client_id==this.buyerid){
+				this.buyerCommentCount++
+			}
+			if(val.client_id==this.salerid){
+				this.salerCommentCount++
+			}
+			val.evaluateContentList.forEach((v,i)=>{
+				this.commects[index]["evaluateContentList"][i]["path"] = v.path.split(',')
+			})
+			
+		})
+		console.log(res)
+	}
   }
 
+
+
+ 
+
   //追平
-  zping() {
-    const prompt = this.alertCtrl.create({
-      title: "追加评论",
+
+  zping(evaluate_id){
+	const prompt = this.alertCtrl.create({
+      title: '追加评论',
       inputs: [
         {
           name: "content",
@@ -141,7 +179,7 @@ this.jfdata.express_number=res.object.express_number
         {
           text: "保存",
           handler: data => {
-            this.addzping(data);
+		  	this.addzping(data,evaluate_id)
           }
         }
       ]
@@ -149,8 +187,16 @@ this.jfdata.express_number=res.object.express_number
     prompt.present();
   }
 
-  addzping(data) {
-    console.log(data);
+
+  addzping(data,evaluate_id) {
+  		var params = {
+			goodid: this.goods_id,
+			orderid:this.order_id,
+			father_id:evaluate_id
+
+		}
+      console.log(data);
+
   }
 
   // 评论

@@ -40,6 +40,9 @@ export class SoplPage {
   storecarts(){
       this.navCtrl.push("StorecartsPage")
   }
+  refunds(){
+      this.navCtrl.push("StorerefundPage")
+  }
   mycollect(){
         this.navCtrl.push("StorecollectPage")
   }
