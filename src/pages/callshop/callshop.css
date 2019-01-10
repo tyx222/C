@@ -8,15 +8,17 @@ page-callshop .titaa {
 }
 
 page-callshop .titaa .userimg {
-  width: 5rem;
-  border-radius: 5rem;
-  height: 5rem;
+  border-radius: 50%;
+  min-width: 4rem;
+  height: 4rem;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: #dbd9d9;
 }
 
 page-callshop .titaa .userimg img {
-  width: 100%;
-  height: 100%;
+  width: 4rem;
 }
 
 page-callshop .ble {

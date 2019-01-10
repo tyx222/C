@@ -25,7 +25,9 @@ import { ImgServiceProvider } from "../../providers/img-service/img-service";
   templateUrl: "pushdiary.html"
 })
 export class PushdiaryPage {
-  avatar = ["assets/imgs/images/shangchuan@2x.png","http://116.62.219.45/imgs/7ad3044c6a38b809d1bd3f802d5d5ffa.jpg "];
+  avatar = ["assets/imgs/images/shangchuan@2x.png"];
+  avatar2 = ["assets/imgs/images/shangchuan@2x.png"];
+  
   type;
   PageTitle;
   petimg;
@@ -39,11 +41,8 @@ export class PushdiaryPage {
   petdata;
   show = false;
   zhuanjilist = [
-    //   {
-    //   type:2,
-    //   path:"",
-    //   text:"123123"
-    // }
+  ];
+  zhuanjilist2 = [
   ];
   constructor(
     public navCtrl: NavController,
@@ -68,27 +67,35 @@ export class PushdiaryPage {
         text: this.remark,
         path: ""
       });
+      this.zhuanjilist2.push({
+        type: 2,
+        text: this.remark,
+        path: ""
+      });
       this.remark = "";
     }
-    console.log(this.zhuanjilist);
   }
   shows() {
     this.show = !this.show;
   }
   upindex(i) {
     if (i != 0) {
-      console.log(this.zhuanjilist[i]);
       let cont = this.zhuanjilist[i - 1];
+      let cont2 = this.zhuanjilist2[i - 1];
       this.zhuanjilist[i - 1] = this.zhuanjilist[i];
+      this.zhuanjilist2[i - 1] = this.zhuanjilist2[i];
       this.zhuanjilist[i] = cont;
+      this.zhuanjilist2[i] = cont2;
     }
   }
   rmindex(i) {
     this.zhuanjilist.splice(i, 1);
+    this.zhuanjilist2.splice(i, 1);
     for (let index = 0; index < this.avatar.length; index++) {
       if (this.zhuanjilist[i].path) {
         if (this.zhuanjilist[i].path == this.avatar[index]) {
           this.avatar.splice(index, 1);
+          this.avatar2.splice(index, 1);
         }
       }
     }
@@ -108,7 +115,12 @@ export class PushdiaryPage {
       if (data.info == "ok") {
         this.zhuanjilist.push({
           type: 2,
-          path: `http://116.62.219.45/imgs/${data.object.map.filename}`,
+          path: `${data.imageUrl}${data.object.map.filename}`,
+          text: ""
+        });
+        this.zhuanjilist2.push({
+          type: 2,
+          path: `${data.object.map.filename}`,
           text: ""
         });
       }
@@ -120,12 +132,14 @@ export class PushdiaryPage {
     this.upimgserve.upload.success = data => {
       console.log(data);
       if (data.info == "ok") {
-        this.avatar[i] = `http://116.62.219.45/imgs/${data.object.map.filename}`;
+        this.avatar[i] = `${data.imageUrl}${data.object.map.filename}`;
+        this.avatar2[i] = data.object.map.filename;
         if (
           this.avatar.length < 5 &&
           this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png") == -1
         ) {
           this.avatar.push("assets/imgs/images/shangchuan@2x.png");
+          this.avatar2.push("assets/imgs/images/shangchuan@2x.png");
         }
       }
     };
@@ -136,16 +150,18 @@ export class PushdiaryPage {
       for (const item of this.zhuanjilist) {
         if (this.zhuanjilist[item].path == this.avatar[i]) {
           this.zhuanjilist.splice(item, 1);
+          this.zhuanjilist2.splice(item, 1);
         }
       }
     }
     this.avatar[i] = "assets/imgs/images/shangchuan@2x.png";
     this.avatar.splice(i, 1);
-    console.log(this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png"));
-    // this.avatar.slice(i,1)
+    this.avatar2[i] = "assets/imgs/images/shangchuan@2x.png";
+    this.avatar2.splice(i, 1);
 
     if (this.avatar.indexOf("assets/imgs/images/shangchuan@2x.png") == -1) {
       this.avatar.push("assets/imgs/images/shangchuan@2x.png");
+      this.avatar2.push("assets/imgs/images/shangchuan@2x.png");
     }
     console.log(i);
     console.log(this.avatar);
@@ -187,14 +203,14 @@ export class PushdiaryPage {
         for (let index = 0; index < lent; index++) {
           parmas.historycontentlist.push({
             type: 2,
-            path: this.avatar[index],
+            path: this.avatar2[index],
             text: ""
           });
         }
       }
     }
     if (this.type == 2) {
-      parmas.historycontentlist = this.zhuanjilist;
+      parmas.historycontentlist = this.zhuanjilist2;
     }
 
     if (this.navParams.get("cituid")) {

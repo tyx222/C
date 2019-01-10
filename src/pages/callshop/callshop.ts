@@ -68,7 +68,8 @@ export class CallshopPage {
     this.navCtrl.push("ShoppingPage", {
       pordack: this.pordacklist[i],
       type: 2,
-      imgUrl: this.imageUrl
+      imgUrl: this.imageUrl,
+      id: this.pordacklist[i].product_id
     });
   }
 }

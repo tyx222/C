@@ -22,6 +22,7 @@ export class PetAdminPage {
     rowsPrePage: 10,
     mytoken: ""
   };
+  imgsrc
   constructor(public navCtrl: NavController, public navParams: NavParams,private http:UserService) {
   }
 
@@ -30,6 +31,10 @@ export class PetAdminPage {
     this.querypetcardlist()
   }
   gotongcheng(){
+    if(!localStorage.getItem("mytoken")){
+      this.http.http.showToast("请先登录")
+      return false
+    }
     this.navCtrl.push('TongchenglistPage')
   }
   async querypetcardlist() {
@@ -39,6 +44,7 @@ export class PetAdminPage {
       console.log(res.arrayList.length);
     }else{
       this.callname=res.arrayList;
+      this.imgsrc=res.imageUrl
       console.log(this.callname);
     }
   }
@@ -54,9 +60,18 @@ export class PetAdminPage {
   console.log(res)
   }
   newlay() {
+    if(!localStorage.getItem("mytoken")){
+      this.http.http.showToast("请先登录")
+      return false
+    }
     this.navCtrl.push("NewlayPage");
   }
   savepet(i){
+    if(!localStorage.getItem("mytoken")){
+      this.http.http.showToast("请先登录")
+      return false
+    }
+    this.callname[i].headimgpath="https://www.petbashi.com/imgs/"+this.callname[i].headimgpath
     this.navCtrl.push("NewlayPage",{
       data:this.callname[i]
     })

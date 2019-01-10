@@ -67,6 +67,8 @@ page-pushdiary .btnbox {
 page-pushdiary .btnbox button {
   padding: 1rem;
   width: 8rem;
+  background: #f9d753;
+  color: #fff;
 }
 
 page-pushdiary .Fileimg {

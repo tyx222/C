@@ -10,6 +10,7 @@ import { UserService } from "../../app/shared/service/user.service";
 import { WechatChenyu } from "wechat-chenyu";
 import { DefaultAppConfig } from "./../../app/app.config";
 declare let cordova;
+
 /**
  * Generated class for the AllordersPage page.
  *
@@ -23,7 +24,7 @@ declare let cordova;
   templateUrl: "allorders.html"
 })
 export class AllordersPage {
-  order_status = 0;
+  order_status = -1;
   order_list = [];
   httpResponseData: any;
   ordertype = 1;
@@ -37,7 +38,7 @@ export class AllordersPage {
     public wechatChenyu: WechatChenyu,
     public appConfig: DefaultAppConfig,
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
   ) {}
   goevaluate(item, citem) {
     this.navCtrl.push("EvaluatePage", {
@@ -48,16 +49,28 @@ export class AllordersPage {
     });
   }
   lookevaluate(item, citem) {
-    this.navCtrl.push("LookevaluatePage", {
+    if(this.ordertype==2){
+        this.navCtrl.push("LookevaluatePage", {
       type: 0,
       orderid: item.order_id,
       goodsid: citem.goods.goods_id
-    });
-  }
-  shopoder() {
-    this.navCtrl.push("ShippingoderPage");
+    });  
+    }else{
+      this.navCtrl.push("LookevaluatePage", {
+        types: "jf",
+        orderid: item.order_id,
+    })
+
+  }}
+  shopoder(item) {
+    this.navCtrl.push("ShippingoderPage",{data:item,type:"jf"});
   }
 
+
+  /**
+   * 主商城确认收货
+   * @param order_id 
+   */
   async shouhuo(order_id) {
     let res = await this.http.updateorderstatus({
       orderid: order_id,
@@ -70,6 +83,30 @@ export class AllordersPage {
       this.http.presentToast("收货失败");
     }
   }
+
+  /**
+   * 积分商城确认收货
+   * @param item 
+   * @param citem 
+   */
+ async surereceiveorder(data){
+   let parmas={
+    orderid:data
+   }
+    let res=await this.http.surereceiveorder(parmas)
+    if (res.info == "ok") {
+      this.http.presentToast("收货成功");
+      this.queryPetOrderlist();
+    } else {
+      this.http.presentToast("收货失败");
+    }
+  }
+  /**
+   * 积分商城申述
+   */
+  complain(orderid){
+    this.navCtrl.push("RefundPage",{type:"jf",orderid:orderid});
+  }
   // 立即付款
   order(item, citem) {
     //this.navCtrl.push("OrderPage")
@@ -79,7 +116,13 @@ export class AllordersPage {
           {
             text: "支付宝支付",
             handler: () => {
-              this.aliPay(item);
+             
+              if (this.ordertype == 2) {
+                this.aliPay(item); //调用主商城
+              }
+              if (this.ordertype == 1) {
+                this.aliPay2(item); //调用积分商城
+              }
             }
           },
           {
@@ -98,6 +141,46 @@ export class AllordersPage {
 
     console.log(item);
   }
+
+
+  /**
+   * 积分商城支付宝调用
+   * @param item 
+   */
+  async aliPay2(item) {
+    let data = await this.http.alipayorderBeforSendPet({ orderid: item.order_id });
+    try {
+      let payInfo = this.unescapeHTML(data.object);
+      //this.http.presentToast(data.object.replace(/alipay_sdk=alipay-sdk-java-3.3.49.ALL&/,''));
+      cordova.plugins.alipay.payment(
+        payInfo,
+        success => {
+          if (success.resultStatus === "9000") {
+            this.http.presentToast("支付成功");
+            if (this.ordertype == 2) {
+              this.queryapporderlist(); //调用主商城
+            }
+            if (this.ordertype == 1) {
+              this.queryPetOrderlist(); //调用积分商城
+            }
+          } else {
+            this.http.presentToast("支付失败");
+          }
+        },
+        error => {
+          //支付失败
+          this.http.presentToast("支付失败");
+        }
+      );
+    } catch (err) {
+      this.http.presentToast("调用支付失败");
+    }
+  }
+
+  /**
+   * 
+   * @param item 微信支付
+   */
   async weiXinPay(item) {
     let payResult = await this.http.weixinor({ orderid: item.order_id });
     console.log(payResult);
@@ -110,14 +193,18 @@ export class AllordersPage {
       sign: payResult.object.sign // signed string
     };
 
-    this.http.presentToast(JSON.stringify(params));
+    this.http.presentToast(JSON.stringify(payResult.object));
 
-    this.wechatChenyu.sendPaymentRequest(params).then(
+    this.wechatChenyu.sendPaymentRequest(payResult.object).then(
       result => {
         //支付成功
         this.http.presentToast(JSON.stringify(result));
-
-        this.queryapporderlist();
+        if (this.ordertype == 2) {
+          this.queryapporderlist(); //调用主商城
+        }
+        if (this.ordertype == 1) {
+          this.queryPetOrderlist(); //调用积分商城
+        }
       },
       error => {
         //支付失败
@@ -137,7 +224,16 @@ export class AllordersPage {
   }
 
   async aliPay(item) {
-    let data = await this.http.alipay({ orderid: item.order_id });
+    let data;
+    if (this.ordertype == 1) {
+      data = await this.http.alipayorderBeforSendPet({
+        orderid: item.order_id
+      });
+    }
+    if (this.ordertype == 2) {
+      data = await this.http.alipay({ orderid: item.order_id });
+    }
+
     console.log(data);
     try {
       let payInfo = this.unescapeHTML(data);
@@ -147,7 +243,12 @@ export class AllordersPage {
         success => {
           if (success.resultStatus === "9000") {
             this.http.presentToast("支付成功");
-            this.queryapporderlist();
+            if (this.ordertype == 2) {
+              this.queryapporderlist(); //调用主商城
+            }
+            if (this.ordertype == 1) {
+              this.queryPetOrderlist(); //调用积分商城
+            }
           } else {
             this.http.presentToast("支付失败");
           }
@@ -170,7 +271,7 @@ export class AllordersPage {
   // }
 
   /**
-   * @param ordertype 订单类型   1 主商城  2积分商城
+   * @param ordertype 订单类型   2 主商城  1积分商城
    */
   ionViewDidLoad() {
     console.log(this.navParams.get("type"));
@@ -188,12 +289,24 @@ export class AllordersPage {
     //this.statuslist()
   }
 
+  /**
+   * 积分商城所有订单
+   */
   async queryPetOrderlist() {
-    let parmas = {
-      pageNum: 1,
-      rowsPrePage: 20
+    let parmas
+    if(this.order_status!=-1){
+      parmas={
+      pageNum:1,
+      rowsPrePage:50,
+      order_status: this.order_status
     };
-    let res = await this.http.queryPetOrderlist(parmas);
+    }else{
+      parmas={
+        pageNum:1,
+        rowsPrePage:50,
+      };
+    }
+    let res = await this.http.statuslist(parmas);
     if (res.info == "ok") {
       for (let i = 0; i < res.arrayList.length; i++) {
         res.arrayList[i].petdtailorder.petproduct.product_img2 = res.arrayList[
@@ -219,19 +332,32 @@ export class AllordersPage {
       this.order_list = [];
     }
   }
-  async statuslist() {
-    let parmas = {
-      pageNum: 1,
-      rowsPrePage: 10,
-      order_status: this.order_status
-    };
-    let res = await this.http.statuslist(parmas);
-    this.order_list = res.arrayList;
-    console.log(res);
-  }
+  // async statuslist() {
+  //   let parmas = {
+  //     pageNum: 1,
+  //     rowsPrePage: 50,
+  //     order_status: this.order_status
+  //   };
+  //   let res = await this.http.statuslist(parmas);
+  //   this.order_list = res.arrayList;
+  //   for (let i = 0; i < res.arrayList.length; i++) {
+  //     res.arrayList[i].petdtailorder.petproduct.product_img2 = res.arrayList[
+  //       i
+  //     ].petdtailorder.petproduct.product_img1.split(",")[0];
+  //   }
+  //   this.order_list = res.arrayList;
+  //   console.log(res);
+  // }
   status(index) {
     this.order_status = index;
-    this.queryapporderlist();
+    if (this.ordertype == 2) {
+      this.queryapporderlist(); //调用主商城
+    }
+    if (this.ordertype == 1) {
+      //调用积分商城
+      this.queryPetOrderlist();
+    }
+
     console.log(index);
   }
 
@@ -256,7 +382,7 @@ export class AllordersPage {
               };
               let res = await this.http.deletePetOrder(parmas);
               this.http.http.showToast(res.message);
-              if(res.info=="ok"){
+              if (res.info == "ok") {
                 this.queryPetOrderlist();
               }
             }
@@ -270,8 +396,9 @@ export class AllordersPage {
   goodsdetail(item) {
     this.navCtrl.push("StoreproductviewPage", { goodsid: item.goods.goods_id });
   }
-  goodsjf(item){
-    this.navCtrl.push("StoreproductviewPage")
+  goodsjf(item) {
+    console.log(item)
+    this.navCtrl.push("ShoppingPage",{ id: item.petdtailorder.product_id,type:2});
   }
   goShop(shopid) {
     this.navCtrl.push("StorecenterPage", { shopid: shopid });

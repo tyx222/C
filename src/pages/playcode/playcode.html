@@ -12,8 +12,10 @@
 
 
 <ion-content padding>
-    <div class="playcode" *ngIf="type==0"><img src="assets/imgs/images/re_12.png" alt="" srcset=""> <input type="text" placeholder="请设置您的手机号"></div>
-    <div class="playcode" *ngIf="type!==0"><img src="assets/imgs/images/re_12.png" alt="" srcset=""> <input type="text" placeholder="请设置您的密码"></div>
-    <div class="yanzm"><button class="yanz" [disabled]="disabled">获取验证码<span *ngIf="num>0" (click)="yanzm()" >({{num}})</span></button><input type="text" placeholder="请输入验证码"></div>
-    <button class="isok">确认</button>
+    <div class="playcode"><input type="text" placeholder="请输入现在的手机号" [(ngModel)]="client_phone"></div>
+    <div class="playcode" *ngIf="type==0"><img src="assets/imgs/images/re_12.png" alt="" srcset=""> <input type="text" [(ngModel)]="parmas2.newPhone" placeholder="请设置您的手机号"></div>
+    <div class="playcode" *ngIf="type!==0"><img src="assets/imgs/images/re_12.png" alt="" srcset=""> <input type="text" [(ngModel)]="parmas.client_password" placeholder="请设置您的密码"></div>
+    <div class="playcode" *ngIf="type!==0"><img src="assets/imgs/images/re_12.png" alt="" srcset=""> <input type="text" placeholder="确认您的密码" [(ngModel)]="client_password"></div>
+    <div class="yanzm"><button class="yanz" [disabled]="disabled" (click)="sendCode()">获取验证码<span *ngIf="num>0">({{num}})</span></button><input type="text" [(ngModel)]="code" placeholder="请输入验证码"></div>
+    <button class="isok" (click)="isok()">确认</button>
 </ion-content>

@@ -14,19 +14,39 @@
 
 
 <ion-content padding>
-    <div class="imgpage">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- <div class="swiper-slide" *ngFor="let item of imgpath;let i = index;" (click)="openVideo(i)"><img src="{{imgUrl}}{{ item }}" alt="{{ item }}" srcset="" *ngIf="item!==''"></div> -->
+            <div class="swiper-slide" *ngFor="let item of corver"><img src="{{item}}" srcset=""></div>
+            <div class="swiper-slide" *ngIf="videopath!=''">
+                <vg-player>
+                    <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                              <source src="https://www.petbashi.com/imgs/{{videopath}}" type="video/mp4">
+                            </video>
+                </vg-player>
+            </div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+
+        <!-- 如果需要导航按钮 -->
+
+    </div>
+    <!-- <div class="jsimg">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" *ngFor="let item of imgpath;let i = index;" (click)="openVideo(i)"><img src="{{imgUrl}}{{ item }}" alt="{{ item }}" srcset="" *ngIf="item!==''"></div>
-
+                
+                <div class="swiper-slide" *ngIf="videopath!=''">
+                    <vg-player>
+                        <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                                  <source src="https://www.petbashi.com/imgs/{{videopath}}" type="video/mp4">
+                                </video>
+                    </vg-player>
+                </div>
             </div>
-            <!-- 如果需要分页器 -->
-            <div class="swiper-pagination"></div>
-
-            <!-- 如果需要导航按钮 -->
 
         </div>
-    </div>
+    </div> -->
     <div class="msg">
         <p class="title">{{title}}</p>
         <p class="price">
@@ -37,7 +57,7 @@
         <span class="minprice">￥{{deposit}}</span>
             </span>
             <span *ngIf="type==2">积分:
-                <span class="minprice">88</span>
+        <span class="minprice">88</span>
             </span>
         </p>
     </div>
@@ -69,10 +89,11 @@
             <li [ngClass]="{'eft': tabs==3}" (click)="tabs=3">售后保障</li>
         </ul>
         <div class="tabspage" *ngIf="tabs==0 && type==1">
-            <img *ngFor="let im of pordackpage" src="{{imgUrl}}{{im}}">
+            <img *ngFor="let im of item" src="{{imgUrl}}{{im}}">
         </div>
-		<div class="tabspage" *ngIf="tabs==0 && type!=1">
-            <img src="{{imgUrl}}{{pordackpage}}">
+        <div class="tabspage" *ngIf="tabs==0 && type!=1">
+            <div> <img src="{{imgUrl}}{{imgpath[1]}}"></div>
+
         </div>
         <div class="tabspage" *ngIf="tabs==1">
 
@@ -108,12 +129,13 @@
             <button class="join" (click)='pushcall()'>加入购物车</button><button class="shop" (click)="goshop()">立即购买</button>
         </div>
     </div>
-    <div class="shoppingcall" *ngIf="type==2">
 
-        <button style="width: 100%;
-        height: 4rem;
-        color: #fff;
-        background: #fcc93c;" (click)="goshop()">立即购买</button>
-
-    </div>
 </ion-content>
+<div class="shoppingcall" *ngIf="type==2">
+
+    <button style="width: 100%;
+    height: 4rem;
+    color: #fff;
+    background: #fcc93c;" (click)="goshop()">立即购买</button>
+
+</div>

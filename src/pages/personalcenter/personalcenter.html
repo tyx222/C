@@ -14,12 +14,19 @@
 
 
 <ion-content padding>
+
     <div class="day">
+
         <ul>
-            <li (click)="Ckeck()"><span>我的关注</span><span>2</span></li>
-            <li><img src="{{userimg}}" alt="" srcset=""></li>
-            <li (click)="Coupon()"><span>代金券</span><span>2</span></li>
+            <li (click)="Ckeck()"><span>我的关注</span></li>
+            <li><img src="{{userimg}}" alt="" srcset="">
+                <p class="usersty"><span>{{username}}</span></p>
+                <p class="usersty"><span>{{usernum}}</span></p>
+
+            </li>
+            <li (click)="Coupon()"><span>代金券</span></li>
         </ul>
+
     </div>
     <div class="list">
         <h4>日常管理</h4>

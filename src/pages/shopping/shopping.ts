@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { UserService } from '../../app/shared/service/user.service';
 import {
   IonicPage,
   NavController,
@@ -33,13 +34,15 @@ export class ShoppingPage {
   deposit = 0;
   pordack;
   storeinfo;
+  corver=[]
+  videopath=''
   constructor(
     public toastCtrl: ToastController,
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public http:UserService
   ) {
-    this.type = this.navParams.get("type");
-	this.shopinit();
+
   }
   pushcall() {
     const toast = this.toastCtrl.create({
@@ -59,13 +62,45 @@ export class ShoppingPage {
   }
   ionViewWillEnter() {
     
-	this.swipers();
+ 
+    this.shopinit()
+  console.log(this.navParams)
+  this.type = this.navParams.get("type")
+  this.swipers();
   }
-  ionViewDidLoad() {}
-  shopinit() {
-	this.pordack = this.navParams.get("pordack")
-	let products = this.navParams.get("pordack")
+
+
+  /**
+   * 积分商城商品数据初始化
+   * @param data 
+   */
+  async pordackinit(){
+    console.log(this.navParams.get("id"))
+let parmas={
+  PetProductid:this.navParams.get("id")
+}
+let res=await this.http.querypetproduct(parmas)
+let products = res.object
+this.pordack=res.object
+this.storeinfo = JSON.parse(localStorage.getItem('storeinfo'));
+this.imgpath = products.product_img1
+products.product_introduce = products.product_introduce
+this.deposit = products.deposit;
+this.pordackpage = products.product_introduce;
+if(products.video_path!=""){
+  this.hasvideo = true;
+  this.imgpath.push(products.cover)
+  this.imgpath.reverse()
+}
+console.log(res)
+  }
+  ionViewDidLoad() {
+  }
+  async shopinit() {
+    let products
 	if(this.type==1){
+    this.pordack = this.navParams.get("pordack")
+    products = this.navParams.get("pordack")
 		console.log(products)
 		this.storeinfo = JSON.parse(localStorage.getItem('storeinfo'));
 		this.imgpath = products.product_img1
@@ -78,13 +113,29 @@ export class ShoppingPage {
 			this.imgpath.reverse()
 		}
 	}else{
-		this.imgpath=products.product_img1.split(",")
+    let parmas={
+      PetProductid:this.navParams.get("id")
+    }
+    let res=await this.http.querypetproduct(parmas)
+    this.pordack = res.object
+    products =res.object
+    this.imgpath=products.product_img1.split(",,")
+    for (let i = 2; i < this.imgpath.length; i++) {
+      if(this.imgpath[i]!=''){
+        this.corver.push(res.imageUrl+this.imgpath[i])
+      } 
+    }
+    if(this.imgpath[this.imgpath.length-1]!=''){
+      this.videopath=this.imgpath[this.imgpath.length-1]
+    }
+    this.imgUrl = res.imageUrl;
+    console.log(this.corver)
 		// this.pordackpage = products.product_img1[1];
 	}
 	
 
     console.log(this.imgpath);
-    this.imgUrl = this.navParams.get("imgUrl");
+   
     this.maxprice = products.product_price;
     this.title = products.product_name;
     this.cmment = products.product_introduce;
@@ -104,6 +155,8 @@ export class ShoppingPage {
       direction: "horizontal",
       loop: true,
       autoplay: true,
+      observer:true,//修改swiper自己或子元素时，自动初始化swiper
+    observeParents:true,//修改swiper的父元素时，自动初始化swiper
       pagination: {
         el: ".swiper-pagination"
       }

@@ -6,110 +6,125 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>订单详情</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>订单详情</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-	
-    <div class="titaa">
-        <div class="ble">
-            <div>
-                <img src="assets/imgs/images/xdgps.png" alt="" class="userimg" style="width:3rem">
-            </div>
-            <div class="ble2">
-                <div class="name">
-                    <p><span>收货人:{{ipamord.myname||''}}</span><span style="float: right;">{{ipamord.ipone||''}}</span></p>
-                    <p><span>{{ipamord.order||''}}</span></p>
-                </div>
+    <div *ngIf="types!='jf'">
+        <div class="titaa">
+            <div class="ble">
                 <div>
-                    <!--<img src="assets/imgs/images/right.png" alt="" style="width:1.5rem">-->
+                    <img src="assets/imgs/images/xdgps.png" alt="" class="userimg" style="width:3rem">
+                </div>
+                <div class="ble2">
+                    <div class="name">
+                        <p><span>收货人:{{ipamord.myname||''}}</span><span style="float: right;">{{ipamord.ipone||''}}</span></p>
+                        <p><span>{{ipamord.order||''}}</span></p>
+                    </div>
+                    <div>
+                        <!--<img src="assets/imgs/images/right.png" alt="" style="width:1.5rem">-->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="titaa">
-        <div class="ble">
-            <div>
-                <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
-            </div>
-            <div class="ble2">
-                <div class="name">
-                    <p>{{shopName}}</p>
-                </div>
+        <div class="titaa">
+            <div class="ble">
                 <div>
+                    <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
+                </div>
+                <div class="ble2">
+                    <div class="name">
+                        <p>{{shopName}}</p>
+                    </div>
+                    <div>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="titaa">
-        <div class="ble" style="height: 10rem;" *ngFor="let item of goods;let i = index">
-            <div class="shopingimg">
-                <img src="{{imgUrl}}{{item.cover}}" alt="">
-            </div>
-            <div class="ble2">
-                <div class="title">
-                    <p>{{item.goods_name}}</p>
-                    <p class="pardack">商品明细</p>
-                    <p class="total"><span class="maxprice">￥{{item.goods_price | number:'1.2-2'}}</span><span class="pordacknum"><button (click)="outout(i)">—</button><input type="number" min="0" (change)="nums(i)"  [(ngModel)]="goodsnum[i]">
+        <div class="titaa">
+            <div class="ble" style="height: 10rem;" *ngFor="let item of goods;let i = index">
+                <div class="shopingimg">
+                    <img src="{{imgUrl}}{{item.cover}}" alt="">
+                </div>
+                <div class="ble2">
+                    <div class="title">
+                        <p>{{item.goods_name}}</p>
+                        <p class="pardack">商品明细</p>
+                        <p class="total"><span class="maxprice">￥{{item.goods_price | number:'1.2-2'}}</span><span class="pordacknum"><button (click)="outout(i)">—</button><input type="number" min="0" (change)="nums(i)"  [(ngModel)]="goodsnum[i]">
                     <button (click)="upup(i)" >+</button></span></p>
-                </div>
-                <div>
+                    </div>
+                    <div>
 
+                    </div>
                 </div>
             </div>
         </div>
+
+        <p class="distribution"><span>配送方式：</span><span>快递 免邮</span></p>
+        <div class="tarea">
+            <p>买家留言：</p>
+            <textarea disabled style="resize: none;width: 100%;height: 4rem;padding: 0.5rem;border: 1px solid #999;border-radius: 5px" placeholder="选填 填写内容和卖家协商">{{orderinfo.remarks}}</textarea>
+        </div>
+
+        <div class="tarea">
+            <p>评价信息：</p>
+            <div class="comment">
+                <ion-list>
+                    <ion-item>
+                        <ion-avatar item-start>
+                            <img src="./assets/imgs/logo.png">
+                        </ion-avatar>
+                        Herbology
+                        <ion-note item-end style="color:black;">5星</ion-note>
+                        <ion-note item-end>2018-09-19</ion-note>
+
+                    </ion-item>
+                    <ion-item class="commentimg">
+                        <img src="./assets/imgs/logo.png">
+                        <img src="./assets/imgs/logo.png">
+                    </ion-item>
+                </ion-list>
+
+                <ion-card style="margin:0px;">
+
+                    <ion-card-content>
+                        这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！2018/12/3 星期一<br/>
+                        <hr/>
+                        <div class="replay">
+                            商家回复：感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+
+            </div>
+        </div>
+
+        <div style="height: 7rem;"></div>
+        <div class="jiesuan">
+            <span><button (click)="zping()"><ion-icon name="ios-create-outline"></ion-icon> &nbsp;追评</button></span>
+            <span><button (click)="pingl()"> <ion-icon name="logo-twitch"></ion-icon> &nbsp;评论</button></span>
+
+
+        </div>
     </div>
-        
-    <p class="distribution"><span>配送方式：</span><span>快递 免邮</span></p>
-    <div class="tarea">
-        <p>买家留言：</p>
-        <textarea disabled style="resize: none;width: 100%;height: 4rem;padding: 0.5rem;border: 1px solid #999;border-radius: 5px" placeholder="选填 填写内容和卖家协商">{{orderinfo.remarks}}</textarea>
+    <div class="jfpage" *ngIf="types=='jf'">
+        <div><img src="{{jfdata.cover}}" alt="" srcset=""></div>
+        <p><span>商品名称:</span><span>{{jfdata.product_name}}</span></p>
+        <p><span>数量:</span><span>{{jfdata.num}}</span></p>
+        <p><span>原价:</span><span>{{jfdata.unit_price}}</span></p>
+        <p><span>最后支付:</span><span>{{jfdata.cash_price}}</span></p>
+        <p><span>支付时间:</span><span>{{jfdata.creattime}}</span></p>
+        <p><span>快递公司:</span><span>{{jfdata.express_company}}</span></p>
+        <p><span>快递单号:</span><span>{{jfdata.express_number}}</span></p>
+        <p><span>配送方式:</span><span>卖家包邮</span></p>
+        <p><span>订单号:</span><span>{{jfdata.order_code}}</span></p>
+        <p><span>收货地址:</span><span>{{jfdata.city}}</span></p>
+        <p><span>收货人:</span><span>{{jfdata.username}}</span></p>
+        <p><span>联系电话:</span><span>{{jfdata.phone_number}}</span></p>
     </div>
-	
-	<div class="tarea">
-        <p>评价信息：</p>
-        <div class="comment">
-			<ion-list>
-			  <ion-item>
-			  	<ion-avatar item-start>
-				  <img src="./assets/imgs/logo.png">
-				</ion-avatar>
-				  Herbology
-				<ion-note item-end style="color:black;">5星</ion-note>
-				<ion-note item-end>2018-09-19</ion-note>
-
-			  </ion-item>
-				<ion-item class="commentimg">
-				<img src="./assets/imgs/logo.png">
-				<img src="./assets/imgs/logo.png">
-				</ion-item>
-			</ion-list>
-				
-			<ion-card style="margin:0px;">
-
-			  <ion-card-content>
-			  	这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！这货不错！2018/12/3 星期一<br/>
-				<hr/>
-				  <div class="replay">
-					商家回复：感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！感谢您的支持！
-				  </div>
-			  </ion-card-content>
-			</ion-card>
-		
-		</div>
-    </div>
-
-    <div style="height: 7rem;"></div>
-	<div class="jiesuan">
-		<span><button (click)="zping()"><ion-icon name="ios-create-outline"></ion-icon> &nbsp;追评</button></span>
-		<span><button (click)="pingl()"> <ion-icon name="logo-twitch"></ion-icon> &nbsp;评论</button></span>
-
-
-    </div>
-    
 </ion-content>

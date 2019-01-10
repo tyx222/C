@@ -81,7 +81,7 @@ console.log()
     };
 
     if (this.navParams.get("type") == 0) {
-      parmas.clientId = this.navParams.get("id")[0].client_id;
+      parmas.clientId = this.navParams.get("id").client_id;
     }else if(this.navParams.get("type") == 9){
       parmas.clientId = this.navParams.get("id").client_id
     } else {
@@ -89,20 +89,22 @@ console.log()
     }
 
     let res = await this.http.querypetcardotherclientlist(parmas);
-    console.log(res);
+    console.log(res)
     if (res.info == "ok") {
+    
       for (let index = 0; index < res.arrayList.length; index++) {
+        console.log(res.arrayList[index])
         if (
-          res.arrayList[index].headimgpath.indexOf("https") == -1 &&
-          res.arrayList[index].headimgpath.indexOf("http") == -1
+          res.arrayList[index].headimgpath.indexOf("https") == -1
         ) {
+          
           res.arrayList[index].headimgpath =
             "https://www.petbashi.com/imgs/" + res.arrayList[index].headimgpath;
         }
         if (this.navParams.get("type") == 0) {
           if (
             res.arrayList[index].pet_num - 0 ==
-            this.navParams.get("id")[0].pet_num - 0
+            this.navParams.get("id").pet_num - 0
           ) {
             console.log(index);
             this.callname = [];
@@ -190,6 +192,19 @@ console.log()
     console.log(parmas)
     let res = await this.http.updatemating(parmas);
     this.http.http.showToast(res.message);
+    this.querypetcardlist()
+    if(res.info=="ok"){
+     this.callname[i]["peizhong"] != this.callname[i]["peizhong"];
+    }else{
+      this.http.http.showToast("定位失败");
+     // this.callname[i]["peizhong"] = this.callname[i]["peizhong"]
+      // if (this.callname[i].mating_status == 0) {
+      //   this.callname[i].peizhong = false;
+      // } else {
+      //   this.callname[i].peizhong = true;
+      // }
+      console.log(this.callname[i])
+    }
     console.log(res);
   }
 
@@ -292,6 +307,12 @@ console.log()
    *
    */
   godaylist() {
+    console.log(this.daylist)
+    if(this.daylist.length==0){
+      this.http.http.showToast("还没有人给你投食，赶紧去发动态吧")
+      return false
+    }
+    console.log(this.myboject)
     this.navCtrl.push("DaylistPage", {
       daylist: this.daylist,
       object: this.myboject,
@@ -385,10 +406,17 @@ console.log()
     let res = await this.http.querypetcardlist(data);
     if (res.info == "ok") {
       for (let index = 0; index < res.arrayList.length; index++) {
+        if (
+          res.arrayList[index].headimgpath.indexOf("https") == -1
+        ) {
+          
+          res.arrayList[index].headimgpath =
+            "https://www.petbashi.com/imgs/" + res.arrayList[index].headimgpath;
+        }
         if (this.navParams.get("type") == 0) {
           if (
             res.arrayList[index].pet_num - 0 ==
-            this.navParams.get("id")[0].pet_num - 0
+            this.navParams.get("id").pet_num - 0
           ) {
             console.log(index);
             this.callname = [];

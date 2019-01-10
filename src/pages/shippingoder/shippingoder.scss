@@ -73,4 +73,15 @@ page-shippingoder {
             width: 70vw; // border-right: 1px solid #eee
         }
     }
+    .jf {
+        P {
+            padding: 0.5rem 0;
+            span {
+                font-size: 1.5rem;
+            }
+            span:nth-of-type(2) {
+                margin-left: 0.5rem
+            }
+        }
+    }
 }

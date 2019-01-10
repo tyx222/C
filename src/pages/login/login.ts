@@ -4,7 +4,8 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ToastController
+  ToastController,
+  App
 } from "ionic-angular";
 import { Device } from "@ionic-native/device";
 
@@ -26,7 +27,8 @@ export class LoginPage {
     public navParams: NavParams,
     public http: UserService,
     public device: Device,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    private app:App
   ) {}
 
   ionViewDidLoad() {
@@ -61,7 +63,7 @@ export class LoginPage {
    
       localStorage.setItem("mytoken", res.object.mytoken);
       localStorage.setItem("mydata",JSON.stringify(res.object))
-       this.navCtrl.setRoot('TabsPage')
+      this.app.getRootNav().push('TabsPage')
     } else {
       let message = res.message;
       this.showToast(message);

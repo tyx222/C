@@ -17,14 +17,9 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide" *ngFor="let item of advertimg;let i=index">
-                <img *ngIf="item!=''" src="/assets/imgs/images/goudai.png" alt="">
+                <img *ngIf="item!=''" src="{{imgsrc}}{{item}}" alt="">
             </div>
-            <div class="swiper-slide" *ngFor="let item of advertimg;let i=index">
-                <img *ngIf="item!=''" src="/assets/imgs/images/goudai.png" alt="">
-            </div>
-            <div class="swiper-slide" *ngFor="let item of advertimg;let i=index">
-                <img *ngIf="item!=''" src="/assets/imgs/images/goudai.png" alt="">
-            </div>
+
 
         </div>
     </div>
@@ -86,7 +81,10 @@
     <!-- <div [innerHTML]='content'>
 
     </div> -->
-    <button class="canjia jiesu" *ngIf="activitystart==1">活动已经结束</button>
-    <button class="canjia kaishi" (click)="gohuodong()" *ngIf="activitystart==0">参加活动</button>
 
 </ion-content>
+<ion-footer>
+
+    <button class="canjia jiesu" *ngIf="activitystart==1">活动已关闭</button>
+    <button class="canjia kaishi" (click)="gohuodong()" *ngIf="activitystart==0">参加活动</button>
+</ion-footer>

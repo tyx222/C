@@ -36,15 +36,22 @@ page-givenotice {
         border-radius: 5px;
         overflow: hidden;
         .userimg {
-            width: 5rem;
-            margin-top: 1rem;
-            border-radius: 50%
+            width: 4rem;
         }
         .ble {
             display: flex;
             align-items: center;
             padding: 1rem;
             background: #fff;
+            >div:nth-of-type(1) {
+                border-radius: 50%;
+                min-width: 4rem;
+                height: 4rem;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                background: #dbd9d9;
+            }
         }
         .ble2 {
             width: 100%;
@@ -53,7 +60,10 @@ page-givenotice {
             align-items: center;
             margin: 0 1rem;
             p {
-                font-size: 2rem
+                font-size: 1.5rem;
+                span {
+                    color: red;
+                }
             }
             span {
                 margin-top: 0.5rem;

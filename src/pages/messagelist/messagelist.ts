@@ -142,6 +142,10 @@ export class MessagelistPage {
    * 发表评论
    */
   async pushmess() {
+    if(!localStorage.getItem("mytoken")){
+      this.http.http.showToast("请先登录")
+      return false
+    }
     let parmas = {
       mytoken: localStorage.getItem("mytoken"),
       messageContent: this.messgtext,
@@ -169,6 +173,10 @@ export class MessagelistPage {
    * @param i 
    */
  async huifu(i){
+  if(!localStorage.getItem("mytoken")){
+    this.http.http.showToast("请先登录")
+    return false
+  }
    if(this.messglist[i].sendPetClient.client_id==JSON.parse(localStorage.getItem("mydata")).client_id){
 return false
    }

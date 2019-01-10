@@ -7,9 +7,12 @@ page-personalcenter .scroll-content {
 page-personalcenter .day {
   width: 100%;
   padding: 2rem;
-  padding-top: 5rem !important;
   background: url(../assets/imgs/images/con_bg.png);
   background-size: 100%;
+}
+
+page-personalcenter .day .usersty {
+  margin-top: 0.5rem;
 }
 
 page-personalcenter .day ul {
@@ -61,4 +64,8 @@ page-personalcenter .list ul li {
   flex-direction: column;
   align-items: center;
   margin-left: 5%;
+}
+
+page-personalcenter .list ul li img {
+  max-width: 4rem;
 }

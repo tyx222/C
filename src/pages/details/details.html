@@ -45,7 +45,7 @@
 
                                     <div>
                                         <img src="assets/imgs/images/jiantou.png" alt="">
-                                        <span>总能量值 {{item.integral_num}}kg</span>
+                                        <span *ngIf="item.integral_num">总能量值 {{item.integral_num}}kg</span>
                                     </div>
                                     <div class="baybay" *ngIf="!gay">
                                         <button (click)="jubao(i)">举报</button>
@@ -58,6 +58,8 @@
                                 <span><img src="{{item.headimgpath}}" alt="" srcset=""></span>
                                 <span style="width: 10rem;">猫卡号:{{item.pet_num}}</span>
                                 <p *ngIf="!gay" style="margin-top:0.5rem">{{item.citycode}}</p>
+                                <span style="color: rgb(142, 140, 143);" *ngIf="gay&&!item.peizhong">配种关</span>
+                                <span style="color: rgb(142, 140, 143);" *ngIf="gay&&item.peizhong">配种开</span>
                             </div>
 
                         </div>

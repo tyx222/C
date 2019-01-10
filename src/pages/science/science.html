@@ -21,24 +21,25 @@
     <div class="box">
         <div class="imgbox">
 
-            <div class="swiper-container">
+            <!-- <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" *ngFor="let item of imgUrl"><img src="{{item}}" alt="" srcset=""></div>
 
                 </div>
-                <!-- 如果需要分页器 -->
+           
                 <div class="swiper-pagination"></div>
 
-                <!-- 如果需要导航按钮 -->
 
-            </div>
+            </div> -->
+            <div><img src="assets/imgs/images/callbg.png" alt="" srcset=""></div>
+
         </div>
-        <p>
+        <!-- <p>
             <button>
         <img src="assets/imgs/images/kepu1.png" alt="" srcset="">宠圈</button>
             <button>
         <img src="assets/imgs/images/kepu2.png" alt="" srcset="">知识</button>
-        </p>
+        </p> -->
     </div>
 
     <p class="tabs">
@@ -55,10 +56,10 @@
                 <div>
                     <p *ngIf="item.science_title!==undefined">{{item.science_title}}</p>
                     <p class="pagetext" *ngIf="item.textmgs!==undefined">{{item.textmgs}}</p>
-                    <p class="tags" *ngIf="lulartype==1">
+                    <!-- <p class="tags" *ngIf="lulartype==1">
                         <img src="assets/imgs/images/home_13.png" alt="" srcset="">宠物培养</p>
                     <p class="tags" *ngIf="lulartype==2">
-                        <img src="assets/imgs/images/home_13.png" alt="" srcset="">宠物护理</p>
+                        <img src="assets/imgs/images/home_13.png" alt="" srcset="">宠物护理</p> -->
                 </div>
             </li>
 

@@ -14,12 +14,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'shippingoder.html',
 })
 export class ShippingoderPage {
-
+type
+express_number
+express_company
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShippingoderPage');
+    console.log(this.navParams)
+    this.type=this.navParams.get("type")
+    this.express_number=this.navParams.get("data").express_number
+    this.express_company=this.navParams.get("data").express_company
   }
 
 }

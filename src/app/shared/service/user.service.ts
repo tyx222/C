@@ -2,20 +2,17 @@ import { Injectable } from "@angular/core";
 import { MyHttpService } from "./my-http.service";
 import { ToastController } from "ionic-angular";
 import { Geolocation } from "@ionic-native/geolocation";
-import { WechatChenyu } from 'wechat-chenyu';
+import { WechatChenyu } from "wechat-chenyu";
 declare var Wechat: any;
 
-export interface WechatPayParam {  
-  partnerid: string;  
-  prepayid: string;  
-  noncestr: string;  
-  timestamp: string;  
-  sign: string;  
-} 
+export interface WechatPayParam {
+  partnerid: string;
+  prepayid: string;
+  noncestr: string;
+  timestamp: string;
+  sign: string;
+}
 @Injectable()
-
-
-
 export class UserService {
   private api = {
     userLogin: "chongwu/app/Applogin",
@@ -68,71 +65,80 @@ export class UserService {
     querypethistorytypecontent: "chongwu/chongwu/querypethistorytypecontent",
     addreport: "chongwu/chongwu/addreport",
     addblack: "chongwu/app/addblack",
-    querypetfeedinglist: "chongwu/chongwu/querypetfeedinglist",
-    querypetfeedingclientlist: "chongwu/chongwu/querypetfeedingclientlist",
+    querypetfeedinglist: "chongwu/chongwu/querypetfeedinglist", //查询我的投食
+    querypetfeedingclientlist: "chongwu/chongwu/querypetfeedingclientlist", //查询我给别人的投食记录
+    querypetotherfeedinglist: "chongwu/chongwu/querypetotherfeedinglist", //查询我的全部投食
     updatemating: "chongwu/chongwu/updatemating",
     addmating: "chongwu/app/addmating",
     querypetcardmatinglist: "chongwu/app/querypetcardmatinglist",
-    addshop:"chongwu/app/addshop",
-	alipay:"chongwu/app/alipayorderBeforSendapp",
-    queryshopclassify:"chongwu/app/queryshopclassify", 
-    deleteshopclassify:"chongwu/app/deleteshopclassify",
-    queryshopclassifygoodlist:"chongwu/app/queryshopclassifygoodlist",
-	queryshopnullgoodlist:'chongwu/app/queryshopnullgoodlist',
-	queryshopbyclientid:"chongwu/app/queryshopbyclientid",
-	queryshopbyshopid:"chongwu/app/queryshop",
-    addshopclassify:"chongwu/app/addshopclassify",
-	updateshopclassify:"chongwu/app/updateshopclassify",
-    addgoods:"chongwu/app/addgoods",
-	querygoods:"chongwu/app/querygoods",
-	addappstoreOrder:"chongwu/app/addappOrder",
-	updategoods:"chongwu/app/updategoods",
-	queryshopgoods:"chongwu/app/queryshopgoods",
-    updateshopstatus:"chongwu/app/updateshopstauts",
-	querypropertylist:"chongwu/app/querypropertylist",
-	querypropertycommonlist:"chongwu/app/querypropertycommonlist",
-	queryclassbrandlist:"chongwu/app/queryclassbrandlist",
-	queryclasslist:"chongwu/app/queryclasslist",
-	updategoodshopclassify:"chongwu/app/updategoodshopclassify",
-	updategoodstatus:"chongwu/app/updategoodstatus",
-    querygoodsbyseach:"chongwu/app/querygoodsbyseach",
-	queryapporderlist:"chongwu/app/queryapporderlist",
-	addcollectoin:'chongwu/app/addcollectoin',
-	querycollectionlist:"chongwu/app/querycollectionlist",
-	deletecollection:'chongwu/app/deletecollection',
-	addevaluate:"chongwu/app/addevaluate",
-	queryevaluatelist:"chongwu/app/queryevaluatelist",
-	addshopcar:"chongwu/app/addshopcar",
-	queryshopcar:"chongwu/app/queryshopcar",
-	updateshopcar:"chongwu/app/updateshopcar",
-	deleteshopcar:"chongwu/app/deleteshopcar",
-	queryshopapporderlist:"chongwu/app/queryshopapporderlist",
-	addcoupon:"chongwu/app/addcoupon",
-	querycouponlist:"chongwu/app/querycouponlist",
-	updatecouponstatus:"chongwu/app/updatecouponstatus",
-	updateorderstatus:"chongwu/app/updateorderstatus",
-	addshopclient:"chongwu/app/addshopclient",
-	couponclientlist:"chongwu/app/couponclientlist",
-	deletecoupon:"chongwu/app/deletecoupon",
-	queryclientunum:"chongwu/app/queryclientunum",
-	choiceclerk:"chongwu/app/choiceclerk",
-	queryappdtailOrderlist:"chongwu/app/queryappdtailOrderlist",
-	querymyclerklist:"chongwu/app/querymyclerklist",
-	queryclerklist:"chongwu/app/queryclerklist",
-	wxGoBackOrder:"chongwu/app/wxGoBackOrder",
-  logistics:"chongwu/app/logistics",
-  queryPetOrderlist:"chongwu/chongwu/queryPetOrderlist",
-  deletePetOrder:"chongwu/chongwu/deletePetOrder"
-
-
-
+    addshop: "chongwu/app/addshop",
+    alipay: "chongwu/app/alipayorderBeforSendapp",
+    queryshopclassify: "chongwu/app/queryshopclassify",
+    deleteshopclassify: "chongwu/app/deleteshopclassify",
+    queryshopclassifygoodlist: "chongwu/app/queryshopclassifygoodlist",
+    queryshopnullgoodlist: "chongwu/app/queryshopnullgoodlist",
+    queryshopbyclientid: "chongwu/app/queryshopbyclientid",
+    queryshopbyshopid: "chongwu/app/queryshop",
+    addshopclassify: "chongwu/app/addshopclassify",
+    updateshopclassify: "chongwu/app/updateshopclassify",
+    addgoods: "chongwu/app/addgoods",
+    querygoods: "chongwu/app/querygoods",
+    addappstoreOrder: "chongwu/app/addappOrder",
+    updategoods: "chongwu/app/updategoods",
+    queryshopgoods: "chongwu/app/queryshopgoods",
+    updateshopstatus: "chongwu/app/updateshopstauts",
+    querypropertylist: "chongwu/app/querypropertylist",
+    querypropertycommonlist: "chongwu/app/querypropertycommonlist",
+    queryclassbrandlist: "chongwu/app/queryclassbrandlist",
+    queryclasslist: "chongwu/app/queryclasslist",
+    updategoodshopclassify: "chongwu/app/updategoodshopclassify",
+    updategoodstatus: "chongwu/app/updategoodstatus",
+    querygoodsbyseach: "chongwu/app/querygoodsbyseach",
+    queryapporderlist: "chongwu/app/queryapporderlist",
+    addcollectoin: "chongwu/app/addcollectoin",
+    querycollectionlist: "chongwu/app/querycollectionlist",
+    deletecollection: "chongwu/app/deletecollection",
+    addevaluate: "chongwu/app/addevaluate",
+    queryevaluatelist: "chongwu/app/queryevaluatelist",
+    addshopcar: "chongwu/app/addshopcar",
+    queryshopcar: "chongwu/app/queryshopcar",
+    updateshopcar: "chongwu/app/updateshopcar",
+    deleteshopcar: "chongwu/app/deleteshopcar",
+    queryshopapporderlist: "chongwu/app/queryshopapporderlist",
+    addcoupon: "chongwu/app/addcoupon",
+    querycouponlist: "chongwu/app/querycouponlist",
+    updatecouponstatus: "chongwu/app/updatecouponstatus",
+    updateorderstatus: "chongwu/app/updateorderstatus",
+    addshopclient: "chongwu/app/addshopclient",
+    couponclientlist: "chongwu/app/couponclientlist",
+    deletecoupon: "chongwu/app/deletecoupon",
+    queryclientunum: "chongwu/app/queryclientunum",
+    choiceclerk: "chongwu/app/choiceclerk",
+    queryappdtailOrderlist: "chongwu/app/queryappdtailOrderlist",
+    querymyclerklist: "chongwu/app/querymyclerklist",
+    queryclerklist: "chongwu/app/queryclerklist",
+    wxGoBackOrder: "chongwu/app/wxGoBackOrder",
+    logistics: "chongwu/app/logistics",
+    queryPetOrderlist: "chongwu/chongwu/queryPetOrderlist",
+    deletePetOrder: "chongwu/chongwu/deletePetOrder",
+    sendCode: "chongwu/app/sendCode",
+    updapassword: "chongwu/app/updapassword",
+    updaphonenumber: "chongwu/app/updaphonenumber",
+    alipayorderBeforSendPet: "chongwu/app/alipayorderBeforSendPet",
+    querypetproduct: "chongwu/chongwu/querypetproduct",
+    queryPetdtailOrderlist: "chongwu/chongwu/queryPetdtailOrderlist",
+    surereceiveorder: "chongwu/chongwu/surereceiveorder",
+    addwallet:"chongwu/app/addwallet",
+    getwalletbalance:"chongwu/app/getwalletbalance",
+    addappeal:"chongwu/chongwu/addappeal",
+    queryclient:"chongwu/app/queryclient"
   };
-  
+
   constructor(
     public http: MyHttpService,
     public toastCtrl: ToastController,
     public geolocation: Geolocation,
-    public  wechat:WechatChenyu
+    public wechat: WechatChenyu
   ) {}
 
   /**
@@ -476,13 +482,13 @@ export class UserService {
     return this.http.Post(this.api.alipay, data);
   }
 
-/**
- * 查询某用户的所有猫卡
- * @param data 
- */
-querypetcardotherclientlist(data){
-  return this.http.Post(this.api.querypetcardotherclientlist,data)
-}
+  /**
+   * 查询某用户的所有猫卡
+   * @param data
+   */
+  querypetcardotherclientlist(data) {
+    return this.http.Post(this.api.querypetcardotherclientlist, data);
+  }
 
   /**
    * 投食
@@ -572,333 +578,360 @@ querypetcardotherclientlist(data){
   querypetcardmatinglist(data) {
     return this.http.Post(this.api.querypetcardmatinglist, data);
   }
-   /* 查询店铺
-   * @param data 
+  /* 查询店铺
+   * @param data
    */
   queryshopbyclientid() {
-    return this.http.Post(this.api.queryshopbyclientid,{_time:110})
+    return this.http.Post(this.api.queryshopbyclientid, { _time: 110 });
   }
 
-
-	/**
+  /**
    * 查询店铺
-   * @param data 
+   * @param data
    */
-	queryshopbyshopid(data){
-	    return this.http.Post(this.api.queryshopbyshopid,data)
+  queryshopbyshopid(data) {
+    return this.http.Post(this.api.queryshopbyshopid, data);
+  }
 
-	}
-  
+  /**
+   * 积分商城确认收货
+   * @param data
+   */
+  surereceiveorder(data) {
+    return this.http.Post(this.api.surereceiveorder, data);
+  }
+  /**
+   *
+   * @param data
+   */
+  querypetotherfeedinglist(data) {
+    return this.http.Post(this.api.querypetotherfeedinglist, data);
+  }
 
   /**
    * 查询店铺分类
-   * @param data 
+   * @param data
    */
   queryshopclassify(data) {
-    return this.http.Post(this.api.queryshopclassify,data)
+    return this.http.Post(this.api.queryshopclassify, data);
   }
 
   /**
    * 添加店铺分类
-   * @param data 
+   * @param data
    */
   addshopclassify(data) {
-    return this.http.Post(this.api.addshopclassify,data)
+    return this.http.Post(this.api.addshopclassify, data);
   }
-	
-	/**
+
+  /**
    * 编辑店铺分类
-   * @param data 
+   * @param data
    */
   updateshopclassify(data) {
-      return this.http.Post(this.api.updateshopclassify,data)
+    return this.http.Post(this.api.updateshopclassify, data);
   }
 
   /**
    * 删除店铺分类
-   * @param data 
+   * @param data
    */
   deleteshopclassify(data) {
-    return this.http.Post(this.api.deleteshopclassify,data)
+    return this.http.Post(this.api.deleteshopclassify, data);
   }
-
 
   /**
    * 保存店铺信息
-   * @param data 
+   * @param data
    */
   addshop(data) {
-    return this.http.Post(this.api.addshop,data)
+    return this.http.Post(this.api.addshop, data);
   }
 
   /**
    * 添加店铺商品
-   * @param data 
+   * @param data
    */
   addgood(data) {
-    return this.http.Post(this.api.addgoods,data)
+    return this.http.Post(this.api.addgoods, data);
   }
 
   /**
    * 更新店铺商品
-   * @param data 
+   * @param data
    */
   updategoods(data) {
-    return this.http.Post(this.api.updategoods,data)
+    return this.http.Post(this.api.updategoods, data);
   }
-
-  
 
   /**
    * 店铺分类下的商品
-   * @param data 
+   * @param data
    */
   queryshopclassifygoodlist(data) {
-    return this.http.Post(this.api.queryshopclassifygoodlist,data)
-  }
-	
-	/**
-   * 店铺内未关联任何店铺分类的商品
-   * @param data 
-   */
-  queryshopnullgoodlist(data){
-      return this.http.Post(this.api.queryshopnullgoodlist,data)
+    return this.http.Post(this.api.queryshopclassifygoodlist, data);
   }
 
+  /**
+   * 店铺内未关联任何店铺分类的商品
+   * @param data
+   */
+  queryshopnullgoodlist(data) {
+    return this.http.Post(this.api.queryshopnullgoodlist, data);
+  }
 
   /**
    * 商品关联店铺分类
-   * @param data 
+   * @param data
    */
   updategoodshopclassify(data) {
-    return this.http.Post(this.api.updategoodshopclassify,data)
+    return this.http.Post(this.api.updategoodshopclassify, data);
   }
-
 
   /**
    * 商品上下架
-   * @param data 
+   * @param data
    */
   updategoodstatus(data) {
-    return this.http.Post(this.api.updategoodstatus,data)
+    return this.http.Post(this.api.updategoodstatus, data);
   }
-
-  
 
   /**
    * 更新店铺状态
-   * @param data 
+   * @param data
    */
   updateshopstatus(data) {
-    return this.http.Post(this.api.updateshopstatus,data)
+    return this.http.Post(this.api.updateshopstatus, data);
   }
-  
+
   /**
    * 查询店铺商品
-   * @param data 
+   * @param data
    */
   querygoodsbyseach(data) {
-    return this.http.Post(this.api.querygoodsbyseach,data)
+    return this.http.Post(this.api.querygoodsbyseach, data);
   }
-	
-	/**
+
+  /**
    * 查询店铺商品详情
-   * @param data 
+   * @param data
    */
   querygoods(data) {
-    return this.http.Post(this.api.querygoods,data)
+    return this.http.Post(this.api.querygoods, data);
   }
 
-	/**
-	 * 查询属性
-	*/
-	querypropertylist(data){
-	    return this.http.Post(this.api.querypropertylist,data)
-	}
-	/**
-	 * 查询公共属性
-	*/
-	querypropertycommonlist(){
-		return this.http.Post(this.api.querypropertycommonlist,{_time:111})
-	}
+  /**
+   * 查询属性
+   */
+  querypropertylist(data) {
+    return this.http.Post(this.api.querypropertylist, data);
+  }
+  /**
+   * 查询公共属性
+   */
+  querypropertycommonlist() {
+    return this.http.Post(this.api.querypropertycommonlist, { _time: 111 });
+  }
 
+  /**
+   * 查询全局分类
+   * @param data
+   */
+  queryclasslist() {
+    return this.http.Post(this.api.queryclasslist, { _time: 111 });
+  }
 
-	/**
-	 * 查询全局分类
-	 * @param data 
-	 */
-	queryclasslist(){
-	    return this.http.Post(this.api.queryclasslist,{_time:111})
-
-	}
-	
-	/**
+  /**
    * 品牌列表
-   * @param data 
+   * @param data
    */
-	queryclassbrandlist(data){
-	    return this.http.Post(this.api.queryclassbrandlist,data)
-	}
+  queryclassbrandlist(data) {
+    return this.http.Post(this.api.queryclassbrandlist, data);
+  }
 
-	/**
+  /**
    * 按店铺查询商品列表
-   * @param data 
+   * @param data
    */
-	queryshopgoods(data){
-		return this.http.Post(this.api.queryshopgoods,data)
-	}
+  queryshopgoods(data) {
+    return this.http.Post(this.api.queryshopgoods, data);
+  }
 
-
-	/**
+  /**
    * 宠物商城添加订单
-   * @param data 
+   * @param data
    */
-	addappstoreOrder(data){
-		return this.http.Post(this.api.addappstoreOrder,data)
-	}
+  addappstoreOrder(data) {
+    return this.http.Post(this.api.addappstoreOrder, data);
+  }
 
-	/**
+  /**
    * 宠物商城查询订单
-   * @param data 
+   * @param data
    */
-	queryapporderlist(data){
-		return this.http.Post(this.api.queryapporderlist,data)
-	}
-	
-	
-	/**
+  queryapporderlist(data) {
+    return this.http.Post(this.api.queryapporderlist, data);
+  }
+
+  /**
    * 宠物商城添加收藏
-   * @param data 
+   * @param data
    */
-	addcollectoin(data){
-		return this.http.Post(this.api.addcollectoin,data)
-	}
+  addcollectoin(data) {
+    return this.http.Post(this.api.addcollectoin, data);
+  }
 
-	
-	/**
+  /**
    * 宠物商城收藏列表
-   * @param data 
+   * @param data
    */
-	querycollectionlist(data){
-		return this.http.Post(this.api.querycollectionlist,data)
-	}
+  querycollectionlist(data) {
+    return this.http.Post(this.api.querycollectionlist, data);
+  }
 
-	
-	/**
+  /**
    * 宠物商城移除收藏的商品
-   * @param data 
+   * @param data
    */
-	deletecollection(data){
-		return this.http.Post(this.api.deletecollection,data)
-	}
+  deletecollection(data) {
+    return this.http.Post(this.api.deletecollection, data);
+  }
 
-	
-	/**
+  /**
    * 商城商品添加评价
-   * @param data 
+   * @param data
    */
-	addevaluate(data){
-		return this.http.Post(this.api.addevaluate,data)
-	}
+  addevaluate(data) {
+    return this.http.Post(this.api.addevaluate, data);
+  }
 
-	
-	/**
+  /**
    * 商城商品评价列表
-   * @param data 
+   * @param data
    */
-	queryevaluatelist(data){
-		return this.http.Post(this.api.queryevaluatelist,data)
-	}
+  queryevaluatelist(data) {
+    return this.http.Post(this.api.queryevaluatelist, data);
+  }
 
-	/**
+  /**
    * 商城添加购物车
-   * @param data 
+   * @param data
    */
-	addshopcar(data){
-		return this.http.Post(this.api.addshopcar,data)
-	}
+  addshopcar(data) {
+    return this.http.Post(this.api.addshopcar, data);
+  }
 
-	/**
+  /**
    * 商城购物车列表
-   * @param data 
+   * @param data
    */
-	queryshopcar(data){
-		return this.http.Post(this.api.queryshopcar,data)
-	}
+  queryshopcar(data) {
+    return this.http.Post(this.api.queryshopcar, data);
+  }
 
-	/**
+  /**
    * 商城修改购物车
-   * @param data 
+   * @param data
    */
-	updateshopcar(data){
-		return this.http.Post(this.api.updateshopcar,data)
-	}
+  updateshopcar(data) {
+    return this.http.Post(this.api.updateshopcar, data);
+  }
 
-
-	/**
+  /**
    * 商城删除购物车
-   * @param data 
+   * @param data
    */
-	deleteshopcar(data){
-		return this.http.Post(this.api.deleteshopcar,data)
-	}
+  deleteshopcar(data) {
+    return this.http.Post(this.api.deleteshopcar, data);
+  }
 
-	/**
+  /**
    * 商城商家订单列表
-   * @param data 
+   * @param data
    */
-	queryshopapporderlist(data){
-		return this.http.Post(this.api.queryshopapporderlist,data)
-	}
+  queryshopapporderlist(data) {
+    return this.http.Post(this.api.queryshopapporderlist, data);
+  }
 
-
-	/**
+  /**
    * 商城商家发布优惠券
-   * @param data 
+   * @param data
    */
-	addcoupon(data){
-		return this.http.Post(this.api.addcoupon,data)
-	}
+  addcoupon(data) {
+    return this.http.Post(this.api.addcoupon, data);
+  }
 
-	/**
+  /**
    * 商城商家优惠券列表
-   * @param data 
+   * @param data
    */
-	querycouponlist(data){
-		return this.http.Post(this.api.querycouponlist,data)
-	}
-	/**
+  querycouponlist(data) {
+    return this.http.Post(this.api.querycouponlist, data);
+  }
+  /**
    * 商城商家派发优惠券
-   * @param data 
+   * @param data
    */
-	updatecouponstatus(data){
-		return this.http.Post(this.api.updatecouponstatus,data)
-	}
+  updatecouponstatus(data) {
+    return this.http.Post(this.api.updatecouponstatus, data);
+  }
 
-	/**
+  /**
    * 商城商家邀请店员
+   * @param data
+   */
+  addshopclient(data) {
+    return this.http.Post(this.api.addshopclient, data);
+  }
+
+
+  /**
+   * 用户信息拉取
    * @param data 
    */
-	addshopclient(data){
-		return this.http.Post(this.api.addshopclient,data)
-	}
-
-	/**
+ queryclient(data){
+   return this.http.Post(this.api.queryclient,data)
+ }
+ 
+  /**
    * 用户领取优惠卷列表
-   * @param data 
+   * @param data
    */
-	couponclientlist(data){
-		return this.http.Post(this.api.couponclientlist,data)
-	}
-	/**
-   * 商家发货
-   * @param data 
-   */
-	updateorderstatus(data){
-		return this.http.Post(this.api.updateorderstatus,data)
-	}
+  couponclientlist(data) {
+    return this.http.Post(this.api.couponclientlist, data);
+  }
 
-	
+/**
+ * 积分商城申述
+ * @param data 
+ */
+addappeal(data){
+  return this.http .Post(this.api.addappeal,data)
+}
+
+  /**
+   * 商家发货
+   * @param data
+   */
+  updateorderstatus(data) {
+    return this.http.Post(this.api.updateorderstatus, data);
+  }
+
+/**
+ * 充值
+ * @param data 
+ */
+addwallet(data){
+  return this.http.Post(this.api.addwallet,data)
+}
+
+/**
+ * 用户钱包
+ * @param data 
+ */
+getwalletbalance(data){
+  return this.http.Post(this.api.getwalletbalance,data)
+}
 
   /**
    * 商家删除优惠券
@@ -929,11 +962,9 @@ querypetcardotherclientlist(data){
    * 我收到的邀请
    */
   querymyclerklist() {
-    return this.http.Post(this.api.querymyclerklist, {_time:1});
+    return this.http.Post(this.api.querymyclerklist, { _time: 1 });
   }
 
-  
-  
   /**
    * 店铺邀请的店员列表
    */
@@ -949,33 +980,85 @@ querypetcardotherclientlist(data){
     return this.http.Post(this.api.logistics, data);
   }
 
-/**
- * 积分商城所有订单
- * @param data 
- */
-queryPetOrderlist(data){
-return this.http.Post(this.api.queryPetOrderlist,data)
-}
+  /**
+   * 积分商城所有订单
+   * @param data
+   */
+  queryPetOrderlist(data) {
+    return this.http.Post(this.api.queryPetOrderlist, data);
+  }
 
-/**
- * 
- * @param params 积分商城订单删除
- */
-deletePetOrder(data){
-  return this.http.Post(this.api.deletePetOrder,data)
-}
+  /**
+   * 积分商城单个商品查询
+   * @param data
+   */
+  querypetproduct(data) {
+    return this.http.Post(this.api.querypetproduct, data);
+  }
 
-/**
- * 微信支付订单处理
- * https://api.mch.weixin.qq.com/pay/unifiedorder
- */
- sendPaymentRequest(params: WechatPayParam) {  
-  return new Promise((resolve, reject) => {  
-   Wechat.sendPaymentRequest(params, result => {  
-      resolve(result);  
-    }, error => {  
-      reject(error);  
-    });  
-  });  
-} 
+  /**
+   * 积分商城支付宝预订单
+   * @param data
+   */
+  alipayorderBeforSendPet(data) {
+    return this.http.Post(this.api.alipayorderBeforSendPet, data);
+  }
+
+  /**
+   * 积分商城订单详情
+   * @param data
+   */
+
+  queryPetdtailOrderlist(data) {
+    return this.http.Post(this.api.queryPetdtailOrderlist, data);
+  }
+
+  /**
+   *
+   * @param params 积分商城订单删除
+   */
+  deletePetOrder(data) {
+    return this.http.Post(this.api.deletePetOrder, data);
+  }
+
+  /**
+   * 短信验证
+   * @param params
+   */
+  sendCode(data) {
+    return this.http.Post(this.api.sendCode, data);
+  }
+
+  /**
+   * 修改密码
+   * @param params
+   */
+  updapassword(data) {
+    return this.http.Post(this.api.updapassword, data);
+  }
+
+  /**
+   * 修改手机号
+   * @param params
+   */
+  updaphonenumber(data) {
+    return this.http.Post(this.api.updaphonenumber, data);
+  }
+  /**
+   * 微信支付订单处理
+   * https://api.mch.weixin.qq.com/pay/unifiedorder
+   */
+  sendPaymentRequest(params: WechatPayParam) {
+    return new Promise((resolve, reject) => {
+      Wechat.sendPaymentRequest(
+        params,
+        result => {
+          resolve(result);
+        },
+        error => {
+          reject(error);
+        }
+      );
+    });
+  }
 }

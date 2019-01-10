@@ -1,6 +1,6 @@
 page-query-petactivity .swiper-container {
   width: 100vw;
-  height: 12rem;
+  height: auto;
   display: flex;
   flex-direction: column;
 }
@@ -26,14 +26,6 @@ page-query-petactivity .scroll-content button {
   border-radius: 5rem;
   left: -7rem;
   margin-left: 50%;
-}
-
-page-query-petactivity .scroll-content .kaishi {
-  background: #fac9548a;
-}
-
-page-query-petactivity .scroll-content .jiesu {
-  background: rgba(102, 101, 101, 0.51);
 }
 
 page-query-petactivity .huodong {
@@ -145,7 +137,24 @@ page-query-petactivity .card > div:nth-of-type(2) .Interaction span img {
   width: 1.5rem;
 }
 
-page-query-petactivity .canjia {
+.canjia {
   position: fixed;
   bottom: 2rem;
+  width: 14rem;
+  padding: 2rem;
+  color: #fff;
+  font-size: 1.5rem;
+  border-radius: 5rem;
+  left: -7rem;
+  margin-left: 50%;
+}
+
+.kaishi {
+  background: #fac9548a;
+  z-index: 999;
+}
+
+.jiesu {
+  background: rgba(102, 101, 101, 0.51);
+  z-index: 999;
 }

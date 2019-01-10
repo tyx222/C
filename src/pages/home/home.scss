@@ -17,6 +17,24 @@ page-home {
         width: 100%;
         background: #fff
     }
+    .petimgbox {
+        border-radius: 50%;
+        min-width: 6rem;
+        height: 6rem;
+        overflow: hidden;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        background: #dbd9d9;
+        img {
+            max-width: 6rem!important;
+        }
+    }
     .tabs {
         margin-top: 3rem;
         width: 100%;
@@ -112,12 +130,6 @@ page-home {
             margin-top: 1rem;
             display: flex;
             justify-content: center;
-            img {
-                width: 5rem;
-                height: 5rem;
-                border-radius: 50%;
-                // border: 1px solid #06c;
-            }
             // .swiper-slide {
             //     width: 95vw;
             // }
@@ -209,6 +221,56 @@ page-home {
                 margin-left: 1rem;
             }
         }
+        .card2 {
+            display: flex;
+            border-radius: 0.8rem;
+            border: 1px solid #eee;
+            margin-top: 2rem;
+            width: 100%;
+            padding-top: 2rem !important;
+            padding: 1rem;
+            >div:nth-of-type(2) {
+                margin-left: 0.5rem;
+                >p {
+                    color: #999;
+                    margin-top: -1rem;
+                    padding: 0.5rem 0;
+                    img {
+                        width: 1rem;
+                        // height: 1rem;
+                        margin-right: 0.5rem;
+                    }
+                }
+                div {
+                    margin-top: 0.5rem;
+                    >img {
+                        width: 5rem;
+                        height: 100%;
+                    }
+                    >p {
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 4;
+                        overflow: hidden;
+                        color: #999;
+                        max-height: 5.5rem;
+                    }
+                }
+                .Interaction {
+                    display: flex;
+                    justify-content: flex-end;
+                    span {
+                        margin: 0.5rem 1rem;
+                        display: flex;
+                        align-items: center;
+                        img {
+                            width: 1.5rem;
+                            margin: 0 0.1rem;
+                        }
+                    }
+                }
+            }
+        }
         .card {
             display: flex;
             border-radius: 0.8rem;
@@ -218,15 +280,21 @@ page-home {
             padding-top: 2rem !important;
             padding: 1rem;
             >div:nth-of-type(1) {
-                min-width: 4rem;
                 border-radius: 50%;
-                margin-top: -1rem;
+                min-width: 3rem;
+                height: 3rem;
+                overflow: hidden;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                background: #dbd9d9;
                 >img {
                     width: 3rem;
-                    max-width: 3rem;
-                    height: 3rem;
-                    border-radius: 50%;
-                    border: #c73ede;
                 }
             }
             >div:nth-of-type(2) {
@@ -262,8 +330,11 @@ page-home {
                     justify-content: flex-end;
                     span {
                         margin: 0.5rem 1rem;
+                        display: flex;
+                        align-items: center;
                         img {
                             width: 1.5rem;
+                            margin: 0 0.1rem;
                         }
                     }
                 }

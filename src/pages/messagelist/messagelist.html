@@ -16,13 +16,13 @@
 <ion-content padding>
 
     <div class="card">
-        <div><img src="{{imgurl}}{{imgpath}}" alt="" srcset=""></div>
+        <div class="userimg"><img src="{{imgurl}}{{imgpath}}" alt="" srcset=""></div>
         <div>
             <h5>{{petname}} <span (click)="addpetConcern()" *ngIf="!concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">关注</span>
                 <span (click)="addpetConcern()" *ngIf="concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span></h5>
             <p><span *ngIf="type==4" style="margin-right: 1rem;background: #21abeb;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">活动</span><span *ngIf="type==2" style="margin-right: 1rem;background: #eec10e;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">传记</span>{{title}}</p>
             <div *ngIf="type==1||type==4">
-                <p>{{comment}}</p>
+                <!-- <p>{{comment}}</p> -->
                 <div *ngIf="!mp4" style="display: flex;flex-wrap: wrap;">
                     <div *ngFor="let item of pathlist" class="imgbox1">
                         <img src="https://www.petbashi.com/imgs/{{item.path}}" alt="" srcset="">
@@ -40,7 +40,7 @@
             <div *ngIf="type==2">
                 <div *ngFor="let item of pathlist">
                     <p>{{item.text}}</p>
-                    <p> <img src="{{item.path}}" alt="" srcset=""></p>
+                    <p> <img src="https://www.petbashi.com/imgs/{{item.path}}" alt="" srcset=""></p>
                 </div>
 
             </div>
@@ -67,7 +67,10 @@
         </ion-infinite-scroll>
     </div>
     <div style="height:6rem"></div>
+
+</ion-content>
+<ion-footer>
     <div class="putbox">
         <input type="text" class="mess" [(ngModel)]="messgtext"><button class="ok" (click)="pushmess()">发送</button>
     </div>
-</ion-content>
+</ion-footer>

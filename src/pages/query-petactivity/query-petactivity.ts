@@ -26,6 +26,7 @@ export class QueryPetactivityPage {
   historytypelist=[]
   historyimg=[]
   activitystart=0
+  imgsrc
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -156,6 +157,7 @@ setInterval(()=>{
     this.activity_prize = res.object.activity_prize.split("@@");
     this.huojiangtext=this.activity_prize[this.indexs]
     this.historytypelist=res.object.historytypelist
+    this.imgsrc=res.imageUrl
     for (let item in this.historytypelist) {
       if (this.historytypelist.length != 0) {
         if (this.historytypelist[item].historycontentlist[0].type == 1) {

@@ -25,29 +25,8 @@
         </ion-item>
         <ion-item>
             <ion-label fixed>昵称</ion-label>
-            <ion-input type="text" [(ngModel)]="mydata.client_nikename" placeholder="用户昵称"></ion-input>
+            <ion-input type="text" maxlength="10" [(ngModel)]="mydata.client_nikename" placeholder="用户昵称"></ion-input>
         </ion-item>
-        <ion-item>
-            <ion-label fixed>用户姓名</ion-label>
-            <ion-input type="text" [(ngModel)]="mydata.myname" placeholder="用户昵称"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label fixed>联系电话</ion-label>
-            <ion-input type="tel" [(ngModel)]="mydata.ipone" placeholder="用户手机号"></ion-input>
-        </ion-item>
-        <!--  <ion-item>
-            <ion-label fixed>用户密码</ion-label>
-            <ion-input type="tel" [(ngModel)]="mydata.client_password" placeholder="用户密码"></ion-input>
-        </ion-item> -->
-        <ion-item>
-            <ion-label>地区</ion-label>
-            <ion-multi-picker item-content [cancelText]="'取消'" [doneText]="'完成'" [(ngModel)]="mydata.myipam" [multiPickerColumns]="listData" #myipam></ion-multi-picker>
-        </ion-item>
-        <ion-item>
-            <ion-label>详细地址</ion-label>
-            <ion-input type="text" maxlength="20" [(ngModel)]="mydata.ipam" placeholder="输入您的详细地址"></ion-input>
-        </ion-item>
-
         <ion-list class="raod" radio-group [(ngModel)]="mydata.sex">
             <ion-list-header>性别</ion-list-header>
             <ion-item>

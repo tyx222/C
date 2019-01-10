@@ -8,15 +8,21 @@ page-messagelist {
         padding-top: 2rem !important;
         padding: 1rem;
         >div:nth-of-type(1) {
-            width: 5rem;
             border-radius: 50%;
-            margin-top: -1rem;
+            min-width: 3rem;
+            height: 3rem;
+            overflow: hidden;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            background: #dbd9d9;
             >img {
                 width: 3rem;
-                max-width: 3rem;
-                height: 3rem;
-                border-radius: 50%;
-                border: #c73ede;
             }
         }
         >div:nth-of-type(2) {
@@ -113,15 +119,32 @@ page-messagelist {
         }
     }
     .userimg {
-        width: 13%!important;
-        margin-right: 0.5rem;
+        border-radius: 50%;
+        min-width: 3rem!important;
+        width: 3rem!important;
         height: 3rem;
-        border-radius: 3rem;
-        display: inline-block;
         overflow: hidden;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        background: #dbd9d9;
         img {
-            width: 100%;
+            width: 3rem;
         }
         ;
+    }
+    vg-player {
+        font-family: 'videogular';
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 20rem;
+        overflow: hidden;
+        background-color: black;
     }
 }

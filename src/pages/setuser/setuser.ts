@@ -49,6 +49,7 @@ export class SetuserPage {
 
   ionViewDidLoad() {
     this.getRequestContact();
+    this.initdata()
   }
   getRequestContact() {
     this.reviceServe.getRequestContact().subscribe(
@@ -62,49 +63,52 @@ export class SetuserPage {
   }
 
 /**
+ * 初始化用户信息
+ */
+initdata(){
+  console.log(localStorage.getItem("mydata"))
+  let data=JSON.parse(localStorage.getItem("mydata"))
+  this.mydata.headimgpath=data.headimgpath
+  this.mydata.client_nikename= data.client_nikename
+  this.mydata.sex=data.sex
+}
+
+/**
  * 图片上传调用方法 userimg()   在initImgSer()中得到返回值
  */
   userimg() {
     this.initImgSer();
     this.upimgserve.showPicActionSheet();
     }
+
+    /**
+     *重新拉取用户信息 
+     */
+    async queryclient(){
+      let res=await this.http.queryclient({})
+      console.log(res)
+      localStorage.setItem("mydata",JSON.stringify(res.object))
+      }
+
+
  initImgSer() {
     this.upimgserve.upload.success = data => {
       console.log(data);
     //  this.fromdata.headimgpath=data.imageUrl+data.object.map.filename
      // this.petimage=data.imageUrl+data.object.map.filename
-        this.mydata.headimgpath="http://116.62.219.45/imgs/"+data.object.map.filename
+        this.mydata.headimgpath=data.imageUrl+data.object.map.filename
      //this.petimage="http://116.62.219.45/imgs/"+data.object.map.filename
     };
   }
 
 
   async save(myipam: HTMLEmbedElement) {
-    let city =  myipam['_text'].split(" ") ;
-    console.log(city);
-   var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
-    if (!myreg.test(this.mydata.ipone)) {
-      let message = "请输入正确手机号";
-      const toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000,
-        position: "middle"
-      });
-      toast.present();
-      return false;
-    }
-    console.log(this.mydata.myipam)
-    console.log(myipam)
     let parmas = {
-     // client_password: this.mydata.client_password,
       client_nikename: this.mydata.client_nikename,
-      client_username: this.mydata.myname,
-    phonenumber: this.mydata.ipone,
-      headimgpath:"123123123",//this.mydata.headimgpath,
+      headimgpath:this.mydata.headimgpath,//this.mydata.headimgpath,//"https://www.petbashi.com/imgs/219e02ce1c1c9350fdecaa54d038d40c.jpg",
       sex: this.mydata.sex,
-      address:myipam['_text']+this.mydata.ipam
     };
-    let res = await this.http.addPetReceiver(parmas);
+    let res = await this.http.bangdingclient(parmas);
     console.log(res);
     const toast = this.toastCtrl.create({
       message: res.message,
@@ -112,5 +116,12 @@ export class SetuserPage {
       position: "middle"
     });
     toast.present();
+    if(res.info=="ok"){
+      this.queryclient()
+      setTimeout(() => {
+         this.navCtrl.pop() 
+      }, 1000);
+    
+    }
   }
 }

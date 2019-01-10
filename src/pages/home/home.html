@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
         <ion-title style="display: none">首页</ion-title>
-        <div class="titlebox"><button (click)='Pushdiary()'><img src="assets/imgs/images/home1_03.png" alt=""></button><input type='text' [(ngModel)]="petid" (keyup.Enter)='showResult()' [ngModelOptions]="{standalone: true}" class='sousuo'><button (click)="checkIn()">签到</button></div>
+        <div class="titlebox"><button (click)='Pushdiary()'><img src="assets/imgs/images/home1_03.png" alt=""></button><input type='text' (focus)="gopetsaerch()" [(ngModel)]="petid" (keyup.Enter)='showResult()' placeholder="可以通过ID或者昵称搜索宠卡" class='sousuo'><button (click)="checkIn()">签到</button></div>
 
     </ion-navbar>
 </ion-header>
@@ -26,7 +26,8 @@
                     <div class="swiper-wrapper">
 
                         <div class="swiper-slide" *ngFor="let item of callname" (click)="godetails()">
-                            <img src="{{item.headimgpath}}" alt="">
+                            <div class="petimgbox"> <img src="{{imgurl}}{{item.headimgpath}}" alt=""></div>
+
                             <p> {{item.pet_name}}</p>
                         </div>
                     </div>
@@ -78,13 +79,13 @@
                             style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span></h5>
                     <p><span *ngIf="item.type==2" style="margin-right: 1rem;background: #eec10e;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">传记</span><span *ngIf="item.type==4" style="margin-right: 1rem;background: #21abeb;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">活动</span>{{item.title}}</p>
                     <div (click)="gomessagelist(i)" *ngIf="item.mp4">
-                        <p>{{item.remark}}</p>
+                        <!-- <p>{{item.remark}}</p> -->
                         <span style="max-height: 20rem;overflow: hidden;display: inline-block;position: relative;"><span *ngIf="item.mp4" style="position:absolute;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;background: #00000096;"><img src="assets/imgs/showmp4.png" alt="" srcset=""></span>
                         <img src="{{imgurl}}{{item.cover}}" alt="" srcset="" *ngIf="item.cover!=undefined"></span>
 
                     </div>
                     <div (click)="gomessagelist(i)" *ngIf="!item.mp4">
-                        <p>{{item.remark}}</p>
+                        <!-- <p>{{item.remark}}</p> -->
                         <span *ngFor="let items of item.historycontentlist">
                         <span *ngIf="items.path!=''" style="padding: 0.5rem;width: 30%;height: 7rem;display: inline-block;"><img style="width:100%;height:100%" src="https://www.petbashi.com/imgs/{{items.path}}" alt="" srcset=""></span>
                         </span>
@@ -107,12 +108,12 @@
                     <h5>{{item.petcard.pet_name}} <span (click)="addpetConcern(i)" *ngIf="item.concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">关注</span> <span (click)="addConcern(i)" *ngIf="!item.concernStatus"
                             style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span></h5>
                     <p><span *ngIf="item.type==2" style="margin-right: 1rem;background: #eec10e;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">传记</span><span *ngIf="item.type==4" style="margin-right: 1rem;background: #21abeb;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">活动</span>{{item.title}}</p>
-                    <div (click)="gomessagelist(i)">
+                    <!-- <div (click)="gomessagelist(i)">
                         <span style="max-height: 20rem;overflow: hidden;display: inline-block;position: relative;">
                             <span *ngIf="item.mp4" style="position:absolute;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;background: #00000096;"><img src="assets/imgs/showmp4.png" alt="" srcset=""></span>
                         <img src="{{imgurl}}{{item.cover}}" alt="" srcset="" *ngIf="item.cover!=undefined"></span>
                         <p>{{item.remark}}</p>
-                    </div>
+                    </div> -->
                     <div (click)="gomessagelist(i)" *ngIf="!item.mp4">
                         <p>{{item.remark}}</p>
                         <span *ngFor="let items of item.historycontentlist" style="padding: 0.5rem;width: 7rem;height: 7rem;display: inline-block;"><img style="width:100%;height:100%" src="https://www.petbashi.com/imgs/{{items.path}}" alt="" srcset=""></span>
@@ -130,12 +131,12 @@
             </div>
         </div>
         <div *ngIf="lulartype==3" style="width:100%">
-            <div class="card" *ngFor="let item of huodonglist;let i=index">
+            <div class="card2" *ngFor="let item of huodonglist;let i=index">
                 <!-- <div><img src="{{imgurl}}{{item.petcard.headimgpath}}" alt="" srcset=""></div> -->
                 <div style="width:100%">
                     <h5>{{item.activity_title}}</h5>
                     <!-- <p>{{item.activity_prize}}</p> -->
-                    <div style="border: 1px solid #eae5e5;border-radius: 0.5rem;overflow: hidden;margin-top: 1rem; " (click)="goctivity(i)"><img src="{{imgurl}}{{item.listimg}}" alt="" srcset="">
+                    <div style="border-radius: 0.5rem;overflow: hidden;margin-top: 1rem;text-align: center; " (click)="goctivity(i)"><img style="border-radius: 0.5rem;" src="{{imgurl}}{{item.listimg}}" alt="" srcset="">
 
                     </div>
                 </div>

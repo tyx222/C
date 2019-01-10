@@ -30,11 +30,11 @@
         <div class="titaa" *ngFor="let item of listdata;let i=index">
             <div class="ble">
                 <div (click)="clickEventHandler(i)">
-                    <img src="{{item.petcard.headimgpath}}" alt="" class="userimg">
+                    <img src="https://www.petbashi.com/imgs/{{item.sendConcernClient.headimgpath}}" alt="" class="userimg">
                 </div>
                 <div class="ble2">
                     <div class="name">
-                        <p>{{item.petcard.pet_name}}</p>
+                        <p><span>{{item.sendConcernClient.client_nikename}}</span> 关注了 <span>{{item.petcard.pet_name}}</span></p>
                         <span></span>
                     </div>
                     <div>

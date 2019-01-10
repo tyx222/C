@@ -16,9 +16,11 @@ page-setuser .selectStyle button {
   width: 8rem;
   border-radius: 50%;
   overflow: hidden;
+  height: 8rem;
 }
 
 page-setuser .selectStyle button img {
   border-radius: 50%;
   width: 100%;
+  height: 100%;
 }

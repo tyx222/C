@@ -7,14 +7,14 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>shippingoder</ion-title>
+        <ion-title>物流查询</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <div class="shippingoder">
+    <div class="shippingoder" *ngIf="type!='jf'">
         <div class="box">
             <div>
                 <span>04-03</span>
@@ -85,5 +85,9 @@
                 <p>[收货地址] 用户填写的真正收货地址用户填写的真正收货地址用户填写的真正收货地址用户填写的真正收货地址</p>
             </div>
         </div>
+    </div>
+    <div class="jf" *ngIf="type=='jf'">
+        <p><span>物流公司:</span><span>{{express_company}}</span></p>
+        <p><span>快递单号:</span><span>{{express_number}}</span></p>
     </div>
 </ion-content>

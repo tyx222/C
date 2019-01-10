@@ -85,3 +85,15 @@ page-shippingoder .box2 div:nth-of-type(2) {
   padding-left: 2rem !important;
   width: 70vw;
 }
+
+page-shippingoder .jf P {
+  padding: 0.5rem 0;
+}
+
+page-shippingoder .jf P span {
+  font-size: 1.5rem;
+}
+
+page-shippingoder .jf P span:nth-of-type(2) {
+  margin-left: 0.5rem;
+}

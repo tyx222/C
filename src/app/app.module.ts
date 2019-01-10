@@ -60,7 +60,6 @@ import { StorageProvider } from "../providers/storage/storage";
 import {WechatChenyu} from "wechat-chenyu"
 declare var LocationPlugin;
 
-
 @NgModule({
   declarations: [
     MyApp,
@@ -117,6 +116,7 @@ declare var LocationPlugin;
     VideoEditor,
     Device,
     WechatChenyu,
+
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: DefaultAppConfig, useClass: DefaultAppConfig },
     ImgServiceProvider,

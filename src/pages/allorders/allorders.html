@@ -17,6 +17,7 @@
 
     <div class="tabs">
         <ul>
+            <li [ngClass]="{'eft':order_status==-1}" (click)="status(-1)">全部</li>
             <li [ngClass]="{'eft':order_status==0}" (click)="status(0)">未支付</li>
             <li [ngClass]="{'eft':order_status==1}" (click)="status(1)">待发货</li>
             <li [ngClass]="{'eft':order_status==2}" (click)="status(2)">已发货</li>
@@ -47,16 +48,12 @@
                             </div>
                         </div>
                         <div class="tag">
-                            <span *ngIf="item.order_status >= 4">交易成功</span>
-                            <button *ngIf="item.order_status == 4" (click)='gouout()'>申请退款</button>
+                            <span *ngIf="item.order_status >= 3">交易成功</span>
+                            <button *ngIf="item.order_status == 3" (click)='gouout()'>申请退款</button>
                             <button *ngIf="item.order_status == 0" (click)="order(item,citem)">立即付款</button>
                             <button *ngIf="item.order_status == 0" (click)="cancelOrder(item)">取消订单</button>
                             <button *ngIf="item.order_status == 2" (click)='shouhuo(item.order_id)'>确认收货</button>
-
-                            <button *ngIf="item.order_status >= 2" (click)='shopoder()'>查看物流</button>
-                            <button *ngIf="item.order_status >= 2">延长收货</button>
-                            <button *ngIf="item.order_status == 3" (click)='goevaluate(item,citem)'>评价</button>
-                            <button *ngIf="item.order_status >=3" (click)='lookevaluate(item,citem)'>订单详情</button>
+                            <button *ngIf="item.order_status >= 1" (click)='shopoder(item)'>查看物流</button>
                         </div>
                     </div>
                 </div>
@@ -80,14 +77,14 @@
 
                     </div>
                     <div class="tag">
-                        <span *ngIf="item.order_status >= 4">交易成功</span>
-                        <button *ngIf="item.order_status == 4" (click)='gouout()'>申请退款</button>
-                        <span *ngIf="item.order_status == 1">待发货</span>
+                        <span *ngIf="item.order_status >= 3">交易成功</span>
+                        <button *ngIf="item.order_status == 3" (click)='complain(item.order_id)'>申诉</button>
+                        <span *ngIf="item.order_status == 1" style="color:red">待发货</span>
                         <button *ngIf="item.order_status == 0" (click)="order(item,citem)">立即付款</button>
                         <button *ngIf="item.order_status == 0" (click)="cancelOrder(item)">取消订单</button>
-                        <button *ngIf="item.order_status == 2" (click)='shouhuo(item.order_id) '>确认收货</button>
-                        <button *ngIf="item.order_status >= 1" (click)='shopoder() '>查看物流</button>
-                        <button *ngIf="item.order_status >=3" (click)='lookevaluate(item,citem) '>订单详情</button>
+                        <button *ngIf="item.order_status == 2" (click)='surereceiveorder(item.order_id) '>确认收货</button>
+                        <button *ngIf="item.order_status >= 2" (click)='shopoder(item)'>查看物流</button>
+                        <button *ngIf="item.order_status >=1" (click)='lookevaluate(item,citem) '>订单详情</button>
                     </div>
 
                 </div>

@@ -42,9 +42,7 @@ page-givenotice .titaa {
 }
 
 page-givenotice .titaa .userimg {
-  width: 5rem;
-  margin-top: 1rem;
-  border-radius: 50%;
+  width: 4rem;
 }
 
 page-givenotice .titaa .ble {
@@ -52,6 +50,16 @@ page-givenotice .titaa .ble {
   align-items: center;
   padding: 1rem;
   background: #fff;
+}
+
+page-givenotice .titaa .ble > div:nth-of-type(1) {
+  border-radius: 50%;
+  min-width: 4rem;
+  height: 4rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: #dbd9d9;
 }
 
 page-givenotice .titaa .ble2 {
@@ -63,7 +71,11 @@ page-givenotice .titaa .ble2 {
 }
 
 page-givenotice .titaa .ble2 p {
-  font-size: 2rem;
+  font-size: 1.5rem;
+}
+
+page-givenotice .titaa .ble2 p span {
+  color: red;
 }
 
 page-givenotice .titaa .ble2 span {

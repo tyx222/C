@@ -17,6 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class GivenoticePage {
 listdata
 type
+imgsrc
   constructor(public navCtrl: NavController, public navParams: NavParams, public http:UserService) {
   }
 
@@ -32,12 +33,18 @@ type
 
   }
  async guanzhu(i){
+  
     let parmas = {
       reciveclientid: this.listdata[i].sendConcernClient.client_id,
       concerntype: 1,
       mytoken: localStorage.getItem("mytoken"),
       recivepetcardid: this.listdata[i].petcard.id
     };
+    if(!this.listdata[i].petcard.concernStatus){
+     parmas.concerntype=0
+    }else{
+      parmas.concerntype=1
+    }
     console.log(this.listdata[i]);
     let res = await this.http.addpetConcern(parmas);
     this.http.http.showToast(res.message);

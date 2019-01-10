@@ -21,6 +21,7 @@ import {
   ConfigurationData
 } from "@ionic-native/media-capture";
 import { Observable } from "rxjs/Observable";
+import { DefaultAppConfig } from '../../app/app.config';
 
 /*
   Generated class for the ImgServiceProvider provider.
@@ -48,7 +49,7 @@ export class ImgServiceProvider {
     quality: 80
   };
   // 图片上传的的api
-  public uploadApi: string = "http://116.62.219.45/chongwu/chongwu/uploadFile";
+  public uploadApi: string = this.appConfig.ip+"/chongwu/chongwu/uploadFile";
   upload: any = {
     fileKey: "file", //接收图片时的key
     fileName: "imageName.jpg",
@@ -71,7 +72,8 @@ export class ImgServiceProvider {
     private file: File,
     private fileTransfer: FileTransferObject,
     private mediaCapture: MediaCapture,
-    private videoEditor: VideoEditor
+    private videoEditor: VideoEditor,
+    private appConfig:DefaultAppConfig
   ) {
     this.fileTransfer = this.transfer.create();
   }

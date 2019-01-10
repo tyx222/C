@@ -1,5 +1,5 @@
 page-lookevaluate {
-	.scroll-content {
+    .scroll-content {
         padding: 0 !important;
         background: #eee
     }
@@ -129,38 +129,62 @@ page-lookevaluate {
             width: 10rem;
         }
     }
-	.commentimg{
-		padding-left: 16px;
-	}
-    .commentimg img{
-		width:86px;
-		height:86px;
-		float:left;
-		padding:2px;
-	}
-	.card-content{
-		padding:0px 16px;
-	}
-	.label{
-		margin:0px;
-	}
-	.replay{
-		color:#222;
-	}
-	.jiesuan{
+    .commentimg {
+        padding-left: 16px;
+    }
+    .commentimg img {
+        width: 86px;
+        height: 86px;
+        float: left;
+        padding: 2px;
+    }
+    .card-content {
+        padding: 0px 16px;
+    }
+    .label {
+        margin: 0px;
+    }
+    .replay {
+        color: #222;
+    }
+    .jiesuan {
         display: flex;
         position: fixed;
         background: #fff;
         padding-left: 1rem;
         height: 4rem;
         justify-content: space-between;
-        width: 100%;align-items: center;
+        width: 100%;
+        align-items: center;
         bottom: 0;
-        button{
+        button {
             height: 4rem;
             width: 7rem;
             background: #ef863d;
             color: #fff
+        }
+    }
+    .jfpage {
+        padding-bottom: 3rem;
+        background: #fff;
+        div {
+            img {
+                width: 100%;
+            }
+        }
+        p {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 16px;
+            border-bottom: 1px solid #eee;
+            span {
+                font-size: 1.5rem;
+                min-width: 8rem
+            }
+            span:nth-of-type(2) {
+                color: #5a5a5a;
+                text-align: right;
+            }
         }
     }
 }

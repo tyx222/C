@@ -94,8 +94,8 @@ export class NewlayPage {
       console.log(data);
     //  this.fromdata.headimgpath=data.imageUrl+data.object.map.filename
      // this.petimage=data.imageUrl+data.object.map.filename
-        this.fromdata.headimgpath="http://116.62.219.45/imgs/"+data.object.map.filename
-     this.petimage="http://116.62.219.45/imgs/"+data.object.map.filename
+        this.fromdata.headimgpath=data.object.map.filename
+     this.petimage=data.imageUrl+data.object.map.filename
     };
   }
 

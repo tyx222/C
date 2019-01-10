@@ -7,64 +7,86 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>refund</ion-title>
+        <ion-title>申诉</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-card class="first">
-
-        <ion-grid>
-            <ion-row class="goods">
-                <ion-col col-4>
-                    <img src="assets/imgs/images/goudai.png" class="goodPic">
-                </ion-col>
-                <ion-col col-8 class="mydetail">
-                    <h4 class="serviceName">asdasdasd啊是大神大所大所大阿萨德阿萨德</h4>
-
-
-                </ion-col>
-
-            </ion-row>
-
-
-        </ion-grid>
-    </ion-card>
-    <button ion-item>
+    <div *ngIf="type!='jf'">
+        <ion-card class="first">
+            <ion-grid>
+                <ion-row class="goods">
+                    <ion-col col-4>
+                        <img src="assets/imgs/images/goudai.png" class="goodPic">
+                    </ion-col>
+                    <ion-col col-8 class="mydetail">
+                        <h4 class="serviceName">asdasdasd啊是大神大所大所大阿萨德阿萨德</h4>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+        <button ion-item>
     货物状态
   </button>
-    <p class="refundReason">申请原因（可填可不填）</p>
-    <ion-card class="last">
-        <textarea id="text" rows="6" placeholder="请在此输入，不超过200字" maxlength="200"></textarea>
-    </ion-card>
+        <p class="refundReason">申请原因（可填可不填）</p>
+        <ion-card class="last">
+            <textarea id="text" rows="6" placeholder="请在此输入，不超过200字" maxlength="200"></textarea>
+        </ion-card>
 
-    <ion-row class="same">
-        <ion-col col-3 id="left">
-            退款金额
-        </ion-col>
-        <ion-col col-9 class="way">
-            ￥9999
-        </ion-col>
-    </ion-row>
-    <ion-row class="same">
-        <ion-col col-9 id="left">
-            最多可退:￥9999,包含邮费(0.00)
-        </ion-col>
+        <ion-row class="same">
+            <ion-col col-3 id="left">
+                退款金额
+            </ion-col>
+            <ion-col col-9 class="way">
+                ￥9999
+            </ion-col>
+        </ion-row>
+        <ion-row class="same">
+            <ion-col col-9 id="left">
+                最多可退:￥9999,包含邮费(0.00)
+            </ion-col>
 
-    </ion-row>
-    <h4>上传凭证</h4>
+        </ion-row>
+        <h4>上传凭证</h4>
 
-    <div class="Fileimg">
-        <div class="itembox" *ngFor="let item of avatar let i =index">
-            <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
-            <img src="{{item}}" alt="" (click)="presentActionSheet(i)">
+        <div class="Fileimg">
+            <div class="itembox" *ngFor="let item of avatar let i =index">
+                <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
+                <img src="{{item}}" alt="" (click)="presentActionSheet(i)">
+            </div>
         </div>
-    </div>
 
-    <!--底部按钮-->
-    <button class="down">
+        <!--底部按钮-->
+        <button class="down">
     提交
   </button>
+    </div>
+
+    <div *ngIf="type=='jf'">
+        <ion-item>
+            <ion-input [(ngModel)]="parmas.appeal_title" type="text" value="" placeholder="请输入标题"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="text" [(ngModel)]="parmas.phonenumber" value="" placeholder="请输入联系方式"></ion-input>
+        </ion-item>
+        <p class="refundReason">申请原因（可填可不填）</p>
+        <ion-card class="last">
+            <textarea id="text" rows="6" [(ngModel)]="parmas.appeal_content" placeholder="请在此输入，不超过200字" maxlength="200"></textarea>
+        </ion-card>
+        <h4>上传凭证</h4>
+        <div class="Fileimg">
+            <div class="itembox" *ngFor="let item of avatar let i =index">
+                <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
+                <img src="{{item}}" alt="" (click)="presentActionSheet(i)">
+            </div>
+        </div>
+
+        <!--底部按钮-->
+        <button class="down" (click)="oudjf()">
+            提交
+          </button>
+    </div>
+
 </ion-content>

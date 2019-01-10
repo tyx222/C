@@ -72,7 +72,6 @@ export class MyHttpService {
       .post(`${this.ip}${url}`, body)
       .toPromise()
       .then(res => {
-        console.log(res);
         return res.json();
       });
   }
@@ -81,7 +80,6 @@ export class MyHttpService {
     body: any,
     options?: RequestOptionsArgs
   ): Promise<any> {
-    console.log(localStorage);
     if (this.isMock) {
       return this.mockGet(url);
     }

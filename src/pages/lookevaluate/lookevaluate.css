@@ -1,0 +1,223 @@
+page-lookevaluate .scroll-content {
+  padding: 0 !important;
+  background: #eee;
+}
+
+page-lookevaluate .titaa {
+  margin-bottom: 1rem;
+}
+
+page-lookevaluate .titaa .userimg {
+  width: 6rem;
+}
+
+page-lookevaluate .pordacknum button {
+  width: 2rem;
+  height: 2rem;
+}
+
+page-lookevaluate .pordacknum input {
+  width: 2rem;
+  margin-left: 3px;
+  height: 2rem;
+}
+
+page-lookevaluate .distribution {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+page-lookevaluate .ble {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+}
+
+page-lookevaluate .ble .shopingimg {
+  width: 10rem;
+}
+
+page-lookevaluate .ble2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  margin: 0 1rem;
+}
+
+page-lookevaluate .ble2 p {
+  font-size: 1.8rem;
+}
+
+page-lookevaluate .ble2 .pardack {
+  color: #999;
+}
+
+page-lookevaluate .ble2 .maxprice {
+  color: #FF7041;
+}
+
+page-lookevaluate .ble2 .total {
+  display: flex;
+  justify-content: space-between;
+}
+
+page-lookevaluate .ble2 .title {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 7rem;
+  width: 100%;
+}
+
+page-lookevaluate .ble2 .title > p {
+  font-size: 1.5rem;
+}
+
+page-lookevaluate .ble2 .title > p:nth-of-type(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+page-lookevaluate .ble2 span {
+  margin-top: 0.5rem;
+}
+
+page-lookevaluate .ble2 span img {
+  width: 1rem;
+}
+
+page-lookevaluate .name {
+  display: flex;
+  flex-direction: column;
+}
+
+page-lookevaluate .djd {
+  width: 5rem;
+  height: 2rem;
+  color: #fff;
+  background: #EF8936;
+  border-radius: 2rem;
+}
+
+page-lookevaluate .texx {
+  padding: 1rem;
+  background: #fff;
+}
+
+page-lookevaluate .imglist {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  padding-bottom: 1rem;
+}
+
+page-lookevaluate .imglist img {
+  width: 25vw;
+  height: 25vw;
+  margin-left: 6vw;
+  margin-bottom: 1rem;
+}
+
+page-lookevaluate .titaa {
+  background: #fff;
+}
+
+page-lookevaluate .top {
+  margin-top: 2rem;
+}
+
+page-lookevaluate .black {
+  color: #999;
+}
+
+page-lookevaluate .martop {
+  margin-top: -1.5rem;
+}
+
+page-lookevaluate .tarea {
+  margin-top: 1rem;
+  background: #fff;
+  padding: 1rem;
+}
+
+page-lookevaluate .tarea p {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  width: 10rem;
+}
+
+page-lookevaluate .commentimg {
+  padding-left: 16px;
+}
+
+page-lookevaluate .commentimg img {
+  width: 86px;
+  height: 86px;
+  float: left;
+  padding: 2px;
+}
+
+page-lookevaluate .card-content {
+  padding: 0px 16px;
+}
+
+page-lookevaluate .label {
+  margin: 0px;
+}
+
+page-lookevaluate .replay {
+  color: #222;
+}
+
+page-lookevaluate .jiesuan {
+  display: flex;
+  position: fixed;
+  background: #fff;
+  padding-left: 1rem;
+  height: 4rem;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  bottom: 0;
+}
+
+page-lookevaluate .jiesuan button {
+  height: 4rem;
+  width: 7rem;
+  background: #ef863d;
+  color: #fff;
+}
+
+page-lookevaluate .jfpage {
+  padding-bottom: 3rem;
+  background: #fff;
+}
+
+page-lookevaluate .jfpage div img {
+  width: 100%;
+}
+
+page-lookevaluate .jfpage p {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+page-lookevaluate .jfpage p span {
+  font-size: 1.5rem;
+  min-width: 8rem;
+}
+
+page-lookevaluate .jfpage p span:nth-of-type(2) {
+  color: #5a5a5a;
+  text-align: right;
+}

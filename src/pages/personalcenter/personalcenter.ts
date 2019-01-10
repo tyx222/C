@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams  } from 'ionic-angular';
+import { MyHttpService } from '../../app/shared/service/my-http.service';
+import { UserService } from '../../app/shared/service/user.service';
 
 
 /**
@@ -16,7 +18,9 @@ import { IonicPage, NavController, NavParams  } from 'ionic-angular';
 })
 export class PersonalcenterPage {
 userimg
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+usernum
+username
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:UserService) {
 
   }
 
@@ -24,24 +28,47 @@ userimg
     console.log('ionViewDidLoad PersonalcenterPage');
   }
   ionViewWillEnter(){
+    this.queryclient()
+    
     if(localStorage.getItem('mydata')){
      this.userimg=JSON.parse(localStorage.getItem('mydata')).headimgpath 
+     if(JSON.parse(localStorage.getItem('mydata')).clientnum ){
+       this.usernum=JSON.parse(localStorage.getItem('mydata')).clientnum  
+     }
+    
+     this.username=JSON.parse(localStorage.getItem('mydata')).client_nikename 
     }
    
   }
 	
 
   wallet() {
+    if(!localStorage.getItem("mytoken")){
+      this.http.presentToast("请先登录")
+      return false
+    }
     this.navCtrl.push("WalletPage");
   }
   gotoushilist(i){
     console.log(i)
+    if(!localStorage.getItem("mytoken")){
+      this.http.presentToast("请先登录")
+      return false
+    }
     this.navCtrl.push("ToushilistPage",{type:i})
   }
   enter(){
+    if(!localStorage.getItem("mytoken")){
+      this.http.presentToast("请先登录")
+      return false
+    }
     this.navCtrl.push("EnterPage")
   }
   goshol(){
+    if(!localStorage.getItem("mytoken")){
+      this.http.presentToast("请先登录")
+      return false
+    }
   	let store = localStorage.getItem("storeinfo")
 	console.log(store)
 	if(store != "undefined"){
@@ -49,19 +76,42 @@ userimg
 	}else{
 		this.navCtrl.push("EnterPage")
 	}
-    
   }
+
+/**
+ * 初始化用户信息
+ */
+async queryclient(){
+let res=await this.http.queryclient({})
+console.log(res)
+localStorage.setItem("mydata",JSON.stringify(res.object))
+}
+
+
   Detemgs(){
     this.navCtrl.push("CalendarPage")
   }
   Allorders(){
+    if(!localStorage.getItem("mytoken")){
+      this.http.presentToast("请先登录")
+      return false
+    }
       this.navCtrl.push("PersonalorderadminPage")
     //this.navCtrl.push("AllordersPage")
   }
  callshop(){
+  if(!localStorage.getItem("mytoken")){
+    this.http.presentToast("请先登录")
+    return false
+  }
+  if(!localStorage.getItem("petdata")){
+    this.http.presentToast("您还没有添加宠卡呢")
+    return false
+  }
    this.navCtrl.push("CallshopPage")
  }
  petAdmin() {
+   
   this.navCtrl.push("PetAdminPage");
 }
 setpage(){
@@ -71,6 +121,10 @@ Newsword(){
   this.navCtrl.push("NewswordPage")
 }
 advices(){
+  if(!localStorage.getItem("mytoken")){
+    this.http.presentToast("请先登录")
+    return false
+  }
   this.navCtrl.push("AdvicesPage")
 }
 Coupon(){
@@ -80,6 +134,10 @@ Ckeck() {
   this.navCtrl.push("CkeckPage");
 }
 collect(){
+  if(!localStorage.getItem("mytoken")){
+    this.http.presentToast("请先登录")
+    return false
+  }
   this.navCtrl.push("StorecollectPage");
 }
 

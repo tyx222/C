@@ -16,7 +16,7 @@ export class HomePage {
   usermgs: boolean = true;
   goguidance: boolean = false;
   index: any = 0;
-  petid:""
+  petid: "";
   contnet = "";
   callname = [];
   tkisid;
@@ -43,14 +43,12 @@ export class HomePage {
   constructor(public navCtrl: NavController, public http: UserService) {}
   ionViewDidLoad() {
     console.log("第一次进入");
-		
 
     if (localStorage.getItem("index") == null) {
       localStorage.setItem("index", "0");
     } else {
       this.index = parseInt(localStorage.getItem("index"));
     }
-	
 
     this.ctn = 1;
     this.petlist = [];
@@ -64,13 +62,12 @@ export class HomePage {
       return false;
     }
     this.localogin();
-  
 
     this.queryclevertricklist();
-  this.queryshopbyclientid();
-  this.getCurrentPosition();
+    this.queryshopbyclientid();
+    this.getCurrentPosition();
   }
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.querypetcardlist();
   }
   /**
@@ -98,15 +95,13 @@ export class HomePage {
     this.tkisid = res.arrayList[0].id;
   }
 
-	
-	/**
+  /**
    * 店铺查询
    */
-	async queryshopbyclientid() {
+  async queryshopbyclientid() {
     let res = await this.http.queryshopbyclientid();
-	localStorage.setItem("storeinfo", JSON.stringify(res.object));
-
-	}
+    localStorage.setItem("storeinfo", JSON.stringify(res.object));
+  }
 
   /**
    * tab切换
@@ -193,7 +188,9 @@ export class HomePage {
     console.log(this.huodonglist);
     this.imgUrl = res.imageUrl;
   }
-
+  gopetsaerch() {
+    this.navCtrl.push("PetsearchPage");
+  }
   /**
    *
    */
@@ -428,7 +425,7 @@ export class HomePage {
    */
   async querypetcardlist() {
     let res = await this.http.querypetcardlist(this.data);
-    console.log(res)
+    console.log(res);
     if (res.arrayList.length == 0) {
       this.goguidance = true;
       this.usermgs = false;
@@ -456,7 +453,7 @@ export class HomePage {
     var m = date.getMonth() + 1;
     var d = date.getDate();
     let dates = `${y}-${m}-${d}`;
- 
+
     let parmas = {
       calendartime: dates,
       mytoken: localStorage.getItem("mytoken"),
@@ -491,6 +488,10 @@ export class HomePage {
     });
   }
   godetailsto(i) {
+    if (!localStorage.getItem("mytoken")) {
+      this.http.http.showToast("请先登录");
+      return false;
+    }
     if (
       this.petlist[i].petcard.client_id ==
       JSON.parse(localStorage.getItem("mydata")).client_id
@@ -551,18 +552,18 @@ export class HomePage {
     this.maxleng = res.page.maxPage;
     // console.log(this.petlist);
   }
- async showResult(){
-    if(this.petid!=''){
-      let parmas={
-        petnum:this.petid,
-      }
-      let res=await this.http.querypetcardnum(parmas)
-      this.http.http.showToast(res.message)
-      if(res.info=="ok"){
-        this.navCtrl.push("DetailsPage",{
-          type:0,
-          id:res.arrayList
-        })
+  async showResult() {
+    if (this.petid != "") {
+      let parmas = {
+        petnum: this.petid
+      };
+      let res = await this.http.querypetcardnum(parmas);
+      this.http.http.showToast(res.message);
+      if (res.info == "ok") {
+        this.navCtrl.push("DetailsPage", {
+          type: 0,
+          id: res.arrayList
+        });
       }
     }
   }
@@ -615,7 +616,7 @@ export class HomePage {
       this.http.http.showToast("请先登录");
       return false;
     }
-    if(!localStorage.getItem("petdata")){
+    if (!localStorage.getItem("petdata")) {
       this.http.http.showToast("请先添加宠卡");
       return false;
     }
@@ -626,6 +627,10 @@ export class HomePage {
     });
   }
   checkIn() {
+    if (!localStorage.getItem("mytoken")) {
+      this.http.http.showToast("请先登录");
+      return false;
+    }
     let datas = this.callname;
     this.navCtrl.push("CheckInPage", {
       datas
@@ -638,28 +643,26 @@ export class HomePage {
     );
   }
 
+  //  ionViewDidLoad() {
+  // 	 this.getCurrentPosition();
+  //  }
 
-
-
-	//  ionViewDidLoad() {
-	// 	 this.getCurrentPosition();
-	//  }
-   
-	 /**
-	  * 获取当前地理位置
-	  */
-	getCurrentPosition() {
-		try{
-			LocationPlugin.getLocation(data => {
-				localStorage.setItem("geolocation",JSON.stringify(data))
-				this.http.http.showToast("定位城市：" + data.city + data.district);
-			}, msg => {
-				this.http.http.showToast("定位失败");
-			})
-		}catch(error){
-			this.http.http.showToast("定位失败");
-		}
-		
-	 }
-
+  /**
+   * 获取当前地理位置
+   */
+  getCurrentPosition() {
+    try {
+      LocationPlugin.getLocation(
+        data => {
+          localStorage.setItem("geolocation", JSON.stringify(data));
+          this.http.http.showToast("定位城市：" + data.city + data.district);
+        },
+        msg => {
+          this.http.http.showToast("定位失败");
+        }
+      );
+    } catch (error) {
+      this.http.http.showToast("定位失败");
+    }
+  }
 }

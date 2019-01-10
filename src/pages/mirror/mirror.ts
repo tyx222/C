@@ -55,6 +55,7 @@ export class MirrorPage {
 
     this.navCtrl.push("DiaryPage", {
       datas,
+      gay: true,
       cityid:this.navParams.get('cityid')
     });
   }

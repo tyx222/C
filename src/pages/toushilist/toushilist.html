@@ -14,7 +14,18 @@
 
 
 <ion-content padding>
-    <ion-list>
+    <div class="btns"><button [ngClass]="{'cols': msgfd==0}" (click)="clickEventHandler(0)">我投出的</button><button [ngClass]="{'cols': msgfd==1}" (click)="clickEventHandler(1)">我收到的</button></div>
+    <p class="nolist" *ngIf="list.length==0">暂时没有投食记录</p>
+    <ion-list *ngIf="msgfd==0">
+        <ion-item *ngFor="let item of list">
+            <ion-thumbnail item-start>
+                <img src="{{imageUrl}}{{item.petcard.headimgpath}}">
+            </ion-thumbnail>
+            <h2>{{item.petcard.pet_name}}</h2>
+            <button ion-button clear item-end>+{{item.feednum}}</button>
+        </ion-item>
+    </ion-list>
+    <ion-list *ngIf="msgfd==1">
         <ion-item *ngFor="let item of list">
             <ion-thumbnail item-start>
                 <img src="{{item.petclient.headimgpath}}">
