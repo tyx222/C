@@ -24,7 +24,7 @@ export class EnterPage {
   map: any; //地图对象
   listData = [];
   jsonParamter = {
-    shop_introduce:"", //"商铺介绍",
+    shop_introduce: "", //"商铺介绍",
     head_path: "assets/imgs/images/shangchuan@2x.png", //店铺头像
     shop_key: "", //"商铺关键字",
     shop_name: "", // "店铺名称",
@@ -46,30 +46,30 @@ export class EnterPage {
     qq: "", //"123456",
     wechat: "" //"微信号"
   };
-  myipam
+  myipam;
   myDate = "";
   mydata;
   asscity = "";
   shopData = {
-	shop_name:"",
-	shop_introduce:"",
-	shop_type:"0",
-	business_license:"",
-	shop_key:"",
-	head_path:"",
-	phonenumber:"",
-	business_hours:"",
-	idcard:"",
-	idcardimg1:"",
-	idcardimg2:"",
-	latitude:"",
-	longitude:"",
-	remark:"",
-	wechat:"",
-	qq:"",
-	address:"",
-	cku:"",
-	caac:""
+    shop_name: "",
+    shop_introduce: "",
+    shop_type: "0",
+    business_license: "",
+    shop_key: "",
+    head_path: "",
+    phonenumber: "",
+    business_hours: "",
+    idcard: "",
+    idcardimg1: "",
+    idcardimg2: "",
+    latitude: "",
+    longitude: "",
+    remark: "",
+    wechat: "",
+    qq: "",
+    address: "",
+    cku: "",
+    caac: ""
   };
   agree = false;
   items = [
@@ -93,7 +93,7 @@ export class EnterPage {
   ionViewDidLoad() {
     console.log("ionViewDidLoad EnterPage");
     this.getRequestContact();
-	this.getCurrentPosition();
+    this.getCurrentPosition();
   }
   getRequestContact() {
     this.reviceServe.getRequestContact().subscribe(
@@ -111,26 +111,30 @@ export class EnterPage {
     console.log(citys._text);
     console.log(AMap);
     let data = citys._text + this.asscity;
+    this.gps();
     setTimeout(() => {
       this.mapinit(data);
     }, 1000);
   }
   mapinit(data) {
-    var _this=this
-    console.log(data);
+    var _this = this;
+    console.log(this.jsonParamter);
     var marker, geocoder;
-    var x ,y
+    var x, y;
     this.map = new AMap.Map(this.map_container.nativeElement, {
       view: new AMap.View2D({
         //创建地图二维视口
         zoom: 20, //设置地图缩放级别
         rotateEnable: true,
         showBuildingBlock: true,
-        center: [this.rgps.longitude, this.rgps.latitude] //初始地图中心点
+        center: [_this.jsonParamter.longitude, _this.jsonParamter.latitude] //初始地图中心点
       })
     });
     marker = new AMap.Marker({
-      position: new AMap.LngLat(this.rgps.longitude, this.rgps.latitude), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+      position: new AMap.LngLat(
+        _this.jsonParamter.longitude,
+        _this.jsonParamter.latitude
+      ), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
       title: "当前坐标"
     });
     marker.setMap(null);
@@ -162,7 +166,7 @@ export class EnterPage {
       // 触发事件的地理坐标，AMap.LngLat 类型
 
       var lnglat = ev.lnglat;
-       x = ev.lng;
+      x = ev.lng;
       y = ev.lat;
       if (marker) {
         marker.setMap(null);
@@ -172,9 +176,9 @@ export class EnterPage {
         position: new AMap.LngLat(lnglat.lng, lnglat.lat), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
         title: "当前坐标"
       });
-      _this.jsonParamter.latitude=lnglat.lat
-      _this.jsonParamter.longitude=lnglat.lng
-      _this.http.http.showToast(`${lnglat.lng}, ${lnglat.lat}`)
+      _this.jsonParamter.latitude = lnglat.lat;
+      _this.jsonParamter.longitude = lnglat.lng;
+      _this.http.http.showToast(`${lnglat.lng}, ${lnglat.lat}`);
       marker.setMap(null);
       this.add(marker);
       // 触发事件的像素坐标，AMap.Pixel 类型
@@ -189,60 +193,78 @@ export class EnterPage {
     return;
   }
 
- async updata(citys){
-    console.log(citys._text)
-    if(citys._text==""||this.asscity==''){
-      this.http.http.showToast("请填写地址")
-      return false
+  async updata(citys) {
+    console.log(citys._text);
+    if (citys._text == "" || this.asscity == "") {
+      this.http.http.showToast("请填写地址");
+      return false;
     }
-    this.jsonParamter.address=citys._text+this.asscity
-    if(this.jsonParamter.latitude==""||this.jsonParamter.longitude==""){
-      this.http.http.showToast("请点击精确,获取经纬度")
-      return false
+    this.jsonParamter.address = citys._text + this.asscity;
+    if (this.jsonParamter.latitude == "" || this.jsonParamter.longitude == "") {
+      this.http.http.showToast("请点击精确,获取经纬度");
+      return false;
     }
-    if(this.jsonParamter.shop_name==""||this.jsonParamter.shop_name.indexOf(" ")!=-1||this.jsonParamter.phonenumber.length<8||this.jsonParamter.idcard.length<18){
-    this.http.http.showToast("请填写完整")
-    return false
+    if (
+      this.jsonParamter.shop_name == "" ||
+      this.jsonParamter.shop_name.indexOf(" ") != -1 ||
+      this.jsonParamter.phonenumber.length < 8 ||
+      this.jsonParamter.idcard.length < 18
+    ) {
+      this.http.http.showToast("请填写完整");
+      return false;
     }
-    this.jsonParamter
-let res=await this.http.addshop({jsonParamter:JSON.stringify(this.jsonParamter)})
-    this.http.http.showToast(res.message)
+    if (
+      this.jsonParamter.idcardimg1 == "assets/imgs/images/shangchuan@2x.png" ||
+      this.jsonParamter.head_path == "assets/imgs/images/shangchuan@2x.png" ||
+      this.jsonParamter.idcardimg2 == "assets/imgs/images/shangchuan@2x.png" ||
+      this.jsonParamter.business_license ==
+        "assets/imgs/images/shangchuan@2x.png"
+    ) {
+      this.http.http.showToast("请上传资料");
+    }
+    this.jsonParamter;
+    let res = await this.http.addshop({
+      jsonParamter: JSON.stringify(this.jsonParamter)
+    });
+    this.http.http.showToast(res.message);
   }
-/**
- * 店铺logo
- */
-headlogo() {
-    this.upimgserve.showPicActionSheet();
-    this.upimgserve.upload.success = data => {
-      console.log(data);
-      this.jsonParamter.head_path=data.imageUrl+data.object.map.filename
-    };
+
+  /**
+   * 获取经纬度
+   */
+  async gps() {
+    var _this = this;
+
+    let res = await _this.http.getGPS();
+    (this.jsonParamter.latitude = res["longitude"].toString()),
+      (this.jsonParamter.longitude = res["latitude"].toString());
   }
-/**
-	  * 获取当前地理位置
-	  */
-	getCurrentPosition() {
-		var isHave = localStorage.getItem('geolocation')
-		if(isHave=='undefined'){
-			try{
-				LocationPlugin.getLocation(data => {
-					localStorage.setItem("geolocation",JSON.stringify(data))
-					this.shopData.latitude = data.latitude+""
-					this.shopData.longitude = data.longitude+""
-					//this.http.http.showToast("定位城市：" + data.city + data.district);
-				}, msg => {
-					this.http.http.showToast("定位失败");
-					console.log('geolocation is fail')
-				})
-			}catch(error){
-				console.log('geolocation is fail')
-				this.http.http.showToast("定位失败");
-			}
-		}
 
-		
-	 }
-
+  /**
+   * 获取当前地理位置
+   */
+  getCurrentPosition() {
+    var isHave = localStorage.getItem("geolocation");
+    if (isHave == "undefined") {
+      try {
+        LocationPlugin.getLocation(
+          data => {
+            localStorage.setItem("geolocation", JSON.stringify(data));
+            this.shopData.latitude = data.latitude + "";
+            this.shopData.longitude = data.longitude + "";
+            //this.http.http.showToast("定位城市：" + data.city + data.district);
+          },
+          msg => {
+            this.http.http.showToast("定位失败");
+            console.log("geolocation is fail");
+          }
+        );
+      } catch (error) {
+        console.log("geolocation is fail");
+        this.http.http.showToast("定位失败");
+      }
+    }
+  }
 
   /**
    * 营业执照
@@ -251,7 +273,8 @@ headlogo() {
     this.upimgserve.showPicActionSheet();
     this.upimgserve.upload.success = data => {
       console.log(data);
-      this.jsonParamter.business_license=data.imageUrl+data.object.map.filename
+      this.jsonParamter.business_license =
+        data.imageUrl + data.object.map.filename;
     };
   }
   /**
@@ -262,28 +285,44 @@ headlogo() {
     // console.log(res)
     this.upimgserve.showPicActionSheet();
     this.upimgserve.upload.success = data => {
-	this.shopData.idcardimg1 = data.object.map.filename
-     console.log(data) ;
+      this.jsonParamter.idcardimg1 = data.imageUrl + data.object.map.filename;
+      console.log(data);
     };
-    }
-
-	async headpathup(){
-		this.upimgserve.showPicActionSheet();
-		this.upimgserve.upload.success = data => {
-			this.shopData.head_path = data.object.map.filename
-		};
-	}
- 
+  }
   /**
    * 身份证反面
    */
   async mydatasout() {
     this.upimgserve.showPicActionSheet();
     this.upimgserve.upload.success = data => {
-		this.shopData.idcardimg2 = data.object.map.filename
-      console.log(data) ;
-     };
-    }
+      this.jsonParamter.idcardimg2 = data.imageUrl + data.object.map.filename;
+      console.log(data);
+    };
+  }
+  /**
+   * 店铺logo
+   */
+  headlogo() {
+    this.upimgserve.showPicActionSheet();
+    this.upimgserve.upload.success = data => {
+      console.log(data);
+      this.jsonParamter.head_path = data.imageUrl + data.object.map.filename;
+    };
+  }
+  /**
+   * 营业执照
+   */
+  async headpathup() {
+    this.upimgserve.showPicActionSheet();
+    this.upimgserve.upload.success = data => {
+      this.shopData.head_path = data.object.map.filename;
+    };
+  }
+
+  /**
+   * 身份证反面
+   */
+
   removeItem(item) {
     for (let i = 0; i < this.items.length; i++) {
       if (this.items[i] == item) {
@@ -292,20 +331,20 @@ headlogo() {
     }
   }
 
-	/**
-	 * 确认注册
-	*/
-	async confirmReg(){
-		if(this.agree == false){
-			console.log('请同意协议')
-			return 
+  /**
+   * 确认注册
+   */
+  async confirmReg() {
+    if (this.agree == false) {
+      console.log("请同意协议");
+      return;
+    }
 
-		}
-		
-		let res = await this.http.addshop({jsonPramter:JSON.stringify(this.shopData)})
-		if(res.info=='ok'){
-			this.navCtrl.pop();
-		}
-
-	}
+    let res = await this.http.addshop({
+      jsonPramter: JSON.stringify(this.shopData)
+    });
+    if (res.info == "ok") {
+      this.navCtrl.pop();
+    }
+  }
 }
