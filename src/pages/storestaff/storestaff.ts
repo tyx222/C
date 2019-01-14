@@ -45,10 +45,16 @@ export class StorestaffPage {
   }
 
   async del(index) {
-    console.log(index)
     // this.lists.splice(index,1)
+    console.log(index);
+    
     let res = await this.http.deleteclerk({ shop_clientid: index });
-
+    if (res.info == "ok" && res.object != undefined) {
+      this.datas = this.datas.filter(r => r.client_id !== index)
+      this.http.presentToast('删除成功')
+    }
+    console.log(res);
+    
   }
 
   showPrompt() {
