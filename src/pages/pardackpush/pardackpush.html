@@ -6,203 +6,305 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>添加商品</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>添加商品</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-	<div class="tabs">
-        <ul>
-            <li [ngClass]="{'eft':type==''}" (click)="check('')">商品信息</li>
-            <li [ngClass]="{'eft':type=='商品规格'}" (click)="check('商品规格')">商品规格</li>
-            <li [ngClass]="{'eft':type=='商品图片'}" (click)="check('商品图片')">商品图片</li>
-			<li></li>
-        </ul>
+  <div class="tabs">
+    <ul>
+      <li [ngClass]="{'eft':type==''}" (click)="check('')">商品信息</li>
+      <li [ngClass]="{'eft':type=='商品规格'}" (click)="check('商品规格')">商品规格</li>
+      <li [ngClass]="{'eft':type=='商品图片'}" (click)="check('商品图片')">商品图片</li>
+      <li></li>
+    </ul>
+  </div>
+
+  <div class="fromdata" *ngIf="type==''">
+    <ul>
+
+      <li>
+        <span>名称</span>
+        <input type="text" [(ngModel)]="proData.goods_name" placeholder="请输入宠物名称 例:哈士奇">
+      </li>
+
+
+      <li>
+        <span>库存</span>
+        <input type="text" [(ngModel)]="proData.stock" placeholder="请输入库存">
+      </li>
+
+      <li>
+        <span>定金</span>
+        <input type="text" [(ngModel)]="proData.deposit" placeholder="请输入定金">
+
+      </li>
+      <li>
+        <span>类型</span>
+
+        <ion-list radio-group [(ngModel)]="proData.living" class="noionic">
+          <ion-item>
+            <ion-label>活体</ion-label>
+            <ion-radio value="0"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>非活体</ion-label>
+            <ion-radio value="1"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>关爱</ion-label>
+            <ion-radio value="2" [disabled]="isDisabled"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </li>
+
+      <li>
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>分类</ion-label>
+            <ion-select [(ngModel)]="proData.classify_id" (ngModelChange)="packagTypeChange()" [selectOptions]="selectOptions"
+              multiple="false" okText="确定" cancelText="取消">
+              <ion-option *ngFor="let item of proClassifyList" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li>
+
+
+      <li *ngIf="childs[0]">
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>子分类</ion-label>
+            <ion-select [(ngModel)]="childids[0]" (ngModelChange)="childChange(1)" [selectOptions]="selectOptions"
+              multiple="false" okText="确定" cancelText="取消">
+              <ion-option *ngFor="let item of childs[0]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li>
+
+      <li *ngIf="childs[1]">
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>子分类</ion-label>
+            <ion-select [(ngModel)]="childids[1]" (ngModelChange)="childChange(2)" [selectOptions]="selectOptions"
+              multiple="false" okText="确定" cancelText="取消">
+              <ion-option *ngFor="let item of childs[1]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li>
+
+      <li *ngIf="childs[2]">
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>子分类</ion-label>
+            <ion-select [(ngModel)]="childids[2]" (ngModelChange)="childChange(3)" [selectOptions]="selectOptions"
+              multiple="false" okText="确定" cancelText="取消">
+              <ion-option *ngFor="let item of childs[2]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li>
+
+      <li *ngIf="childs[3]">
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>子分类</ion-label>
+            <ion-select [(ngModel)]="childids[3]" (ngModelChange)="childChange(4)" [selectOptions]="selectOptions"
+              multiple="false" okText="确定" cancelText="取消">
+              <ion-option *ngFor="let item of childs[3]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li>
+
+      <li *ngIf="childs[4]">
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>子分类</ion-label>
+            <ion-select [(ngModel)]="childids[4]" (ngModelChange)="childChange(5)" [selectOptions]="selectOptions"
+              multiple="false" okText="确定" cancelText="取消">
+              <ion-option *ngFor="let item of childs[4]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li>
+
+      <li *ngIf="childs[5]">
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>子分类</ion-label>
+            <ion-select [(ngModel)]="childids[5]" (ngModelChange)="childChange(6)" [selectOptions]="selectOptions"
+              multiple="false" okText="确定" cancelText="取消">
+              <ion-option *ngFor="let item of childs[5]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li>
+
+      <li *ngIf="childs[6]">
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>子分类</ion-label>
+            <ion-select [(ngModel)]="childids[6]" (ngModelChange)="childChange(7)" [selectOptions]="selectOptions"
+              multiple="false" okText="确定" cancelText="取消">
+              <ion-option *ngFor="let item of childs[6]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li>
+
+      <li *ngIf="childs[7]">
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>子分类</ion-label>
+            <ion-select [(ngModel)]="childids[7]" (ngModelChange)="childChange(8)" [selectOptions]="selectOptions"
+              multiple="false" okText="确定" cancelText="取消">
+              <ion-option *ngFor="let item of childs[7]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li>
+
+      <li *ngIf="childs[8]">
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>子分类</ion-label>
+            <ion-select [(ngModel)]="childids[8]" (ngModelChange)="childChange(9)" [selectOptions]="selectOptions"
+              multiple="false" okText="确定" cancelText="取消">
+              <ion-option *ngFor="let item of childs[8]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li>
+
+      <li *ngIf="childs[9]">
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>子分类</ion-label>
+            <ion-select [(ngModel)]="childids[9]" (ngModelChange)="childChange(10)" [selectOptions]="selectOptions"
+              multiple="false" okText="确定" cancelText="取消">
+              <ion-option *ngFor="let item of childs[9]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li>
+
+
+
+
+
+
+      <!-- <li>
+        <ion-list class="noionic" style="width: 100%;">
+          <ion-item>
+            <ion-label>品牌</ion-label>
+            <ion-select [(ngModel)]="proData.brand_id" multiple="false" [selectOptions]="selectOptions" okText="确定"
+              cancelText="取消">
+              <ion-option *ngFor="let item of brandList" [value]="item.brand_id">{{ item.brand_name }}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </li> -->
+
+      <li *ngFor="let item of propertylist;let i = index">
+        <span>{{ item.property_name }}</span>
+        <input type="text" [(ngModel)]="propertylist[i].property_val" placeholder="请输入{{ item.property_name }}">
+
+      </li>
+
+    </ul>
+  </div>
+
+
+  <div *ngIf="type=='商品规格'">
+    <div class="fromdata">
+      <ul>
+        <li>
+          <span>规格总名称</span>
+          <input type="text" [(ngModel)]="proData.specification" placeholder="请输入规格总名称">
+        </li>
+        <li>
+          <span>折扣</span>
+          <input type="text" (ngModelChange)="setzhekou($event)" [(ngModel)]="zhekou" placeholder="不打折可不填，打九五折填9.5">
+        </li>
+      </ul>
     </div>
-
-    <div class="fromdata" *ngIf="type==''">
-        <ul>
-
-            <li>
-                <span>名称</span>
-                <input type="text" [(ngModel)]="proData.goods_name" placeholder="请输入宠物名称 例:哈士奇">
-            </li>
-           
-			
-            <li>
-                <span>库存</span>
-                <input type="text" [(ngModel)]="proData.stock" placeholder="请输入库存">
-            </li>
-			
-			<li>
-                <span>定金</span>
-                <input type="text" [(ngModel)]="proData.deposit" placeholder="请输入定金">
-
-			</li>
-            <li>
-                <span>类型</span>
-
-                <ion-list radio-group [(ngModel)]="proData.living" class="noionic">
-                    <ion-item>
-                        <ion-label>活体</ion-label>
-                        <ion-radio value="0"></ion-radio>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>非活体</ion-label>
-                        <ion-radio value="1"></ion-radio>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>关爱</ion-label>
-                        <ion-radio value="2" [disabled]="isDisabled"></ion-radio>
-                    </ion-item>
-                </ion-list>
-            </li>
-
-			<li>
-				<ion-list class="noionic" style="width: 100%;">
-				  <ion-item>
-				  <ion-label>分类</ion-label>
-					<ion-select [(ngModel)]="proData.classify_id" (ngModelChange)="packagTypeChange()" [selectOptions]="selectOptions" multiple="false" okText="确定" cancelText="取消">
-					  <ion-option *ngFor="let item of proClassifyList" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
-					</ion-select>
-				  </ion-item>
-				</ion-list>
-			</li>
-
-		
-
-			<li *ngIf="childs[0]">
-				<ion-list class="noionic" style="width: 100%;">
-				  <ion-item>
-				  <ion-label>子分类</ion-label>
-					<ion-select [(ngModel)]="childids[0]" (ngModelChange)="childChange(1)" [selectOptions]="selectOptions" multiple="false" okText="确定" cancelText="取消">
-					  <ion-option *ngFor="let item of childs[0]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
-					</ion-select>
-				  </ion-item>
-				</ion-list>
-			</li>
-
-			<li *ngIf="childs[1]">
-				<ion-list class="noionic" style="width: 100%;">
-				  <ion-item>
-				  <ion-label>子分类</ion-label>
-					<ion-select [(ngModel)]="childids[1]" (ngModelChange)="childChange(2)" [selectOptions]="selectOptions" multiple="false" okText="确定" cancelText="取消">
-					  <ion-option *ngFor="let item of childs[1]" [value]="item.classify_id">{{ item.classify_name }}</ion-option>
-					</ion-select>
-				  </ion-item>
-				</ion-list>
-			</li>
+    <div class="fromdata guige" *ngFor="let gui of guigeList;let g = index;">
+      <ul>
+        <li>
+          <span>规格名称</span>
+          <input type="text" [(ngModel)]="guigeList[g].specifications_name" placeholder="请输入规格名称">
+        </li>
+        <li>
+          <span>尺寸</span>
+          <input type="text" [(ngModel)]="guigeList[g].specifications_size" placeholder="请输入尺寸">
+        </li>
+        <li>
+          <span>显示价格</span>
+          <input type="text" (ngModelChange)="setprice($event,g)" [(ngModel)]="guigeList[g].display_price" placeholder="请输入显示价格">
+        </li>
+        <li>
+          <span>价格</span>
+          <input type="text" [(ngModel)]="guigeList[g].specifications_price" placeholder="请输入价格">
+        </li>
+        <li>
+          <span>运费</span>
+          <input type="text" [(ngModel)]="guigeList[g].postage" placeholder="请输入物流价格">
+        </li>
 
 
-
-			
-			<li>
-				<ion-list class="noionic" style="width: 100%;">
-				  <ion-item>
-				  <ion-label>品牌</ion-label>
-					<ion-select [(ngModel)]="proData.brand_id" multiple="false" [selectOptions]="selectOptions" okText="确定" cancelText="取消">
-					  <ion-option *ngFor="let item of brandList" [value]="item.brand_id">{{ item.brand_name }}</ion-option>
-					</ion-select>
-				  </ion-item>
-				</ion-list>
-			</li>
-
-			<li *ngFor="let item of propertylist;let i = index">
-                <span>{{ item.property_name }}</span>
-                <input type="text" [(ngModel)]="propertylist[i].property_val" placeholder="请输入{{ item.property_name }}">
-
-			</li>
-
-        </ul>
+        <li (click)="guigeimgup(g)">
+          规格图片<img style="width: 40px;" src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+          <span *ngIf="guigeList[g].cover!=''"><img style="width: 40px;" src="{{imageUrl}}{{guigeList[g].cover}}" alt=""
+              srcset=""></span>
+        </li>
+      </ul>
     </div>
+  </div>
+  <div class="fromdata guige" *ngIf="type=='商品规格'">
+    <button class="tijiao" style="margin-top: 0;" (click)="addguige()">增加规格</button>
+  </div>
 
-	
-	<div *ngIf="type=='商品规格'">
-		<div class="fromdata">
-			<ul>
-				<li>
-					<span>规格总名称</span>
-					<input type="text" [(ngModel)]="proData.specification" placeholder="请输入规格总名称">
-				</li>
-				<li>
-					<span>折扣</span>
-					<input type="text" (ngModelChange)="setzhekou($event)" [(ngModel)]="zhekou" placeholder="不打折可不填，打九五折填9.5">
-				</li>
-			</ul>
-		</div>
-		<div class="fromdata guige" *ngFor="let gui of guigeList;let g = index;">
-			<ul>
-				<li>
-					<span>规格名称</span>
-					<input type="text" [(ngModel)]="guigeList[g].specifications_name" placeholder="请输入规格名称">
-				</li>
-				<li>
-					<span>尺寸</span>
-					<input type="text" [(ngModel)]="guigeList[g].specifications_size" placeholder="请输入尺寸">
-				</li>
-				<li>
-					<span>显示价格</span>
-					<input type="text" (ngModelChange)="setprice($event,g)" [(ngModel)]="guigeList[g].display_price" placeholder="请输入显示价格">
-				</li>
-				<li>
-					<span>价格</span>
-					<input type="text" [(ngModel)]="guigeList[g].specifications_price" placeholder="请输入价格">
-				</li>
-				<li>
-					<span>运费</span>
-					<input type="text" [(ngModel)]="guigeList[g].postage" placeholder="请输入物流价格">
-				</li>
-				
-				
-				<li (click)="guigeimgup(g)">
-					规格图片<img style="width: 40px;" src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
-					<span *ngIf="guigeList[g].cover!=''"><img style="width: 40px;" src="{{imageUrl}}{{guigeList[g].cover}}" alt="" srcset=""></span>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="fromdata guige" *ngIf="type=='商品规格'">
-		  <button class="tijiao" style="margin-top: 0;" (click)="addguige()">增加规格</button>
-	</div>
+  <div class="imgdata" *ngIf="type=='商品图片'">
+    <p>商品轮播图上传</p>
+    <ul>
+      <li (click)="devoup()">
+        <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+      </li>
 
-    <div class="imgdata" *ngIf="type=='商品图片'">
-        <p>商品轮播图上传</p>
-        <ul>
-            <li (click)="devoup()">
-                <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
-            </li>
-			
-        </ul>
-		<p>
-			<img (click)="delSildes(index)" class="viewimg" *ngFor="let img of slides" src="{{imageUrl}}{{img}}" />
-		</p>
-		<p>商品短视频（小于10M）</p>
-        <ul>
-            <li (click)="videoup()">
-                <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
-            </li>
-			
-        </ul>
-		<p><img class="viewimg" *ngIf="video_cover_isup" src="{{video_cover}}" /></p>
+    </ul>
+    <p>
+      <img (click)="delSildes(index)" class="viewimg" *ngFor="let img of slides" src="{{imageUrl}}{{img}}" />
+    </p>
+    <p>商品短视频（小于10M）</p>
+    <ul>
+      <li (click)="videoup()">
+        <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+      </li>
 
-		<p>商品描述图上传</p>
-        <ul>
-            <li (click)="remarkimg()">
-                <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
-            </li>
-        </ul>
-		<p>
-		<img  (click)="delRemarkimg(index)" class="viewimg" *ngFor="let rimg of remarkimgs" src="{{imageUrl}}{{rimg}}" />
-		</p>
-        <button class="tijiao" (click)="save()">保存商品信息</button>
+    </ul>
+    <p><img class="viewimg" *ngIf="video_cover_isup" src="{{video_cover}}" /></p>
 
-    </div>
+    <p>商品描述图上传</p>
+    <ul>
+      <li (click)="remarkimg()">
+        <img src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+      </li>
+    </ul>
+    <p>
+      <img (click)="delRemarkimg(index)" class="viewimg" *ngFor="let rimg of remarkimgs" src="{{imageUrl}}{{rimg}}" />
+    </p>
+    <button class="tijiao" (click)="save()">保存商品信息</button>
 
-	
+  </div>
 
-    
+
+
+
 
 </ion-content>
