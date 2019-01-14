@@ -128,17 +128,18 @@ export class UserService {
     querypetproduct: "chongwu/chongwu/querypetproduct",
     queryPetdtailOrderlist: "chongwu/chongwu/queryPetdtailOrderlist",
     surereceiveorder: "chongwu/chongwu/surereceiveorder",
-    addwallet:"chongwu/app/addwallet",
-    getwalletbalance:"chongwu/app/getwalletbalance",
-    addappeal:"chongwu/chongwu/addappeal",
-    queryclient:"chongwu/app/queryclient",
-	queryclasschildlist:"chongwu/app/queryclasschildlist",
-	addrefundable:"chongwu/app/addrefundable",
-	intervention:"chongwu/app/intervention",
-	refuserefundable:"chongwu/app/refuserefundable",
-	queryRefundable:"chongwu/app/queryRefundable",
-	queryRefundablelist:"chongwu/app/queryRefundablelist",
-	addevaluatechild:"chongwu/app/addevaluatechild"
+    addwallet: "chongwu/app/addwallet",
+    getwalletbalance: "chongwu/app/getwalletbalance",
+    addappeal: "chongwu/chongwu/addappeal",
+    queryclient: "chongwu/app/queryclient",
+    queryclasschildlist: "chongwu/app/queryclasschildlist",
+    addrefundable: "chongwu/app/addrefundable",
+    intervention: "chongwu/app/intervention",
+    refuserefundable: "chongwu/app/refuserefundable",
+    queryRefundable: "chongwu/app/queryRefundable",
+    queryRefundablelist: "chongwu/app/queryRefundablelist",
+    addevaluatechild: "chongwu/app/addevaluatechild",
+    deleteclerk: "chongwu/app/deleteclerk",
   }
 
   constructor(
@@ -146,7 +147,7 @@ export class UserService {
     public toastCtrl: ToastController,
     public geolocation: Geolocation,
     public wechat: WechatChenyu
-  ) {}
+  ) { }
 
   /**
    * gps定位
@@ -917,10 +918,10 @@ export class UserService {
    * 用户信息拉取
    * @param data 
    */
- queryclient(data){
-   return this.http.Post(this.api.queryclient,data)
- }
- 
+  queryclient(data) {
+    return this.http.Post(this.api.queryclient, data)
+  }
+
   /**
    * 用户领取优惠卷列表
    * @param data
@@ -929,13 +930,13 @@ export class UserService {
     return this.http.Post(this.api.couponclientlist, data);
   }
 
-/**
- * 积分商城申述
- * @param data 
- */
-addappeal(data){
-  return this.http .Post(this.api.addappeal,data)
-}
+  /**
+   * 积分商城申述
+   * @param data 
+   */
+  addappeal(data) {
+    return this.http.Post(this.api.addappeal, data)
+  }
 
   /**
    * 商家发货
@@ -945,21 +946,21 @@ addappeal(data){
     return this.http.Post(this.api.updateorderstatus, data);
   }
 
-/**
- * 充值
- * @param data 
- */
-addwallet(data){
-  return this.http.Post(this.api.addwallet,data)
-}
+  /**
+   * 充值
+   * @param data 
+   */
+  addwallet(data) {
+    return this.http.Post(this.api.addwallet, data)
+  }
 
-/**
- * 用户钱包
- * @param data 
- */
-getwalletbalance(data){
-  return this.http.Post(this.api.getwalletbalance,data)
-}
+  /**
+   * 用户钱包
+   * @param data 
+   */
+  getwalletbalance(data) {
+    return this.http.Post(this.api.getwalletbalance, data)
+  }
 
   /**
    * 商家删除优惠券
@@ -1007,7 +1008,7 @@ getwalletbalance(data){
   logistics(data) {
     return this.http.Post(this.api.logistics, data);
   }
-	
+
 	/**
    * 子分类
    */
@@ -1120,5 +1121,12 @@ getwalletbalance(data){
         }
       );
     });
+  }
+
+  /**
+   * 删除店员
+   */
+  deleteclerk(data) {
+    return this.http.Post(this.api.deleteclerk, data);
   }
 }
