@@ -18,8 +18,11 @@
     <div class="card">
         <div class="userimg"><img src="{{imgurl}}{{imgpath}}" alt="" srcset=""></div>
         <div>
-            <h5>{{petname}} <span (click)="addpetConcern()" *ngIf="!concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">关注</span>
-                <span (click)="addpetConcern()" *ngIf="concernStatus" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span></h5>
+            <h5>{{petname}} <span (click)="addpetConcern()" *ngIf="!concernStatus&&!Me" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">关注</span>
+                <span (click)="addpetConcern()" *ngIf="concernStatus&&!Me" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">取消关注</span>
+                <span style="background:red" (click)="deletehistoryType()" *ngIf="Me" style="float: right;color: #999;border: 1px solid #999;padding: 0.1rem 0.5rem;border-radius: 1rem;">删除</span>
+            </h5>
+
             <p><span *ngIf="type==4" style="margin-right: 1rem;background: #21abeb;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">活动</span><span *ngIf="type==2" style="margin-right: 1rem;background: #eec10e;color: #fff; padding: 0.1rem 0.5rem;border-radius: 0.5rem;">传记</span>{{title}}</p>
             <div *ngIf="type==1||type==4">
                 <!-- <p>{{comment}}</p> -->
@@ -53,7 +56,7 @@
         <h5>评论</h5>
         <ul class="messg">
             <li *ngIf="messg">还没有评论!快去抢沙发吧</li>
-            <li *ngFor="let item of messglist;let i=index"><span class="userimg"><img src="{{item.recivePetClient.headimgpath}}"
+            <li *ngFor="let item of messglist;let i=index" (click)=" gomydata(i)"><span class="userimg"><img src="{{item.recivePetClient.headimgpath}}"
             alt="" srcset=""></span><span (click)="huifu(i)">{{item.recivePetClient.client_nikename}} : <i>{{item.messageContent}}</i></span>
                 <ol>
                     <li *ngFor="let items of item.petMessages;let j=index" (click)="huifu2(i,j)" style="word-break: break-all;"><span style="width:auto">{{items.sendPetClient.client_nikename}} 回复 {{items.recivePetClient.client_nikename}}:{{items.messageContent}}</span></li>

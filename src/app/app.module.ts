@@ -53,11 +53,13 @@ import {
   CaptureError,
   CaptureImageOptions
 } from "@ionic-native/media-capture";
+
 import { VideoEditor } from "@ionic-native/video-editor";
 import { ImgServiceProvider } from "../providers/img-service/img-service";
 import { ToastProvider } from "../providers/toast/toast";
 import { StorageProvider } from "../providers/storage/storage";
 import {WechatChenyu} from "wechat-chenyu"
+import { PipesModule } from '../pipes/pipes.module';
 declare var LocationPlugin;
 
 @NgModule({
@@ -80,6 +82,7 @@ declare var LocationPlugin;
     HttpModule,
     HttpClientModule,
     DatePickerModule,
+    PipesModule,
     SharedModule.forRoot(),
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: "true",

@@ -33,6 +33,7 @@ export class MessagelistPage {
   mp4;
   type;
   pathlist = [];
+  Me=false
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -42,8 +43,13 @@ export class MessagelistPage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad MessagelistPage");
-    console.log(this.navParams);
-    // this.initdata();
+    console.log(this.navParams.data.datas.petcard.client_id);
+    if (
+      this.navParams.data.datas.petcard.client_id ==
+      JSON.parse(localStorage.getItem("mydata")).client_id
+    ) {
+     this.Me=true
+    }
     this.querypethistorytypecontent();
     this.queryPetMessagelist();
   }
@@ -63,6 +69,44 @@ export class MessagelistPage {
     console.log(res);
   }
   
+
+/**
+ *   删除动态
+ * @param i 
+ */
+
+async deletehistoryType(){
+  let parmas = {
+    historyTypeid: this.navParams.get("datas").id
+  };
+let res= await this.http.deletehistoryType(parmas)
+this.http.presentToast(res.message)
+if(res.info=="ok"){
+  this.navCtrl.popToRoot()
+}
+console.log(res)
+}
+
+  gomydata(i){
+    this.messglist[i].client_id= this.messglist[i].reciveClient
+    if (
+      this.messglist[i].client_id ==
+      JSON.parse(localStorage.getItem("mydata")).client_id
+    ) {
+      this.navCtrl.push("DetailsPage", {
+        datas: {
+          index:localStorage.getItem("index")
+        }
+      });
+      return false;
+    }
+    this.navCtrl.push("DetailsPage", {
+      id: this.messglist[i],
+      type:0
+    });
+  }
+
+
   doInfinite(infiniteScroll) {
     this.ctn++;
     this.queryPetMessagelist();

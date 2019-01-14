@@ -63,4 +63,21 @@ type
       this.daypklist = res.arrayList;
     }
   }
+  gomydata(i){
+    if (
+      this.daypklist[i].client_id ==
+      JSON.parse(localStorage.getItem("mydata")).client_id
+    ) {
+      this.navCtrl.push("DetailsPage", {
+        datas: {
+          index:localStorage.getItem("index")
+        }
+      });
+      return false;
+    }
+    this.navCtrl.push("DetailsPage", {
+      id: this.daypklist[i],
+      type:0
+    });
+  }
 }

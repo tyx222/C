@@ -25,7 +25,7 @@
                 <span *ngIf="type==2">{{myboject.feedingNum}}</span>
                 </span>
             </li>
-            <li class="boxs" *ngFor="let item of daypklist;let i=index"><span class="listlv"><img *ngIf="i==0" src="assets/imgs/images/111111.png" alt=""><img  *ngIf="i==1" src="assets/imgs/images/222222.png" alt=""> <img  *ngIf="i==2" src="assets/imgs/images/333333.png" alt=""> <b *ngIf="i>2">{{i+1}}</b></span>
+            <li class="boxs" *ngFor="let item of daypklist;let i=index" (click)="gomydata(i)"><span class="listlv"><img *ngIf="i==0" src="assets/imgs/images/111111.png" alt=""><img  *ngIf="i==1" src="assets/imgs/images/222222.png" alt=""> <img  *ngIf="i==2" src="assets/imgs/images/333333.png" alt=""> <b *ngIf="i>2">{{i+1}}</b></span>
                 <span class="lvuser">
           <span  *ngIf="type==1"><img src="{{item.headimgpath}}" alt="" >&nbsp;{{item.pet_name}}</span>
                 <span *ngIf="type==2"><img src="{{item.headimgpath}}" alt="" >&nbsp;{{item.client_nikename}}</span>

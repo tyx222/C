@@ -58,7 +58,7 @@ export class StorePage {
     this.navCtrl.push("AdvicesPage");
   }
   gonews() {
-    this.navCtrl.push("NewswordPage");
+    this.navCtrl.push("ChatPage");
   }
   scrollEvent(e) {
     let opacity = (300 - e.scrollTop) / 300; //设置滚动距离300的时候导航栏消失
