@@ -56,6 +56,7 @@ export class UserService {
     addPetOrder: "chongwu/chongwu/addPetOrder",
     statuslist: "chongwu/chongwu/queryPetOrderorder_statuslist",
     weixinor: "chongwu/app/weixinorderBeforSendpet",
+    weixinorapp: "chongwu/app/weixinorderBeforSendapp",
     addpetFeeding: "chongwu/chongwu/addpetFeeding",
     querypetcardotherclientlist: "chongwu/chongwu/querypetcardotherclientlist",
     querypetfeedingtop: "chongwu/chongwu/querypetfeedingtop",
@@ -502,6 +503,13 @@ export class UserService {
    */
   weixinor(data) {
     return this.http.Post(this.api.weixinor, data);
+  }
+
+  /**
+ * 微信支付预处理
+ */
+  weixinorapp(data) {
+    return this.http.Post(this.api.weixinorapp, data);
   }
 
   /**
