@@ -26,7 +26,8 @@ export class StaffmsgPage {
   }
 
   async list(){
-  	let res = await this.http.querymyclerklist();
+		let shopid = JSON.parse(localStorage.getItem("storeinfo")).shop_id
+		let res = await this.http.queryclerklist({shopid});
 	if(res.info=="ok"){
 		this.lists = res.arrayList;
 		this.shop = res.object
