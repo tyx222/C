@@ -508,6 +508,7 @@ export class UserService {
    * 支付宝支付预处理
    */
   alipay(data) {
+    data['num']='2'
     return this.http.Post(this.api.alipay, data);
   }
 
