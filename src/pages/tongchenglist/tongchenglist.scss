@@ -2,4 +2,9 @@ page-tongchenglist {
     h2 {
         margin-top: 0!important
     }
+    ion-thumbnail img {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+    }
 }

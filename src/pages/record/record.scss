@@ -9,15 +9,14 @@ page-record {
         background: #fff;
         margin-top: 1rem;
         img {
-            width: 5rem;
+            min-width: 5rem;
         }
         p {
             color: #999
         }
         >div:nth-of-type(2) {
-            width: 50vw;
+            // width: 50vw;
             >h3 {
-                
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap
@@ -29,7 +28,7 @@ page-record {
             justify-content: space-between;
             height: 4.5rem;
             margin-left: 1rem;
-
+            width: 100%;
             >h3 {
                 font-size: 1.3rem;
                 margin-bottom: 0.2rem;

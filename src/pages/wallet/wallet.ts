@@ -7,7 +7,8 @@ import {
   AlertController
 } from "ionic-angular";
 import { UserService } from "../../app/shared/service/user.service";
-
+import { WechatChenyu } from "wechat-chenyu";
+declare let cordova;
 /**
  * Generated class for the WalletPage page.
  *
@@ -21,32 +22,38 @@ import { UserService } from "../../app/shared/service/user.service";
   templateUrl: "wallet.html"
 })
 export class WalletPage {
-  faceValue=0
+  faceValue={
+    walletbalance:"",
+    pay_password:''
+  };
   constructor(
     public actionSheetCtrl: ActionSheetController,
     private http: UserService,
     public navCtrl: NavController,
     public navParams: NavParams,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    public wechatChenyu: WechatChenyu
   ) {}
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad WalletPage");
-    this.getwalletbalance()
+    this.getwalletbalance();
   }
-/**
- * 钱包查询
- */
-async  getwalletbalance(){
-let res=await this.http.getwalletbalance({})
-if(res.info=="ok"){
-
-  this.faceValue=res.object
-}
-console.log(res)
+  /**
+   * 钱包查询
+   */
+  async getwalletbalance() {
+    let res = await this.http.getwalletbalance({});
+    if (res.info == "ok") {
+      this.faceValue = res.object;
+      if( res.object.pay_password=="no"){
+        this.http.presentToast("未设置支付密码")
+      }
+    }
+    console.log(res);
   }
 
-  presentActionSheet(data) {
+  presentActionSheet() {
     const actionSheet = this.actionSheetCtrl.create({
       title: "支付方式",
       buttons: [
@@ -54,19 +61,14 @@ console.log(res)
           text: "支付宝",
           role: "destructive",
           handler: () => {
-            console.log(data);
-           let parmas=data
-           parmas.source="1"
-           this.addwallet(parmas)
+            this.showPrompt(1);
+            // this.addwallet(parmas);
           }
         },
         {
           text: "微信",
           handler: () => {
-            console.log(data);
-            let parmas=data
-            parmas.source="2"
-            this.addwallet(parmas)
+            this.showPrompt(2);
           }
         },
         {
@@ -81,32 +83,22 @@ console.log(res)
     actionSheet.present();
   }
 
-/**
- * 充值
- */
-async addwallet(data){
-let res=await this.http.addwallet(data)
-console.log(res)
-}
- 
+  /**
+   * 充值
+   */
+  async addwallet(data) {
+    let res = await this.http.addwallet(data);
+    console.log(res);
+  }
+
   /**
    * 充值金额弹框
    */
-  showPrompt() {
+  showPrompt(i) {
     const prompt = this.alertCtrl.create({
       title: "充值",
       message: "请输入充值金额",
       inputs: [
-        {
-          type: "text",
-          name: "present_account",
-          placeholder: "请输入充值账户"
-        },
-        {
-          type: "number",
-          name: "phonenumber",
-          placeholder: "请输入手机号"
-        },
         {
           type: "number",
           name: "face_value",
@@ -126,18 +118,17 @@ console.log(res)
               this.http.presentToast("请输入大于1的金额");
               return false;
             }
-            var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
-            if (!myreg.test(data.phonenumber)) {
-              let message = "请输入正确手机号";
-              this.http.http.showToast(message);
-              return false;
+            if (i == 1) {
+              this.http.presentToast("支付宝支付");
+              this.alipaysendaccount(data.face_value);
             }
-            if (data.user == "") {
-              this.http.presentToast("请输入充值账户");
-              return false;
+            if (i == 2) {
+              this.http.presentToast("微信支付");
+              this.weixinBeforSendaccount(data.face_value);
             }
 
-            this.presentActionSheet(data);
+            console.log(i);
+            //  this.presentActionSheet(data);
           }
         }
       ]
@@ -146,8 +137,93 @@ console.log(res)
   }
 
   /**
-   *
+   * 微信支付唤起调用后台签名
+   * @param money
    */
+  async weixinBeforSendaccount(money) {
+    let parmas = {
+      face_value: money
+    };
+    let res = await this.http.weixinBeforSendaccount(parmas);
+    if (res.info == "ok") {
+      this.weiXinPay(res.object);
+    } else {
+      this.http.presentToast("充值失败");
+    }
+  }
+
+  /**
+   *调用微信支付
+   */
+
+  async weiXinPay(item) {
+    this.http.presentToast(JSON.stringify(item));
+    this.wechatChenyu.sendPaymentRequest(item).then(
+      result => {
+        //支付成功
+        this.http.presentToast("充值成功");
+        this.getwalletbalance();
+      },
+      error => {
+        //支付失败
+        this.http.presentToast(JSON.stringify(error));
+      }
+    );
+  }
+
+  /**
+   *
+   * @param 支付宝充值预处理
+   */
+
+  async alipaysendaccount(money) {
+    let parmas = {
+      face_value: money
+    };
+    let res = await this.http.alipaysendaccount(parmas);
+    if (res.info == "ok") {
+      this.aliPay(res.object);
+    } else {
+      this.http.presentToast("充值失败");
+    }
+  }
+
+  unescapeHTML(a) {
+    let aNew = "" + a;
+    return aNew
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&amp;/g, "&")
+      .replace(/&quot;/g, '"')
+      .replace(/&apos;/g, "'");
+  }
+  /**
+   *
+   * @param item 支付宝支付
+   */
+  async aliPay(item) {
+    try {
+      let payInfo = this.unescapeHTML(item);
+      this.http.presentToast(payInfo);
+      cordova.plugins.alipay.payment(
+        payInfo,
+        success => {
+          if (success.resultStatus === "9000") {
+            this.http.presentToast("充值成功");
+            this.getwalletbalance();
+          } else {
+            this.http.presentToast("支付失败");
+          }
+        },
+        error => {
+          //支付失败
+          this.http.presentToast("支付失败");
+        }
+      );
+    } catch (err) {
+      this.http.presentToast("调用支付失败");
+    }
+  }
 
   deposit() {
     this.navCtrl.push("DepositPage");
@@ -156,6 +232,6 @@ console.log(res)
     this.navCtrl.push("RecordPage");
   }
   playcode() {
-    this.navCtrl.push("PlaypasswordPage");
+    this.navCtrl.push("PlaypasswordPage", { type: this.faceValue.pay_password });
   }
 }

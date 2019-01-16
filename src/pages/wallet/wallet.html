@@ -17,9 +17,9 @@
     <div class="bg">
         <div class="wallet">
             <p>零钱</p>
-            <h1>¥ {{faceValue}}</h1>
+            <h1>¥ {{faceValue.walletbalance | number:'1.2'}}</h1>
         </div>
-        <div><button (click)="deposit()"> <img src="assets/imgs/images/txl.png" alt="" >提现</button><button (click)="showPrompt()"><img src="assets/imgs/images/chongzhi.png" alt="">充值</button></div>
+        <div><button (click)="deposit()"> <img src="assets/imgs/images/txl.png" alt="" >提现</button><button (click)="presentActionSheet()"><img src="assets/imgs/images/chongzhi.png" alt="">充值</button></div>
     </div>
 
     <!-- <div class="list"><span> <img src="assets/imgs/images/qianbao1.png" alt="">提现</span><img src="assets/imgs/images/right.png" alt=""></div> -->

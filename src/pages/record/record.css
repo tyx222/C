@@ -11,15 +11,11 @@ page-record .userdata {
 }
 
 page-record .userdata img {
-  width: 5rem;
+  min-width: 5rem;
 }
 
 page-record .userdata p {
   color: #999;
-}
-
-page-record .userdata > div:nth-of-type(2) {
-  width: 50vw;
 }
 
 page-record .userdata > div:nth-of-type(2) > h3 {
@@ -34,6 +30,7 @@ page-record .userdata > div:not(:first-child) {
   justify-content: space-between;
   height: 4.5rem;
   margin-left: 1rem;
+  width: 100%;
 }
 
 page-record .userdata > div:not(:first-child) > h3 {

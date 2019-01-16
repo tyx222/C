@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UserService } from '../../app/shared/service/user.service';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { UserService } from "../../app/shared/service/user.service";
 
 /**
  * Generated class for the PlaypasswordPage page.
@@ -11,20 +11,28 @@ import { UserService } from '../../app/shared/service/user.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-playpassword',
-  templateUrl: 'playpassword.html',
+  selector: "page-playpassword",
+  templateUrl: "playpassword.html"
 })
 export class PlaypasswordPage {
-  disabled
-  client_phone
-  num=60
-  constructor(public navCtrl: NavController, public navParams: NavParams,private http:UserService) {
-  }
+  disabled;
+  client_phone;
+  payment_password:string;
+  num = 60;
+  type = 1;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private http: UserService
+  ) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PlaypasswordPage');
+    console.log("ionViewDidLoad PlaypasswordPage");
+    if (this.navParams.get("type")) {
+      this.type = this.navParams.get("type");
+    }
   }
- /**
+  /**
    * 调用短信验证
    */
   async sendCode() {
@@ -52,5 +60,23 @@ export class PlaypasswordPage {
       }
     }
     console.log(res);
+  }
+  /**
+   * 设置支付密码
+   */
+  async SetPayment() {
+    if (this.payment_password.length < 6) {
+      this.http.presentToast("长度不能小于6");
+      return false;
+    }
+    let parmas = {
+      payment_password: this.payment_password
+    };
+    let res = await this.http.SetPayment(parmas);
+    this.http.presentToast(res.message);
+    if (res.info == "ok") {
+      this.payment_password = "";
+      this.navCtrl.pop();
+    }
   }
 }

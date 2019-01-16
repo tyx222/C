@@ -220,6 +220,8 @@ export class AllordersPage {
     );
   }
 
+
+
   unescapeHTML(a) {
     let aNew = "" + a;
     return aNew
@@ -229,7 +231,10 @@ export class AllordersPage {
       .replace(/&quot;/g, '"')
       .replace(/&apos;/g, "'");
   }
-
+/**
+ * 
+ * @param item 支付宝支付
+ */
   async aliPay(item) {
     let data;
     if (this.ordertype == 1) {

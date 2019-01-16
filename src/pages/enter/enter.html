@@ -18,26 +18,26 @@
         <div class='selectStyle'>
             <p>店铺logo</p>
             <button (click)="headlogo()">
-                <img src="{{jsonParamter.head_path}}" alt="" srcset="">
+                <img src="{{jsonPramter.head_path}}" alt="" srcset="">
               </button>
         </div>
         <ul>
 
             <li>
                 <span>商家名称</span>
-                <input type="text" [(ngModel)]="jsonParamter.shop_name" placeholder="请输入商家名称">
+                <input type="text" [(ngModel)]="jsonPramter.shop_name" placeholder="请输入商家名称">
             </li>
             <li>
                 <span>身份证号</span>
-                <input type="text" [(ngModel)]="jsonParamter.idcard" placeholder="请输入身份证号">
+                <input type="text" [(ngModel)]="jsonPramter.idcard" placeholder="请输入身份证号">
             </li>
             <li>
                 <span>联系方式</span>
-                <input type="text" [(ngModel)]="jsonParamter.phonenumber" placeholder="请输入联系方式">
+                <input type="text" [(ngModel)]="jsonPramter.phonenumber" placeholder="请输入联系方式">
             </li>
             <li>
                 <span>微信号</span>
-                <input type="text" [(ngModel)]="jsonParamter.wechat" placeholder="请输入微信号">
+                <input type="text" [(ngModel)]="jsonPramter.wechat" placeholder="请输入微信号">
             </li>
 
             <ion-item>
@@ -57,20 +57,20 @@
         <div class='selectStyle'>
             <p>点击上传手持身份证正面照</p>
             <button (click)="mydatasup()">
-        <img src="{{jsonParamter.idcardimg1}}" alt="" srcset="">
+        <img src="{{jsonPramter.idcardimg1}}" alt="" srcset="">
       </button>
         </div>
         <div class='selectStyle'>
             <p>点击上传手持身份证反面照</p>
             <button (click)="mydatasout()">
-        <img src="{{jsonParamter.idcardimg2}}" alt="" srcset="">
+        <img src="{{jsonPramter.idcardimg2}}" alt="" srcset="">
       </button>
 
         </div>
         <div class='selectStyle'>
             <p>营业执照</p>
             <button (click)="business()">
-        <img src="{{jsonParamter.business_license}}" alt="" srcset="">
+        <img src="{{jsonPramter.business_license}}" alt="" srcset="">
       </button>
         </div>
         <p><input type="checkbox" name="" id="">我已同意XXX用户协议</p>

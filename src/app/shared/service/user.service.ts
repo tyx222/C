@@ -138,7 +138,13 @@ export class UserService {
 	refuserefundable:"chongwu/app/refuserefundable",
 	queryRefundable:"chongwu/app/queryRefundable",
 	queryRefundablelist:"chongwu/app/queryRefundablelist",
-	addevaluatechild:"chongwu/app/addevaluatechild"
+  addevaluatechild:"chongwu/app/addevaluatechild",
+  weixinBeforSendaccount:"chongwu/app/weixinBeforSendaccount",
+  alipaysendaccount:"chongwu/app/alipaysendaccount",
+  querywalletorderlist: "chongwu/app/querywalletorderlist",
+  payAppWallet:"chongwu/app/payAppWallet",
+  SetPayment:"chongwu/app/SetPayment",
+  updatepayment:"chongwu/app/updatepayment"
   }
 
   constructor(
@@ -951,6 +957,50 @@ addappeal(data){
  */
 addwallet(data){
   return this.http.Post(this.api.addwallet,data)
+}
+
+/**
+ * 微信充值
+ * @param data 
+ */
+weixinBeforSendaccount(data){
+  return this.http.Post(this.api.weixinBeforSendaccount,data)
+}
+/**
+ * 充值记录
+ * @param data 
+ */
+querywalletorderlist(data){
+  return this.http.Post(this.api.querywalletorderlist,data)
+}
+
+/**
+ *  钱包支付
+ * @param data
+ */
+payAppWallet(data){
+  return this.http.Post(this.api.payAppWallet,data)
+}
+
+/**
+ * 设置钱包支付密码
+ * @param data 
+ */
+SetPayment(data){
+  return this.http.Post(this.api.SetPayment,data)
+}
+/**
+ * 修改钱包密码
+ */
+updatepayment(data){
+  return this.http.Post(this.api.updatepayment,data)
+}
+/**
+ * 支付宝充值
+ * @param data 
+ */
+alipaysendaccount(data){
+  return this.http.Post(this.api.alipaysendaccount,data)
 }
 
 /**

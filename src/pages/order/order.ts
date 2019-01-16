@@ -8,6 +8,7 @@ import {
   ActionSheetController
 } from "ionic-angular";
  import { WechatChenyu } from "wechat-chenyu";
+import { AlertController } from 'ionic-angular';
  declare let cordova;
 /**
  * Generated class for the OrderPage page.
@@ -53,6 +54,7 @@ export class OrderPage {
     private http: UserService,
     private actionSheetCtrl: ActionSheetController,
     public  wechat:WechatChenyu,
+    public alertCtrl:AlertController
   ) {}
 
   ionViewDidLoad() {
@@ -82,6 +84,12 @@ export class OrderPage {
             }
           },
           {
+            text: "钱包支付",
+            handler: () => {
+            this.showPrompt(data.order_id)
+            }
+          },
+          {
             text: "取消",
             role: "cancel"
           }
@@ -90,6 +98,12 @@ export class OrderPage {
       .present();
   }
 
+
+
+
+  /**
+   * 商品数据初始化
+   */
   pordackinit() {
     this.type = this.navParams.get("type");
     this.imgpath = this.navParams.get("pordack").product_img2;
@@ -180,6 +194,57 @@ export class OrderPage {
     }
     console.log(res);
   }
+
+/**
+ * 钱包支付
+ */
+async payAppWallet(orderid){
+  console.log(orderid)
+  let parmas={
+    orderid:orderid,
+    num:"1"
+  }
+ let res=await this.http.payAppWallet(parmas)
+ this.http.presentToast(res.message)
+ if(res.info=="ok"){
+   this.navCtrl.push("OrderPage",{type:1})
+ }
+}
+  /**
+   * 支付密码
+   */
+  showPrompt(orderid) {
+
+    const prompt = this.alertCtrl.create({
+      title: "充值",
+      message: "请输入充值金额",
+      inputs: [
+        {
+          type: "password",
+          name: "password",
+          placeholder: "请输入支付密码"
+        }
+      ],
+      buttons: [
+        {
+          text: "取消",
+          handler: data => {}
+        },
+        {
+          text: "确定",
+          handler: data => {
+            if (data.password.length<6) {
+              //this.http.presentToast("请输入大于1的金额");
+              return false;
+            }
+            this.payAppWallet(orderid)
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
   /**
    * 数量加减
    */

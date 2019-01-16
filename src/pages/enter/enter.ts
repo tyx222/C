@@ -23,7 +23,7 @@ export class EnterPage {
   @ViewChild("map_container") map_container: ElementRef;
   map: any; //地图对象
   listData = [];
-  jsonParamter = {
+  jsonPramter = {
     shop_introduce: "", //"商铺介绍",
     head_path: "assets/imgs/images/shangchuan@2x.png", //店铺头像
     shop_key: "", //"商铺关键字",
@@ -118,7 +118,7 @@ export class EnterPage {
   }
   mapinit(data) {
     var _this = this;
-    console.log(this.jsonParamter);
+    console.log(_this.jsonPramter);
     var marker, geocoder;
     var x, y;
     this.map = new AMap.Map(this.map_container.nativeElement, {
@@ -127,13 +127,14 @@ export class EnterPage {
         zoom: 20, //设置地图缩放级别
         rotateEnable: true,
         showBuildingBlock: true,
-        center: [_this.jsonParamter.longitude, _this.jsonParamter.latitude] //初始地图中心点
+        center: [_this.jsonPramter.latitude,_this.jsonPramter.longitude ] //初始地图中心点
       })
     });
+    console.log(_this.jsonPramter.longitude)
     marker = new AMap.Marker({
       position: new AMap.LngLat(
-        _this.jsonParamter.longitude,
-        _this.jsonParamter.latitude
+        _this.jsonPramter.longitude,
+        _this.jsonPramter.latitude
       ), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
       title: "当前坐标"
     });
@@ -144,7 +145,7 @@ export class EnterPage {
         city: "010"
       });
       console.log(geocoder, "fuwu");
-      let positionInfo = [121.498586, 31.239637];
+      let positionInfo = [_this.jsonPramter.longitude,_this.jsonPramter.latitude];
       console.log(positionInfo);
       geocoder.getAddress(positionInfo, (status, result) => {
         console.log(status, result, "转换定位信息");
@@ -176,8 +177,8 @@ export class EnterPage {
         position: new AMap.LngLat(lnglat.lng, lnglat.lat), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
         title: "当前坐标"
       });
-      _this.jsonParamter.latitude = lnglat.lat;
-      _this.jsonParamter.longitude = lnglat.lng;
+      _this.jsonPramter.latitude = lnglat.lat;
+      _this.jsonPramter.longitude = lnglat.lng;
       _this.http.http.showToast(`${lnglat.lng}, ${lnglat.lat}`);
       marker.setMap(null);
       this.add(marker);
@@ -199,32 +200,32 @@ export class EnterPage {
       this.http.http.showToast("请填写地址");
       return false;
     }
-    this.jsonParamter.address = citys._text + this.asscity;
-    if (this.jsonParamter.latitude == "" || this.jsonParamter.longitude == "") {
+    this.jsonPramter.address = citys._text + this.asscity;
+    if (this.jsonPramter.latitude == "" || this.jsonPramter.longitude == "") {
       this.http.http.showToast("请点击精确,获取经纬度");
       return false;
     }
     if (
-      this.jsonParamter.shop_name == "" ||
-      this.jsonParamter.shop_name.indexOf(" ") != -1 ||
-      this.jsonParamter.phonenumber.length < 8 ||
-      this.jsonParamter.idcard.length < 18
+      this.jsonPramter.shop_name == "" ||
+      this.jsonPramter.shop_name.indexOf(" ") != -1 ||
+      this.jsonPramter.phonenumber.length < 8 ||
+      this.jsonPramter.idcard.length < 18
     ) {
       this.http.http.showToast("请填写完整");
       return false;
     }
     if (
-      this.jsonParamter.idcardimg1 == "assets/imgs/images/shangchuan@2x.png" ||
-      this.jsonParamter.head_path == "assets/imgs/images/shangchuan@2x.png" ||
-      this.jsonParamter.idcardimg2 == "assets/imgs/images/shangchuan@2x.png" ||
-      this.jsonParamter.business_license ==
+      this.jsonPramter.idcardimg1 == "assets/imgs/images/shangchuan@2x.png" ||
+      this.jsonPramter.head_path == "assets/imgs/images/shangchuan@2x.png" ||
+      this.jsonPramter.idcardimg2 == "assets/imgs/images/shangchuan@2x.png" ||
+      this.jsonPramter.business_license ==
         "assets/imgs/images/shangchuan@2x.png"
     ) {
       this.http.http.showToast("请上传资料");
     }
-    this.jsonParamter;
+    this.jsonPramter;
     let res = await this.http.addshop({
-      jsonParamter: JSON.stringify(this.jsonParamter)
+      jsonPramter: JSON.stringify(this.jsonPramter)
     });
     this.http.http.showToast(res.message);
   }
@@ -236,8 +237,8 @@ export class EnterPage {
     var _this = this;
 
     let res = await _this.http.getGPS();
-    (this.jsonParamter.latitude = res["longitude"].toString()),
-      (this.jsonParamter.longitude = res["latitude"].toString());
+    (this.jsonPramter.latitude = res["longitude"].toString()),
+      (this.jsonPramter.longitude = res["latitude"].toString());
   }
 
   /**
@@ -273,7 +274,7 @@ export class EnterPage {
     this.upimgserve.showPicActionSheet();
     this.upimgserve.upload.success = data => {
       console.log(data);
-      this.jsonParamter.business_license =
+      this.jsonPramter.business_license =
         data.imageUrl + data.object.map.filename;
     };
   }
@@ -285,7 +286,7 @@ export class EnterPage {
     // console.log(res)
     this.upimgserve.showPicActionSheet();
     this.upimgserve.upload.success = data => {
-      this.jsonParamter.idcardimg1 = data.imageUrl + data.object.map.filename;
+      this.jsonPramter.idcardimg1 = data.imageUrl + data.object.map.filename;
       console.log(data);
     };
   }
@@ -295,7 +296,7 @@ export class EnterPage {
   async mydatasout() {
     this.upimgserve.showPicActionSheet();
     this.upimgserve.upload.success = data => {
-      this.jsonParamter.idcardimg2 = data.imageUrl + data.object.map.filename;
+      this.jsonPramter.idcardimg2 = data.imageUrl + data.object.map.filename;
       console.log(data);
     };
   }
@@ -306,7 +307,7 @@ export class EnterPage {
     this.upimgserve.showPicActionSheet();
     this.upimgserve.upload.success = data => {
       console.log(data);
-      this.jsonParamter.head_path = data.imageUrl + data.object.map.filename;
+      this.jsonPramter.head_path = data.imageUrl + data.object.map.filename;
     };
   }
   /**
