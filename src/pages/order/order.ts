@@ -198,11 +198,12 @@ export class OrderPage {
 /**
  * 钱包支付
  */
-async payAppWallet(orderid){
+async payAppWallet(orderid,password){
   console.log(orderid)
   let parmas={
     orderid:orderid,
-    num:"1"
+    num:"1",
+    payment_Password:password
   }
  let res=await this.http.payAppWallet(parmas)
  this.http.presentToast(res.message)
@@ -237,7 +238,7 @@ async payAppWallet(orderid){
               //this.http.presentToast("请输入大于1的金额");
               return false;
             }
-            this.payAppWallet(orderid)
+            this.payAppWallet(orderid,data.password)
           }
         }
       ]

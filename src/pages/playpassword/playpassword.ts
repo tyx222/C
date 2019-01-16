@@ -16,10 +16,11 @@ import { UserService } from "../../app/shared/service/user.service";
 })
 export class PlaypasswordPage {
   disabled;
-  client_phone;
+  phonenumber:string;
   payment_password:string;
   num = 60;
   type = 1;
+  code
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -37,13 +38,13 @@ export class PlaypasswordPage {
    */
   async sendCode() {
     var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
-    if (!myreg.test(this.client_phone)) {
+    if (!myreg.test(this.phonenumber)) {
       let message = "请输入正确手机号";
       this.http.http.showToast(message);
       return false;
     }
     let parmas = {
-      client_phone: this.client_phone
+      client_phone: this.phonenumber,
     };
     let res = await this.http.sendCode(parmas);
     this.http.http.showToast(res.message);
@@ -60,6 +61,29 @@ export class PlaypasswordPage {
       }
     }
     console.log(res);
+  }
+ async updatepayment(){
+    var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+    if (!myreg.test(this.phonenumber)) {
+      let message = "请输入正确手机号";
+      this.http.http.showToast(message);
+      return false;
+    }
+    if(this.payment_password.length<6){
+      this.http.presentToast("密码长度不能小于6个字符")
+    }
+    let parmas = {
+      phonenumber: this.phonenumber,
+      payment_password:this.payment_password,
+      code:this.code
+    };
+    let res =await this.http.updatepayment(parmas)
+    this.http.presentToast(res.message);
+    if (res.info == "ok") {
+      this.payment_password = "";
+      
+      this.navCtrl.pop();
+    }
   }
   /**
    * 设置支付密码
