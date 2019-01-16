@@ -48,9 +48,9 @@ export class PardackpushPage {
 	childids: any = ["", "", "", "", "", "", "", "", "", ""];
 	childid: string = "";
 	guigeList: any = [
-		{ specifications_name: "", specifications_size: "", specifications_price: "", postage: "", cover: "assets/imgs/images/dsp.png", display_price: "" }
+		{ specifications_name: "", specifications_size: "1", specifications_price: "", postage: "", cover: "assets/imgs/images/dsp.png", display_price: "" }
 	];
-	slides: any = ["68094a1351e0323ce804ddb403b85f86.jpg"];
+	slides: any = [];
 	remarkimgs: any = ["68094a1351e0323ce804ddb403b85f86.jpg"];
 	video_cover_isup: any = false;
 	video_cover: string = './assets/imgs/images/dsp.png';
@@ -382,6 +382,7 @@ export class PardackpushPage {
 	}
 
 	save() {
+		this.guigeList[0].specifications_size = '1' // 默认规格，规格暂时不显示
 		if (this.guigeList[0].specifications_name == '' || this.guigeList[0].specifications_size == '' || this.guigeList[0].display_price == '' ||
 			this.guigeList[0].specifications_price == '' || this.guigeList[0].postage == '' || this.guigeList[0].cover == ''
 		) {
@@ -406,6 +407,10 @@ export class PardackpushPage {
 		});
 
 		this.proData.shopid = storeinfo.shop_id;
+		if (this.slides.length == 0) {
+			this.http.presentToast('商品轮播图必须至少上传一张!')
+			return
+		}
 		this.proData.cover = this.slides[0]
 		this.proData.propterty = propertys;
 		this.proData.goods_key = this.proData.goods_name;
@@ -426,7 +431,7 @@ export class PardackpushPage {
 
 	//增加规格
 	addguige() {
-		this.guigeList.push({ specifications_name: "", specifications_size: "", specifications_price: "", postage: "", cover: "", display_price: "" })
+		this.guigeList.push({ specifications_name: "", specifications_size: "1", specifications_price: "", postage: "", cover: "", display_price: "" })
 	}
 	async updategood() {
 		let res = await this.http.updategoods(this.proData)

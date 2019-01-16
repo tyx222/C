@@ -240,10 +240,10 @@
           <span>规格名称</span>
           <input type="text" [(ngModel)]="guigeList[g].specifications_name" placeholder="请输入规格名称">
         </li>
-        <li>
+        <!-- <li>
           <span>尺寸</span>
           <input type="text" [(ngModel)]="guigeList[g].specifications_size" placeholder="请输入尺寸">
-        </li>
+        </li> -->
         <li>
           <span>显示价格</span>
           <input type="text" (ngModelChange)="setprice($event,g)" [(ngModel)]="guigeList[g].display_price" placeholder="请输入显示价格">
