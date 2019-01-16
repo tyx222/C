@@ -6,141 +6,146 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>商品详情</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>商品详情</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <div class="imgpage">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" *ngFor="let item of imgpath; let i = index"><img src="{{imgUrl}}{{item}}" alt="" srcset="" (click)="videoopen(i)" *ngIf="item!==''"></div>
+  <div class="imgpage">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" *ngFor="let item of imgpath; let i = index"><img src="{{imgUrl}}{{item}}" alt=""
+            srcset="" (click)="videoopen(i)" *ngIf="item!==''"></div>
 
-            </div>
-            <!-- 如果需要分页器 -->
-            <div class="swiper-pagination"></div>
+      </div>
+      <!-- 如果需要分页器 -->
+      <div class="swiper-pagination"></div>
 
-            <!-- 如果需要导航按钮 -->
+      <!-- 如果需要导航按钮 -->
 
+    </div>
+  </div>
+  <div class="msg">
+    <p class="title">{{goodsinfo.goods_name}}</p>
+    <p class="price">
+      <span>售价:
+        <span class="maxprice">￥{{goodsinfo.goods_price}}</span>
+      </span>
+    </p>
+    <p class="price">
+      <!-- <span *ngIf="specifications.length>0">价格:
+        <span class="minprice" style="text-decoration:line-through" *ngIf="specifications?.length==1">￥{{specifications[0].display_price||'0'}}</span>
+        <span class="minprice" style="text-decoration:line-through" *ngIf="specifications?.length>1">￥{{specifications[0].display_price}}-￥{{specifications[specifications.length-1].display_price}}</span>
+      </span> -->
+      <span>定金:
+        <span class="minprice">￥{{goodsinfo.deposit}}</span>
+      </span>
+      <span style="margin-left: 3rem;" *ngIf="postage>0">快递:
+        <span class="minprice">￥ {{postage}}</span>
+      </span>
+      <span style="margin-left: 3rem;" *ngIf="postage==0">快递:
+        <span class="minprice">免邮</span>
+      </span>
+    </p>
+    <p class="price">
+
+      <span>月销:
+        <span class="minprice">{{goodsinfo.stock}}笔</span>
+      </span>
+    </p>
+
+  </div>
+
+  <div class="titaa" *ngIf="specifications.length>0">
+    <div class="guige">
+      <div style="width: 20%;padding: 0.5rem;">选择&nbsp;{{goodsinfo.specifications}}</div>
+      <div (click)="viewGuige()" style="width: 78%;text-align: right;"><img style="width: 25px;float: right;" src="assets/imgs/images/right.png"
+          alt="">
+        <div *ngIf="specifications.length==1" style="padding: 0.5rem;float:right">{{specifications[0].specifications_name}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="titaa">
+    <div class="ble">
+      <div>
+        <img src="assets/imgs/images/petImg.png" alt="" class="userimg">
+      </div>
+      <div class="ble2">
+        <div class="name">
+          <p>{{goodsinfo.shop_name||"未知"}}</p>
+          <span class="eee">已成功交易 0 单</span>
         </div>
-    </div>
-    <div class="msg">
-        <p class="title">{{goodsinfo.goods_name}}</p>
-        <p class="price">
-            <span>售价:
-				<span class="maxprice">￥{{goodsinfo.goods_price}}</span>
-            </span>
-        </p>
-		<p class="price">
-            <span *ngIf="specifications.length>0">价格:
-				<span class="minprice" style="text-decoration:line-through">￥{{specifications[0].display_price||'0'}}</span>
-            </span>
-            <span>定金:
-			<span class="minprice">￥{{goodsinfo.deposit}}</span>
-            </span>
-            <span style="margin-left: 3rem;" *ngIf="postage>0">快递:
-			<span class="minprice">￥ {{postage}}</span>
-            </span>
-            <span style="margin-left: 3rem;" *ngIf="postage==0">快递:
-			<span class="minprice">免邮</span>
-            </span>
-        </p>
-		<p class="price">
-			
-			<span>月销:
-			<span class="minprice">{{goodsinfo.stock}}笔</span>
-            </span>
-        </p>
-
-    </div>
-	
-	<div class="titaa" *ngIf="specifications.length>0">
-		<div class="guige">
-		<div style="width: 20%;padding: 0.5rem;">选择&nbsp;{{goodsinfo.specifications}}</div>
-        <div (click)="viewGuige()" style="width: 78%;text-align: right;"><img style="width: 25px;float: right;" src="assets/imgs/images/right.png" alt=""><div *ngIf="specifications.length==1" style="padding: 0.5rem;float:right">{{specifications[0].specifications_name}}</div></div>
-		</div>
-    </div>
-
-    <div class="titaa">
-        <div class="ble">
-            <div>
-                <img src="assets/imgs/images/petImg.png" alt="" class="userimg">
-            </div>
-            <div class="ble2">
-                <div class="name">
-                    <p>{{goodsinfo.shop_name||"未知"}}</p>
-                    <span class="eee">已成功交易 0 单</span>
-                </div>
-                <div>
-                    <span>
+        <div>
+          <span>
             <img src="assets/imgs/images/right.png" alt="">
           </span>
-                </div>
-            </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <div class="tabs">
-        <ul>
-            <li [ngClass]="{'eft': tabs==0}" (click)="tabs=0">详细介绍</li>
-            <li [ngClass]="{'eft': tabs==1}" (click)="tabs=1">评价详情</li>
-            <li [ngClass]="{'eft': tabs==2}" (click)="tabs=2">品类介绍</li>
-            <li [ngClass]="{'eft': tabs==3}" (click)="tabs=3">售后保障</li>
-        </ul>
-        <div class="tabspage" *ngIf="tabs==0">
-            <img *ngFor="let im of pordackpage" src="{{imgUrl}}{{im}}">
-        </div>
-        <div class="tabspage" *ngIf="tabs==1">
-            <div class="comment">
-			<div *ngFor="let c of comments;">
-				<ion-list>
-					<ion-item>
-						<ion-avatar item-start>
-						  <img src="./assets/imgs/logo.png">
-						</ion-avatar>
-					  用户名
-						<ion-note item-end style="color:black;">{{c.level}}星</ion-note>
-						<ion-note item-end>{{c.createtime}}</ion-note>
-					</ion-item>
-					<ion-item class="commentimg">
-						<div *ngFor="let im of c.evaluateContentList">
-						<img *ngFor="let imgs of im.path" src="{{imgs}}" />
-						<p style="clear:both"></p>
-						<p>{{im.text}}</p>
-						</div>
-					</ion-item>
-				</ion-list>
-			</div>
-		</div>
-        </div>
-        <div class="tabspage" *ngIf="tabs==2">
-            品类介绍
-        </div>
-        <div class="tabspage" *ngIf="tabs==3">
-            售后保障
-        </div>
+  <div class="tabs">
+    <ul>
+      <li [ngClass]="{'eft': tabs==0}" (click)="tabs=0">详细介绍</li>
+      <li [ngClass]="{'eft': tabs==1}" (click)="tabs=1">评价详情</li>
+      <li [ngClass]="{'eft': tabs==2}" (click)="tabs=2">品类介绍</li>
+      <li [ngClass]="{'eft': tabs==3}" (click)="tabs=3">售后保障</li>
+    </ul>
+    <div class="tabspage" *ngIf="tabs==0">
+      <img *ngFor="let im of pordackpage" src="{{imgUrl}}{{im}}">
     </div>
-    <div style="height: 7rem;"></div>
-    <div class="shoppingcall">
-        <div>
-            <p (click)="store()">
-                <span>
+    <div class="tabspage" *ngIf="tabs==1">
+      <div class="comment">
+        <div *ngFor="let c of comments;">
+          <ion-list>
+            <ion-item>
+              <ion-avatar item-start>
+                <img src="./assets/imgs/logo.png">
+              </ion-avatar>
+              用户名
+              <ion-note item-end style="color:black;">{{c.level}}星</ion-note>
+              <ion-note item-end>{{c.createtime}}</ion-note>
+            </ion-item>
+            <ion-item class="commentimg">
+              <div *ngFor="let im of c.evaluateContentList">
+                <img *ngFor="let imgs of im.path" src="{{imgs}}" />
+                <p style="clear:both"></p>
+                <p>{{im.text}}</p>
+              </div>
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+    </div>
+    <div class="tabspage" *ngIf="tabs==2">
+      品类介绍
+    </div>
+    <div class="tabspage" *ngIf="tabs==3">
+      售后保障
+    </div>
+  </div>
+  <div style="height: 7rem;"></div>
+  <div class="shoppingcall">
+    <div>
+      <p (click)="store()">
+        <span>
           <img src="assets/imgs/images/dp.png" alt="">
         </span>
-                <span>店铺</span>
-            </p>
-            <p (click)="addcollect()">
-                <span>
+        <span>店铺</span>
+      </p>
+      <p (click)="addcollect()">
+        <span>
           <img src="assets/imgs/images/aixin.png" alt="">
         </span>
-                <span>{{collectTxt}}收藏</span>
-            </p>
-        </div>
-        <div>
-            <!--<button class="join" (click)='pushcall()'>加入购物车</button>--><button class="shop" (click)="goshop()" style="width:100%">立即购买</button>
-        </div>
+        <span>{{collectTxt}}收藏</span>
+      </p>
     </div>
+    <div>
+      <!--<button class="join" (click)='pushcall()'>加入购物车</button>--><button class="shop" (click)="goshop()" style="width:100%">立即购买</button>
+    </div>
+  </div>
 </ion-content>
