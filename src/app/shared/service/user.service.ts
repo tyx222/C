@@ -56,6 +56,7 @@ export class UserService {
     addPetOrder: "chongwu/chongwu/addPetOrder",
     statuslist: "chongwu/chongwu/queryPetOrderorder_statuslist",
     weixinor: "chongwu/app/weixinorderBeforSendpet",
+    weixinorapp: "chongwu/app/weixinorderBeforSendapp",
     addpetFeeding: "chongwu/chongwu/addpetFeeding",
     querypetcardotherclientlist: "chongwu/chongwu/querypetcardotherclientlist",
     querypetfeedingtop: "chongwu/chongwu/querypetfeedingtop",
@@ -144,7 +145,9 @@ export class UserService {
   querywalletorderlist: "chongwu/app/querywalletorderlist",
   payAppWallet:"chongwu/app/payAppWallet",
   SetPayment:"chongwu/app/SetPayment",
-  updatepayment:"chongwu/app/updatepayment"
+  updatepayment:"chongwu/app/updatepayment",
+
+    deleteclerk: "chongwu/app/deleteclerk",
   }
 
   constructor(
@@ -152,7 +155,7 @@ export class UserService {
     public toastCtrl: ToastController,
     public geolocation: Geolocation,
     public wechat: WechatChenyu
-  ) {}
+  ) { }
 
   /**
    * gps定位
@@ -510,9 +513,17 @@ export class UserService {
   }
 
   /**
+ * 微信支付预处理
+ */
+  weixinorapp(data) {
+    return this.http.Post(this.api.weixinorapp, data);
+  }
+
+  /**
    * 支付宝支付预处理
    */
   alipay(data) {
+    data['num']='2'
     return this.http.Post(this.api.alipay, data);
   }
 
@@ -923,10 +934,10 @@ export class UserService {
    * 用户信息拉取
    * @param data 
    */
- queryclient(data){
-   return this.http.Post(this.api.queryclient,data)
- }
- 
+  queryclient(data) {
+    return this.http.Post(this.api.queryclient, data)
+  }
+
   /**
    * 用户领取优惠卷列表
    * @param data
@@ -935,13 +946,13 @@ export class UserService {
     return this.http.Post(this.api.couponclientlist, data);
   }
 
-/**
- * 积分商城申述
- * @param data 
- */
-addappeal(data){
-  return this.http .Post(this.api.addappeal,data)
-}
+  /**
+   * 积分商城申述
+   * @param data 
+   */
+  addappeal(data) {
+    return this.http.Post(this.api.addappeal, data)
+  }
 
   /**
    * 商家发货
@@ -951,13 +962,13 @@ addappeal(data){
     return this.http.Post(this.api.updateorderstatus, data);
   }
 
-/**
- * 充值
- * @param data 
- */
-addwallet(data){
-  return this.http.Post(this.api.addwallet,data)
-}
+  /**
+   * 充值
+   * @param data 
+   */
+  addwallet(data) {
+    return this.http.Post(this.api.addwallet, data)
+  }
 
 /**
  * 微信充值
@@ -1010,7 +1021,6 @@ alipaysendaccount(data){
 getwalletbalance(data){
   return this.http.Post(this.api.getwalletbalance,data)
 }
-
   /**
    * 商家删除优惠券
    */
@@ -1057,7 +1067,7 @@ getwalletbalance(data){
   logistics(data) {
     return this.http.Post(this.api.logistics, data);
   }
-	
+
 	/**
    * 子分类
    */
@@ -1170,5 +1180,12 @@ getwalletbalance(data){
         }
       );
     });
+  }
+
+  /**
+   * 删除店员
+   */
+  deleteclerk(data) {
+    return this.http.Post(this.api.deleteclerk, data);
   }
 }

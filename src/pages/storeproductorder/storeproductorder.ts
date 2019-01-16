@@ -244,7 +244,7 @@ export class StoreproductorderPage {
 
 
 async weiXinPay(item){
-		let payResult=await this.http.weixinor({orderid:item.order_id})
+		let payResult=await this.http.weixinorapp({orderid:item.order_id})
 		console.log(payResult)	
 		var prepay = payResult.object.package.split("=");
 		var params = {
