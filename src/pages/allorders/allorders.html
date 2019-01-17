@@ -31,7 +31,7 @@
 
           <p (click)="goShop(item.shopid)">
             <span>
-              <img style="width: 3rem;" src="{{imgUrl}}{{item.shoplist[0].head_path}}" alt="">{{item.shoplist[0].shop_name}}</span>
+              <img style="width: 3rem;" src="{{imgUrl}}{{item.shoplist[0]?.head_path}}" alt="" onerror="src='assets/imgs/loginLogo.png'">{{item.shoplist[0]?.shop_name}}</span>
             <span>
               <img src="assets/imgs/images/right.png" alt="" srcset="">
             </span>
@@ -55,7 +55,7 @@
               <button *ngIf="item.order_status == 0" (click)="order(item,citem)">立即付款</button>
               <button *ngIf="item.order_status == 0" (click)="cancelOrder(item)">取消订单</button>
               <button *ngIf="item.order_status == 2" (click)='shouhuo(item.order_id)'>确认收货</button>
-              <button *ngIf="item.order_status >= 1" (click)='shopoder(item)'>查看物流</button>
+              <button *ngIf="item.order_status > 1" (click)='shopoder(item)'>查看物流</button>
             </div>
           </div>
         </div>

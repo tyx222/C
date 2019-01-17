@@ -140,10 +140,10 @@ export class AllordersPage {
             handler: () => {
               this.weiXinPay(item);
             }
-          },{
+          }, {
             text: "钱包支付",
             handler: () => {
-            this.showPrompt(item.order_id)
+              this.showPrompt(item.order_id)
             }
           },
           {
@@ -158,22 +158,22 @@ export class AllordersPage {
   }
 
 
-/**
- * 钱包支付
- */
-async payAppWallet(orderid,password){
-  console.log(orderid)
-  let parmas={
-    orderid:orderid,
-    num:"1",
-    payment_Password:password
+  /**
+   * 钱包支付
+   */
+  async payAppWallet(orderid, password) {
+    console.log(orderid)
+    let parmas = {
+      orderid: orderid,
+      num: "1",
+      payment_Password: password
+    }
+    let res = await this.http.payAppWallet(parmas)
+    this.http.presentToast(res.message)
+    if (res.info == "ok") {
+      this.navCtrl.push("OrderPage", { type: 1 })
+    }
   }
- let res=await this.http.payAppWallet(parmas)
- this.http.presentToast(res.message)
- if(res.info=="ok"){
-   this.navCtrl.push("OrderPage",{type:1})
- }
-}
   /**
    * 支付密码
    */
@@ -192,16 +192,16 @@ async payAppWallet(orderid,password){
       buttons: [
         {
           text: "取消",
-          handler: data => {}
+          handler: data => { }
         },
         {
           text: "确定",
           handler: data => {
-            if (data.password.length<6) {
+            if (data.password.length < 6) {
               //this.http.presentToast("请输入大于1的金额");
               return false;
             }
-            this.payAppWallet(orderid,data.password)
+            this.payAppWallet(orderid, data.password)
           }
         }
       ]
@@ -289,10 +289,10 @@ async payAppWallet(orderid,password){
       .replace(/&quot;/g, '"')
       .replace(/&apos;/g, "'");
   }
-/**
- * 
- * @param item 支付宝支付
- */
+  /**
+   * 
+   * @param item 支付宝支付
+   */
   async aliPay(item) {
     let data;
     if (this.ordertype == 1) {
@@ -333,8 +333,8 @@ async payAppWallet(orderid,password){
     }
   }
 
-  gouout() {
-    this.navCtrl.push("RefundPage");
+  gouout(orderid) {
+    this.navCtrl.push("RefundPage", { type: "zc", orderid: orderid });
   }
   // ionViewDidLoad() {
   //   console.log("ionViewDidLoad AllordersPage");
@@ -391,9 +391,9 @@ async payAppWallet(orderid,password){
   }
 
   async queryapporderlist() {
-    // if (this.order_status == -1) {
-    //   this.order_status = '';
-    // }
+    if (this.order_status == -1) {
+      this.order_status = '';
+    }
     let params = {
       order_status: this.order_status
     };
