@@ -27,12 +27,10 @@ export class ProductadminPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductadminPage');
   }
 
   ionViewWillEnter() {
-  	this.queryshopgoods();
-    console.log('ionViewDidLoad ProductadminPage');
+    this.querygoodsbyseach()
   }
 
   getItems(ev: any){
@@ -67,10 +65,10 @@ export class ProductadminPage {
   }
 
   async querygoodsbyseach(){
-  	if(this.keywords==''){
-		this.data = [];
-		return this.queryshopgoods()
-	}
+  // 	if(this.keywords==''){
+	// 	this.data = [];
+	// 	return this.queryshopgoods()
+	// }
 	let storeinfo = JSON.parse(localStorage.getItem('storeinfo'))
 	let params = {
 		goods_name:this.keywords,
@@ -133,7 +131,7 @@ export class ProductadminPage {
     console.log('Begin async operation');
 	this.pageNum++
     setTimeout(() => {
-		this.queryshopgoods()
+      this.querygoodsbyseach()
 		infiniteScroll.complete();
     }, 500);
   }
