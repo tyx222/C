@@ -73,7 +73,7 @@ export class UserService {
     addmating: "chongwu/app/addmating",
     querypetcardmatinglist: "chongwu/app/querypetcardmatinglist",
     addshop: "chongwu/app/addshop",
-    alipay: "chongwu/app/alipayorderBeforSendapp",
+    alipay: "chongwu/app/alipayorderBeforSend",
     queryshopclassify: "chongwu/app/queryshopclassify",
     deleteshopclassify: "chongwu/app/deleteshopclassify",
     queryshopclassifygoodlist: "chongwu/app/queryshopclassifygoodlist",
@@ -129,23 +129,23 @@ export class UserService {
     querypetproduct: "chongwu/chongwu/querypetproduct",
     queryPetdtailOrderlist: "chongwu/chongwu/queryPetdtailOrderlist",
     surereceiveorder: "chongwu/chongwu/surereceiveorder",
-    addwallet:"chongwu/app/addwallet",
-    getwalletbalance:"chongwu/app/getwalletbalance",
-    addappeal:"chongwu/chongwu/addappeal",
-    queryclient:"chongwu/app/queryclient",
-	queryclasschildlist:"chongwu/app/queryclasschildlist",
-	addrefundable:"chongwu/app/addrefundable",
-	intervention:"chongwu/app/intervention",
-	refuserefundable:"chongwu/app/refuserefundable",
-	queryRefundable:"chongwu/app/queryRefundable",
-	queryRefundablelist:"chongwu/app/queryRefundablelist",
-  addevaluatechild:"chongwu/app/addevaluatechild",
-  weixinBeforSendaccount:"chongwu/app/weixinBeforSendaccount",
-  alipaysendaccount:"chongwu/app/alipaysendaccount",
-  querywalletorderlist: "chongwu/app/querywalletorderlist",
-  payAppWallet:"chongwu/app/payAppWallet",
-  SetPayment:"chongwu/app/SetPayment",
-  updatepayment:"chongwu/app/updatepayment",
+    addwallet: "chongwu/app/addwallet",
+    getwalletbalance: "chongwu/app/getwalletbalance",
+    addappeal: "chongwu/chongwu/addappeal",
+    queryclient: "chongwu/app/queryclient",
+    queryclasschildlist: "chongwu/app/queryclasschildlist",
+    addrefundable: "chongwu/app/addrefundable",
+    intervention: "chongwu/app/intervention",
+    refuserefundable: "chongwu/app/refuserefundable",
+    queryRefundable: "chongwu/app/queryRefundable",
+    queryRefundablelist: "chongwu/app/queryRefundablelist",
+    addevaluatechild: "chongwu/app/addevaluatechild",
+    weixinBeforSendaccount: "chongwu/app/weixinBeforSendaccount",
+    alipaysendaccount: "chongwu/app/alipaysendaccount",
+    querywalletorderlist: "chongwu/app/querywalletorderlist",
+    payAppWallet: "chongwu/app/payAppWallet",
+    SetPayment: "chongwu/app/SetPayment",
+    updatepayment: "chongwu/app/updatepayment",
 
     deleteclerk: "chongwu/app/deleteclerk",
   }
@@ -523,7 +523,7 @@ export class UserService {
    * 支付宝支付预处理
    */
   alipay(data) {
-    data['num']='2'
+    data['num'] = '2'
     return this.http.Post(this.api.alipay, data);
   }
 
@@ -970,57 +970,57 @@ export class UserService {
     return this.http.Post(this.api.addwallet, data)
   }
 
-/**
- * 微信充值
- * @param data 
- */
-weixinBeforSendaccount(data){
-  return this.http.Post(this.api.weixinBeforSendaccount,data)
-}
-/**
- * 充值记录
- * @param data 
- */
-querywalletorderlist(data){
-  return this.http.Post(this.api.querywalletorderlist,data)
-}
+  /**
+   * 微信充值
+   * @param data 
+   */
+  weixinBeforSendaccount(data) {
+    return this.http.Post(this.api.weixinBeforSendaccount, data)
+  }
+  /**
+   * 充值记录
+   * @param data 
+   */
+  querywalletorderlist(data) {
+    return this.http.Post(this.api.querywalletorderlist, data)
+  }
 
-/**
- *  钱包支付
- * @param data
- */
-payAppWallet(data){
-  return this.http.Post(this.api.payAppWallet,data)
-}
+  /**
+   *  钱包支付
+   * @param data
+   */
+  payAppWallet(data) {
+    return this.http.Post(this.api.payAppWallet, data)
+  }
 
-/**
- * 设置钱包支付密码
- * @param data 
- */
-SetPayment(data){
-  return this.http.Post(this.api.SetPayment,data)
-}
-/**
- * 修改钱包密码
- */
-updatepayment(data){
-  return this.http.Post(this.api.updatepayment,data)
-}
-/**
- * 支付宝充值
- * @param data 
- */
-alipaysendaccount(data){
-  return this.http.Post(this.api.alipaysendaccount,data)
-}
+  /**
+   * 设置钱包支付密码
+   * @param data 
+   */
+  SetPayment(data) {
+    return this.http.Post(this.api.SetPayment, data)
+  }
+  /**
+   * 修改钱包密码
+   */
+  updatepayment(data) {
+    return this.http.Post(this.api.updatepayment, data)
+  }
+  /**
+   * 支付宝充值
+   * @param data 
+   */
+  alipaysendaccount(data) {
+    return this.http.Post(this.api.alipaysendaccount, data)
+  }
 
-/**
- * 用户钱包
- * @param data 
- */
-getwalletbalance(data){
-  return this.http.Post(this.api.getwalletbalance,data)
-}
+  /**
+   * 用户钱包
+   * @param data 
+   */
+  getwalletbalance(data) {
+    return this.http.Post(this.api.getwalletbalance, data)
+  }
   /**
    * 商家删除优惠券
    */
