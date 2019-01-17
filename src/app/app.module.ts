@@ -60,6 +60,7 @@ import { ToastProvider } from "../providers/toast/toast";
 import { StorageProvider } from "../providers/storage/storage";
 import {WechatChenyu} from "wechat-chenyu"
 import { PipesModule } from '../pipes/pipes.module';
+import { SharedWebSocketProvider } from '../providers/shared-web-socket/shared-web-socket';
 declare var LocationPlugin;
 
 @NgModule({
@@ -125,7 +126,8 @@ declare var LocationPlugin;
     ImgServiceProvider,
     ToastProvider,
     StorageProvider,
-    Geolocation
+    Geolocation,
+    SharedWebSocketProvider
   ]
 })
 export class AppModule {}

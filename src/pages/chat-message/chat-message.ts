@@ -1,11 +1,13 @@
 import { FormControl, FormBuilder } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 import {IonicPage, NavController, Content, NavParams} from 'ionic-angular';
+import { SharedWebSocketProvider } from '../../providers/shared-web-socket/shared-web-socket';
 
 @IonicPage()
 @Component({
   selector: 'page-chat-message',
   templateUrl: 'chat-message.html',
+  providers:[SharedWebSocketProvider]
 })
 export class ChatMessagePage {
 
@@ -81,18 +83,44 @@ export class ChatMessagePage {
 
   constructor(public navParams: NavParams,
               public navCtrl: NavController,
-              public formBuilder: FormBuilder) {
+              public formBuilder: FormBuilder,
+              private wsService:SharedWebSocketProvider) {
     this.messageForm = formBuilder.group({
       message: new FormControl('')
     });
     this.chatBox = '';
   }
-
+ 
+  /**
+   * 与服务器建立长链接
+   */
   ionViewDidLoad() {
     let modelData: string = '用户名：' + this.navParams.get('chatId');
     console.log(modelData);
-  }
 
+    console.log('ionViewDidLoad');
+    //WS连接的IP和端口提前保存在localStorage里，现在读出来
+    const printsIp = localStorage.getItem("prints-ipAddress");
+    const printsPort = localStorage.getItem("prints-port");
+    console.log(printsIp)
+    console.log(printsPort)
+    if(printsIp != null && printsPort !=null){
+      this.wsService.createObservableSocket(`ws://${printsIp}:${printsPort}`).subscribe(
+        data => console.log(data),
+        err => console.log(err),
+        () => console.log("流已经结束")
+      );;
+      console.log(`已连接ws://${printsIp}:${printsPort}`)
+    }else {
+      console.log("请配置打印机");
+    }
+  }
+  /**
+   * 发送消息
+   */
+  sendMessageToserver(){
+    this.wsService.sendMessage("Hello from client");
+}
   // 发送消息
   send(message) {
     if (message && message !== '') {

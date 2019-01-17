@@ -140,6 +140,11 @@ export class AllordersPage {
             handler: () => {
               this.weiXinPay(item);
             }
+          },{
+            text: "钱包支付",
+            handler: () => {
+            this.showPrompt(item.order_id)
+            }
           },
           {
             text: "取消",
@@ -153,6 +158,56 @@ export class AllordersPage {
   }
 
 
+/**
+ * 钱包支付
+ */
+async payAppWallet(orderid,password){
+  console.log(orderid)
+  let parmas={
+    orderid:orderid,
+    num:"1",
+    payment_Password:password
+  }
+ let res=await this.http.payAppWallet(parmas)
+ this.http.presentToast(res.message)
+ if(res.info=="ok"){
+   this.navCtrl.push("OrderPage",{type:1})
+ }
+}
+  /**
+   * 支付密码
+   */
+  showPrompt(orderid) {
+
+    const prompt = this.alertCtrl.create({
+      title: "支付",
+      message: "请输入支付密码",
+      inputs: [
+        {
+          type: "password",
+          name: "password",
+          placeholder: "请输入支付密码"
+        }
+      ],
+      buttons: [
+        {
+          text: "取消",
+          handler: data => {}
+        },
+        {
+          text: "确定",
+          handler: data => {
+            if (data.password.length<6) {
+              //this.http.presentToast("请输入大于1的金额");
+              return false;
+            }
+            this.payAppWallet(orderid,data.password)
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
   /**
    * 积分商城支付宝调用
    * @param item 

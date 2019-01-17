@@ -217,8 +217,8 @@ async payAppWallet(orderid,password){
   showPrompt(orderid) {
 
     const prompt = this.alertCtrl.create({
-      title: "充值",
-      message: "请输入充值金额",
+      title: "支付",
+      message: "请输入支付密码",
       inputs: [
         {
           type: "password",
