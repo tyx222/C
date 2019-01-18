@@ -1,0 +1,24 @@
+ordergoods {
+
+  .product {
+    p {
+      padding: 5px;
+      float: left;
+    }
+
+    .title {
+      width: 100%;
+    }
+
+    .left {
+      width: 70%;
+      color: rgb(189, 189, 189);
+    }
+
+    .right {
+      width: 30%;
+      color: rgb(189, 189, 189);
+      text-align: right;
+    }
+  }
+}
