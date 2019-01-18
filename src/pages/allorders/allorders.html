@@ -36,14 +36,14 @@
               <img src="assets/imgs/images/right.png" alt="" srcset="">
             </span>
           </p>
-          <div class="datas" *ngFor="let citem of item.dtailOrderList;let i = index;">
-            <div (click)="goodsdetail(citem)" style="margin-top: 1rem;">
-              <img style="width: 25%;height: 25%;" src="{{imgUrl}}{{citem.goods.cover}}" alt="">
+          <div class="datas" *ngFor="let citem of item?.dtailOrderList;let i = index;">
+            <div (click)="goodsdetail(item.order_id)" style="margin-top: 1rem;">
+              <img style="width: 25%;height: 25%;" src="{{imgUrl}}{{citem.goods.cover}}" alt="" onerror="src='assets/imgs/loginLogo.png'">
               <div style="width: 90%;">
                 <h1>{{citem.goods.goods_name}}</h1>
                 <!--<p>商品明细</p>-->
                 <p>
-                  <span class="money">¥{{citem.goods.goods_price}}</span>
+                  <span class="money">¥{{citem.unit_price}}</span>
                   <span style="font-size: 1.5rem">X{{citem.good_num}}</span>
                 </p>
 
@@ -51,7 +51,7 @@
             </div>
             <div class="tag">
               <span *ngIf="item.order_status >= 3">交易成功</span>
-              <button *ngIf="item.order_status == 3" (click)='gouout()'>申请退款</button>
+              <button *ngIf="item.order_status == 3" (click)='gouout(item.order_id)'>申请退款</button>
               <button *ngIf="item.order_status == 0" (click)="order(item,citem)">立即付款</button>
               <button *ngIf="item.order_status == 0" (click)="cancelOrder(item)">取消订单</button>
               <button *ngIf="item.order_status == 2" (click)='shouhuo(item.order_id)'>确认收货</button>

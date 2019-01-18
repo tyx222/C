@@ -334,7 +334,7 @@ export class AllordersPage {
   }
 
   gouout(orderid) {
-    this.navCtrl.push("RefundPage", { type: "zc", orderid: orderid });
+    this.navCtrl.push("RefundservivePage", { type: "zc", orderid: orderid });
   }
   // ionViewDidLoad() {
   //   console.log("ionViewDidLoad AllordersPage");
@@ -466,8 +466,9 @@ export class AllordersPage {
     confirm.present();
   }
 
-  goodsdetail(item) {
-    this.navCtrl.push("StoreproductviewPage", { goodsid: item.goods.goods_id });
+  goodsdetail(order_id) {
+    console.log(order_id)
+    this.navCtrl.push("MyorderdetailPage", { order_id });
   }
   goodsjf(item) {
     console.log(item)
