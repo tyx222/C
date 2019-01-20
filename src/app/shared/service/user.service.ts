@@ -148,6 +148,8 @@ export class UserService {
     updatepayment: "chongwu/app/updatepayment",
 
     deleteclerk: "chongwu/app/deleteclerk",
+
+    deleteOrder: "chongwu/app/deleteOrder",
   }
 
   constructor(
@@ -1187,5 +1189,12 @@ export class UserService {
    */
   deleteclerk(data) {
     return this.http.Post(this.api.deleteclerk, data);
+  }
+
+  /**
+ * 删除订单
+ */
+  deleteOrder(data) {
+    return this.http.Post(this.api.deleteOrder, data);
   }
 }

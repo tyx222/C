@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { UserService } from '../../app/shared/service/user.service';
 
 /**
@@ -19,7 +19,8 @@ import { UserService } from '../../app/shared/service/user.service';
 export class MyorderdetailPage {
   orderid
   arrayList
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: UserService) {
+  object
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: UserService, public alertCtrl:AlertController) {
   }
 
   ionViewDidLoad() {
@@ -28,7 +29,18 @@ export class MyorderdetailPage {
     this.http.queryappdtailOrderlist({ orderid: this.orderid })
       .then(x => {
         this.arrayList = x.arrayList[0]
+        this.object = x.object
       })
   }
 
+
+  
+
+  shopoder(item) {
+    this.navCtrl.push("ShippingoderPage", { data: item, type: "jf" });
+  }
+
+  complain(orderid){
+    this.navCtrl.push("RefundservivePage", { type: "zc", orderid: orderid });
+  }
 }

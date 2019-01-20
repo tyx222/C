@@ -1,5 +1,6 @@
+import { UserService } from './../../../app/shared/service/user.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the RefundservivePage page.
@@ -16,12 +17,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'refundservive.html',
 })
 export class RefundservivePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  orderid
+  arrayList
+  object
+  data
+  constructor(public http: UserService, public alertCtrl:AlertController,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RefundservivePage');
+    this.orderid = this.navParams.get("orderid")
+    this.http.queryappdtailOrderlist({ orderid: this.orderid })
+      .then(x => {
+        this.arrayList = x.arrayList[0]
+        this.object = x.object
+        this.data = x
+      })
   }
 
+  toRequstRefundPage(){
+    this.navCtrl.push("RequstRefundPage",{data:this.data})
+  }
 }
