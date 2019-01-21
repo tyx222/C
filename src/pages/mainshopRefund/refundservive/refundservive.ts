@@ -21,7 +21,7 @@ export class RefundservivePage {
   arrayList
   object
   data
-  constructor(public http: UserService, public alertCtrl:AlertController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public http: UserService, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -34,7 +34,7 @@ export class RefundservivePage {
       })
   }
 
-  toRequstRefundPage(){
-    this.navCtrl.push("RequstRefundPage",{data:this.data})
+  toRequstRefundPage(status) {
+    this.navCtrl.push("RequstRefundPage", { data: this.data, status })
   }
 }
