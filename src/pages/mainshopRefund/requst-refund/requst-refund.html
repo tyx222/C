@@ -38,7 +38,8 @@
   </ion-row>
 
   <ion-row class="rebox">
-    <div class="b1">退款金额:￥ <input [value]="requestMoney()" type="number" name="" id=""> </div>
+    <div class="b1">退款金额:<span>￥</span> <input [value]="afterMoney" [(ngModel)]="afterMoney" type="number" name="" id="">
+    </div>
     <div class="b2">
       请填写金额<span>
         （最多￥{{afterMoney}}元，1%平台会拿走作为手续费

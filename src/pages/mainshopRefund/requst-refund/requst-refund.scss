@@ -12,7 +12,10 @@ page-requst-refund {
       padding: 10px;
       width: 100%;
       font-size: 16px;
-
+      span {
+        font-size: 16px;
+        color: #ec5050;
+      }
       input {
         border: none;
         background: none;
@@ -60,7 +63,6 @@ page-requst-refund {
         width: 80%;
 
         input {
-
           &::placeholder {
             color: #9c9c9c;
           }
@@ -73,7 +75,6 @@ page-requst-refund {
         }
       }
     }
-
   }
 
   .reimg {
@@ -88,7 +89,6 @@ page-requst-refund {
   }
 
   .statu {
-
     background: #fff;
     padding: 10px;
     margin-top: 10px;
@@ -115,7 +115,6 @@ page-requst-refund {
 
       input {
         border: none;
-
       }
     }
   }

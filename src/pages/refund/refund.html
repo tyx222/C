@@ -6,149 +6,149 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>申诉</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>申诉</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-card class="first">
+  <ion-card class="first">
 
-        <ion-grid>
-            <ion-row class="goods">
-                <ion-col col-4>
-                    <img src="{{imgUrl}}{{info.dtailOrderList[0].goods.cover}}" class="goodPic">
-                </ion-col>
-                <ion-col col-8 class="mydetail">
-                    <h4 class="serviceName">{{info.dtailOrderList[0].goods.goods_name}}</h4>
-
-
-                </ion-col>
-
-            </ion-row>
+    <ion-grid>
+      <ion-row class="goods">
+        <ion-col col-4>
+          <img src="{{imgUrl}}{{info.dtailOrderList[0].goods.cover}}" class="goodPic">
+        </ion-col>
+        <ion-col col-8 class="mydetail">
+          <h4 class="serviceName">{{info.dtailOrderList[0].goods.goods_name}}</h4>
 
 
-        </ion-grid>
-    </ion-card>
+        </ion-col>
 
-    <ion-list>
-        <ion-item>
-            <ion-label>货物状态</ion-label>
-            <ion-select [(ngModel)]="type" (ngModelChange)="settype()">
-                <ion-option value="1">仅退款未到货</ion-option>
-                <ion-option value="2">退货退款</ion-option>
-            </ion-select>
-        </ion-item>
-    </ion-list>
+      </ion-row>
 
-    <div class="titaa" (click)='pushipam()' *ngIf="show && type==2">
-        <div class="ble">
-            <div>
-                <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
-            </div>
-            <div class="ble2">
-                <div class="name">
-                    <p>选择收货地址</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/images/right.png" alt="">
-                </div>
-            </div>
+
+    </ion-grid>
+  </ion-card>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>货物状态</ion-label>
+      <ion-select [(ngModel)]="type" (ngModelChange)="settype()">
+        <ion-option value="1">仅退款未到货</ion-option>
+        <ion-option value="2">退货退款</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <div class="titaa" (click)='pushipam()' *ngIf="show && type==2">
+    <div class="ble">
+      <div>
+        <img src="assets/imgs/images/gprs.png" alt="" class="userimg">
+      </div>
+      <div class="ble2">
+        <div class="name">
+          <p>选择收货地址</p>
         </div>
-    </div>
-    <div class="titaa" (click)='pushipam()' *ngIf="!show && type==2">
-        <div class="ble">
-            <div>
-                <img src="assets/imgs/images/xdgps.png" alt="" class="userimg" style="width:3rem">
-            </div>
-            <div class="ble2">
-                <div class="name">
-                    <p><span>收货人:{{ipamord.myname||''}}</span><span style="float: right;">{{ipamord.ipone||''}}</span></p>
-                    <p><span>{{ipamord.order||''}}</span></p>
-                </div>
-                <div>
-                    <img src="assets/imgs/images/right.png" alt="" style="width:1.5rem">
-                </div>
-            </div>
+        <div>
+          <img src="assets/imgs/images/right.png" alt="">
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="titaa" (click)='pushipam()' *ngIf="!show && type==2">
+    <div class="ble">
+      <div>
+        <img src="assets/imgs/images/xdgps.png" alt="" class="userimg" style="width:3rem">
+      </div>
+      <div class="ble2">
+        <div class="name">
+          <p><span>收货人:{{ipamord.myname||''}}</span><span style="float: right;">{{ipamord.ipone||''}}</span></p>
+          <p><span>{{ipamord.order||''}}</span></p>
+        </div>
+        <div>
+          <img src="assets/imgs/images/right.png" alt="" style="width:1.5rem">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label>快递公司</ion-label>
+      <ion-input type="text" [(ngModel)]="express_company"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>快递单号</ion-label>
+      <ion-input type="text" [(ngModel)]="express_number"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+
+  <p class="refundReason">申请原因（可填可不填）</p>
+  <ion-card class="last">
+    <textarea id="text" rows="6" [(ngModel)]="refundContent" placeholder="请在此输入，不超过200字" maxlength="200"></textarea>
+  </ion-card>
+
+  <ion-row class="same">
+    <ion-col col-3 id="left">
+      退款金额
+    </ion-col>
+    <ion-col col-9 class="way">
+      ￥{{info.cash_sum}}
+    </ion-col>
+  </ion-row>
+  <ion-row class="same">
+    <ion-col col-9 id="left">
+      最多可退:￥{{info.final_payment}},包含邮费(0.00)
+    </ion-col>
+
+  </ion-row>
+  <h4>上传凭证</h4>
+
+  <div class="Fileimg">
+    <div class="itembox" *ngFor="let item of refundImgs let i =index">
+      <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
+
+      <img *ngIf="item!=='assets/imgs/images/pushimg.png'" src="{{imgUrl}}{{item}}" alt="" (click)="imgup(i)">
+      <img *ngIf="item=='assets/imgs/images/pushimg.png'" src="{{item}}" alt="" (click)="imgup(i)">
+
     </div>
 
-    <ion-list>
+    <!--底部按钮-->
+    <button class="down" (click)="save()">
+      提交
+    </button>
+  </div>
 
-        <ion-item>
-            <ion-label>快递公司</ion-label>
-            <ion-input type="text" [(ngModel)]="express_company"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>快递单号</ion-label>
-            <ion-input type="text" [(ngModel)]="express_number"></ion-input>
-        </ion-item>
-
-    </ion-list>
-
-
+  <div *ngIf="type=='jf'">
+    <ion-item>
+      <ion-input [(ngModel)]="parmas.appeal_title" type="text" value="" placeholder="请输入标题"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="parmas.phonenumber" value="" placeholder="请输入联系方式"></ion-input>
+    </ion-item>
     <p class="refundReason">申请原因（可填可不填）</p>
     <ion-card class="last">
-        <textarea id="text" rows="6" [(ngModel)]="refundContent" placeholder="请在此输入，不超过200字" maxlength="200"></textarea>
+      <textarea id="text" rows="6" [(ngModel)]="parmas.appeal_content" placeholder="请在此输入，不超过200字" maxlength="200"></textarea>
     </ion-card>
-
-    <ion-row class="same">
-        <ion-col col-3 id="left">
-            退款金额
-        </ion-col>
-        <ion-col col-9 class="way">
-            ￥{{info.cash_sum}}
-        </ion-col>
-    </ion-row>
-    <ion-row class="same">
-        <ion-col col-9 id="left">
-            最多可退:￥{{info.final_payment}},包含邮费(0.00)
-        </ion-col>
-
-    </ion-row>
     <h4>上传凭证</h4>
-
     <div class="Fileimg">
-        <div class="itembox" *ngFor="let item of refundImgs let i =index">
-            <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
-
-            <img *ngIf="item!=='assets/imgs/images/pushimg.png'" src="{{imgUrl}}{{item}}" alt="" (click)="imgup(i)">
-            <img *ngIf="item=='assets/imgs/images/pushimg.png'" src="{{item}}" alt="" (click)="imgup(i)">
-
-        </div>
-
-        <!--底部按钮-->
-        <button class="down" (click)="save()">
-    提交
-  </button>
+      <div class="itembox" *ngFor="let item of avatar let i =index">
+        <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
+        <img src="{{item}}" alt="" (click)="presentActionSheet(i)">
+      </div>
     </div>
 
-    <div *ngIf="type=='jf'">
-        <ion-item>
-            <ion-input [(ngModel)]="parmas.appeal_title" type="text" value="" placeholder="请输入标题"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-input type="text" [(ngModel)]="parmas.phonenumber" value="" placeholder="请输入联系方式"></ion-input>
-        </ion-item>
-        <p class="refundReason">申请原因（可填可不填）</p>
-        <ion-card class="last">
-            <textarea id="text" rows="6" [(ngModel)]="parmas.appeal_content" placeholder="请在此输入，不超过200字" maxlength="200"></textarea>
-        </ion-card>
-        <h4>上传凭证</h4>
-        <div class="Fileimg">
-            <div class="itembox" *ngFor="let item of avatar let i =index">
-                <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
-                <img src="{{item}}" alt="" (click)="presentActionSheet(i)">
-            </div>
-        </div>
-
-        <!--底部按钮-->
-        <button class="down" (click)="oudjf()">
-            提交
-          </button>
-    </div>
+    <!--底部按钮-->
+    <button class="down" (click)="oudjf()">
+      提交
+    </button>
+  </div>
 
 </ion-content>
