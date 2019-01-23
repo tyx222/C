@@ -468,13 +468,13 @@ export class AllordersPage {
 
   goodsdetail(order_id) {
     console.log(order_id)
-    this.navCtrl.push("MyorderdetailPage", { order_id });
+    this.navCtrl.push("MyorderdetailPage", { order_id, stuta: this.order_status });
   }
   goodsjf(item) {
     console.log(item)
     this.navCtrl.push("ShoppingPage", { id: item.petdtailorder.product_id, type: 2 });
   }
   goShop(shopid) {
-    this.navCtrl.push("StorecenterPage", { shopid: shopid });
+    this.navCtrl.push("StorecenterPage", { shopid });
   }
 }

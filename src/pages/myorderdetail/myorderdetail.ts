@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { UserService } from '../../app/shared/service/user.service';
 
 /**
@@ -20,11 +20,19 @@ export class MyorderdetailPage {
   orderid
   arrayList
   object
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: UserService, public alertCtrl:AlertController) {
+  stuta
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public http: UserService,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController,
+  ) {
   }
 
   ionViewDidLoad() {
     this.orderid = this.navParams.get("order_id")
+    this.stuta = this.navParams.get("stuta")
     console.log()
     this.http.queryappdtailOrderlist({ orderid: this.orderid })
       .then(x => {
@@ -34,13 +42,27 @@ export class MyorderdetailPage {
   }
 
 
-  
+  //退款详情
+  async queryRefundable(refundable_id) {
+    let res = await this.http.queryRefundable({ refundable_id: refundable_id });
+    if (res.info == "ok") {
+      // this.refundinfo = res.object
+    } else {
+      this.http.presentToast('退款数据不存在')
+    }
+  }
 
   shopoder(item) {
     this.navCtrl.push("ShippingoderPage", { data: item, type: "jf" });
   }
 
-  complain(orderid){
+  complain(orderid) {
     this.navCtrl.push("RefundservivePage", { type: "zc", orderid: orderid });
+  }
+
+  evidence() {
+    // this.navCtrl.push('EvidencePage')
+    let profileModal = this.modalCtrl.create('EvidencePage', { userId: 8675309 });
+    profileModal.present();
   }
 }

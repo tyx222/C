@@ -6,54 +6,68 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>订单详情</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>订单详情</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
 
-    <ordergoods [goodname]="arrayList?.goods.goods_name" [specification]="arrayList?.specifications.specifications_name" [num]="arrayList?.good_num" [orderid]="object?.order_id" [price]="object?.final_payment" [goodimg]="arrayList?.cover"></ordergoods>
+  <ordergoods [goodname]="arrayList?.goods.goods_name" [specification]="arrayList?.specifications.specifications_name"
+    [num]="arrayList?.good_num" [orderid]="object?.order_id" [price]="object?.final_payment" [goodimg]="arrayList?.cover"></ordergoods>
 
-    <ion-row>
-        <div class="statu" [ngSwitch]="object?.order_status">
-            订单状态：
-            <span *ngSwitchCase="0">待付款</span>
-            <span *ngSwitchCase="1">待发货</span>
-            <span *ngSwitchCase="2">待收货</span>
-            <span *ngSwitchCase="3">待买家评价</span>
-            <span *ngSwitchCase="4">待支付尾款</span>
-            <span *ngSwitchCase="5">退款</span>
-            <span *ngSwitchCase="6">请支付尾款</span>
-            <span *ngSwitchCase="8">售后</span>
-        </div>
-    </ion-row>
+  <ion-row>
+    <div class="statu" [ngSwitch]="object?.order_status">
+      订单状态：
+      <span *ngSwitchCase="0">待付款</span>
+      <span *ngSwitchCase="1">待发货</span>
+      <span *ngSwitchCase="2">待收货</span>
+      <span *ngSwitchCase="3">待买家评价</span>
+      <span *ngSwitchCase="4">待支付尾款</span>
+      <span *ngSwitchCase="5">退款</span>
+      <span *ngSwitchCase="6">请支付尾款</span>
+      <span *ngSwitchCase="8">售后</span>
+    </div>
+  </ion-row>
 
-    <ion-row *ngIf="object?.express_company">
-        <div class="wl">
-            <p>物流公司：{{object?.express_company}}</p>
-            <p>订单号：{{object?.express_number}}</p>
-        </div>
-    </ion-row>
+  <ion-row *ngIf="object?.express_company">
+    <div class="wl">
+      <p>物流公司：{{object?.express_company}}</p>
+      <p>订单号：{{object?.express_number}}</p>
+    </div>
+  </ion-row>
 
-    <ion-row>
-        <div class="tag">
-            <!-- <span>交易成功</span>
+  <ion-row>
+    <div class="tag">
+      <!-- <span>交易成功</span>
       <button (click)='gouout()'>申请退款</button>
       <button (click)="order( )">立即付款</button>
       <button (click)="cancelOrder( )">取消订单</button>
       <button (click)='shouhuo( )'>确认收货</button>
       <button (click)='shopoder( )'>查看物流</button> -->
 
-            <span *ngIf="object?.order_status >= 3">交易成功</span>
-            <button *ngIf="object?.order_status == 3" (click)='complain(object?.order_id)'>申请退款</button>
-            <span *ngIf="object?.order_status == 1" style="color:red">待发货</span>
-            <button *ngIf="object?.order_status == 0" (click)="order(object)">立即付款</button>
-            <button *ngIf="object?.order_status == 0" (click)="cancelOrder(object)">取消订单</button>
-            <button *ngIf="object?.order_status == 2" (click)='surereceiveorder(object?.order_id) '>确认收货</button>
-            <button *ngIf="object?.order_status >= 2" (click)='shopoder(object)'>查看物流</button>
-        </div>
-    </ion-row>
+      <span *ngIf="object?.order_status >= 3">交易成功</span>
+      <button *ngIf="object?.order_status == 3" (click)='complain(object?.order_id)'>申请退款</button>
+      <span *ngIf="object?.order_status == 1" style="color:red">待发货</span>
+      <button *ngIf="object?.order_status == 0" (click)="order(object)">立即付款</button>
+      <button *ngIf="object?.order_status == 0" (click)="cancelOrder(object)">取消订单</button>
+      <button *ngIf="object?.order_status == 2" (click)='surereceiveorder(object?.order_id) '>确认收货</button>
+      <button *ngIf="object?.order_status >= 2" (click)='shopoder(object)'>查看物流</button>
+    </div>
+  </ion-row>
+
+  <ion-row>
+    <div (click)="evidence()">
+      查看对方证据
+    </div>
+  </ion-row>
+
+  <ion-row>
+    <div>
+      修改证据
+    </div>
+  </ion-row>
+
 </ion-content>

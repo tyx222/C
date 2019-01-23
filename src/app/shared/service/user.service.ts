@@ -150,6 +150,7 @@ export class UserService {
     deleteclerk: "chongwu/app/deleteclerk",
 
     deleteOrder: "chongwu/app/deleteOrder",
+    weixinorderBeforSendDeposit: "chongwu/app/weixinorderBeforSendDeposit",
   }
 
   constructor(
@@ -1197,4 +1198,14 @@ export class UserService {
   deleteOrder(data) {
     return this.http.Post(this.api.deleteOrder, data);
   }
+
+
+  /**
+ * 支付宝定金预订单
+ */
+  weixinorderBeforSendDeposit(data) {
+    return this.http.Post(this.api.weixinorderBeforSendDeposit, data);
+  }
+
+
 }

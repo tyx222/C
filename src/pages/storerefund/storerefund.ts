@@ -63,8 +63,8 @@ export class StorerefundPage {
 	}
 
 
-	goodsdetail() {
-		this.navCtrl.push('StorerefundPage')
+	goodsdetail(refundable_id) {
+		this.navCtrl.push('RequstDetailPage', { refundable_id })
 		// this.navCtrl.push('ShoprefundPage')
 	}
 }
