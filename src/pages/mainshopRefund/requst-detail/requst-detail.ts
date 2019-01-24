@@ -17,7 +17,8 @@ import { UserService } from '../../../app/shared/service/user.service';
   templateUrl: 'requst-detail.html',
 })
 export class RequstDetailPage {
-
+datas;
+goods
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -26,17 +27,20 @@ export class RequstDetailPage {
   }
 
   ionViewDidLoad() {
+    let goods = this.navParams.get('goods')
+    console.log(goods);
+    
     let refundable_id = this.navParams.get('refundable_id')
     let order_id = this.navParams.get('order_id')
-    this.queryRefundablebyorderid(order_id)
+    this.queryRefundablebyorderid(refundable_id)
   }
 
 
   //退款详情
-  async queryRefundablebyorderid(order_id) {
-    let res = await this.http.queryRefundablebyorderid({ order_id });
+  async queryRefundablebyorderid(refundable_id) {
+    let res = await this.http.queryRefundable({ refundable_id });
     if (res.info == "ok") {
-      // this.refundinfo = res.object
+      this.datas = res.object
     } else {
       this.http.presentToast('退款数据不存在')
     }

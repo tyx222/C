@@ -45,8 +45,8 @@ export class MyorderdetailPage {
 
 
   //退款详情
-  async queryRefundable(refundable_id) {
-    let res = await this.http.queryRefundable({ refundable_id: refundable_id });
+  async queryRefundable(orderid) {
+    let res = await this.http.queryRefundable({ oederid: orderid });
     if (res.info == "ok") {
       // this.refundinfo = res.object
     } else {
@@ -70,8 +70,8 @@ export class MyorderdetailPage {
 
 
   //退款详情
-  async queryRefundablebyorderid(order_id) {
-    let res = await this.http.queryRefundablebyorderid({ order_id });
+  async queryRefundablebyorderid(orderid) {
+    let res = await this.http.queryRefundablebyorderid({ orderid, mytoken: localStorage.getItem("mytoken")});
     if (res.info == "ok") {
       // this.refundinfo = res.object
     } else {

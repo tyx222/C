@@ -146,7 +146,7 @@ export class UserService {
     payAppWallet: "chongwu/app/payAppWallet",
     SetPayment: "chongwu/app/SetPayment",
     updatepayment: "chongwu/app/updatepayment",
-    queryRefundablebyorderid: 'chongwu/app/queryRefundablebyorderid',
+    queryRefundablebyorderid: "chongwu/app/queryRefundablebyorderid",
 
     deleteclerk: "chongwu/app/deleteclerk",
 
