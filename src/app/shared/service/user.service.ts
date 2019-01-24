@@ -146,6 +146,7 @@ export class UserService {
     payAppWallet: "chongwu/app/payAppWallet",
     SetPayment: "chongwu/app/SetPayment",
     updatepayment: "chongwu/app/updatepayment",
+    queryRefundablebyorderid: 'chongwu/app/queryRefundablebyorderid',
 
     deleteclerk: "chongwu/app/deleteclerk",
 
@@ -1207,5 +1208,7 @@ export class UserService {
     return this.http.Post(this.api.weixinorderBeforSendDeposit, data);
   }
 
-
+  queryRefundablebyorderid(data) {
+    return this.http.Post(this.api.queryRefundablebyorderid, data);
+  }
 }

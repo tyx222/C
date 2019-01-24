@@ -39,6 +39,8 @@ export class MyorderdetailPage {
         this.arrayList = x.arrayList[0]
         this.object = x.object
       })
+
+    this.queryRefundablebyorderid(this.orderid)
   }
 
 
@@ -64,5 +66,16 @@ export class MyorderdetailPage {
     // this.navCtrl.push('EvidencePage')
     let profileModal = this.modalCtrl.create('EvidencePage', { userId: 8675309 });
     profileModal.present();
+  }
+
+
+  //退款详情
+  async queryRefundablebyorderid(order_id) {
+    let res = await this.http.queryRefundablebyorderid({ order_id });
+    if (res.info == "ok") {
+      // this.refundinfo = res.object
+    } else {
+      this.http.presentToast('退款数据不存在')
+    }
   }
 }

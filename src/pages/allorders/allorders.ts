@@ -477,4 +477,18 @@ export class AllordersPage {
   goShop(shopid) {
     this.navCtrl.push("StorecenterPage", { shopid });
   }
+
+  // 去评价
+  Messagelist(id) {
+    // this.navCtrl.push("MessagelistPage")
+    let a = this.getComment(id, 2)
+
+  }
+
+  async getComment(goodid, type) {
+    let res = await this.http.queryevaluatelist({ goodid, type });
+
+  }
+
+  // 
 }

@@ -56,6 +56,7 @@
               <button *ngIf="item.order_status == 0" (click)="cancelOrder(item)">取消订单</button>
               <button *ngIf="item.order_status == 2" (click)='shouhuo(item.order_id)'>确认收货</button>
               <button *ngIf="item.order_status > 1" (click)='shopoder(item)'>查看物流</button>
+              <button *ngIf="item.order_status == 5" (click)='Messagelist(item.order_id)'>查看评论</button>
             </div>
           </div>
         </div>

@@ -27,13 +27,14 @@ export class RequstDetailPage {
 
   ionViewDidLoad() {
     let refundable_id = this.navParams.get('refundable_id')
-    this.queryRefundable(refundable_id)
+    let order_id = this.navParams.get('order_id')
+    this.queryRefundablebyorderid(order_id)
   }
 
 
   //退款详情
-  async queryRefundable(refundable_id) {
-    let res = await this.http.queryRefundable({ refundable_id: refundable_id });
+  async queryRefundablebyorderid(order_id) {
+    let res = await this.http.queryRefundablebyorderid({ order_id });
     if (res.info == "ok") {
       // this.refundinfo = res.object
     } else {
