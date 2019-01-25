@@ -1,3 +1,30 @@
 page-requst-detail {
+  .scroll-content {
+    background: #eee;
+    padding: 0 !important;
+  }
 
+  ion-row {
+    margin-bottom: 10px;
+    background: #fff;
+
+    div {
+      width: 100%;
+      padding: 10px;
+    }
+  }
+
+  .box3 {
+    div {
+      width: 50%;
+      text-align: center;
+
+      button {
+        padding: 6px;
+        color: white;
+        background-color: #f08d3f;
+        border-radius: 5px;
+      }
+    }
+  }
 }

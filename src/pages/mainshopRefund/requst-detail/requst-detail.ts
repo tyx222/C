@@ -17,8 +17,12 @@ import { UserService } from '../../../app/shared/service/user.service';
   templateUrl: 'requst-detail.html',
 })
 export class RequstDetailPage {
-datas;
-goods
+  datas;
+  goods
+  arrayList
+  object
+  message
+  imgList
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -29,10 +33,11 @@ goods
   ionViewDidLoad() {
     let goods = this.navParams.get('goods')
     console.log(goods);
-    
+
     let refundable_id = this.navParams.get('refundable_id')
     let order_id = this.navParams.get('order_id')
     this.queryRefundablebyorderid(refundable_id)
+    this.queryappdtailOrderlist(order_id)
   }
 
 
@@ -43,6 +48,43 @@ goods
       this.datas = res.object
     } else {
       this.http.presentToast('退款数据不存在')
+    }
+  }
+
+  queryappdtailOrderlist(orderid) {
+    this.http.queryappdtailOrderlist({ orderid })
+      .then(x => {
+        this.arrayList = x.arrayList[0]
+        this.object = x.object
+      })
+  }
+
+
+  noRequst(refundable_id) {
+    if (!this.message && this.message.length == 0) {
+      this.http.presentToast("请填写拒绝退款原因")
+      return
+    }
+    const p = {
+      refundable_id, status: '2', shop_reason: this.message, shop_picture: this.imgList,
+    }
+    this.refuserefundable(p)
+  }
+
+  okRequst(refundable_id) {
+    const p = {
+      refundable_id, status: '1'
+    }
+
+    this.refuserefundable(p)
+  }
+
+  async refuserefundable(data) {
+    let res = await this.http.refuserefundable(data);
+    if (res.info == "ok") {
+      this.http.presentToast("操作成功")
+    } else {
+      this.http.presentToast("操作失败")
     }
   }
 }

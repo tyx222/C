@@ -1,0 +1,13 @@
+<div class="imgbox">
+  <div class="name">{{name}}</div>
+  <div class="imgList">
+    <span *ngFor="let item of imgList">
+      <img style="width: 40px;" src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+    </span>
+
+    <img *ngIf="imgList.length<3" style="width: 40px;" src="assets/imgs/images/shangchuan@2x.png" alt="" srcset="">
+
+
+  </div>
+
+</div>

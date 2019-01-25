@@ -6,6 +6,7 @@ import { MapComponent } from './map/map';
 import { TrickComponent } from './trick/trick';
 import { OrdergoodsComponent } from './ordergoods/ordergoods';
 import { IonicModule } from 'ionic-angular';
+import { UploadImgComponent } from './upload-img/upload-img';
 
 @NgModule({
     declarations: [GuidanceComponent,
@@ -13,6 +14,7 @@ import { IonicModule } from 'ionic-angular';
         MapComponent,
         TrickComponent,
         OrdergoodsComponent,
+    UploadImgComponent,
     ],
     imports: [CalendarModule, IonicModule],
     exports: [GuidanceComponent,
@@ -20,6 +22,7 @@ import { IonicModule } from 'ionic-angular';
         MapComponent,
         TrickComponent,
         OrdergoodsComponent,
+    UploadImgComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
