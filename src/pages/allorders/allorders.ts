@@ -128,6 +128,7 @@ export class AllordersPage {
             handler: () => {
 
               if (this.ordertype == 2) {
+
                 this.aliPay(item); //调用主商城
               }
               if (this.ordertype == 1) {
@@ -479,9 +480,10 @@ export class AllordersPage {
   }
 
   // 去评价
-  Messagelist(id) {
+  Messagelist(orderid, goodsid) {
     // this.navCtrl.push("MessagelistPage")
-    let a = this.getComment(id, 2)
+    let a = this.getComment(orderid, 2)
+    this.navCtrl.push("EvaluatePage", { type: 0, orderid, goodsid})
 
   }
 

@@ -16,10 +16,12 @@
 <ion-content padding>
     <div class="tabs">
         <ul>
-            <li [ngClass]="{'eft':order_status===0}" (click)="status(0)">退款中</li>
-            <li [ngClass]="{'eft':order_status==1}" (click)="status(1)">已同意</li>
-            <li [ngClass]="{'eft':order_status==2}" (click)="status(2)">已拒绝</li>
-            <li [ngClass]="{'eft':order_status==3}" (click)="status(3)">退款成功</li>
+            <li [ngClass]="{'eft':order_status===0}" (click)="status(0)">待付款</li>
+            <li [ngClass]="{'eft':order_status==1}" (click)="status(1)">同意退款</li>
+            <li [ngClass]="{'eft':order_status==2}" (click)="status(2)">拒绝退款</li>
+            <li [ngClass]="{'eft':order_status==3}" (click)="status(3)">退款失败</li>
+            <li [ngClass]="{'eft':order_status==4}" (click)="status(4)">退款成功</li>
+            <li [ngClass]="{'eft':order_status==5}" (click)="status(5)">退款中</li>
         </ul>
         <div class="tabspage">
 

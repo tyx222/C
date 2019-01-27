@@ -152,6 +152,8 @@ export class UserService {
 
     deleteOrder: "chongwu/app/deleteOrder",
     weixinorderBeforSendDeposit: "chongwu/app/weixinorderBeforSendDeposit",
+    updaterefundableshop:"chongwu/app/updaterefundableshop",
+    alipayorderBeforSendDeposit:"chongwu/app/alipayorderBeforSendDeposit",
   }
 
   constructor(
@@ -1202,7 +1204,7 @@ export class UserService {
 
 
   /**
- * 支付宝定金预订单
+ * 微信定金预订单
  */
   weixinorderBeforSendDeposit(data) {
     return this.http.Post(this.api.weixinorderBeforSendDeposit, data);
@@ -1210,5 +1212,13 @@ export class UserService {
 
   queryRefundablebyorderid(data) {
     return this.http.Post(this.api.queryRefundablebyorderid, data);
+  }
+
+  updaterefundableshop(data){
+    return this.http.Post(this.api.updaterefundableshop,data);
+  }
+
+  alipayorderBeforSendDeposit(data){
+    return this.http.Post(this.api.alipayorderBeforSendDeposit,data);
   }
 }

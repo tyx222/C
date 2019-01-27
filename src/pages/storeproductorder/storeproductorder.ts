@@ -244,7 +244,13 @@ export class StoreproductorderPage {
 
 
 async weiXinPay(item){
-		let payResult=await this.http.weixinorapp({orderid:item.order_id})
+		let payResult
+	if (this.deposit > 0) {
+		payResult = await this.http.weixinorderBeforSendDeposit({ orderid: item.order_id })
+		}else{
+		payResult = await this.http.weixinorapp({ orderid: item.order_id })
+
+		}
 		console.log(payResult)	
 		var prepay = payResult.object.package.split("=");
 		var params = {
@@ -275,7 +281,13 @@ async weiXinPay(item){
 	 }
 
 	async aliPay(item){
-		let data=await this.http.alipay({orderid:item.order_id})
+		let data 
+		if (this.deposit>0) {
+			data = await this.http.alipayorderBeforSendDeposit({ orderid: item.order_id })
+		}else{
+			data = await this.http.alipay({ orderid: item.order_id })
+		}
+	 
 		let payInfos=this.unescapeHTML(data.object);
 
 		console.log(payInfos)
