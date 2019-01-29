@@ -114,7 +114,7 @@ export class OrderPage {
     this.maxprice = this.navParams.get("pordack").product_price;
     this.title = this.navParams.get("pordack").product_name;
     this.cmment = this.navParams.get("pordack").product_introduce;
-    this.leastpay = this.navParams.get("pordack").leastpay || 1;
+    this.leastpay = (this.navParams.get("pordack").product_price-this.navParams.get("pordack").leastpay)*10 || 1;
     this.integral_proportion =
       this.navParams.get("pordack").integral_proportion || 1;
     this.product_guige = this.navParams.get("pordack").product_guige || 1;
@@ -122,18 +122,22 @@ export class OrderPage {
   }
 
   upup() {
-    if (this.product_guige <= this.pordacknum) {
-      return false;
-    }
+    // if (this.product_guige*10 <= this.pordacknum) {
+    //   return false;
+    // }
     this.pordacknum++;
+    
+    console.log(this.pordacknum)
     if (
       this.linshinum > this.leastpay * this.pordacknum ||
       this.linshinum > this.integral_num
     ) {
       if (this.integral_num > this.leastpay * this.pordacknum) {
         this.linshinum = this.leastpay;
+        
       } else {
         this.linshinum = this.integral_num;
+        
       }
     }
   }

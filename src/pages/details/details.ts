@@ -93,7 +93,6 @@ console.log()
     if (res.info == "ok") {
     
       for (let index = 0; index < res.arrayList.length; index++) {
-        console.log(res.arrayList[index])
         if (
           res.arrayList[index].headimgpath.indexOf("https") == -1
         ) {
@@ -102,12 +101,24 @@ console.log()
             "https://www.petbashi.com/imgs/" + res.arrayList[index].headimgpath;
         }
         if (this.navParams.get("type") == 0) {
+          console.log(res.arrayList[0].integral_num)
           if (
             res.arrayList[index].pet_num - 0 ==
             this.navParams.get("id").pet_num - 0
           ) {
             console.log(index);
             this.callname = [];
+            this.callname.push(res.arrayList[index]);
+            if (
+              res.arrayList[index].client_id ==
+              JSON.parse(localStorage.getItem("mydata")).client_id
+            ) {
+              this.gay = true;
+            } else {
+              this.gay = false;
+            }
+          }
+          if(!this.navParams.get("id").pet_num){
             this.callname.push(res.arrayList[index]);
             if (
               res.arrayList[index].client_id ==
@@ -130,7 +141,7 @@ console.log()
       }
 
       this.integral_num = this.callname[0].integral_num;
-      console.log(this.callname);
+     
       this.querypetfeedingtop();
     }
   }

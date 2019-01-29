@@ -80,9 +80,9 @@
             </div>
         </div>
     </div>
-    <p class="distribution" *ngIf="type==2"><span>零食：({{integral_num}}Kg)</span><span>每件可用{{leastpay}}Kg零食</span></p>
+    <p class="distribution" *ngIf="type==2"><span>零食：({{integral_num}}g)</span><span>每件可用{{leastpay}}g零食</span></p>
     <p class="distribution" *ngIf="type==2"><span>可用抵：({{rmb*linshinum | number:'1.2-2'}}元)</span><span>使用<span class="pordacknum"><button (click)="lingshiout()">—</button><input type="number" min="0" (change)="lingshig()"  [(ngModel)]="linshinum">
-        <button (click)="lingshiup()" >+</button></span>Kg零食</span>
+        <button (click)="lingshiup()" >+</button></span>g零食</span>
     </p>
     <p class="distribution" *ngIf="type==1"><span>配送方式：</span><span>快递 免邮</span></p>
     <div class="tarea" *ngIf="type==1">

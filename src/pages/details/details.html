@@ -45,7 +45,7 @@
 
                                     <div>
                                         <img src="assets/imgs/images/jiantou.png" alt="">
-                                        <span *ngIf="item.integral_num">总能量值 {{item.integral_num}}kg</span>
+                                        <span *ngIf="item.integral_num">总能量值 {{item.integral_num}}g</span>
                                     </div>
                                     <div class="baybay" *ngIf="!gay">
                                         <button (click)="jubao(i)">举报</button>
@@ -104,7 +104,7 @@
         <div class="state_box">
             <div class="bq_box">
                 <div class="bq">
-                    零食能量 :{{integral_num}}Kg
+                    零食能量 :{{integral_num}}g
                 </div>
 
 

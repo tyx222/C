@@ -294,16 +294,8 @@ async payAppWallet(orderid,password){
  * @param item 支付宝支付
  */
   async aliPay(item) {
-    let data;
-    if (this.ordertype == 1) {
-      data = await this.http.alipayorderBeforSendPet({
-        orderid: item.order_id
-      });
-    }
-    if (this.ordertype == 2) {
-      data = await this.http.alipay({ orderid: item.order_id });
-    }
-
+   
+      let   data = await this.http.alipay({ orderid: item.order_id });
     console.log(data);
     try {
       let payInfo = this.unescapeHTML(data);
@@ -313,12 +305,8 @@ async payAppWallet(orderid,password){
         success => {
           if (success.resultStatus === "9000") {
             this.http.presentToast("支付成功");
-            if (this.ordertype == 2) {
               this.queryapporderlist(); //调用主商城
-            }
-            if (this.ordertype == 1) {
-              this.queryPetOrderlist(); //调用积分商城
-            }
+           
           } else {
             this.http.presentToast("支付失败");
           }
