@@ -8,61 +8,56 @@
 
     <ion-navbar>
         <ion-title>productadmin</ion-title>
-		<ion-buttons right (click)="pardackpush()">
+        <ion-buttons right (click)="pardackpush()">
             <button ion-button>添加商品<ion-icon name="add"></ion-icon></button>
         </ion-buttons>
     </ion-navbar>
-	
+
 </ion-header>
 
 
 <ion-content padding>
     <div class="tabs">
-        <ul>
+        <!-- <ul>
             <li [ngClass]="{'eft':type==''}" (click)="check('')">全部</li>
             <li [ngClass]="{'eft':type=='活体'}" (click)="check('活体')">活体</li>
             <li [ngClass]="{'eft':type=='非活体'}" (click)="check('非活体')">非活体</li>
-			<li>
-				
-			</li>
-        </ul>
+        </ul> -->
         <div class="tabspage">
-			<div class="searchbox">
-				<ion-searchbar  placeholder="店铺内搜索" debounce="2000" (ionInput)="getItems($event)"></ion-searchbar>
-			</div>
+            <div class="searchbox">
+                <ion-searchbar placeholder="店铺内搜索" debounce="2000" (ionInput)="getItems($event)"></ion-searchbar>
+            </div>
         </div>
     </div>
     <div class="listbox">
-		<ion-list *ngFor="let item of data let i=index">
-		  <ion-item>
-			<ion-note item-left>
-				<ion-thumbnail item-start>
-				  <img src="{{imageUrl}}{{item.cover}}">
-				</ion-thumbnail>
-			</ion-note>
-			<ion-note item-left>
-				<h2>{{item.goods_name}}</h2>
-				<p>¥ {{item.goods_price}}</p>
-				<p>已售{{item.goods_price}}</p>
-			</ion-note>
+        <ion-list *ngFor="let item of data let i=index">
+            <ion-item>
+                <ion-note item-left>
+                    <ion-thumbnail item-start>
+                        <img src="{{imageUrl}}{{item.cover}}">
+                    </ion-thumbnail>
+                </ion-note>
+                <ion-note item-left>
+                    <h2>{{item.goods_name}}</h2>
+                    <p>¥ {{item.goods_price}}</p>
+                    <p>已售{{item.goods_price}}</p>
+                </ion-note>
 
-			<ion-note item-right>
-				<p><button (click)="edit(item)" class="btn">编辑</button></p>
-				<p><button (click)="view(item)" class="btn">详情</button></p>
-				<p>
-					<button style="background-color:red;" *ngIf="item.status == '1'" (click)="updatestatus(item.goods_id,0)" class="btn">上架</button>
-					<button style="background-color:red;" *ngIf="item.status == '0'" (click)="updatestatus(item.goods_id,1)" class="btn">下架</button>
-				</p>
-				<p><button (click)="evaluate(item.goods_id)" class="btn">查看评价</button></p>
-			</ion-note>
-		  </ion-item>
-		</ion-list>
+                <ion-note item-right>
+                    <p><button (click)="edit(item)" class="btn">编辑</button></p>
+                    <p><button (click)="view(item)" class="btn">详情</button></p>
+                    <p>
+                        <button style="background-color:red;" *ngIf="item.status == '1'" (click)="updatestatus(item.goods_id,0)" class="btn">上架</button>
+                        <button style="background-color:red;" *ngIf="item.status == '0'" (click)="updatestatus(item.goods_id,1)" class="btn">下架</button>
+                    </p>
+                    <p><button (click)="evaluate(item.goods_id)" class="btn">查看评价</button></p>
+                </ion-note>
+            </ion-item>
+        </ion-list>
 
-		<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-			<ion-infinite-scroll-content
-			  loadingSpinner="bubbles"
-			  loadingText="加载中...">
-			</ion-infinite-scroll-content>
-		</ion-infinite-scroll>
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
     </div>
 </ion-content>

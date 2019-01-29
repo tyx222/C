@@ -1,0 +1,24 @@
+upload-img {
+  display: flex;
+  width: 100%;
+
+  div.imgbox {
+    display: block;
+    width: 100%;
+    padding: 0 !important;
+
+    p {
+      width: 100%;
+    }
+
+    .imgList {
+      display: block;
+      width: 100%;
+
+      span {
+        margin-right: 10px;
+      }
+    }
+  }
+
+}

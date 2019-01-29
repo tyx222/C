@@ -89,7 +89,7 @@ export class MyHttpService {
           "Content-Type": "application/x-www-form-urlencoded"
         })
       };
-	  console.log(JSON.stringify(options))
+    console.log(JSON.stringify(options))
     return this.http
       .post(`${this.ip}${url}`, this.toQueryString(body), options)
       .toPromise()
@@ -276,5 +276,5 @@ export class MyHttpService {
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public Wechat: WechatChenyu
-  ) {}
+  ) { }
 }

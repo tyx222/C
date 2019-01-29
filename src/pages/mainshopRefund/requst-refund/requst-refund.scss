@@ -1,0 +1,121 @@
+page-requst-refund {
+  .scroll-content {
+    background: #eee;
+    padding: 0 !important;
+  }
+
+  .rebox {
+    background: #fff;
+    margin: 10px 0;
+
+    .b1 {
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+      span {
+        font-size: 16px;
+        color: #ec5050;
+      }
+      input {
+        border: none;
+        background: none;
+        font-size: 16px;
+        color: #ec5050;
+      }
+    }
+
+    .b2 {
+      padding: 10px;
+      font-size: 14px;
+      width: 100%;
+      background: #eee;
+      color: #9c9c9c;
+
+      input {
+        width: 100%;
+
+        &::placeholder {
+          color: #9c9c9c;
+        }
+
+        color: #333;
+        border: none;
+        background: none;
+      }
+
+      span {
+        color: #ec5050;
+      }
+    }
+
+    .b3 {
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+
+      .b31 {
+        width: 20%;
+        float: left;
+      }
+
+      .b32 {
+        float: left;
+        width: 80%;
+
+        input {
+          &::placeholder {
+            color: #9c9c9c;
+          }
+
+          border: none;
+          background: none;
+          width: 100%;
+          border: none;
+          color: #9c9c9c;
+        }
+      }
+    }
+  }
+
+  .reimg {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 100px;
+
+    div {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+  }
+
+  .statu {
+    background: #fff;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .wl {
+    background: #fff;
+    margin-top: 10px;
+    padding: 10px;
+
+    p {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+  }
+
+  .adress {
+    margin-bottom: 10px;
+    background: #fff;
+
+    .ad {
+      padding: 15px 10px;
+      width: 100%;
+
+      input {
+        border: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<ion-row class="product">
+  <ion-col col-4><img [src]="goodimg" alt="" onerror="src='assets/imgs/loginLogo.png'"></ion-col>
+  <ion-col col-8>
+    <p class="title">{{goodname}}</p>
+    <p class="left">规格：{{specification}}</p>
+    <p class="right">x{{num}}</p>
+  </ion-col>
+  <ion-col class="col-12">
+    <p class="left">订单号：{{orderid}}</p>
+    <p class="right">￥{{price}}</p>
+  </ion-col>
+</ion-row>

@@ -22,7 +22,7 @@
             <li [ngClass]="{'eft':order_status==1}" (click)="status(1)">待发货</li>
             <li [ngClass]="{'eft':order_status==2}" (click)="status(2)">已发货</li>
             <li [ngClass]="{'eft':order_status==3}" (click)="status(3)" *ngIf="ordertype == 2">待评价</li>
-            <li [ngClass]="{'eft':order_status==4}" (click)="status(4)">退款/售后</li>
+            <li [ngClass]="{'eft':order_status==4}" (click)="status(5)">退款/售后</li>
 
         </ul>
         <div class="tabspage">
@@ -31,19 +31,19 @@
 
                     <p (click)="goShop(item.shopid)">
                         <span>
-              <img style="width: 3rem;" src="{{imgUrl}}{{item.shoplist[0].head_path}}" alt="">{{item.shoplist[0].shop_name}}</span>
+              <img style="width: 3rem;" src="{{imgUrl}}{{item.shoplist[0]?.head_path}}" alt="" onerror="src='assets/imgs/loginLogo.png'">{{item.shoplist[0]?.shop_name}}</span>
                         <span>
               <img src="assets/imgs/images/right.png" alt="" srcset="">
             </span>
                     </p>
-                    <div class="datas" *ngFor="let citem of item.dtailOrderList;let i = index;">
-                        <div (click)="goodsdetail(citem)" style="margin-top: 1rem;">
-                            <img style="width: 25%;height: 25%;" src="{{imgUrl}}{{citem.goods.cover}}" alt="">
+                    <div class="datas" *ngFor="let citem of item?.dtailOrderList;let i = index;">
+                        <div (click)="goodsdetail(item.order_id)" style="margin-top: 1rem;">
+                            <img style="width: 25%;height: 25%;" src="{{imgUrl}}{{citem.goods.cover}}" alt="" onerror="src='assets/imgs/loginLogo.png'">
                             <div style="width: 90%;">
                                 <h1>{{citem.goods.goods_name}}</h1>
                                 <!--<p>商品明细</p>-->
                                 <p>
-                                    <span class="money">¥{{citem.goods.goods_price}}</span>
+                                    <span class="money">¥{{citem.unit_price}}</span>
                                     <span style="font-size: 1.5rem">X{{citem.good_num}}</span>
                                 </p>
 
@@ -51,11 +51,13 @@
                         </div>
                         <div class="tag">
                             <span *ngIf="item.order_status >= 3">交易成功</span>
-                            <button *ngIf="item.order_status == 3" (click)='gouout()'>申请退款</button>
+                            <button *ngIf="item.order_status == 3" (click)='gouout(item.order_id)'>申请退款</button>
                             <button *ngIf="item.order_status == 0" (click)="order(item,citem)">立即付款</button>
                             <button *ngIf="item.order_status == 0" (click)="cancelOrder(item)">取消订单</button>
                             <button *ngIf="item.order_status == 2" (click)='shouhuo(item.order_id)'>确认收货</button>
-                            <button *ngIf="item.order_status >= 1" (click)='shopoder(item)'>查看物流</button>
+                            <button *ngIf="item.order_status > 1" (click)='shopoder(item)'>查看物流</button>
+                            <button (click)='Messagelist(item.order_id,citem.goods.goods_id)'>查看评论</button>
+                            <!-- <button *ngIf="item.order_status == 5" (click)='Messagelist(item.order_id)'>查看评论</button> -->
                         </div>
                     </div>
                 </div>

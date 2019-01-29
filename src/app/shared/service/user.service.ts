@@ -146,8 +146,14 @@ export class UserService {
     payAppWallet: "chongwu/app/payAppWallet",
     SetPayment: "chongwu/app/SetPayment",
     updatepayment: "chongwu/app/updatepayment",
+    queryRefundablebyorderid: "chongwu/app/queryRefundablebyorderid",
 
     deleteclerk: "chongwu/app/deleteclerk",
+
+    deleteOrder: "chongwu/app/deleteOrder",
+    weixinorderBeforSendDeposit: "chongwu/app/weixinorderBeforSendDeposit",
+    updaterefundableshop:"chongwu/app/updaterefundableshop",
+    alipayorderBeforSendDeposit:"chongwu/app/alipayorderBeforSendDeposit",
   }
 
   constructor(
@@ -1187,5 +1193,32 @@ export class UserService {
    */
   deleteclerk(data) {
     return this.http.Post(this.api.deleteclerk, data);
+  }
+
+  /**
+ * 删除订单
+ */
+  deleteOrder(data) {
+    return this.http.Post(this.api.deleteOrder, data);
+  }
+
+
+  /**
+ * 微信定金预订单
+ */
+  weixinorderBeforSendDeposit(data) {
+    return this.http.Post(this.api.weixinorderBeforSendDeposit, data);
+  }
+
+  queryRefundablebyorderid(data) {
+    return this.http.Post(this.api.queryRefundablebyorderid, data);
+  }
+
+  updaterefundableshop(data){
+    return this.http.Post(this.api.updaterefundableshop,data);
+  }
+
+  alipayorderBeforSendDeposit(data){
+    return this.http.Post(this.api.alipayorderBeforSendDeposit,data);
   }
 }

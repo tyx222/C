@@ -31,15 +31,17 @@
   <div class="msg">
     <p class="title">{{goodsinfo.goods_name}}</p>
     <p class="price">
-      <span>售价:
-        <span class="maxprice">￥{{goodsinfo.goods_price}}</span>
+      <span>价格:
+        <span class="maxprice" *ngIf="specifications?.length==1||specifications?.length>1&&specifications[0]?.specifications_price==specifications[specifications.length-1]?.specifications_price">￥{{goodsinfo?.goods_price}}</span>
+        <span class="maxprice" *ngIf="specifications?.length>1&&specifications[0]?.specifications_price!=specifications[specifications.length-1]?.specifications_price">￥{{specifications[0]?.specifications_price}}-{{specifications[specifications.length-1]?.specifications_price}}</span>
       </span>
     </p>
     <p class="price">
-      <!-- <span *ngIf="specifications.length>0">价格:
+
+      <span *ngIf="specifications.length>0">原价:
         <span class="minprice" style="text-decoration:line-through" *ngIf="specifications?.length==1">￥{{specifications[0].display_price||'0'}}</span>
         <span class="minprice" style="text-decoration:line-through" *ngIf="specifications?.length>1">￥{{specifications[0].display_price}}-￥{{specifications[specifications.length-1].display_price}}</span>
-      </span> -->
+      </span>
       <span>定金:
         <span class="minprice">￥{{goodsinfo.deposit}}</span>
       </span>

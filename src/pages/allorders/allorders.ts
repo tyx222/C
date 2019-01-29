@@ -128,6 +128,7 @@ export class AllordersPage {
             handler: () => {
 
               if (this.ordertype == 2) {
+
                 this.aliPay(item); //调用主商城
               }
               if (this.ordertype == 1) {
@@ -140,10 +141,10 @@ export class AllordersPage {
             handler: () => {
               this.weiXinPay(item);
             }
-          },{
+          }, {
             text: "钱包支付",
             handler: () => {
-            this.showPrompt(item.order_id)
+              this.showPrompt(item.order_id)
             }
           },
           {
@@ -158,22 +159,22 @@ export class AllordersPage {
   }
 
 
-/**
- * 钱包支付
- */
-async payAppWallet(orderid,password){
-  console.log(orderid)
-  let parmas={
-    orderid:orderid,
-    num:"1",
-    payment_Password:password
+  /**
+   * 钱包支付
+   */
+  async payAppWallet(orderid, password) {
+    console.log(orderid)
+    let parmas = {
+      orderid: orderid,
+      num: "1",
+      payment_Password: password
+    }
+    let res = await this.http.payAppWallet(parmas)
+    this.http.presentToast(res.message)
+    if (res.info == "ok") {
+      this.navCtrl.push("OrderPage", { type: 1 })
+    }
   }
- let res=await this.http.payAppWallet(parmas)
- this.http.presentToast(res.message)
- if(res.info=="ok"){
-   this.navCtrl.push("OrderPage",{type:1})
- }
-}
   /**
    * 支付密码
    */
@@ -192,16 +193,16 @@ async payAppWallet(orderid,password){
       buttons: [
         {
           text: "取消",
-          handler: data => {}
+          handler: data => { }
         },
         {
           text: "确定",
           handler: data => {
-            if (data.password.length<6) {
+            if (data.password.length < 6) {
               //this.http.presentToast("请输入大于1的金额");
               return false;
             }
-            this.payAppWallet(orderid,data.password)
+            this.payAppWallet(orderid, data.password)
           }
         }
       ]
@@ -289,10 +290,10 @@ async payAppWallet(orderid,password){
       .replace(/&quot;/g, '"')
       .replace(/&apos;/g, "'");
   }
-/**
- * 
- * @param item 支付宝支付
- */
+  /**
+   * 
+   * @param item 支付宝支付
+   */
   async aliPay(item) {
    
       let   data = await this.http.alipay({ orderid: item.order_id });
@@ -321,8 +322,8 @@ async payAppWallet(orderid,password){
     }
   }
 
-  gouout() {
-    this.navCtrl.push("RefundPage");
+  gouout(orderid) {
+    this.navCtrl.push("RefundservivePage", { type: "zc", orderid: orderid });
   }
   // ionViewDidLoad() {
   //   console.log("ionViewDidLoad AllordersPage");
@@ -379,9 +380,9 @@ async payAppWallet(orderid,password){
   }
 
   async queryapporderlist() {
-    // if (this.order_status == -1) {
-    //   this.order_status = '';
-    // }
+    if (this.order_status == -1) {
+      this.order_status = '';
+    }
     let params = {
       order_status: this.order_status
     };
@@ -454,14 +455,30 @@ async payAppWallet(orderid,password){
     confirm.present();
   }
 
-  goodsdetail(item) {
-    this.navCtrl.push("StoreproductviewPage", { goodsid: item.goods.goods_id });
+  goodsdetail(order_id) {
+    console.log(order_id)
+    this.navCtrl.push("MyorderdetailPage", { order_id, stuta: this.order_status });
   }
   goodsjf(item) {
     console.log(item)
     this.navCtrl.push("ShoppingPage", { id: item.petdtailorder.product_id, type: 2 });
   }
   goShop(shopid) {
-    this.navCtrl.push("StorecenterPage", { shopid: shopid });
+    this.navCtrl.push("StorecenterPage", { shopid });
   }
+
+  // 去评价
+  Messagelist(orderid, goodsid) {
+    // this.navCtrl.push("MessagelistPage")
+    let a = this.getComment(orderid, 2)
+    this.navCtrl.push("EvaluatePage", { type: 0, orderid, goodsid})
+
+  }
+
+  async getComment(goodid, type) {
+    let res = await this.http.queryevaluatelist({ goodid, type });
+
+  }
+
+  // 
 }

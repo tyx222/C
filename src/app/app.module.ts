@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../components/components.module';
 import { UserService } from "./shared/service/user.service";
 
 import { MatchPage } from "./../pages/match/match";
@@ -61,6 +62,7 @@ import { StorageProvider } from "../providers/storage/storage";
 import {WechatChenyu} from "wechat-chenyu"
 import { PipesModule } from '../pipes/pipes.module';
 import { SharedWebSocketProvider } from '../providers/shared-web-socket/shared-web-socket';
+import { MailMallProvider } from '../providers/mail-mall/mail-mall';
 declare var LocationPlugin;
 
 @NgModule({
@@ -80,6 +82,7 @@ declare var LocationPlugin;
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
+    ComponentsModule,
     HttpModule,
     HttpClientModule,
     DatePickerModule,
@@ -127,7 +130,8 @@ declare var LocationPlugin;
     ToastProvider,
     StorageProvider,
     Geolocation,
-    SharedWebSocketProvider
+    SharedWebSocketProvider,
+    MailMallProvider
   ]
 })
 export class AppModule {}

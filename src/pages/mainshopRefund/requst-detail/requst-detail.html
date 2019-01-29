@@ -1,0 +1,51 @@
+<!--
+  Generated template for the RequstDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>退款订单详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ordergoods [goodname]="arrayList?.goods.goods_name" [specification]="arrayList?.specifications.specifications_name"
+    [num]="arrayList?.good_num" [orderid]="object?.order_id" [price]="object?.final_payment" [goodimg]="arrayList?.cover"></ordergoods>
+
+  <ion-row class="box1">
+    <div>下单时间： {{datas?.refundable?.createtime}}</div>
+    <div [ngSwitch]="datas?.refundable?.status">
+      订单状态：
+      <span *ngSwitchCase="0">待商家处理</span>
+      <span *ngSwitchCase="1">商家同意退款</span>
+      <span *ngSwitchCase="2">2商家拒绝退款</span>
+      <span *ngSwitchCase="3">客服判定退款失败，交易成功</span>
+      <span *ngSwitchCase="4">退款成功</span>
+      <span *ngSwitchCase="5">退款中</span>
+    </div>
+    <div>退款单号：{{datas?.refundable?.refundable_id}}</div>
+  </ion-row>
+
+  <ion-row class="box2">
+    <div>
+      拒绝提交原因：<input [(ngModel)]="message" type="text" placeholder="若拒绝请填写原因">
+    </div>
+
+    <upload-img [name]="'上传证据'"></upload-img>
+  </ion-row>
+
+  <ion-row class="box3">
+    <div>
+      <button (click)="noRequst(datas?.refundable?.refundable_id)">拒绝退款</button>
+    </div>
+    <div>
+      <button (click)="okRequst(datas?.refundable?.refundable_id)">同意退款</button>
+    </div>
+
+  </ion-row>
+</ion-content>

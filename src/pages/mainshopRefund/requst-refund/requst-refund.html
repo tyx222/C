@@ -1,0 +1,80 @@
+<!--
+  Generated template for the RequstRefundPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>requstRefund</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ordergoods [goodname]="arrayList?.goods.goods_name" [specification]="arrayList?.specifications.specifications_name"
+    [num]="arrayList?.good_num" [orderid]="object?.order_id" [price]="object?.final_payment" [goodimg]="arrayList?.cover"></ordergoods>
+  <ion-row *ngIf="status=='2'" class="wl">
+    <div>
+      <p>物流公司：{{object?.express_company}}</p>
+      <p>订单号：{{object?.express_number}}</p>
+    </div>
+  </ion-row>
+
+  <ion-row *ngIf="status=='2'" class="statu">
+    <div [ngSwitch]="object?.order_status">
+      订单状态：
+      <span *ngSwitchCase="0">待付款</span>
+      <span *ngSwitchCase="1">待发货</span>
+      <span *ngSwitchCase="2">待收货</span>
+      <span *ngSwitchCase="3">待买家评价</span>
+      <span *ngSwitchCase="4">待支付尾款</span>
+      <span *ngSwitchCase="5">退款</span>
+      <span *ngSwitchCase="6">请支付尾款</span>
+      <span *ngSwitchCase="8">售后</span>
+    </div>
+  </ion-row>
+
+  <ion-row class="rebox">
+    <div class="b1">退款金额:<span>￥</span> <input [value]="afterMoney" [(ngModel)]="afterMoney" type="number" name="" id="">
+    </div>
+    <div class="b2">
+      请填写金额<span>
+        （最多￥{{afterMoney}}元，1%平台会拿走作为手续费
+      </span>）
+    </div>
+    <div class="b3">
+      <div class="b31">
+        退款说明：
+      </div>
+      <div class="b32">
+        <input type="text" name="" id="" placeholder="选填">
+      </div>
+    </div>
+  </ion-row>
+
+  <ion-row *ngIf="status=='2'" class="adress">
+    <ion-item>
+      <ion-label>地区</ion-label>
+      <ion-multi-picker item-content [(ngModel)]="myipam" [cancelText]="'取消'" [doneText]="'完成'" [multiPickerColumns]="listData"
+        #citys></ion-multi-picker>
+    </ion-item>
+    <div class="ad">
+      <span>退货详细地址:</span>
+      <input [(ngModel)]="params.refundable_adress" type="text" name="" id="" placeholder="请填写退货地址">
+    </div>
+  </ion-row>
+
+  <ion-row class="reimg">
+    <div>上传凭证</div>
+    <div>
+      <img style="width: 40px;" src="assets/imgs/images/shangchuan@2x.png" alt="">
+    </div>
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+  <button ion-button full (click)="sub()">提交</button>
+</ion-footer>

@@ -6,87 +6,87 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>处理退款</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>处理退款</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-card class="first">
+  <ion-card class="first">
 
-        <ion-grid>
-            <ion-row class="goods">
-                <ion-col col-4>
-                    <img src="{{imgUrl}}{{info.dtailOrderList[0].goods.cover}}" class="goodPic">
-                </ion-col>
-                <ion-col col-8 class="mydetail">
-                    <h4 class="serviceName">{{info.dtailOrderList[0].goods.goods_name}}</h4>
-
-
-                </ion-col>
-
-            </ion-row>
-
-
-        </ion-grid>
-    </ion-card>
-	<ion-row class="same">
-        <ion-col col-3 id="left">
-            退款类型
+    <ion-grid>
+      <ion-row class="goods">
+        <ion-col col-4>
+          <!-- <img src="{{imgUrl}}{{info.dtailOrderList[0].goods.cover}}" class="goodPic"> -->
         </ion-col>
-        <ion-col col-9 class="way">
-            退款
+        <ion-col col-8 class="mydetail">
+          <!-- <h4 class="serviceName">{{info.dtailOrderList[0].goods.goods_name}}</h4> -->
+
+
         </ion-col>
-    </ion-row>
-	<ion-row class="same">
-        <ion-col col-3 id="left">
-            退款原因
-        </ion-col>
-        <ion-col col-9 class="way">
-            小了
-        </ion-col>
-    </ion-row>
-	<ion-row class="same">
-        <ion-col col-3 id="left">
-            退款金额
-        </ion-col>
-        <ion-col col-9 class="way">
-            ￥{{info.cash_sum}}
-        </ion-col>
-    </ion-row>
 
-	<ion-list>
-	  <ion-item>
-		<ion-label>处理状态</ion-label>
-		<ion-select [(ngModel)]="status" (ngModelChange)="setstatus()">
-		  <ion-option value="1">同意退款</ion-option>
-		  <ion-option value="2">拒绝退款</ion-option>
-		</ion-select>
-	  </ion-item>
-	</ion-list>
+      </ion-row>
 
- 
-    <p class="refundReason">处理理由</p>
-    <ion-card class="last">
-        <textarea id="text" rows="6" [(ngModel)]="refundContent" placeholder="请在此输入，不超过200字" maxlength="200"></textarea>
-    </ion-card>
 
-    <h4>上传凭证</h4>
+    </ion-grid>
+  </ion-card>
+  <ion-row class="same">
+    <ion-col col-3 id="left">
+      退款类型
+    </ion-col>
+    <ion-col col-9 class="way">
+      退款
+    </ion-col>
+  </ion-row>
+  <ion-row class="same">
+    <ion-col col-3 id="left">
+      退款原因
+    </ion-col>
+    <ion-col col-9 class="way">
+      小了
+    </ion-col>
+  </ion-row>
+  <ion-row class="same">
+    <ion-col col-3 id="left">
+      退款金额
+    </ion-col>
+    <ion-col col-9 class="way">
+      <!-- ￥{{info.cash_sum}} -->
+    </ion-col>
+  </ion-row>
 
-    <div class="Fileimg">
-        <div class="itembox" *ngFor="let item of refundImgs let i =index">
-            <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
+  <ion-list>
+    <ion-item>
+      <ion-label>处理状态</ion-label>
+      <ion-select [(ngModel)]="status" (ngModelChange)="setstatus()">
+        <ion-option value="1">同意退款</ion-option>
+        <ion-option value="2">拒绝退款</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
 
-			<img *ngIf="item!=='assets/imgs/images/pushimg.png'" src="{{imgUrl}}{{item}}" alt="" (click)="imgup(i)">
-			<img *ngIf="item=='assets/imgs/images/pushimg.png'" src="{{item}}" alt="" (click)="imgup(i)">
 
-        </div>
+  <p class="refundReason">处理理由</p>
+  <ion-card class="last">
+    <textarea id="text" rows="6" [(ngModel)]="refundContent" placeholder="请在此输入，不超过200字" maxlength="200"></textarea>
+  </ion-card>
+
+  <h4>上传凭证</h4>
+
+  <div class="Fileimg">
+    <div class="itembox" *ngFor="let item of refundImgs let i =index">
+      <span class="remimg" *ngIf="item!=='assets/imgs/images/pushimg.png'" (click)='remimages(i)'>X</span>
+
+      <!-- <img *ngIf="item!=='assets/imgs/images/pushimg.png'" src="{{imgUrl}}{{item}}" alt="" (click)="imgup(i)"> -->
+      <!-- <img *ngIf="item=='assets/imgs/images/pushimg.png'" src="{{item}}" alt="" (click)="imgup(i)"> -->
+
     </div>
+  </div>
 
-    <!--底部按钮-->
-    <button class="down" (click)="save()">
+  <!--底部按钮-->
+  <button class="down" (click)="save()">
     提交
   </button>
 </ion-content>
